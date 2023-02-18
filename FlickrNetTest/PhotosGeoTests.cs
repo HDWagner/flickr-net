@@ -62,6 +62,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosForLocationReturnsPhotos()
         {
             var photos = Instance.PhotosSearch(new PhotoSearchOptions { HasGeo = true, UserId = TestData.TestUserId, Extras = PhotoSearchExtras.Geo, PerPage = 10 });
@@ -115,6 +116,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGeoSetContextTest()
         {
             var photo = AuthInstance.PhotosSearch(new PhotoSearchOptions { HasGeo = true, UserId = TestData.TestUserId, Extras = PhotoSearchExtras.Geo }).First();
@@ -168,6 +170,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGeoPhotosForLocationBasicTest()
         {
             var o = new PhotoSearchOptions

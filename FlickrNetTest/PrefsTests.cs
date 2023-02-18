@@ -12,6 +12,7 @@ namespace FlickrNetTest
     public class PrefsTests : BaseTest
     {
         [Test]
+        [Ignore("Method requires authentication")]
         public void PrefsGetContentTypeTest()
         {
             var s = AuthInstance.PrefsGetContentType();
@@ -21,6 +22,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PrefsGetGeoPermsTest()
         {
             var p = AuthInstance.PrefsGetGeoPerms();
@@ -31,6 +33,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PrefsGetHiddenTest()
         {
             var s = AuthInstance.PrefsGetHidden();
@@ -40,6 +43,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PrefsGetPrivacyTest()
         {
             var p = AuthInstance.PrefsGetPrivacy();
@@ -49,6 +53,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PrefsGetSafetyLevelTest()
         {
             var s = AuthInstance.PrefsGetSafetyLevel();

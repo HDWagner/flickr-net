@@ -78,6 +78,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GalleriesEditPhotosTest()
         {
             Flickr.FlushCache();
@@ -111,6 +112,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GalleriesEditMetaTest()
         {
             Flickr.FlushCache();
@@ -134,6 +136,7 @@ namespace FlickrNetTest
         }
 
         [Test, Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GalleriesAddRemovePhoto()
         {
             string photoId = "18841298081";
@@ -154,6 +157,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GalleriesEditPhotoTest()
         {
             Flickr.FlushCache();
@@ -186,6 +190,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GalleriesEditComplexTest()
         {
             Flickr.CacheDisabled = true;

@@ -14,6 +14,7 @@ namespace FlickrNetTest
         
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetListTestBasicTest()
         {
             Flickr f = AuthInstance;
@@ -31,6 +32,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetListFullParamTest()
         {
             Flickr f = AuthInstance;
@@ -42,6 +44,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetListFilteredTest()
         {
             Flickr f = AuthInstance;
@@ -61,6 +64,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetListPagedTest()
         {
             Flickr f = AuthInstance;
@@ -94,6 +98,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetRecentlyUpdatedTest()
         {
             Flickr f = AuthInstance;
@@ -105,6 +110,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void ContactsGetTaggingSuggestions()
         {
             Flickr f = AuthInstance;

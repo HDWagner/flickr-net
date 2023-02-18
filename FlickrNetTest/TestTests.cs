@@ -27,6 +27,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void TestGenericTestNull()
         {
             Flickr f = AuthInstance;

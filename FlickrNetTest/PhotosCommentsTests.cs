@@ -28,6 +28,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosCommentsGetRecentForContactsBasicTest()
         {
             Flickr f = AuthInstance;
@@ -38,6 +39,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosCommentsGetRecentForContactsFullParamTest()
         {
             Flickr f = AuthInstance;

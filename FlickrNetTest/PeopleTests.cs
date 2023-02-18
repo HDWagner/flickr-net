@@ -30,6 +30,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetPhotosOfMe()
         {
             PeoplePhotoCollection p = AuthInstance.PeopleGetPhotosOf();
@@ -41,6 +42,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetPhotosBasicTest()
         {
             PhotoCollection photos = AuthInstance.PeopleGetPhotos();
@@ -52,6 +54,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetPhotosFullParamTest()
         {
             PhotoCollection photos = AuthInstance.PeopleGetPhotos(TestData.TestUserId, SafetyLevel.Safe, new DateTime(2010, 1, 1),
@@ -64,6 +67,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoBasicTestUnauth()
         {
             Flickr f = Instance;
@@ -81,6 +85,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoGenderNoAuthTest()
         {
             Flickr f = Instance;
@@ -97,6 +102,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoGenderTest()
         {
             Flickr f = AuthInstance;
@@ -115,6 +121,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoBuddyIconTest()
         {
             Flickr f = AuthInstance;
@@ -124,6 +131,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoSelfTest()
         {
             Flickr f = AuthInstance;
@@ -138,6 +146,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetGroupsTest()
         {
             Flickr f = AuthInstance;
@@ -150,6 +159,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetLimitsTest()
         {
             var f = AuthInstance;
@@ -226,6 +236,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PeopleGetUploadStatusBasicTest()
         {
             var u = AuthInstance.PeopleGetUploadStatus();
@@ -237,18 +248,21 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoBlankDate()
         {
             var p = Instance.PeopleGetInfo("18387778@N00");
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoZeroDate()
         {
             var p = Instance.PeopleGetInfo("47963952@N03");
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PeopleGetInfoInternationalCharacters()
         {
             var p = Instance.PeopleGetInfo("24754141@N08");

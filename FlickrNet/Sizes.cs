@@ -2,6 +2,7 @@
 using System.Xml.Schema;
 using System.Collections.Generic;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace FlickrNet
 {
@@ -71,10 +72,10 @@ namespace FlickrNet
                         Label = reader.Value;
                         break;
                     case "width":
-                        Width = reader.ReadContentAsInt();
+                        Width = string.IsNullOrEmpty(reader.Value) ? 0: reader.ReadContentAsInt();
                         break;
                     case "height":
-                        Height = reader.ReadContentAsInt();
+                        Height = string.IsNullOrEmpty(reader.Value) ? 0 : reader.ReadContentAsInt();
                         break;
                     case "source":
                         Source = reader.Value;

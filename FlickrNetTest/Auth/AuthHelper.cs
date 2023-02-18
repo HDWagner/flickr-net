@@ -11,6 +11,7 @@ namespace FlickrNetTest
     public class AuthHelper
     {
         [Test]
+        [Ignore("Method requires environment variable")]
         public void CheckEnvironmentVariableForAccessToken()
         {
             var value = Environment.GetEnvironmentVariable("FLICKR_TEST_ACCESSTOKEN");

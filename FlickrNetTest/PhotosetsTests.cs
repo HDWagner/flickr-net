@@ -109,6 +109,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosetsCreateAddPhotosTest()
         {
             byte[] imageBytes = TestData.TestImageBytes;
@@ -176,6 +177,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosetGetInfoGetList()
         {
             const string photosetId = "72157660633195178";

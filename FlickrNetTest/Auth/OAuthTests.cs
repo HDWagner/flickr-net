@@ -57,6 +57,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void OAuthPeopleGetPhotosBasicTest()
         {
             PhotoCollection photos = AuthInstance.PeopleGetPhotos("me");
@@ -72,6 +73,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void OAuthCheckTokenTest()
         {
             Flickr f = AuthInstance;

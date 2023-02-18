@@ -8,6 +8,7 @@ namespace FlickrNetTest
     public class PhotosetsOrderSets : BaseTest
     {
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosetsOrderSetsStringTest()
         {
             var mySets = AuthInstance.PhotosetsGetList();
@@ -17,6 +18,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosetsOrderSetsArrayTest()
         {
             var mySets = AuthInstance.PhotosetsGetList();

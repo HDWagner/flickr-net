@@ -12,6 +12,7 @@ namespace FlickrNetTest
     {
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsBrowseBasicTest()
         {
             Flickr f = AuthInstance;
@@ -84,6 +85,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsMembersGetListBasicTest()
         {
             var ms = AuthInstance.GroupsMembersGetList(TestData.GroupId);

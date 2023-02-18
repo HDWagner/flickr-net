@@ -51,6 +51,9 @@ namespace FlickrNet
                     case "pages":
                         Pages = int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
+                    case "adj_search_args":
+                        // TODO: define corresponding properties
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         break;

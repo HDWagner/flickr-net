@@ -12,6 +12,7 @@ namespace FlickrNetTest
     public class StatsGetTotalViewsTest : BaseTest
     {
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetTotalViewsBasicTest()
         {
             StatViews views = AuthInstance.StatsGetTotalViews();
@@ -23,6 +24,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatGetCsvFilesTest()
         {
             CsvFileCollection col = AuthInstance.StatsGetCsvFiles();

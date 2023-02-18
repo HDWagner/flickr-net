@@ -482,6 +482,10 @@ namespace FlickrNet
                     case "path_alias":
                         PathAlias = reader.Value;
                         break;
+                    case "gift":
+                        // TODO: define corresponding object
+                        reader.Skip();
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         reader.Skip();

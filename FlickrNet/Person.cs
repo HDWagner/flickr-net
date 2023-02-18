@@ -290,6 +290,13 @@ namespace FlickrNet
                     case "is_cognito_user":
                     case "all_rights_reserved_photos_count":
                         break;
+                    case "is_deleted": 
+                    case "invitation_only":   
+                    case "has_adfree": 
+                    case "has_free_educational_resources": 
+                    case "has_free_standard_shipping":
+                        // TODO: define corresponding properties
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         break;

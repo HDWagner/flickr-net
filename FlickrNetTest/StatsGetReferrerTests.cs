@@ -19,6 +19,7 @@ namespace FlickrNetTest
 
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotoReferrersBasicTest()
         {
             string domain = "flickr.com";
@@ -54,6 +55,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotosetsReferrersBasicTest()
         {
             string domain = "flickr.com";
@@ -92,6 +94,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotostreamReferrersBasicTest()
         {
             string domain = "flickr.com";
@@ -123,6 +126,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetCollectionReferrersBasicTest()
         {
             string domain = "flickr.com";

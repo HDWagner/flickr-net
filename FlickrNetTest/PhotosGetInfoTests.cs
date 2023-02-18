@@ -17,6 +17,7 @@ namespace FlickrNetTest
     {
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetInfoBasicTest()
         {
             PhotoInfo info = AuthInstance.PhotosGetInfo("4268023123");

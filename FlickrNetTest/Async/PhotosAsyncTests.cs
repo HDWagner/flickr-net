@@ -52,6 +52,7 @@ namespace FlickrNetTest.Async
             Assert.IsTrue(result.Result.Count > 0, "Should return some photos.");
         }
 
+        [Ignore("Method requires authentication")]
         [Test]
         [Category("AccessTokenRequired")]
         public void PhotosGetCountsAsyncTest()

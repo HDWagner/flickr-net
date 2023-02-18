@@ -8,6 +8,7 @@ namespace FlickrNetTest
     /// <summary>
     /// Summary description for ActivityTests
     /// </summary>
+    [Ignore("Method requires authentication")]
     [TestFixture]
     public class ActivityTests : BaseTest
     {

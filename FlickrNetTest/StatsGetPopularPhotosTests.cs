@@ -10,6 +10,7 @@ namespace FlickrNetTest
     public class StatsGetPopularPhotosTests : BaseTest
     {
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPopularPhotosBasic()
         {
             PopularPhotoCollection photos = AuthInstance.StatsGetPopularPhotos(DateTime.MinValue, PopularitySort.None, 0, 0);
@@ -33,6 +34,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPopularPhotosNoParamsTest()
         {
             Flickr f = AuthInstance;
@@ -58,6 +60,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPopularPhotosOtherTest()
         {
             var lastWeek = DateTime.Today.AddDays(-7);

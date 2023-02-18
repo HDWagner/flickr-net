@@ -14,6 +14,7 @@ namespace FlickrNetTest
         string photosetId = "1493109";
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetCollectionDomainsBasicTest()
         {
             Flickr f = AuthInstance;
@@ -35,6 +36,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetCollectionStatsTest()
         {
             Flickr f = AuthInstance;
@@ -45,6 +47,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotoDomainsTests()
         {
             Flickr f = AuthInstance;
@@ -72,6 +75,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotoStatsTest()
         {
             Flickr f = AuthInstance;
@@ -82,6 +86,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotosetDomainsBasic()
         {
             Flickr f = AuthInstance;
@@ -109,6 +114,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotosetStatsTest()
         {
             Flickr f = AuthInstance;
@@ -119,6 +125,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotostreamDomainsBasic()
         {
             Flickr f = AuthInstance;
@@ -138,6 +145,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void StatsGetPhotostreamStatsTest()
         {
             Flickr f = AuthInstance;

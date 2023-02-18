@@ -176,6 +176,10 @@ namespace FlickrNet
                     case "photo_limit_opt_out":
                         PhotoLimitOptOut = reader.Value == "1";
                         break;
+                    case "eighteenplus":
+                    case "invitation_only":
+                        // TODO: define corresponding properties
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         break;
@@ -227,6 +231,11 @@ namespace FlickrNet
                         break;
                     case "topic_count":
                         TopicCount = reader.ReadElementContentAsInt();
+                        break;
+                    case "datecreate":
+                    case "dateactivity":
+                        // TODO: define corresponding properties for // <datecreate>2005-01-09 09:10:32</datecreate>
+                        reader.Skip();
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);

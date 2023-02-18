@@ -13,6 +13,7 @@ namespace FlickrNetTest
        
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGeoGetPermsBasicTest()
         {
             GeoPermissions perms = AuthInstance.PhotosGeoGetPerms(TestData.PhotoId);
@@ -24,6 +25,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetWithGeoDataBasicTest()
         {
             PhotoCollection photos = AuthInstance.PhotosGetWithGeoData();

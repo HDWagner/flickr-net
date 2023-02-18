@@ -14,6 +14,7 @@ namespace FlickrNetTest
     {
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetCountTakenTest()
         {
             Flickr f = AuthInstance;
@@ -43,6 +44,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetCountUloadTest()
         {
             Flickr f = AuthInstance;

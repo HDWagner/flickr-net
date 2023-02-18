@@ -9,6 +9,7 @@ using Shouldly;
 
 namespace FlickrNetTest.Async
 {
+    [Ignore("Methods require authentication")]
     [TestFixture]
     [Category("AccessTokenRequired")]
     public class StatsAsyncTests : BaseTest

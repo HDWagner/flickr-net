@@ -83,7 +83,7 @@ namespace FlickrNet
         /// A comma delimited list of tags
         /// </summary>
         public string Tags { get; set; }
-    
+
         /// <summary>
         /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="FlickrNet.TagMode.AllTags"/>
         /// </summary>
@@ -110,25 +110,25 @@ namespace FlickrNet
         /// Search for the given text in photo titles and descriptions.
         /// </summary>
         public string Text { get; set; }
-    
+
         /// <summary>
         /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
         public DateTime MinUploadDate { get; set; }
-    
+
         /// <summary>
         /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
         public DateTime MaxUploadDate { get; set; }
-    
+
         /// <summary>
         /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
         public DateTime MinTakenDate { get; set; }
-    
+
         /// <summary>
         /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
@@ -189,12 +189,12 @@ namespace FlickrNet
         public GeoAccuracy Accuracy
         {
             get { return BoundaryBox == null ? GeoAccuracy.None : BoundaryBox.Accuracy; }
-            set 
+            set
             {
                 if (BoundaryBox == null) { BoundaryBox = new BoundaryBox(); }
                 BoundaryBox.Accuracy = value;
             }
-        
+
         }
 
         /// <summary>
@@ -370,6 +370,31 @@ namespace FlickrNet
         public ICollection<Style> Styles { get; set; }
 
         /// <summary>
+        /// Comma-separated list of content types to return. 
+        /// If used in conjunction with video_content_types, this is applied to only photos. 
+        /// If video_content_types is not specified, this filter will apply to all media types.
+        ///     <ul>
+        ///         <li>0 for photos.</li>
+        ///         <li>1 for screenshots.</li>
+        ///         <li>2 for 'other'.</li>
+        ///         <li>3 for virtual photos.</li>
+        ///     </ul>
+        /// </summary>
+        public string ContentTypes { get; set; }
+
+        /// <summary>
+        /// Comma-separated list of video content types to return. 
+        /// If specified without content_types, ensure that the media argument is not set to 'photos' or no results will be returned.
+        ///     <ul>
+        ///         <li>0 for videos.</li>
+        ///         <li>1 for Screencasts.</li>
+        ///         <li>2 for Animation/CGI.</li>
+        ///         <li>3 for Machinima.</li>
+        ///     </ul>
+        /// </summary>
+        public string VideoContentTypes { get; set; }
+
+        /// <summary>
         /// Calculates the Uri for a Flash slideshow for the given search options.
         /// </summary>
         /// <returns></returns>
@@ -457,8 +482,10 @@ namespace FlickrNet
             if (FoursquareVenueID != null) parameters.Add("foursquare_venueid", FoursquareVenueID);
             if (FoursquareWoeID != null) parameters.Add("foursquare_woeid", FoursquareWoeID);
             if (GroupPathAlias != null) parameters.Add("group_path_alias", GroupPathAlias);
-            if (ColorCodes != null && ColorCodes.Count != 0 ) parameters.Add("color_codes", ColorCodeString);
+            if (ColorCodes != null && ColorCodes.Count != 0) parameters.Add("color_codes", ColorCodeString);
             if (Styles != null && Styles.Count != 0) parameters.Add("styles", UtilityMethods.StylesToString(Styles));
+            if (!string.IsNullOrEmpty(ContentTypes)) parameters.Add("content_types", ContentTypes);
+            if (!string.IsNullOrEmpty(VideoContentTypes)) parameters.Add("video_content_types", VideoContentTypes);
         }
 
     }

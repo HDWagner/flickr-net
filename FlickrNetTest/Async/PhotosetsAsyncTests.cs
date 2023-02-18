@@ -57,6 +57,7 @@ namespace FlickrNetTest.Async
             var result = w.Next().First();
         }
 
+        [Ignore("Method requires authentication")]
         [Test]
         [Category("AccessTokenRequired")]
         public void PhotosetsGeneralAsyncTest()

@@ -22,6 +22,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void TagsGetListUserRawBasicTest()
         {
             var tags = AuthInstance.TagsGetListUserRaw();
@@ -38,6 +39,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void TagsGetListUserPopularBasicTest()
         {
             TagCollection tags = AuthInstance.TagsGetListUserPopular();
@@ -54,6 +56,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void TagsGetListUserBasicTest()
         {
             TagCollection tags = AuthInstance.TagsGetListUser();
@@ -123,6 +126,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method might require authentication or always returns empty count and no score")]
         public void TagsGetHotListTest()
         {
             var col = Instance.TagsGetHotList();
@@ -145,6 +149,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void TagsGetMostFrequentlyUsedTest()
         {
             Flickr f = AuthInstance;

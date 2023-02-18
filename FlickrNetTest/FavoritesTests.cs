@@ -41,6 +41,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void FavoritesGetListBasicTest()
         {
             var photos = AuthInstance.FavoritesGetList();
@@ -50,6 +51,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void FavoritesGetListFullParamTest()
         {
             var photos = AuthInstance.FavoritesGetList(TestData.TestUserId, DateTime.Now.AddYears(-4), DateTime.Now, PhotoSearchExtras.All, 1, 10);
@@ -61,6 +63,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void FavoritesGetListPartialParamTest()
         {
             PhotoCollection photos = AuthInstance.FavoritesGetList(TestData.TestUserId, 2, 20);

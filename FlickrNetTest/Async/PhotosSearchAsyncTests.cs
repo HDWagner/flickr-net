@@ -15,6 +15,7 @@ namespace FlickrNetTest
     {
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosSearchAsyncBasicTest()
         {
             var o = new PhotoSearchOptions();
@@ -46,6 +47,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosSearchAsyncShowerTest()
         {
             var o = new PhotoSearchOptions();
@@ -66,6 +68,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetContactsPhotosAsyncTest()
         {
             var w = new AsyncSubject<FlickrResult<PhotoCollection>>();

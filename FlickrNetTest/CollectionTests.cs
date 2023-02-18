@@ -13,6 +13,7 @@ namespace FlickrNetTest
         
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void CollectionGetInfoBasicTest()
         {
             string id = "78188-72157618817175751";
@@ -34,6 +35,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void CollectionGetTreeRootTest()
         {
             Flickr f = AuthInstance;
@@ -114,6 +116,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void CollectionsEditMetaTest()
         {
             string id = "78188-72157618817175751";
@@ -136,6 +139,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void CollectionsEmptyCollection()
         {
             Flickr f = AuthInstance;

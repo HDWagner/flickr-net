@@ -12,6 +12,7 @@ namespace FlickrNetTest
     {
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosSetDatesTest()
         {
             var f = AuthInstance;
@@ -24,6 +25,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosAddTagsTest()
         {
             Flickr f = AuthInstance;
@@ -125,6 +127,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetNotInSetAllParamsTest()
         {
             Flickr f = AuthInstance;
@@ -137,6 +140,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetNotInSetNoParamsTest()
         {
             Flickr f = AuthInstance;
@@ -146,6 +150,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetNotInSetPagesTest()
         {
             Flickr f = AuthInstance;
@@ -163,6 +168,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetPermsBasicTest()
         {
             var p = AuthInstance.PhotosGetPerms("4114887196");
@@ -260,6 +266,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetUntaggedAllParamsTest()
         {
             Flickr f = AuthInstance;
@@ -269,6 +276,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetUntaggedNoParamsTest()
         {
             Flickr f = AuthInstance;
@@ -283,6 +291,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetUntaggedExtrasTest()
         {
             Flickr f = AuthInstance;
@@ -299,6 +308,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosGetUntaggedPagesTest()
         {
             Flickr f = AuthInstance;
@@ -311,6 +321,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosRecentlyUpdatedTests()
         {
             var sixMonthsAgo = DateTime.Today.AddMonths(-6);
@@ -348,6 +359,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosSetMetaLargeDescription()
         {
             string description;

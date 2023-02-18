@@ -39,6 +39,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosSearchFavorites()
         {
             var o = new PhotoSearchOptions {UserId = "me", Faves = true, Tags = "cat"};
@@ -855,6 +856,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosSearchContactsPhotos()
         {
             var contacts = AuthInstance.ContactsGetList(1, 1000).Select(c => c.UserId).ToList();
@@ -991,6 +993,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("WOE ID searches don't appear to be working.")]
         public void GetPhotosByFoursquareWoeId()
         {
             // Seems to be the same as normal WOE IDs, so not sure what is different about the foursquare ones.

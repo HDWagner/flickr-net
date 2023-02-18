@@ -16,12 +16,14 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosGetContactsPhotosIncorrectCountTest()
         {
             Should.Throw<ArgumentOutOfRangeException>(() => AuthInstance.PhotosGetContactsPhotos(51));
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosGetContactsPhotosBasicTest()
         {
             PhotoCollection photos = AuthInstance.PhotosGetContactsPhotos(10);
@@ -31,6 +33,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void PhotosGetContactsPhotosExtrasTest()
         {
             PhotoCollection photos = AuthInstance.PhotosGetContactsPhotos(10, false, false, false, PhotoSearchExtras.All);

@@ -12,6 +12,7 @@ namespace FlickrNetTest
         
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussRepliesAddTest()
         {
             var topicId = "72157630982877126";
@@ -54,6 +55,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussRepliesGetListTest()
         {
             var topics = AuthInstance.GroupsDiscussTopicsGetList(TestData.GroupId, 1, 100);
@@ -105,6 +107,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussTopicsGetListTest()
         {
             var topics = AuthInstance.GroupsDiscussTopicsGetList(TestData.GroupId, 1, 10);
@@ -135,6 +138,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussTopicsGetListEditableTest()
         {
             var groupId = "51035612836@N01"; // Flickr API group
@@ -154,6 +158,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussTopicsGetInfoStickyTest()
         {
             const string topicId = "72157630982967152";
@@ -167,6 +172,7 @@ namespace FlickrNetTest
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void GroupsDiscussTopicsGetInfoLockedTest()
         {
             const string topicId = "72157630982969782";

@@ -18,6 +18,7 @@ namespace FlickrNetTest
     public class PhotosUploadTests : BaseTest
     {
         [Test]
+        [Ignore("Method requires authentication")]
         public void UploadPictureAsyncBasicTest()
         {
             Flickr f = AuthInstance;
@@ -50,6 +51,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void UploadPictureBasicTest()
         {
             Flickr f = AuthInstance;
@@ -99,6 +101,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void DownloadAndUploadImage()
         {
             var photos = AuthInstance.PeopleGetPhotos(PhotoSearchExtras.Small320Url);
@@ -119,6 +122,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void ReplacePictureBasicTest()
         {
             Flickr f = AuthInstance;
@@ -144,6 +148,7 @@ namespace FlickrNetTest
         }
 
         [Test]
+        [Ignore("Method requires authentication")]
         public void UploadPictureFromUrl()
         {
             string url = "http://www.google.co.uk/intl/en_com/images/srpr/logo1w.png";
