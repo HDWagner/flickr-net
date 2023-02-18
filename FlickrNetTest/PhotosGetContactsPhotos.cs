@@ -42,8 +42,8 @@ namespace FlickrNetTest
 
             foreach (Photo p in photos)
             {
-                Assert.IsNotNull(p.OwnerName, "OwnerName should not be null");
-                Assert.AreNotEqual(default(DateTime), p.DateTaken, "DateTaken should not be default DateTime");
+                Assert.That(p.OwnerName, Is.Not.Null, "OwnerName should not be null");
+                Assert.That(p.DateTaken, Is.Not.EqualTo(default(DateTime)), "DateTaken should not be default DateTime");
             }
         }
     }

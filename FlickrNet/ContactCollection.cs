@@ -28,7 +28,7 @@ namespace FlickrNet
         /// </summary>
         public int Pages { get; set; }
 
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "contacts")
             {

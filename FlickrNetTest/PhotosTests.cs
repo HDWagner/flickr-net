@@ -53,12 +53,12 @@ namespace FlickrNetTest
         {
             var a = Instance.PhotosGetAllContexts("4114887196");
 
-            Assert.IsNotNull(a);
-            Assert.IsNotNull(a.Groups, "Groups should not be null.");
-            Assert.IsNotNull(a.Sets, "Sets should not be null.");
+            Assert.That(a, Is.Not.Null);
+            Assert.That(a.Groups, Is.Not.Null, "Groups should not be null.");
+            Assert.That(a.Sets, Is.Not.Null, "Sets should not be null.");
 
-            Assert.AreEqual(1, a.Groups.Count, "Groups.Count should be one.");
-            Assert.AreEqual(1, a.Sets.Count, "Sets.Count should be one.");
+            Assert.That(a.Groups, Has.Count.EqualTo(1), "Groups.Count should be one.");
+            Assert.That(a.Sets, Has.Count.EqualTo(1), "Sets.Count should be one.");
         }
 
         [Test]
@@ -78,16 +78,16 @@ namespace FlickrNetTest
 
             Console.WriteLine(f.LastResponse);
 
-            Assert.IsNotNull(tags, "ExifTagCollection should not be null.");
+            Assert.That(tags, Is.Not.Null, "ExifTagCollection should not be null.");
 
-            Assert.IsTrue(tags.Count > 20, "More than twenty parts of EXIF data should be returned.");
+            Assert.That(tags, Has.Count.GreaterThan(20), "More than twenty parts of EXIF data should be returned.");
 
-            Assert.AreEqual("IFD0", tags[0].TagSpace, "First tags TagSpace is not set correctly.");
-            Assert.AreEqual(0, tags[0].TagSpaceId, "First tags TagSpaceId is not set correctly.");
-            Assert.AreEqual("Compression", tags[0].Tag, "First tags Tag is not set correctly.");
-            Assert.AreEqual("Compression", tags[0].Label, "First tags Label is not set correctly.");
-            Assert.AreEqual("JPEG (old-style)", tags[0].Raw, "First tags RAW is not correct.");
-            Assert.IsNull(tags[0].Clean, "First tags Clean should be null.");
+            Assert.That(tags[0].TagSpace, Is.EqualTo("IFD0"), "First tags TagSpace is not set correctly.");
+            Assert.That(tags[0].TagSpaceId, Is.EqualTo(0), "First tags TagSpaceId is not set correctly.");
+            Assert.That(tags[0].Tag, Is.EqualTo("Compression"), "First tags Tag is not set correctly.");
+            Assert.That(tags[0].Label, Is.EqualTo("Compression"), "First tags Label is not set correctly.");
+            Assert.That(tags[0].Raw, Is.EqualTo("JPEG (old-style)"), "First tags RAW is not correct.");
+            Assert.That(tags[0].Clean, Is.Null, "First tags Clean should be null.");
         }
 
         [Test]
@@ -95,10 +95,10 @@ namespace FlickrNetTest
         {
             var context = Instance.PhotosGetContext("3845365350");
 
-            Assert.IsNotNull(context);
+            Assert.That(context, Is.Not.Null);
 
-            Assert.AreEqual("3844573707", context.PreviousPhoto.PhotoId);
-            Assert.AreEqual("3992605178", context.NextPhoto.PhotoId);
+            Assert.That(context.PreviousPhoto.PhotoId, Is.EqualTo("3844573707"));
+            Assert.That(context.NextPhoto.PhotoId, Is.EqualTo("3992605178"));
         }
 
         [Test]
@@ -109,18 +109,18 @@ namespace FlickrNetTest
 
             ExifTagCollection tags = f.PhotosGetExif("5899928191");
 
-            Assert.AreEqual("Apple iPhone 4", tags.Camera, "Camera property should be set correctly.");
+            Assert.That(tags.Camera, Is.EqualTo("Apple iPhone 4"), "Camera property should be set correctly.");
 
             foreach (ExifTag tag in tags)
             {
                 if (tag.Tag == "Model")
                 {
-                    Assert.IsTrue(tag.Raw == "iPhone 4", "Model tag is not 'iPhone 4'");
+                    Assert.That(tag.Raw, Is.EqualTo("iPhone 4"), "Model tag is not 'iPhone 4'");
                     bFound = true;
                     break;
                 }
             }
-            Assert.IsTrue(bFound, "Model tag not found.");
+            Assert.That(bFound, Is.True, "Model tag not found.");
         }
 
         [Test]
@@ -132,8 +132,8 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetNotInSet(1, 10, PhotoSearchExtras.All);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(10, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Has.Count.EqualTo(10));
         }
 
         [Test]
@@ -155,8 +155,8 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetNotInSet(1, 11);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(11, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Has.Count.EqualTo(11));
 
             // Overloads
             f.PhotosGetNotInSet();
@@ -171,9 +171,9 @@ namespace FlickrNetTest
         {
             var p = AuthInstance.PhotosGetPerms("4114887196");
 
-            Assert.IsNotNull(p);
-            Assert.AreEqual("4114887196", p.PhotoId);
-            Assert.AreNotEqual(PermissionComment.Nobody, p.PermissionComment);
+            Assert.That(p, Is.Not.Null);
+            Assert.That(p.PhotoId, Is.EqualTo("4114887196"));
+            Assert.That(p.PermissionComment, Is.Not.EqualTo(PermissionComment.Nobody));
         }
 
         [Test]
@@ -181,7 +181,7 @@ namespace FlickrNetTest
         {
             var photos = Instance.PhotosGetRecent();
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -189,9 +189,9 @@ namespace FlickrNetTest
         {
             var photos = Instance.PhotosGetRecent(1, 20, PhotoSearchExtras.All);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(20, photos.PerPage);
-            Assert.AreEqual(20, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos.PerPage, Is.EqualTo(20));
+            Assert.That(photos, Has.Count.EqualTo(20));
         }
 
         [Test]
@@ -199,9 +199,9 @@ namespace FlickrNetTest
         {
             var photos = Instance.PhotosGetRecent(1, 20);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(20, photos.PerPage);
-            Assert.AreEqual(20, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos.PerPage, Is.EqualTo(20));
+            Assert.That(photos, Has.Count.EqualTo(20));
         }
 
         [Test]
@@ -209,11 +209,11 @@ namespace FlickrNetTest
         {
             var photos = Instance.PhotosGetRecent(PhotoSearchExtras.OwnerName);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
 
             var photo = photos.First();
-            Assert.IsNotNull(photo.OwnerName);
+            Assert.That(photo.OwnerName, Is.Not.Null);
         }
 
         [Test]
@@ -232,7 +232,7 @@ namespace FlickrNetTest
                 }
             }
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -240,17 +240,17 @@ namespace FlickrNetTest
         {
             var sizes = Instance.PhotosGetSizes("4114887196");
 
-            Assert.IsNotNull(sizes);
-            Assert.AreNotEqual(0, sizes.Count);
+            Assert.That(sizes, Is.Not.Null);
+            Assert.That(sizes, Is.Not.Empty);
 
             foreach (Size s in sizes)
             {
-                Assert.IsNotNull(s.Label, "Label should not be null.");
-                Assert.IsNotNull(s.Source, "Source should not be null.");
-                Assert.IsNotNull(s.Url, "Url should not be null.");
-                Assert.AreNotEqual(0, s.Height, "Height should not be zero.");
-                Assert.AreNotEqual(0, s.Width, "Width should not be zero.");
-                Assert.AreNotEqual(MediaType.None, s.MediaType, "MediaType should be set.");
+                Assert.That(s.Label, Is.Not.Null, "Label should not be null.");
+                Assert.That(s.Source, Is.Not.Null, "Source should not be null.");
+                Assert.That(s.Url, Is.Not.Null, "Url should not be null.");
+                Assert.That(s.Height, Is.Not.EqualTo(0), "Height should not be zero.");
+                Assert.That(s.Width, Is.Not.EqualTo(0), "Width should not be zero.");
+                Assert.That(s.MediaType, Is.Not.EqualTo(MediaType.None), "MediaType should be set.");
             }
         }
 
@@ -283,8 +283,8 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetUntagged();
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
 
             var photo = photos.First();
         }
@@ -298,12 +298,12 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetUntagged(PhotoSearchExtras.OwnerName);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
 
             var photo = photos.First();
 
-            Assert.IsNotNull(photo.OwnerName);
+            Assert.That(photo.OwnerName, Is.Not.Null);
         }
 
         [Test]
@@ -315,8 +315,8 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetUntagged(1, 10);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(10, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Has.Count.EqualTo(10));
         }
 
         [Test]
@@ -329,9 +329,9 @@ namespace FlickrNetTest
 
             var photos = f.PhotosRecentlyUpdated(sixMonthsAgo, PhotoSearchExtras.All, 1, 20);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(20, photos.PerPage);
-            Assert.AreNotEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos.PerPage, Is.EqualTo(20));
+            Assert.That(photos, Is.Not.Empty);
 
             // Overloads
 
@@ -352,8 +352,8 @@ namespace FlickrNetTest
 
             foreach (Photo p in photos)
             {
-                Assert.IsTrue(p.DoesLargeExist == true || p.DoesLargeExist == false);
-                Assert.IsTrue(p.DoesMediumExist == true || p.DoesMediumExist == false);
+                Assert.That(p.DoesLargeExist || !p.DoesLargeExist, Is.True);
+                Assert.That(p.DoesMediumExist || !p.DoesMediumExist, Is.True);
             }
         }
 
@@ -390,11 +390,11 @@ namespace FlickrNetTest
 
             var t = f.PhotosUploadCheckTickets(tickets);
 
-            Assert.AreEqual(3, t.Count);
+            Assert.That(t, Has.Count.EqualTo(3));
 
-            Assert.AreEqual("invalid1", t[0].TicketId);
-            Assert.IsNull(t[0].PhotoId);
-            Assert.IsTrue(t[0].InvalidTicketId);
+            Assert.That(t[0].TicketId, Is.EqualTo("invalid1"));
+            Assert.That(t[0].PhotoId, Is.Null);
+            Assert.That(t[0].InvalidTicketId, Is.True);
         }
 
         [Test]
@@ -404,15 +404,15 @@ namespace FlickrNetTest
 
             var people = Instance.PhotosPeopleGetList(photoId);
 
-            Assert.AreNotEqual(0, people.Total, "Total should not be zero.");
-            Assert.AreNotEqual(0, people.Count, "Count should not be zero.");
-            Assert.AreEqual(people.Count, people.Total, "Count should equal Total.");
+            Assert.That(people.Total, Is.Not.EqualTo(0), "Total should not be zero.");
+            Assert.That(people, Is.Not.Empty, "Count should not be zero.");
+            Assert.That(people.Total, Is.EqualTo(people.Count), "Count should equal Total.");
 
             foreach (var person in people)
             {
-                Assert.IsNotNull(person.UserId, "UserId should not be null.");
-                Assert.IsNotNull(person.PhotostreamUrl, "PhotostreamUrl should not be null.");
-                Assert.IsNotNull(person.BuddyIconUrl, "BuddyIconUrl should not be null.");
+                Assert.That(person.UserId, Is.Not.Null, "UserId should not be null.");
+                Assert.That(person.PhotostreamUrl, Is.Not.Null, "PhotostreamUrl should not be null.");
+                Assert.That(person.BuddyIconUrl, Is.Not.Null, "BuddyIconUrl should not be null.");
             }
         }
 
@@ -425,8 +425,8 @@ namespace FlickrNetTest
             Flickr f = Instance;
             PhotoPersonCollection ppl = f.PhotosPeopleGetList(photoId);
             PhotoPerson pp = ppl[0];
-            Assert.AreEqual(userId, pp.UserId);
-            Assert.IsTrue(pp.BuddyIconUrl.Contains(".staticflickr.com/"), "Buddy icon doesn't contain correct details.");
+            Assert.That(pp.UserId, Is.EqualTo(userId));
+            Assert.That(pp.BuddyIconUrl, Does.Contain(".staticflickr.com/"), "Buddy icon doesn't contain correct details.");
         }
 
         [Test]
@@ -446,7 +446,7 @@ namespace FlickrNetTest
             string userPart = webUrl.Split('/')[4];
 
             Console.WriteLine("WebUrl is: " + webUrl);
-            Assert.AreNotEqual(userPart, string.Empty, "User part of the URL cannot be empty");
+            Assert.That(userPart, Is.Not.EqualTo(string.Empty), "User part of the URL cannot be empty");
         }
 
         [Test]
@@ -460,7 +460,7 @@ namespace FlickrNetTest
 
             string userPart = photoPerson.PhotostreamUrl.Split('/')[4];
 
-            Assert.AreNotEqual(userPart, string.Empty, "User part of the URL cannot be empty");
+            Assert.That(userPart, Is.Not.EqualTo(string.Empty), "User part of the URL cannot be empty");
         }
 
         [Test]
@@ -472,12 +472,12 @@ namespace FlickrNetTest
             o.PerPage = 10;
 
             var photos = Instance.PhotosSearch(o);
-            Assert.IsTrue(photos.Count > 0, "Should return more than zero photos.");
+            Assert.That(photos, Is.Not.Empty, "Should return more than zero photos.");
 
             foreach (var photo in photos)
             {
-                Assert.IsNotNull(photo.Small320Url, "Small320Url should not be null.");
-                Assert.IsNotNull(photo.LargeSquareThumbnailUrl, "LargeSquareThumbnailUrl should not be null.");
+                Assert.That(photo.Small320Url, Is.Not.Null, "Small320Url should not be null.");
+                Assert.That(photo.LargeSquareThumbnailUrl, Is.Not.Null, "LargeSquareThumbnailUrl should not be null.");
             }
         }
 

@@ -172,7 +172,7 @@ namespace FlickrNet
         {
             if (!IsAuthenticated && safetyLevel > SafetyLevel.Safe)
             {
-                throw new ArgumentException("Safety level may only be 'Safe' for unauthenticated calls", "safetyLevel");
+                throw new ArgumentException("Safety level may only be 'Safe' for unauthenticated calls", nameof(safetyLevel));
             }
 
             var parameters = new Dictionary<string, string>();

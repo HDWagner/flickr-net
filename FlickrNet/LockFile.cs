@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace FlickrNet
@@ -76,6 +77,7 @@ namespace FlickrNet
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         internal void Release()
         {
             lock (syncRoot)
@@ -125,14 +127,8 @@ namespace FlickrNet
 
         public void Dispose()
         {
-            if (disposeHelper != null)
-            {
-                disposeHelper.Dispose();
-            }
-            if (stream != null)
-            {
-                ((IDisposable)stream).Dispose();
-            }
+            disposeHelper?.Dispose();
+            stream?.Dispose();
         }
     }
 }

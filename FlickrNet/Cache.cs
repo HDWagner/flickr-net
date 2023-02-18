@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace FlickrNet
 {
@@ -11,7 +8,7 @@ namespace FlickrNet
     /// </summary>
     public static class Cache
     {
-        private static PersistentCache responses;
+        private static PersistentCache? responses;
 
         /// <summary>
         /// A static object containing the list of cached responses from Flickr.
@@ -22,10 +19,7 @@ namespace FlickrNet
             {
                 lock (lockObject)
                 {
-                    if (responses == null)
-                    {
-                        responses = new PersistentCache(Path.Combine(CacheLocation, "responseCache.dat"), new ResponseCacheItemPersister());
-                    }
+                    responses ??= new PersistentCache(Path.Combine(CacheLocation, "responseCache.dat"), new ResponseCacheItemPersister());
 
                     return responses;
                 }
@@ -67,7 +61,7 @@ namespace FlickrNet
             }
         }
 
-        private static string cacheLocation;
+        private static string? cacheLocation;
 
         /// <summary>
         /// Returns the currently set location for the cache.
@@ -144,162 +138,5 @@ namespace FlickrNet
             Responses.Flush();
         }
 
-    }
-
-    /// <summary>
-    /// A cache item containing details of a REST response from Flickr.
-    /// </summary>
-    public sealed class ResponseCacheItem : ICacheItem
-    {
-        /// <summary>
-        /// Gets or sets the original URL of the request.
-        /// </summary>
-        public Uri Url { get; set; }
-
-        /// <summary>
-        /// Gets or sets the XML response.
-        /// </summary>
-        public string Response { get; set; }
-
-        /// <summary>
-        /// Gets or sets the time the cache item was created.
-        /// </summary>
-        public DateTime CreationTime { get; set; }
-
-        /// <summary>
-        /// Gets the filesize of the request.
-        /// </summary>
-        public long FileSize
-        {
-            get { return Response == null ? 0 : Response.Length; }
-        }
-
-        /// <summary>
-        /// Creates an instance of the <see cref="ResponseCacheItem"/> class.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="response"></param>
-        /// <param name="creationTime"></param>
-        public ResponseCacheItem(Uri url, string response, DateTime creationTime)
-        {
-            Url = url;
-            Response = response;
-            CreationTime = creationTime;
-        }
-
-        void ICacheItem.OnItemFlushed()
-        {
-            // the author doesn't care
-        }
-
-    }
-
-    internal class ResponseCacheItemPersister : CacheItemPersister
-    {
-        public override ICacheItem Read(Stream inputStream)
-        {
-            string s = UtilityMethods.ReadString(inputStream);
-            string response = UtilityMethods.ReadString(inputStream);
-
-            string[] chunks = s.Split('\n');
-
-            // Corrupted cache record, so throw IOException which is then handled and returns partial cache.
-            if (chunks.Length != 2)
-            {
-                throw new IOException("Unexpected number of chunks found");
-            }
-
-            string url = chunks[0];
-            var creationTime = new DateTime(long.Parse(chunks[1], System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
-            var item = new ResponseCacheItem(new Uri(url), response, creationTime);
-            return item;
-        }
-
-        public override void Write(Stream outputStream, ICacheItem cacheItem)
-        {
-            var item = (ResponseCacheItem)cacheItem;
-            var result = new StringBuilder();
-            result.Append(item.Url.AbsoluteUri + "\n");
-            result.Append(item.CreationTime.Ticks.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            UtilityMethods.WriteString(outputStream, result.ToString());
-            UtilityMethods.WriteString(outputStream, item.Response);
-        }
-    }
-
-    /// <summary>
-    /// An item that can be stored in a cache.
-    /// </summary>
-    public interface ICacheItem
-    {
-        /// <summary>
-        /// The time this cache item was created.
-        /// </summary>
-        DateTime CreationTime { get; }
-
-        /// <summary>
-        /// Gets called back when the item gets flushed
-        /// from the cache.
-        /// </summary>
-        void OnItemFlushed();
-
-        /// <summary>
-        /// The size of this item, in bytes. Return 0
-        /// if size management is not important.
-        /// </summary>
-        long FileSize { get; }
-    }
-
-    /// <summary>
-    /// An interface that knows how to read/write subclasses
-    /// of ICacheItem.  Obviously there will be a tight
-    /// coupling between concrete implementations of ICacheItem
-    /// and concrete implementations of ICacheItemPersister.
-    /// </summary>
-    public abstract class CacheItemPersister
-    {
-        /// <summary>
-        /// Read a single cache item from the input stream.
-        /// </summary>
-        public abstract ICacheItem Read(Stream inputStream);
-
-        /// <summary>
-        /// Write a single cache item to the output stream.
-        /// </summary>
-        public abstract void Write(Stream outputStream, ICacheItem cacheItem);
-    }
-
-
-    /// <summary>
-    /// An internal class used for catching caching exceptions.
-    /// </summary>
-    [Serializable]
-    public class CacheException : Exception
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CacheException"/> class.
-        /// </summary>
-        public CacheException()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CacheException"/> class with a specified error message.
-        /// </summary>
-        /// <param name="message"></param>
-        public CacheException(string message)
-            : base(message)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CacheException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="innerException"></param>
-        public CacheException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
     }
 }

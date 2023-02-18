@@ -63,7 +63,7 @@ namespace FlickrNet
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be greater than 0");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be greater than 0");
                 }
 
                 page = value; 

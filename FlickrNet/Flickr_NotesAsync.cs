@@ -68,7 +68,7 @@ namespace FlickrNet
             parameters.Add("note_h", noteHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("note_text", noteText);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.notes.delete");
             parameters.Add("note_id", noteId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

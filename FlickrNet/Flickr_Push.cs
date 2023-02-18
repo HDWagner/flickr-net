@@ -65,17 +65,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topic))
             {
-                throw new ArgumentNullException("topic");
+                throw new ArgumentNullException(nameof(topic));
             }
 
             if (string.IsNullOrEmpty(callback))
             {
-                throw new ArgumentNullException("callback");
+                throw new ArgumentNullException(nameof(callback));
             }
 
             if (string.IsNullOrEmpty(verify))
             {
-                throw new ArgumentNullException("verify");
+                throw new ArgumentNullException(nameof(verify));
             }
 
             if (topic == "tags" && (tags == null || tags.Length == 0))
@@ -135,17 +135,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topic))
             {
-                throw new ArgumentNullException("topic");
+                throw new ArgumentNullException(nameof(topic));
             }
 
             if (string.IsNullOrEmpty(callback))
             {
-                throw new ArgumentNullException("callback");
+                throw new ArgumentNullException(nameof(callback));
             }
 
             if (string.IsNullOrEmpty(verify))
             {
-                throw new ArgumentNullException("verify");
+                throw new ArgumentNullException(nameof(verify));
             }
 
             var parameters = new Dictionary<string, string>();

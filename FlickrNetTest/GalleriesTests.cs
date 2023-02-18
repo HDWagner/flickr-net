@@ -14,7 +14,7 @@ namespace FlickrNetTest
     [TestFixture]
     public class GalleriesTests : BaseTest
     {
-        
+
         [Test]
         public void GalleriesGetListUserIdTest()
         {
@@ -22,15 +22,15 @@ namespace FlickrNetTest
 
             GalleryCollection galleries = f.GalleriesGetList(TestData.TestUserId);
 
-            Assert.IsNotNull(galleries, "GalleryCollection should not be null.");
-            Assert.AreNotEqual(0, galleries.Count, "Count should not be zero.");
+            Assert.That(galleries, Is.Not.Null, "GalleryCollection should not be null.");
+            Assert.That(galleries, Is.Not.Empty, "Count should not be zero.");
 
             foreach (var g in galleries)
             {
-                Assert.IsNotNull(g);
-                Assert.IsNotNull(g.Title, "Title should not be null.");
-                Assert.IsNotNull(g.GalleryId, "GalleryId should not be null.");
-                Assert.IsNotNull(g.GalleryUrl, "GalleryUrl should not be null.");
+                Assert.That(g, Is.Not.Null);
+                Assert.That(g.Title, Is.Not.Null, "Title should not be null.");
+                Assert.That(g.GalleryId, Is.Not.Null, "GalleryId should not be null.");
+                Assert.That(g.GalleryUrl, Is.Not.Null, "GalleryUrl should not be null.");
             }
         }
 
@@ -41,15 +41,15 @@ namespace FlickrNetTest
 
             var galleries = Instance.GalleriesGetListForPhoto(photoId);
 
-            Assert.IsNotNull(galleries, "GalleryCollection should not be null.");
-            Assert.AreNotEqual(0, galleries.Count, "Count should not be zero.");
+            Assert.That(galleries, Is.Not.Null, "GalleryCollection should not be null.");
+            Assert.That(galleries, Is.Not.Empty, "Count should not be zero.");
 
             foreach (var g in galleries)
             {
-                Assert.IsNotNull(g);
-                Assert.IsNotNull(g.Title, "Title should not be null.");
-                Assert.IsNotNull(g.GalleryId, "GalleryId should not be null.");
-                Assert.IsNotNull(g.GalleryUrl, "GalleryUrl should not be null.");
+                Assert.That(g, Is.Not.Null);
+                Assert.That(g.Title, Is.Not.Null, "Title should not be null.");
+                Assert.That(g.GalleryId, Is.Not.Null, "GalleryId should not be null.");
+                Assert.That(g.GalleryUrl, Is.Not.Null, "GalleryUrl should not be null.");
             }
         }
 
@@ -66,13 +66,13 @@ namespace FlickrNetTest
 
             Console.WriteLine(f.LastRequest);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(15, photos.Count, "Count should be fifteen.");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Has.Count.EqualTo(15), "Count should be fifteen.");
 
             foreach (var photo in photos)
             {
                 //This gallery has a comment on each photo.
-                Assert.IsNotNull(photo.Comment, "GalleryPhoto.Comment shoult not be null.");
+                Assert.That(photo.Comment, Is.Not.Null, "GalleryPhoto.Comment shoult not be null.");
             }
         }
 
@@ -105,11 +105,11 @@ namespace FlickrNetTest
 
             var photos2 = f.GalleriesGetPhotos(gallery.GalleryId);
 
-            Assert.AreEqual(photos.Count, photos2.Count);
+            Assert.That(photos2, Has.Count.EqualTo(photos.Count));
 
             for (int i = 0; i < photos.Count; i++)
             {
-                Assert.AreEqual(photos[i].PhotoId, photos2[i].PhotoId);
+                Assert.That(photos2[i].PhotoId, Is.EqualTo(photos[i].PhotoId));
             }
         }
 
@@ -134,8 +134,8 @@ namespace FlickrNetTest
 
             Gallery gallery = f.GalleriesGetInfo(galleryId);
 
-            Assert.AreEqual(title, gallery.Title);
-            Assert.AreEqual(description, gallery.Description);
+            Assert.That(gallery.Title, Is.EqualTo(title));
+            Assert.That(gallery.Description, Is.EqualTo(description));
         }
 
         [Test, Category("AccessTokenRequired")]
@@ -182,13 +182,13 @@ namespace FlickrNetTest
             {
                 if (photo.PhotoId == photoId)
                 {
-                    Assert.AreEqual(comment, photo.Comment, "Comment should have been updated.");
+                    Assert.That(photo.Comment, Is.EqualTo(comment), "Comment should have been updated.");
                     found = true;
                     break;
                 }
             }
 
-            Assert.IsTrue(found, "Should have found the photo in the gallery.");
+            Assert.That(found, Is.True, "Should have found the photo in the gallery.");
         }
 
         [Test]
@@ -200,7 +200,6 @@ namespace FlickrNetTest
             Flickr.FlushCache();
 
             string primaryPhotoId = "486875512";
-            string comment = "You don't get much better than this for the best Entrance to Hell.\n\n" + DateTime.Now.ToString();
             string galleryId = "78188-72157622589312064";
 
             Flickr f = AuthInstance;
@@ -224,37 +223,37 @@ namespace FlickrNetTest
             // Check removed photo no longer returned.
             var photos2 = f.GalleriesGetPhotos(galleryId);
 
-            Assert.AreEqual(photos.Count - 1, photos2.Count, "Should be one less photo.");
+            Assert.That(photos2, Has.Count.EqualTo(photos.Count - 1), "Should be one less photo.");
 
             bool found = false;
             foreach (var p in photos2)
             {
                 if (p.PhotoId == photo.PhotoId)
                 {
-                    found = true; 
+                    found = true;
                     break;
                 }
             }
-            Assert.IsFalse(false, "Should not have found the photo in the gallery.");
+            Assert.That(found, Is.False, "Should not have found the photo in the gallery.");
 
             // Add photo back in
             f.GalleriesAddPhoto(galleryId, photo.PhotoId, photo.Comment);
 
             var photos3 = f.GalleriesGetPhotos(galleryId);
-            Assert.AreEqual(photos.Count, photos3.Count, "Count should match now photo added back in.");
+            Assert.That(photos3, Has.Count.EqualTo(photos.Count), "Count should match now photo added back in.");
 
             found = false;
             foreach (var p in photos3)
             {
                 if (p.PhotoId == photo.PhotoId)
                 {
-                    Assert.AreEqual(photo.Comment, p.Comment, "Comment should have been updated.");
+                    Assert.That(p.Comment, Is.EqualTo(photo.Comment), "Comment should have been updated.");
                     found = true;
                     break;
                 }
             }
 
-            Assert.IsTrue(found, "Should have found the photo in the gallery.");
+            Assert.That(found, Is.True, "Should have found the photo in the gallery.");
         }
 
     }

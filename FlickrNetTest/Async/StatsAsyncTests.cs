@@ -25,7 +25,7 @@ namespace FlickrNetTest.Async
             f.StatsGetCollectionDomainsAsync(d, 1, 25, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace FlickrNetTest.Async
             f.StatsGetPhotoDomainsAsync(d, 1, 25, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace FlickrNetTest.Async
             f.StatsGetPhotostreamDomainsAsync(d, 1, 25, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace FlickrNetTest.Async
             f.StatsGetPhotosetDomainsAsync(d, 1, 25, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
         }
 
 
@@ -84,7 +84,7 @@ namespace FlickrNetTest.Async
             f.StatsGetCollectionStatsAsync(d, collection.CollectionId, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
 
         }
 
@@ -106,7 +106,7 @@ namespace FlickrNetTest.Async
                 throw result.Error;
             }
 
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
         }
 
         [Test]

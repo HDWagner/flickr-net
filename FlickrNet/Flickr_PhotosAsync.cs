@@ -35,7 +35,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("tags", tags);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.delete");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getAllContexts");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<AllContexts>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace FlickrNet
 
             if (count != 0 && (count < 10 || count > 50) && !singlePhoto)
             {
-                throw new ArgumentOutOfRangeException("count", string.Format(System.Globalization.CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
+                throw new ArgumentOutOfRangeException(nameof(count), string.Format(System.Globalization.CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
             }
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getContactsPhotos");
@@ -142,7 +142,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getContext");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<Context>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -318,9 +318,9 @@ namespace FlickrNet
 
             if (dates != null && dates.Length > 0)
             {
-                Array.Sort<DateTime>(dates);
+                Array.Sort(dates);
 #if !SILVERLIGHT
-                dateString = string.Join(",", new List<DateTime>(dates).ConvertAll<string>(new Converter<DateTime, string>(delegate(DateTime d) 
+                dateString = string.Join(",", new List<DateTime>(dates).ConvertAll(new Converter<DateTime, string>(delegate(DateTime d) 
                 {
                     return UtilityMethods.DateToUnixTimestamp(d).ToString(); 
                 })).ToArray());
@@ -331,9 +331,9 @@ namespace FlickrNet
 
             if (takenDates != null && takenDates.Length > 0)
             {
-                Array.Sort<DateTime>(takenDates);
+                Array.Sort(takenDates);
 #if !SILVERLIGHT
-                takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll<string>(new Converter<DateTime, string>(delegate(DateTime d) 
+                takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll(new Converter<DateTime, string>(delegate(DateTime d) 
                     {
                         return UtilityMethods.DateToUnixTimestamp(d).ToString(); 
                     })).ToArray());
@@ -354,7 +354,7 @@ namespace FlickrNet
                 parameters.Add("taken_dates", takenDateString);
             }
 
-            GetResponseAsync<PhotoCountCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace FlickrNet
                 parameters.Add("secret", secret);
             }
 
-            GetResponseAsync<ExifTagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace FlickrNet
                 parameters.Add("secret", secret);
             }
 
-            GetResponseAsync<PhotoInfo>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -430,7 +430,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getPerms");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<PhotoPermissions>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -490,7 +490,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getSizes");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<SizeCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace FlickrNet
 
             UtilityMethods.PartialOptionsIntoArray(options, parameters);
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -629,7 +629,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getNotInSet");
             UtilityMethods.PartialOptionsIntoArray(options, parameters);
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -642,7 +642,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.licenses.getInfo");
             parameters.Add("api_key", apiKey);
 
-            GetResponseAsync<LicenseCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -662,13 +662,13 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("license_id", license.ToString("d"));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
         /// Remove an existing tag.
         /// </summary>
-        /// <param name="tagId">The id of the tag, as returned by <see cref="Flickr.PhotosGetInfo(string)"/> or similar method.</param>
+        /// <param name="tagId">The id of the tag, as returned by <see cref="PhotosGetInfo(string)"/> or similar method.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void PhotosRemoveTagAsync(string tagId, Action<FlickrResult<NoResponse>> callback)
         {
@@ -676,7 +676,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.removeTag");
             parameters.Add("tag_id", tagId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -750,7 +750,7 @@ namespace FlickrNet
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -765,7 +765,7 @@ namespace FlickrNet
 
             options.AddToDictionary(parameters);
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -829,7 +829,7 @@ namespace FlickrNet
                 parameters.Add("date_taken_granularity", granularity.ToString("d"));
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -848,7 +848,7 @@ namespace FlickrNet
             parameters.Add("title", title);
             parameters.Add("description", description);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -892,7 +892,7 @@ namespace FlickrNet
             parameters.Add("perm_comment", permComment.ToString("d"));
             parameters.Add("perm_addmeta", permAddMeta.ToString("d"));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -928,7 +928,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("tags", tags);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -946,7 +946,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("content_type", contentType.ToString("D"));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -1000,7 +1000,7 @@ namespace FlickrNet
                     break;
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -1035,7 +1035,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoFavoriteCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 

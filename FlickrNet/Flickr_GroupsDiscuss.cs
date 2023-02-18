@@ -17,12 +17,12 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -44,12 +44,12 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -72,17 +72,17 @@ namespace FlickrNet
             
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -104,12 +104,12 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -131,7 +131,7 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -162,17 +162,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentNullException("groupId");
+                throw new ArgumentNullException(nameof(groupId));
             }
 
             if (string.IsNullOrEmpty(subject))
             {
-                throw new ArgumentNullException("subject");
+                throw new ArgumentNullException(nameof(subject));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -195,7 +195,7 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentNullException("groupId");
+                throw new ArgumentNullException(nameof(groupId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -223,7 +223,7 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             var parameters = new Dictionary<string, string>();

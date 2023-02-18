@@ -18,8 +18,8 @@ namespace FlickrNetTest
         {
             var places = Instance.PlacesFind("Newcastle");
 
-            Assert.IsNotNull(places);
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Is.Not.Empty);
         }
 
         [Test]
@@ -27,8 +27,8 @@ namespace FlickrNetTest
         {
             var places = Instance.PlacesFind("Newcastle upon Tyne");
 
-            Assert.IsNotNull(places);
-            Assert.AreEqual(1, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -39,8 +39,8 @@ namespace FlickrNetTest
 
             var place = Instance.PlacesFindByLatLon(lat, lon);
 
-            Assert.IsNotNull(place);
-            Assert.AreEqual("Haymarket, Newcastle upon Tyne, England, GB, United Kingdom", place.Description);
+            Assert.That(place, Is.Not.Null);
+            Assert.That(place.Description, Is.EqualTo("Haymarket, Newcastle upon Tyne, England, GB, United Kingdom"));
         }
 
         [Test]
@@ -59,16 +59,16 @@ namespace FlickrNetTest
 
             foreach (Place place in places)
             {
-                Assert.IsNotNull(place.PlaceId, "PlaceId should not be null.");
-                Assert.IsNotNull(place.WoeId, "WoeId should not be null.");
-                Assert.IsNotNull(place.Description, "Description should not be null.");
-                Assert.AreEqual(PlaceType.Continent, place.PlaceType, "PlaceType should be continent.");
+                Assert.That(place.PlaceId, Is.Not.Null, "PlaceId should not be null.");
+                Assert.That(place.WoeId, Is.Not.Null, "WoeId should not be null.");
+                Assert.That(place.Description, Is.Not.Null, "Description should not be null.");
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Continent), "PlaceType should be continent.");
             }
 
-            Assert.AreEqual("6dCBhRRTVrJiB5xOrg", places[0].PlaceId);
-            Assert.AreEqual("Europe", places[0].Description);
-            Assert.AreEqual("l5geY0lTVrLoNkLgeQ", places[1].PlaceId);
-            Assert.AreEqual("North America", places[1].Description);
+            Assert.That(places[0].PlaceId, Is.EqualTo("6dCBhRRTVrJiB5xOrg"));
+            Assert.That(places[0].Description, Is.EqualTo("Europe"));
+            Assert.That(places[1].PlaceId, Is.EqualTo("l5geY0lTVrLoNkLgeQ"));
+            Assert.That(places[1].Description, Is.EqualTo("North America"));
         }
 
         [Test, Ignore("Not currently returning any records for some reason.")]
@@ -81,12 +81,12 @@ namespace FlickrNetTest
             Console.WriteLine(f.LastRequest);
             Console.WriteLine(f.LastResponse);
 
-            Assert.IsNotNull(places);
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.AreEqual(PlaceType.Country, place.PlaceType);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Country));
             }
         }
 
@@ -96,12 +96,12 @@ namespace FlickrNetTest
             string woeId = "24865675"; // Europe
 
             var places = Instance.PlacesGetChildrenWithPhotosPublic(null, woeId);
-            Assert.IsNotNull(places);
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.AreEqual(PlaceType.Country, place.PlaceType);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Country));
             }
         }
 
@@ -116,11 +116,11 @@ namespace FlickrNetTest
 
             foreach (Place place in p)
             {
-                Assert.IsNotNull(place.PlaceId, "PlaceId should not be null.");
-                Assert.IsNotNull(place.WoeId, "WoeId should not be null.");
-                Assert.IsNotNull(place.Description, "Description should not be null.");
-                Assert.IsNotNull(place.PlaceUrl, "PlaceUrl should not be null");
-                Assert.AreEqual(PlaceType.Region, place.PlaceType, "PlaceType should be Region.");
+                Assert.That(place.PlaceId, Is.Not.Null, "PlaceId should not be null.");
+                Assert.That(place.WoeId, Is.Not.Null, "WoeId should not be null.");
+                Assert.That(place.Description, Is.Not.Null, "Description should not be null.");
+                Assert.That(place.PlaceUrl, Is.Not.Null, "PlaceUrl should not be null");
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Region), "PlaceType should be Region.");
             }
         }
 
@@ -131,14 +131,14 @@ namespace FlickrNetTest
             var f = AuthInstance;
             var places = f.PlacesPlacesForContacts(PlaceType.Country, null, null, 0, ContactSearch.AllContacts, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
 
-            Assert.IsNotNull(places);
+            Assert.That(places, Is.Not.Null);
 
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.AreEqual(PlaceType.Country, place.PlaceType);
-                Assert.IsNotNull(place.PlaceId);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Country));
+                Assert.That(place.PlaceId, Is.Not.Null);
             }
         }
 
@@ -154,14 +154,14 @@ namespace FlickrNetTest
 
             Console.WriteLine(f.LastRequest);
 
-            Assert.IsNotNull(places);
+            Assert.That(places, Is.Not.Null);
 
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.AreEqual(PlaceType.Country, place.PlaceType);
-                Assert.IsNotNull(place.PlaceId);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Country));
+                Assert.That(place.PlaceId, Is.Not.Null);
             }
         }
 
@@ -174,14 +174,14 @@ namespace FlickrNetTest
                                                TagMode.AllTags, null, MachineTagMode.None, DateTime.MinValue,
                                                DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
 
-            Assert.IsNotNull(places);
+            Assert.That(places, Is.Not.Null);
 
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.AreEqual(PlaceType.Country, place.PlaceType);
-                Assert.IsNotNull(place.PlaceId);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.Country));
+                Assert.That(place.PlaceId, Is.Not.Null);
             }
         }
 
@@ -195,7 +195,7 @@ namespace FlickrNetTest
                                                DateTime.Today.AddYears(-10), DateTime.Today,
                                                DateTime.Today.AddYears(-10), DateTime.Today);
 
-            Assert.IsNotNull(places);
+            Assert.That(places, Is.Not.Null);
         }
 
         [Test]
@@ -207,24 +207,24 @@ namespace FlickrNetTest
 
             Console.WriteLine(f.LastResponse);
 
-            Assert.IsNotNull(p);
-            Assert.AreEqual(placeId, p.PlaceId);
-            Assert.AreEqual("30079", p.WoeId);
-            Assert.AreEqual(PlaceType.Locality, p.PlaceType);
-            Assert.AreEqual("Newcastle upon Tyne, England, United Kingdom", p.Description);
+            Assert.That(p, Is.Not.Null);
+            Assert.That(p.PlaceId, Is.EqualTo(placeId));
+            Assert.That(p.WoeId, Is.EqualTo("30079"));
+            Assert.That(p.PlaceType, Is.EqualTo(PlaceType.Locality));
+            Assert.That(p.Description, Is.EqualTo("Newcastle upon Tyne, England, United Kingdom"));
 
-            Assert.AreEqual("X9sTR3BSUrqorQ", p.Locality.PlaceId);
-            Assert.AreEqual("myqh27pQULzLWcg7Kg", p.County.PlaceId);
-            Assert.AreEqual("2eIY2QFTVr_DwWZNLg", p.Region.PlaceId);
-            Assert.AreEqual("cnffEpdTUb5v258BBA", p.Country.PlaceId);
+            Assert.That(p.Locality.PlaceId, Is.EqualTo("X9sTR3BSUrqorQ"));
+            Assert.That(p.County.PlaceId, Is.EqualTo("myqh27pQULzLWcg7Kg"));
+            Assert.That(p.Region.PlaceId, Is.EqualTo("2eIY2QFTVr_DwWZNLg"));
+            Assert.That(p.Country.PlaceId, Is.EqualTo("cnffEpdTUb5v258BBA"));
 
-            Assert.IsTrue(p.HasShapeData);
-            Assert.IsNotNull(p.ShapeData);
-            Assert.AreEqual(0.00015, p.ShapeData.Alpha);
-            Assert.AreEqual(1, p.ShapeData.PolyLines.Count);
-            Assert.AreEqual(89, p.ShapeData.PolyLines[0].Count);
-            Assert.AreEqual(55.030498504639, p.ShapeData.PolyLines[0][88].X);
-            Assert.AreEqual(-1.6404060125351, p.ShapeData.PolyLines[0][88].Y);
+            Assert.That(p.HasShapeData, Is.True);
+            Assert.That(p.ShapeData, Is.Not.Null);
+            Assert.That(p.ShapeData.Alpha, Is.EqualTo(0.00015));
+            Assert.That(p.ShapeData.PolyLines, Has.Count.EqualTo(1));
+            Assert.That(p.ShapeData.PolyLines[0], Has.Count.EqualTo(89));
+            Assert.That(p.ShapeData.PolyLines[0][88].X, Is.EqualTo(55.030498504639));
+            Assert.That(p.ShapeData.PolyLines[0][88].Y, Is.EqualTo(-1.6404060125351));
         }
 
         [Test]
@@ -235,13 +235,13 @@ namespace FlickrNetTest
             PlaceInfo p1 = f.PlacesGetInfo(placeId, null);
             PlaceInfo p2 = f.PlacesGetInfoByUrl(p1.PlaceUrl);
 
-            Assert.IsNotNull(p2);
-            Assert.AreEqual(p1.PlaceId, p2.PlaceId);
-            Assert.AreEqual(p1.WoeId, p2.WoeId);
-            Assert.AreEqual(p1.PlaceType, p2.PlaceType);
-            Assert.AreEqual(p1.Description, p2.Description);
+            Assert.That(p2, Is.Not.Null);
+            Assert.That(p2.PlaceId, Is.EqualTo(p1.PlaceId));
+            Assert.That(p2.WoeId, Is.EqualTo(p1.WoeId));
+            Assert.That(p2.PlaceType, Is.EqualTo(p1.PlaceType));
+            Assert.That(p2.Description, Is.EqualTo(p1.Description));
 
-            Assert.IsNotNull(p2.PlaceFlickrUrl);
+            Assert.That(p2.PlaceFlickrUrl, Is.Not.Null);
         }
 
         [Test]
@@ -250,14 +250,14 @@ namespace FlickrNetTest
             var f = Instance;
             var places = f.PlacesGetTopPlacesList(PlaceType.Continent);
 
-            Assert.IsNotNull(places);
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var p in places)
             {
-                Assert.AreEqual(PlaceType.Continent, p.PlaceType);
-                Assert.IsNotNull(p.PlaceId);
-                Assert.IsNotNull(p.WoeId);
+                Assert.That(p.PlaceType, Is.EqualTo(PlaceType.Continent));
+                Assert.That(p.PlaceId, Is.Not.Null);
+                Assert.That(p.WoeId, Is.Not.Null);
             }
         }
 
@@ -268,11 +268,11 @@ namespace FlickrNetTest
             var f = Instance;
             var col = f.PlacesGetShapeHistory(placeId, null);
 
-            Assert.IsNotNull(col, "ShapeDataCollection should not be null.");
-            Assert.AreEqual(7, col.Count, "Count should be six.");
-            Assert.AreEqual(placeId, col.PlaceId);
+            Assert.That(col, Is.Not.Null, "ShapeDataCollection should not be null.");
+            Assert.That(col, Has.Count.EqualTo(7), "Count should be six.");
+            Assert.That(col.PlaceId, Is.EqualTo(placeId));
 
-            Assert.AreEqual(1, col[1].PolyLines.Count, "The second shape should have one polylines.");
+            Assert.That(col[1].PolyLines, Has.Count.EqualTo(1), "The second shape should have one polylines.");
         }
 
         [Test]
@@ -282,13 +282,13 @@ namespace FlickrNetTest
             var f = Instance;
             var col = f.PlacesTagsForPlace(placeId, null);
 
-            Assert.IsNotNull(col, "TagCollection should not be null.");
-            Assert.AreEqual(100, col.Count, "Count should be one hundred.");
+            Assert.That(col, Is.Not.Null, "TagCollection should not be null.");
+            Assert.That(col, Has.Count.EqualTo(100), "Count should be one hundred.");
 
             foreach (var t in col)
             {
-                Assert.AreNotEqual(0, t.Count, "Count should be greater than zero.");
-                Assert.IsNotNull(t.TagName, "TagName should not be null.");
+                Assert.That(t.Count, Is.Not.EqualTo(0), "Count should be greater than zero.");
+                Assert.That(t.TagName, Is.Not.Null, "TagName should not be null.");
             }
 
         }
@@ -297,17 +297,17 @@ namespace FlickrNetTest
         public void PlacesGetPlaceTypes()
         {
             var pts = Instance.PlacesGetPlaceTypes();
-            Assert.IsNotNull(pts);
-            Assert.IsTrue(pts.Count > 1, "Count should be greater than one. Count = " + pts.Count + ".");
+            Assert.That(pts, Is.Not.Null);
+            Assert.That(pts, Has.Count.GreaterThan(1), "Count should be greater than one. Count = " + pts.Count + ".");
 
             foreach (var kp in pts)
             {
-                Assert.AreNotEqual(0, kp.Id, "Key should not be zero.");
-                Assert.IsNotNull(kp.Name, "Value should not be null.");
+                Assert.That(kp.Id, Is.Not.EqualTo(0), "Key should not be zero.");
+                Assert.That(kp.Name, Is.Not.Null, "Value should not be null.");
 
-                Assert.IsTrue(Enum.IsDefined(typeof(PlaceType), kp.Id), "PlaceType with ID " + kp.Id + " and Value '" + kp.Name + "' not defined in PlaceType enum.");
+                Assert.That(Enum.IsDefined(typeof(PlaceType), kp.Id), Is.True, "PlaceType with ID " + kp.Id + " and Value '" + kp.Name + "' not defined in PlaceType enum.");
                 var type = (PlaceType)kp.Id;
-                Assert.AreEqual(type.ToString("G").ToLower(), kp.Name, "Name of enum should match.");
+                Assert.That(kp.Name, Is.EqualTo(type.ToString("G").ToLower()), "Name of enum should match.");
             }
         }
 
@@ -318,13 +318,13 @@ namespace FlickrNetTest
 
             var places = f.PlacesPlacesForBoundingBox(PlaceType.County, null, null, BoundaryBox.UKNewcastle);
 
-            Assert.IsNotNull(places);
-            Assert.AreNotEqual(0, places.Count);
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places, Is.Not.Empty);
 
             foreach (var place in places)
             {
-                Assert.IsNotNull(place.PlaceId);
-                Assert.AreEqual(PlaceType.County, place.PlaceType);
+                Assert.That(place.PlaceId, Is.Not.Null);
+                Assert.That(place.PlaceType, Is.EqualTo(PlaceType.County));
             }
         }
 

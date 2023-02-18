@@ -959,7 +959,7 @@ namespace FlickrNet
         /// <summary>
         /// Is the tag a machine tag.
         /// </summary>
-        public bool IsMachineTag { get; set; }
+        public bool? IsMachineTag { get; set; }
 
         /// <summary>
         /// The actually tag.

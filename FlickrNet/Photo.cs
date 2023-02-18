@@ -60,7 +60,7 @@ namespace FlickrNet
         public bool IsFamily { get; set; }
 
         /// <remarks/>
-        public LicenseType License { get; set; }
+        public LicenseType? License { get; set; }
 
         /// <summary>
         /// The width of the original image. 

@@ -20,9 +20,9 @@ namespace FlickrNetTest
 
             MethodCollection methodNames = f.ReflectionGetMethods();
 
-            Assert.IsNotNull(methodNames, "Should not be null");
-            Assert.AreNotEqual(0, methodNames.Count, "Should return some method names.");
-            Assert.IsNotNull(methodNames[0], "First item should not be null");
+            Assert.That(methodNames, Is.Not.Null, "Should not be null");
+            Assert.That(methodNames, Is.Not.Empty, "Should return some method names.");
+            Assert.That(methodNames[0], Is.Not.Null, "First item should not be null");
 
         }
 
@@ -33,9 +33,9 @@ namespace FlickrNetTest
 
             MethodCollection methodNames = f.ReflectionGetMethods();
 
-            Assert.IsNotNull(methodNames, "Should not be null");
-            Assert.AreNotEqual(0, methodNames.Count, "Should return some method names.");
-            Assert.IsNotNull(methodNames[0], "First item should not be null");
+            Assert.That(methodNames, Is.Not.Null, "Should not be null");
+            Assert.That(methodNames, Is.Not.Empty, "Should return some method names.");
+            Assert.That(methodNames[0], Is.Not.Null, "First item should not be null");
 
             Type type = typeof(Flickr);
             MethodInfo[] methods = type.GetMethods();
@@ -61,7 +61,7 @@ namespace FlickrNetTest
                 }
             }
 
-            if( failCount > 0)
+            if (failCount > 0)
             {
                 Assert.Inconclusive("FailCount should be zero. Currently " + failCount + " unsupported methods found.");
             }
@@ -74,9 +74,9 @@ namespace FlickrNetTest
 
             MethodCollection methodNames = f.ReflectionGetMethods();
 
-            Assert.IsNotNull(methodNames, "Should not be null");
-            Assert.AreNotEqual(0, methodNames.Count, "Should return some method names.");
-            Assert.IsNotNull(methodNames[0], "First item should not be null");
+            Assert.That(methodNames, Is.Not.Null, "Should not be null");
+            Assert.That(methodNames, Is.Not.Empty, "Should return some method names.");
+            Assert.That(methodNames[0], Is.Not.Null, "First item should not be null");
 
             Type type = typeof(Flickr);
             MethodInfo[] methods = type.GetMethods();
@@ -138,7 +138,7 @@ namespace FlickrNetTest
                 bool found = false;
 
                 string arg = argument.Name.Replace("_", "").ToLower();
-                
+
                 if (exceptions.ContainsKey(arg))
                 {
                     arg = exceptions[arg];
@@ -163,7 +163,7 @@ namespace FlickrNetTest
                 }
             }
 
-            Assert.AreEqual(0, numMissing, "Number of missing arguments should be zero.");
+            Assert.That(numMissing, Is.EqualTo(0), "Number of missing arguments should be zero.");
         }
 
         [Test]
@@ -181,9 +181,9 @@ namespace FlickrNetTest
 
             MethodCollection methodNames = f.ReflectionGetMethods();
 
-            Assert.IsNotNull(methodNames, "Should not be null");
-            Assert.AreNotEqual(0, methodNames.Count, "Should return some method names.");
-            Assert.IsNotNull(methodNames[0], "First item should not be null");
+            Assert.That(methodNames, Is.Not.Null, "Should not be null");
+            Assert.That(methodNames, Is.Not.Empty, "Should return some method names.");
+            Assert.That(methodNames[0], Is.Not.Null, "First item should not be null");
 
             Type type = typeof(Flickr);
             MethodInfo[] methods = type.GetMethods();
@@ -227,7 +227,7 @@ namespace FlickrNetTest
                 }
             }
 
-            Assert.AreEqual(0, failCount, "FailCount should be zero. Currently " + failCount + " unsupported methods found.");
+            Assert.That(failCount, Is.EqualTo(0), "FailCount should be zero. Currently " + failCount + " unsupported methods found.");
         }
 
 
@@ -237,19 +237,19 @@ namespace FlickrNetTest
             Flickr f = Instance;
             Method method = f.ReflectionGetMethodInfo("flickr.reflection.getMethodInfo");
 
-            Assert.IsNotNull(method, "Method should not be null");
-            Assert.AreEqual("flickr.reflection.getMethodInfo", method.Name, "Method name not set correctly");
+            Assert.That(method, Is.Not.Null, "Method should not be null");
+            Assert.That(method.Name, Is.EqualTo("flickr.reflection.getMethodInfo"), "Method name not set correctly");
 
-            Assert.AreEqual(MethodPermission.None, method.RequiredPermissions);
+            Assert.That(method.RequiredPermissions, Is.EqualTo(MethodPermission.None));
 
-            Assert.AreEqual(2, method.Arguments.Count, "There should be two arguments");
-            Assert.AreEqual("api_key", method.Arguments[0].Name, "First argument should be api_key.");
-            Assert.IsFalse(method.Arguments[0].IsOptional, "First argument should not be optional.");
+            Assert.That(method.Arguments, Has.Count.EqualTo(2), "There should be two arguments");
+            Assert.That(method.Arguments[0].Name, Is.EqualTo("api_key"), "First argument should be api_key.");
+            Assert.That(method.Arguments[0].IsOptional, Is.False, "First argument should not be optional.");
 
-            Assert.AreEqual(9, method.Errors.Count, "There should be 8 errors.");
-            Assert.AreEqual(1, method.Errors[0].Code, "First error should have code of 1");
-            Assert.AreEqual("Method not found", method.Errors[0].Message, "First error should have code of 1");
-            Assert.AreEqual("The requested method was not found.", method.Errors[0].Description, "First error should have code of 1");
+            Assert.That(method.Errors, Has.Count.EqualTo(9), "There should be 8 errors.");
+            Assert.That(method.Errors[0].Code, Is.EqualTo(1), "First error should have code of 1");
+            Assert.That(method.Errors[0].Message, Is.EqualTo("Method not found"), "First error should have code of 1");
+            Assert.That(method.Errors[0].Description, Is.EqualTo("The requested method was not found."), "First error should have code of 1");
         }
 
         [Test]
@@ -258,47 +258,8 @@ namespace FlickrNetTest
             var methodName = "flickr.favorites.getContext";
             var method = Instance.ReflectionGetMethodInfo(methodName);
 
-            Assert.AreEqual(3, method.Arguments.Count);
-            Assert.AreEqual("The id of the photo to fetch the context for.", method.Arguments[1].Description);
-            //Assert.IsNull(method.Arguments[4].Description);
-        }
-
-        void GetExceptionList()
-        {
-            var errors = new Dictionary<int, List<string>>();
-            Flickr.CacheDisabled = true;
-
-            Flickr f = Instance;
-            var list = f.ReflectionGetMethods();
-            foreach (var methodName in list)
-            {
-                Console.WriteLine("Method = " + methodName);
-                var method = f.ReflectionGetMethodInfo(methodName);
-
-                foreach (var exception in method.Errors)
-                {
-                    if (!errors.ContainsKey(exception.Code))
-                    {
-                        errors[exception.Code] = new List<string>();
-                    }
-
-                    var l = errors[exception.Code];
-                    if (!l.Contains(exception.Message))
-                    {
-                        l.Add(exception.Message);
-                    }
-                }
-            }
-
-            foreach (var pair in errors)
-            {
-                Console.WriteLine("Code,Message");
-                foreach (string l in pair.Value)
-                {
-                    Console.WriteLine(pair.Key + ",\"" + l + "\"");
-                }
-                Console.WriteLine();
-            }
+            Assert.That(method.Arguments, Has.Count.EqualTo(3));
+            Assert.That(method.Arguments[1].Description, Is.EqualTo("The id of the photo to fetch the context for."));
         }
     }
 }

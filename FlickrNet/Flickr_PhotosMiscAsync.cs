@@ -20,12 +20,12 @@ namespace FlickrNet
         {
             if (photoId == null)
             {
-                throw new ArgumentNullException("photoId");
+                throw new ArgumentNullException(nameof(photoId));
             }
 
             if (degrees != 90 && degrees != 180 && degrees != 270)
             {
-                throw new ArgumentException("Must be 90, 180 or 270", "degrees");
+                throw new ArgumentException("Must be 90, 180 or 270", nameof(degrees));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -33,7 +33,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("degrees", degrees.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.upload.checkTickets");
             parameters.Add("tickets", string.Join(",", tickets));
 
-            GetResponseAsync<TicketCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

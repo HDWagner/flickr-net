@@ -33,7 +33,7 @@ namespace FlickrNet
             parameters.Add("place_id", placeId);
             parameters.Add("woe_id", woeId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace FlickrNet
             parameters.Add("place_id", placeId);
             parameters.Add("woe_id", woeId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("context", context.ToString("D"));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace FlickrNet
                 parameters.Add("accuracy", accuracy.ToString("D"));
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace FlickrNet
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -205,7 +205,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.geo.removeLocation");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getWithoutGeoData");
             UtilityMethods.PartialOptionsIntoArray(options, parameters);
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getWithGeoData");
             UtilityMethods.PartialOptionsIntoArray(options, parameters);
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.geo.getPerms");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<GeoPermissions>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -298,7 +298,7 @@ namespace FlickrNet
             parameters.Add("is_friend", isFriend ? "1" : "0");
             parameters.Add("is_family", isFamily ? "1" : "0");
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

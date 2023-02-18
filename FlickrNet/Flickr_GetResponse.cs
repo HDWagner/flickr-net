@@ -59,7 +59,6 @@ namespace FlickrNet
                     parameters["auth_token"] = AuthToken;
                 }
             }
-#pragma warning restore 612,618
 
             var url = CalculateUri(parameters, !string.IsNullOrEmpty(sharedSecret));
 

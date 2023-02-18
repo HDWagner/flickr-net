@@ -19,8 +19,8 @@ namespace FlickrNetTest
         {
             string frob = TestData.GetOldSignedInstance().AuthGetFrob();
 
-            Assert.IsNotNull(frob, "frob should not be null.");
-            Assert.AreNotEqual("", frob, "Frob should not be zero length string.");
+            Assert.That(frob, Is.Not.Null, "frob should not be null.");
+            Assert.That(frob, Is.Not.EqualTo(""), "Frob should not be zero length string.");
         }
 
         [Test]
@@ -33,12 +33,12 @@ namespace FlickrNetTest
 
             var frobResult = w.Next().First();
 
-            Assert.IsFalse(frobResult.HasError);
+            Assert.That(frobResult.HasError, Is.False);
 
             string frob = frobResult.Result;
 
-            Assert.IsNotNull(frob, "frob should not be null.");
-            Assert.AreNotEqual("", frob, "Frob should not be zero length string.");
+            Assert.That(frob, Is.Not.Null, "frob should not be null.");
+            Assert.That(frob, Is.Not.EqualTo(""), "Frob should not be zero length string.");
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace FlickrNetTest
 
             string url = TestData.GetOldSignedInstance().AuthCalcUrl(frob, AuthLevel.Read);
 
-            Assert.IsNotNull(url, "url should not be null.");
+            Assert.That(url, Is.Not.Null, "url should not be null.");
         }
 
         [Test]
@@ -75,12 +75,12 @@ namespace FlickrNetTest
 
             string authToken = f.AuthToken;
 
-            Assert.IsNotNull(authToken, "authToken should not be null.");
+            Assert.That(authToken, Is.Not.Null, "authToken should not be null.");
 
             Auth auth = f.AuthCheckToken(authToken);
 
-            Assert.IsNotNull(auth, "Auth should not be null.");
-            Assert.AreEqual(authToken, auth.Token);
+            Assert.That(auth, Is.Not.Null, "Auth should not be null.");
+            Assert.That(auth.Token, Is.EqualTo(authToken));
         }
 
         [Test]
@@ -91,8 +91,8 @@ namespace FlickrNetTest
 
             Auth auth = f.AuthCheckToken();
 
-            Assert.IsNotNull(auth, "Auth should not be null.");
-            Assert.AreEqual(f.AuthToken, auth.Token);
+            Assert.That(auth, Is.Not.Null, "Auth should not be null.");
+            Assert.That(auth.Token, Is.EqualTo(f.AuthToken));
         }
 
         [Test]
@@ -124,14 +124,13 @@ namespace FlickrNetTest
 
             parsable.Load(reader);
 
-            Assert.AreEqual("TheToken", auth.Token);
-            Assert.AreEqual(AuthLevel.Delete, auth.Permissions);
-            Assert.AreEqual("41888973@N00", auth.User.UserId);
-            Assert.AreEqual("Sam Judson", auth.User.UserName);
-            Assert.AreEqual("Sam Judson", auth.User.FullName);
+            Assert.That(auth.Token, Is.EqualTo("TheToken"));
+            Assert.That(auth.Permissions, Is.EqualTo(AuthLevel.Delete));
+            Assert.That(auth.User.UserId, Is.EqualTo("41888973@N00"));
+            Assert.That(auth.User.UserName, Is.EqualTo("Sam Judson"));
+            Assert.That(auth.User.FullName, Is.EqualTo("Sam Judson"));
 
         }
     }
 }
 
-#pragma warning restore CS0618 // Type or member is obsolete

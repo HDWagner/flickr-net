@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FlickrNet
 {
@@ -26,7 +24,7 @@ namespace FlickrNet
 
             parameters.Add("oauth_signature", sig);
 
-            string response = FlickrResponder.GetDataResponse(this, url, parameters); 
+            string response = FlickrResponder.GetDataResponse(this, url, parameters);
 
             return OAuthRequestToken.ParseResponse(response);
         }
@@ -74,6 +72,5 @@ namespace FlickrNet
 
             return accessToken;
         }
-
     }
 }

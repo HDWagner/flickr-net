@@ -22,7 +22,7 @@ namespace FlickrNetTest
             Flickr f = Instance;
             PhotoCollection photos = f.PhotosSearch(o);
 
-            Assert.IsNotNull(photos[0].OwnerName);
+            Assert.That(photos[0].OwnerName, Is.Not.Null);
            
         }
 
@@ -32,7 +32,7 @@ namespace FlickrNetTest
             Flickr f = Instance;
             PhotoCollection photos = f.PhotosGetContactsPublicPhotos(TestData.TestUserId, PhotoSearchExtras.OwnerName);
 
-            Assert.IsNotNull(photos[0].OwnerName);
+            Assert.That(photos[0].OwnerName, Is.Not.Null);
         }
 
     }

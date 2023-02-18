@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 
 namespace FlickrNet
 {
@@ -40,7 +38,7 @@ namespace FlickrNet
         /// <param name="collectionId ">The ID of the collection to fetch a tree for, or zero to fetch the root collection.</param>
         /// <param name="userId">The ID of the user to fetch the tree for, or null if using the authenticated user.</param>
         /// <returns>An array of <see cref="Collection"/> instances.</returns>
-        public CollectionCollection CollectionsGetTree(string collectionId, string userId)
+        public CollectionCollection CollectionsGetTree(string? collectionId, string? userId)
         {
             if (string.IsNullOrEmpty(userId))
             {
@@ -94,7 +92,7 @@ namespace FlickrNet
             CheckRequiresAuthentication();
 
             // construct comma separated list of photoset IDs
-            string photosetIdsParameter = "";
+            var photosetIdsParameter = "";
             for (int i = 0; i < photosetIds.Count; i++)
             {
                 photosetIdsParameter += photosetIds[i];
@@ -123,7 +121,7 @@ namespace FlickrNet
         public void CollectionsRemoveSet(string collectionId, string photosetId)
         {
             CheckRequiresAuthentication();
-            
+
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.collections.removeSet");

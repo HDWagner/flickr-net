@@ -49,7 +49,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void UrlsGetUserPhotosAsync(string userId, Action<FlickrResult<string>> callback)
+        public void UrlsGetUserPhotosAsync(string? userId, Action<FlickrResult<string>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserPhotos");
@@ -88,7 +88,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void UrlsGetUserProfileAsync(string userId, Action<FlickrResult<string>> callback)
+        public void UrlsGetUserProfileAsync(string? userId, Action<FlickrResult<string>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserProfile");
@@ -123,7 +123,7 @@ namespace FlickrNet
             parameters.Add("api_key", apiKey);
             parameters.Add("url", url);
 
-            GetResponseAsync<Gallery>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace FlickrNet
             parameters.Add("api_key", apiKey);
             parameters.Add("url", urlToFind);
 
-            GetResponseAsync<FoundUser>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

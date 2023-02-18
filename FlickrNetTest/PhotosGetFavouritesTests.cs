@@ -13,7 +13,7 @@ namespace FlickrNetTest
             // No favourites
             PhotoFavoriteCollection favs = Instance.PhotosGetFavorites(TestData.PhotoId);
 
-            Assert.AreEqual(0, favs.Count, "Should have no favourites");
+            Assert.That(favs, Is.Empty, "Should have no favourites");
 
         }
 
@@ -23,18 +23,18 @@ namespace FlickrNetTest
         {
             PhotoFavoriteCollection favs = Instance.PhotosGetFavorites(TestData.FavouritedPhotoId, 500, 1);
 
-            Assert.IsNotNull(favs, "PhotoFavourites instance should not be null.");
+            Assert.That(favs, Is.Not.Null, "PhotoFavourites instance should not be null.");
 
-            Assert.IsTrue(favs.Count > 0, "PhotoFavourites.Count should not be zero.");
+            Assert.That(favs, Is.Not.Empty, "PhotoFavourites.Count should not be zero.");
 
-            Assert.AreEqual(50, favs.Count, "Should be 50 favourites listed (maximum returned)");
+            Assert.That(favs, Has.Count.EqualTo(50), "Should be 50 favourites listed (maximum returned)");
 
             foreach (PhotoFavorite p in favs)
             {
-                Assert.IsFalse(string.IsNullOrEmpty(p.UserId), "Should have a user ID.");
-                Assert.IsFalse(string.IsNullOrEmpty(p.UserName), "Should have a user name.");
-                Assert.AreNotEqual(default(DateTime), p.FavoriteDate, "Favourite Date should not be default Date value");
-                Assert.IsTrue(p.FavoriteDate < DateTime.Now, "Favourite Date should be in the past.");
+                Assert.That(string.IsNullOrEmpty(p.UserId), Is.False, "Should have a user ID.");
+                Assert.That(string.IsNullOrEmpty(p.UserName), Is.False, "Should have a user name.");
+                Assert.That(p.FavoriteDate, Is.Not.EqualTo(default(DateTime)), "Favourite Date should not be default Date value");
+                Assert.That(p.FavoriteDate, Is.LessThan(DateTime.Now), "Favourite Date should be in the past.");
             }
         }
 
@@ -43,11 +43,11 @@ namespace FlickrNetTest
         {
             PhotoFavoriteCollection favs = Instance.PhotosGetFavorites(TestData.FavouritedPhotoId, 10, 1);
 
-            Assert.AreEqual(10, favs.Count, "PhotoFavourites.Count should be 10.");
-            Assert.AreEqual(10, favs.PerPage, "PhotoFavourites.PerPage should be 10");
-            Assert.AreEqual(1, favs.Page, "PhotoFavourites.Page should be 1.");
-            Assert.IsTrue(favs.Total > 100, "PhotoFavourites.Total should be greater than 100.");
-            Assert.IsTrue(favs.Pages > 10, "PhotoFavourites.Pages should be greater than 10.");
+            Assert.That(favs, Has.Count.EqualTo(10), "PhotoFavourites.Count should be 10.");
+            Assert.That(favs.PerPage, Is.EqualTo(10), "PhotoFavourites.PerPage should be 10");
+            Assert.That(favs.Page, Is.EqualTo(1), "PhotoFavourites.Page should be 1.");
+            Assert.That(favs.Total, Is.GreaterThan(100), "PhotoFavourites.Total should be greater than 100.");
+            Assert.That(favs.Pages, Is.GreaterThan(10), "PhotoFavourites.Pages should be greater than 10.");
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace FlickrNetTest
         {
             PhotoFavoriteCollection favs = Instance.PhotosGetFavorites(TestData.FavouritedPhotoId, 10, 2);
 
-            Assert.AreEqual(10, favs.Count, "PhotoFavourites.Count should be 10.");
-            Assert.AreEqual(10, favs.PerPage, "PhotoFavourites.PerPage should be 10");
-            Assert.AreEqual(2, favs.Page, "PhotoFavourites.Page should be 2.");
+            Assert.That(favs, Has.Count.EqualTo(10), "PhotoFavourites.Count should be 10.");
+            Assert.That(favs.PerPage, Is.EqualTo(10), "PhotoFavourites.PerPage should be 10");
+            Assert.That(favs.Page, Is.EqualTo(2), "PhotoFavourites.Page should be 2.");
         }
     }
 }

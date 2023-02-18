@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
+﻿using System.Collections.Generic;
 
 namespace FlickrNet
 {
@@ -21,8 +17,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@content_type");
-            if (nav == null)
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@content_type");
+            if (nav?.Value == null)
             {
                 throw new ParsingException("Unable to find content type preference in returned XML.");
             }
@@ -57,8 +53,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@hidden");
-            if (nav == null)
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@hidden");
+            if (nav?.Value == null)
             {
                 throw new ParsingException("Unable to find hidden preference in returned XML.");
             }
@@ -79,8 +75,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@privacy");
-            if (nav == null)
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@privacy");
+            if (nav?.Value == null)
             {
                 throw new ParsingException("Unable to find safety level in returned XML.");
             }
@@ -101,8 +97,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@safety_level");
-            if (nav == null)
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@safety_level");
+            if (nav?.Value == null)
             {
                 throw new ParsingException("Unable to find safety level in returned XML.");
             }

@@ -23,10 +23,7 @@ namespace FlickrNet
         {
             get
             {
-                if (url == null)
-                {
-                    url = string.Format(System.Globalization.CultureInfo.InvariantCulture, "https://www.flickr.com/photos/{0}/sets/{1}/", OwnerId, PhotosetId);
-                }
+                url ??= string.Format(System.Globalization.CultureInfo.InvariantCulture, "https://www.flickr.com/photos/{0}/sets/{1}/", OwnerId, PhotosetId);
 
                 return url;
             }

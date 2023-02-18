@@ -48,14 +48,14 @@ namespace FlickrNet
         {
             if (points == null)
             {
-                throw new ArgumentNullException("points");
+                throw new ArgumentNullException(nameof(points));
             }
 
             string[] splits = points.Split(',');
 
             if (splits.Length != 4)
             {
-                throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", "points");
+                throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", nameof(points));
             }
 
             try
@@ -67,7 +67,7 @@ namespace FlickrNet
             }
             catch (FormatException)
             {
-                throw new ArgumentException("Unable to parse points as integer values", "points");
+                throw new ArgumentException("Unable to parse points as integer values", nameof(points));
             }
         }
 
@@ -155,7 +155,7 @@ namespace FlickrNet
             {
                 if (value < -90 || value > 90)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be between -90 and 90");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be between -90 and 90");
                 }
                 IsSet = true;
                 minimumLat = value;
@@ -172,7 +172,7 @@ namespace FlickrNet
             {
                 if (value < -180 || value > 180)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be between -180 and 180");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be between -180 and 180");
                 }
                 IsSet = true;
                 minimumLon = value;
@@ -189,7 +189,7 @@ namespace FlickrNet
             {
                 if (value < -90 || value > 90)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be between -90 and 90");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be between -90 and 90");
                 }
                 IsSet = true;
                 maximumLat = value;
@@ -206,7 +206,7 @@ namespace FlickrNet
             {
                 if (value < -180 || value > 180)
                 {
-                    throw new ArgumentOutOfRangeException("value", "Must be between -180 and 180");
+                    throw new ArgumentOutOfRangeException(nameof(value), "Must be between -180 and 180");
                 }
                 IsSet = true;
                 maximumLon = value;

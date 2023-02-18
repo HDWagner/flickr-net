@@ -8,9 +8,9 @@ namespace FlickrNet
     /// <summary>
     /// List containing <see cref="Tag"/> items.
     /// </summary>
-    public sealed class TagCollection : System.Collections.ObjectModel.Collection<Tag>, IFlickrParsable
+    public sealed class TagCollection : Collection<Tag>, IFlickrParsable
     {
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             reader.ReadToDescendant("tag");
 
@@ -67,9 +67,9 @@ namespace FlickrNet
     /// <summary>
     /// List containing <see cref="RawTag"/> items.
     /// </summary>
-    public sealed class RawTagCollection : System.Collections.ObjectModel.Collection<RawTag>, IFlickrParsable
+    public sealed class RawTagCollection : Collection<RawTag>, IFlickrParsable
     {
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             reader.ReadToDescendant("tag");
 

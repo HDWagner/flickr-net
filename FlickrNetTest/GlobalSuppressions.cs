@@ -4,6 +4,4 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-
-[assembly: SuppressMessage("Assertion", "NUnit2005:Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)", Justification = "<Ausstehend>", Scope = "module")]
-[assembly: SuppressMessage("Assertion", "NUnit2006:Consider using Assert.That(actual, Is.Not.EqualTo(expected)) instead of Assert.AreNotEqual(expected, actual)", Justification = "<Ausstehend>", Scope = "module")]
+[assembly: SuppressMessage("Assertion", "NUnit2045:Use Assert.Multiple", Justification = "<Ausstehend>", Scope = "module")]

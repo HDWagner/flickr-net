@@ -45,7 +45,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.prefs.getGeoPerms");
 
-            GetResponseAsync<UserGeoPermissions>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>

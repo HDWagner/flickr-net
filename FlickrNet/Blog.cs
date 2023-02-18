@@ -31,7 +31,7 @@ namespace FlickrNet
         /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass in the
         /// password when posting.
         /// </summary>
-        public bool NeedsPassword { get; set; }
+        public bool? NeedsPassword { get; set; }
 
         /// <summary>
         /// The service that his blog uses. See <see cref="Flickr.BlogsGetServices()"/>

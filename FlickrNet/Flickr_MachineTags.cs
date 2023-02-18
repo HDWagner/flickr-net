@@ -42,7 +42,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public NamespaceCollection MachineTagsGetNamespaces(string predicate, int page, int perPage)
+        public NamespaceCollection MachineTagsGetNamespaces(string? predicate, int page, int perPage)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -91,7 +91,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="namespaceName">Limit the list of predicates returned to those that have the following namespace.</param>
         /// <returns></returns>
-        public PredicateCollection MachineTagsGetPredicates(string namespaceName)
+        public PredicateCollection MachineTagsGetPredicates(string? namespaceName)
         {
             return MachineTagsGetPredicates(namespaceName, 0, 0);
         }
@@ -103,7 +103,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of namespaces to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PredicateCollection MachineTagsGetPredicates(string namespaceName, int page, int perPage)
+        public PredicateCollection MachineTagsGetPredicates(string? namespaceName, int page, int perPage)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -152,7 +152,7 @@ namespace FlickrNet
         /// <param name="namespaceName">Limit the list of pairs returned to those that have the following namespace.</param>
         /// <param name="predicate">Limit the list of pairs returned to those that have the following predicate.</param>
         /// <returns></returns>
-        public PairCollection MachineTagsGetPairs(string namespaceName, string predicate)
+        public PairCollection MachineTagsGetPairs(string? namespaceName, string? predicate)
         {
             return MachineTagsGetPairs(namespaceName, predicate, 0, 0);
         }
@@ -165,7 +165,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of pairs to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PairCollection MachineTagsGetPairs(string namespaceName, string predicate, int page, int perPage)
+        public PairCollection MachineTagsGetPairs(string? namespaceName, string? predicate, int page, int perPage)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -260,7 +260,7 @@ namespace FlickrNet
         /// <param name="namespaceName">The namespace that all values should be restricted to.</param>
         /// <param name="predicate">The predicate that all values should be restricted to.</param>
         /// <returns></returns>
-        public ValueCollection MachineTagsGetRecentValues(string namespaceName, string predicate)
+        public ValueCollection MachineTagsGetRecentValues(string? namespaceName, string? predicate)
         {
             return MachineTagsGetRecentValues(namespaceName, predicate, DateTime.MinValue, 0, 0);
         }
@@ -273,7 +273,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of values to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public ValueCollection MachineTagsGetRecentValues(string namespaceName, string predicate, int page, int perPage)
+        public ValueCollection MachineTagsGetRecentValues(string? namespaceName, string? predicate, int page, int perPage)
         {
             return MachineTagsGetRecentValues(namespaceName, predicate, DateTime.MinValue, page, perPage);
         }
@@ -287,7 +287,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of values to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public ValueCollection MachineTagsGetRecentValues(string namespaceName, string predicate, DateTime addedSince, int page, int perPage)
+        public ValueCollection MachineTagsGetRecentValues(string? namespaceName, string? predicate, DateTime addedSince, int page, int perPage)
         {
             if (string.IsNullOrEmpty(namespaceName) && string.IsNullOrEmpty(predicate) && addedSince == DateTime.MinValue)
             {
@@ -324,6 +324,5 @@ namespace FlickrNet
 
             return GetResponseCache<ValueCollection>(parameters);
         }
-
     }
 }

@@ -25,12 +25,13 @@ namespace FlickrNetTest
             Instance.PhotosSearchAsync(o, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsTrue(result.Result.Total > 0);
+            Assert.That(result.Result.Total, Is.GreaterThan(0));
 
         }
 
         [Test]
         [Category("AccessTokenRequired")]
+        [Ignore("Method requires authentication")]
         public void PhotosAddTagTest()
         {
             string photoId = "4499284951";
@@ -41,7 +42,7 @@ namespace FlickrNetTest
             AuthInstance.PhotosAddTagsAsync(photoId, tag, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.Result, Is.Not.Null);
         }
 
         [Test]
@@ -62,7 +63,7 @@ namespace FlickrNetTest
             AuthInstance.PhotosSearchAsync(o, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsTrue(result.Result.Total > 0);
+            Assert.That(result.Result.Total, Is.GreaterThan(0));
         }
 
         [Test]
@@ -74,10 +75,10 @@ namespace FlickrNetTest
             AuthInstance.PhotosGetContactsPhotosAsync(50, true, true, true, PhotoSearchExtras.All, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.HasError, Is.False);
+            Assert.That(result.Result, Is.Not.Null);
 
-            Assert.IsTrue(result.Result.Count > 0, "Should return some photos.");
+            Assert.That(result.Result, Is.Not.Empty, "Should return some photos.");
 
         }
 

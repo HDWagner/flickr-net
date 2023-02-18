@@ -17,7 +17,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.favorites.add");
             parameters.Add("photo_id", photoId);
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.favorites.remove");
             parameters.Add("photo_id", photoId);
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -149,13 +149,13 @@ namespace FlickrNet
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
         /// Gets the public favourites for a specified user.
         /// </summary>
-        /// <remarks>This function difers from <see cref="Flickr.FavoritesGetList(string)"/> in that the user id 
+        /// <remarks>This function difers from <see cref="FavoritesGetList(string)"/> in that the user id 
         /// is not optional.</remarks>
         /// <param name="userId">The is of the user whose favourites you wish to return.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
@@ -167,7 +167,7 @@ namespace FlickrNet
         /// <summary>
         /// Gets the public favourites for a specified user.
         /// </summary>
-        /// <remarks>This function difers from <see cref="Flickr.FavoritesGetList(string)"/> in that the user id 
+        /// <remarks>This function difers from <see cref="FavoritesGetList(string)"/> in that the user id 
         /// is not optional.</remarks>
         /// <param name="userId">The is of the user whose favourites you wish to return.</param>
         /// <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>
@@ -208,7 +208,7 @@ namespace FlickrNet
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<FavoriteContext>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

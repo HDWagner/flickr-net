@@ -18,11 +18,11 @@ namespace FlickrNetTest
 
             var url = o.CalculateSlideshowUrl();
 
-            Assert.IsNotNull(url);
+            Assert.That(url, Is.Not.Null);
 
             const string expected = "https://www.flickr.com/show.gne?api_method=flickr.photos.search&method_params=text|kittens;in_gallery|1";
 
-            Assert.AreEqual(expected, url);
+            Assert.That(url, Is.EqualTo(expected));
 
         }
 
@@ -35,7 +35,7 @@ namespace FlickrNetTest
 
             foreach (var photo in photos)
             {
-                Assert.IsTrue(photo.Views.HasValue);
+                Assert.That(photo.Views.HasValue, Is.True);
             }
         }
 
@@ -47,7 +47,7 @@ namespace FlickrNetTest
 
             o.AddToDictionary(parameters);
 
-            Assert.IsFalse(parameters.ContainsKey("styles"));
+            Assert.That(parameters.ContainsKey("styles"), Is.False);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace FlickrNetTest
 
             o.AddToDictionary(parameters);
 
-            Assert.IsFalse(parameters.ContainsKey("styles"));
+            Assert.That(parameters.ContainsKey("styles"), Is.False);
         }
 
         [TestCase(Style.BlackAndWhite)]
@@ -72,7 +72,7 @@ namespace FlickrNetTest
 
             o.AddToDictionary(parameters);
 
-            Assert.IsTrue(parameters.ContainsKey("styles"));
+            Assert.That(parameters.ContainsKey("styles"), Is.True);
         }
     }
 }

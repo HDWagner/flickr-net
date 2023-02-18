@@ -22,7 +22,8 @@ namespace FlickrNet
         /// passed in.
         /// </summary>
         /// <param name="userId">The ID of the User to search for.</param>
-        public PhotoSearchOptions(string userId) : this(userId, null, TagMode.AllTags, null)
+        public PhotoSearchOptions(string userId) 
+            : this(userId, null, TagMode.AllTags, null)
         {
         }
 
@@ -56,7 +57,7 @@ namespace FlickrNet
         /// <param name="tags">The tags (comma delimited) to search for.</param>
         /// <param name="tagMode">The <see cref="TagMode"/> to use to search.</param>
         /// <param name="text">The text to search for in photo title and descriptions.</param>
-        public PhotoSearchOptions(string userId, string tags, TagMode tagMode, string text)
+        public PhotoSearchOptions(string userId, string? tags, TagMode tagMode, string? text)
         {
             UserId = userId;
             Tags = tags;
@@ -82,10 +83,10 @@ namespace FlickrNet
         /// <summary>
         /// A comma delimited list of tags
         /// </summary>
-        public string Tags { get; set; }
+        public string? Tags { get; set; }
 
         /// <summary>
-        /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="FlickrNet.TagMode.AllTags"/>
+        /// Tag mode can either be 'all', or 'any'. Defaults to <see cref="TagMode.AllTags"/>
         /// </summary>
         public TagMode TagMode { get; set; }
 
@@ -109,7 +110,7 @@ namespace FlickrNet
         /// <summary>
         /// Search for the given text in photo titles and descriptions.
         /// </summary>
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
@@ -186,7 +187,7 @@ namespace FlickrNet
             get { return BoundaryBox == null ? GeoAccuracy.None : BoundaryBox.Accuracy; }
             set
             {
-                if (BoundaryBox == null) { BoundaryBox = new BoundaryBox(); }
+                BoundaryBox ??= new BoundaryBox();
                 BoundaryBox.Accuracy = value;
             }
 

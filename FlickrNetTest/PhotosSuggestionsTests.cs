@@ -25,7 +25,7 @@ namespace FlickrNetTest
 
             // Remove any pending suggestions
             var suggestions = f.PhotosSuggestionsGetList(photoId, SuggestionStatus.Pending);
-            Assert.IsNotNull(suggestions, "SuggestionCollection should not be null.");
+            Assert.That(suggestions, Is.Not.Null, "SuggestionCollection should not be null.");
 
             foreach (var s in suggestions)
             {
@@ -34,7 +34,7 @@ namespace FlickrNetTest
                     Console.WriteLine(f.LastRequest);
                     Console.WriteLine(f.LastResponse);
                 }
-                Assert.IsNotNull(s.SuggestionId, "Suggestion ID should not be null.");
+                Assert.That(s.SuggestionId, Is.Not.Null, "Suggestion ID should not be null.");
                 f.PhotosSuggestionsRemoveSuggestion(s.SuggestionId);
             }
 
@@ -44,15 +44,15 @@ namespace FlickrNetTest
             // Get list of suggestions and check
             suggestions = f.PhotosSuggestionsGetList(photoId, SuggestionStatus.Pending);
 
-            Assert.IsNotNull(suggestions, "SuggestionCollection should not be null.");
-            Assert.AreNotEqual(0, suggestions.Count, "Count should not be zero.");
+            Assert.That(suggestions, Is.Not.Null, "SuggestionCollection should not be null.");
+            Assert.That(suggestions, Is.Not.Empty, "Count should not be zero.");
 
             var suggestion = suggestions.First();
 
-            Assert.AreEqual("41888973@N00", suggestion.SuggestedByUserId);
-            Assert.AreEqual("Sam Judson", suggestion.SuggestedByUserName);
-            Assert.AreEqual("I really think this is a good suggestion.", suggestion.Note);
-            Assert.AreEqual(54.977, suggestion.Latitude, "Latitude should be the same.");
+            Assert.That(suggestion.SuggestedByUserId, Is.EqualTo("41888973@N00"));
+            Assert.That(suggestion.SuggestedByUserName, Is.EqualTo("Sam Judson"));
+            Assert.That(suggestion.Note, Is.EqualTo("I really think this is a good suggestion."));
+            Assert.That(suggestion.Latitude, Is.EqualTo(54.977), "Latitude should be the same.");
 
             f.PhotosSuggestionsRemoveSuggestion(suggestion.SuggestionId);
 
@@ -64,7 +64,7 @@ namespace FlickrNetTest
 
         }
 
-        public void AddSuggestion()
+        private void AddSuggestion()
         {
             var f = AuthInstance;
 

@@ -18,7 +18,7 @@ namespace FlickrNet
         /// <param name="noteHeight">The height of the note.</param>
         /// <param name="noteText">The text in the note.</param>
         /// <returns></returns>
-        public string PhotosNotesAdd(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText)
+        public string? PhotosNotesAdd(string photoId, int noteX, int noteY, int noteWidth, int noteHeight, string noteText)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.notes.add");
@@ -31,8 +31,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode node = response.GetXmlDocument().SelectSingleNode("*/@id");
-            return node == null ? null : node.Value;
+            var node = response.GetXmlDocument().SelectSingleNode("*/@id");
+            return node?.Value;
         }
 
         /// <summary>

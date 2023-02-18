@@ -13,13 +13,13 @@ namespace FlickrNetTest
 
             var topics = f.PushGetTopics();
 
-            Assert.IsNotNull(topics);
-            Assert.AreNotEqual(0, topics.Length, "Should return greater than zero topics.");
+            Assert.That(topics, Is.Not.Null);
+            Assert.That(topics, Is.Not.Empty, "Should return greater than zero topics.");
 
-            Assert.IsTrue(topics.Contains("contacts_photos"), "Should include \"contacts_photos\".");
-            Assert.IsTrue(topics.Contains("contacts_faves"), "Should include \"contacts_faves\".");
-            Assert.IsTrue(topics.Contains("geotagged"), "Should include \"geotagged\".");
-            Assert.IsTrue(topics.Contains("airports"), "Should include \"airports\".");
+            Assert.That(topics, Does.Contain("contacts_photos"), "Should include \"contacts_photos\".");
+            Assert.That(topics, Does.Contain("contacts_faves"), "Should include \"contacts_faves\".");
+            Assert.That(topics, Does.Contain("geotagged"), "Should include \"geotagged\".");
+            Assert.That(topics, Does.Contain("airports"), "Should include \"airports\".");
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace FlickrNetTest
                 }
             }
 
-            Assert.IsTrue(found, "Should have found subscription.");
+            Assert.That(found, Is.True, "Should have found subscription.");
 
             f.PushUnsubscribe(topic, callback, verify, null);
         }
@@ -72,7 +72,7 @@ namespace FlickrNetTest
 
             try
             {
-                Assert.IsTrue(subscriptions.Count > 1, "Should be more than one subscription.");
+                Assert.That(subscriptions, Has.Count.GreaterThan(1), "Should be more than one subscription.");
 
             }
             finally

@@ -37,7 +37,7 @@ namespace FlickrNetTest
 
             var newPhotoInfo = f.PhotosGetInfo(photoId);
 
-            Assert.AreEqual(newLicense, newPhotoInfo.License, "License has not changed");
+            Assert.That(newPhotoInfo.License, Is.EqualTo(newLicense), "License has not changed");
 
             // Reset license 
             f.PhotosLicensesSetLicense(photoId, origLicense);

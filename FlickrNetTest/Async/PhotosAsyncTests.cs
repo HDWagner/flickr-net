@@ -25,8 +25,8 @@ namespace FlickrNetTest.Async
             f.PhotosSearchAsync(o, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.HasError, Is.False);
+            Assert.That(result.Result, Is.Not.Null);
 
             result.Result.Count.ShouldBeGreaterThan(0);
 
@@ -46,10 +46,10 @@ namespace FlickrNetTest.Async
             f.PhotosGetContactsPublicPhotosAsync(TestData.TestUserId, 5, true, true, true, PhotoSearchExtras.All, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.HasError, Is.False);
+            Assert.That(result.Result, Is.Not.Null);
 
-            Assert.IsTrue(result.Result.Count > 0, "Should return some photos.");
+            Assert.That(result.Result, Is.Not.Empty, "Should return some photos.");
         }
 
         [Ignore("Method requires authentication")]
@@ -69,20 +69,20 @@ namespace FlickrNetTest.Async
             f.PhotosGetCountsAsync(uploadDates, false, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
 
             var counts = result.Result;
 
-            Assert.AreEqual(2, counts.Count, "Should be two counts returned.");
+            Assert.That(counts, Has.Count.EqualTo(2), "Should be two counts returned.");
 
             var count1 = counts[0];
 
-            Assert.AreEqual(date1, count1.FromDate);
-            Assert.AreEqual(date2, count1.ToDate);
+            Assert.That(count1.FromDate, Is.EqualTo(date1));
+            Assert.That(count1.ToDate, Is.EqualTo(date2));
 
             var count2 = counts[1];
-            Assert.AreEqual(date2, count2.FromDate);
-            Assert.AreEqual(date3, count2.ToDate);
+            Assert.That(count2.FromDate, Is.EqualTo(date2));
+            Assert.That(count2.ToDate, Is.EqualTo(date3));
 
         }
 
@@ -95,7 +95,7 @@ namespace FlickrNetTest.Async
             f.PhotosGetExifAsync(TestData.PhotoId, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
+            Assert.That(result.HasError, Is.False);
 
         }
 
@@ -107,10 +107,10 @@ namespace FlickrNetTest.Async
             f.PhotosGetRecentAsync(1, 50, PhotoSearchExtras.All, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.IsFalse(result.HasError);
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.HasError, Is.False);
+            Assert.That(result.Result, Is.Not.Null);
 
-            Assert.IsTrue(result.Result.Count > 0, "Should return some photos.");
+            Assert.That(result.Result, Is.Not.Empty, "Should return some photos.");
 
         }
 

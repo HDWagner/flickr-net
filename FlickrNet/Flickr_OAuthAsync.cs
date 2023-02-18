@@ -47,7 +47,7 @@ namespace FlickrNet
                     callback(result);
                     return;
                 }
-                result.Result = FlickrNet.OAuthRequestToken.ParseResponse(r.Result);
+                result.Result = OAuthRequestToken.ParseResponse(r.Result);
                 callback(result);
             });
         }

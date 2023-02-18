@@ -21,7 +21,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.collections.getInfo");
             parameters.Add("collection_id", collectionId);
 
-            GetResponseAsync<CollectionInfo>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -59,7 +59,7 @@ namespace FlickrNet
                 parameters.Add("user_id", userId);
             }
 
-            GetResponseAsync<CollectionCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

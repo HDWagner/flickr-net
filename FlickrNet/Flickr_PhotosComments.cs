@@ -28,7 +28,7 @@ namespace FlickrNet
         /// <param name="photoId">The ID of the photo to add the comment to.</param>
         /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
         /// <returns>The new ID of the created comment.</returns>
-        public string PhotosCommentsAddComment(string photoId, string commentText)
+        public string? PhotosCommentsAddComment(string photoId, string commentText)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.comments.addComment");
@@ -37,8 +37,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@id");
-            return nav == null ? null : nav.Value;
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@id");
+            return nav?.Value;
         }
 
         /// <summary>

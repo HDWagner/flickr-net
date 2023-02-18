@@ -30,12 +30,12 @@ public sealed class MD5Core
     {
         if (null == input)
         {
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+            throw new ArgumentNullException(nameof(input), "Unable to calculate hash over null input data");
         }
 
         if (null == encoding)
         {
-            throw new System.ArgumentNullException("encoding", "Unable to calculate hash over a string without a default encoding. Consider using the GetHash(string) overload to use UTF8 Encoding");
+            throw new ArgumentNullException(nameof(encoding), "Unable to calculate hash over a string without a default encoding. Consider using the GetHash(string) overload to use UTF8 Encoding");
         }
 
         byte[] target = encoding.GetBytes(input);
@@ -52,7 +52,7 @@ public sealed class MD5Core
     {
         if (null == input)
         {
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+            throw new ArgumentNullException(nameof(input), "Unable to calculate hash over null input data");
         }
 
         //Intitial values defined in RFC 1321
@@ -66,11 +66,11 @@ public sealed class MD5Core
         int startIndex = 0;
         while (startIndex <= input.Length - 64)
         {
-            MD5Core.GetHashBlock(input, ref abcd, startIndex);
+            GetHashBlock(input, ref abcd, startIndex);
             startIndex += 64;
         }
         // The final data block. 
-        return MD5Core.GetHashFinalBlock(input, startIndex, input.Length - startIndex, abcd, (Int64)input.Length * 8);
+        return GetHashFinalBlock(input, startIndex, input.Length - startIndex, abcd, (Int64)input.Length * 8);
     }
 
 
@@ -78,7 +78,7 @@ public sealed class MD5Core
     {
         if (null == input)
         {
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+            throw new ArgumentNullException(nameof(input), "Unable to calculate hash over null input data");
         }
 
         string retval = BitConverter.ToString(GetHash(input));
@@ -91,12 +91,12 @@ public sealed class MD5Core
     {
         if (null == input)
         {
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+            throw new ArgumentNullException(nameof(input), "Unable to calculate hash over null input data");
         }
 
         if (null == encoding)
         {
-            throw new System.ArgumentNullException("encoding", "Unable to calculate hash over a string without a default encoding. " +
+            throw new ArgumentNullException(nameof(encoding), "Unable to calculate hash over a string without a default encoding. " +
                                                                "Consider using the GetHashString(string) overload to use UTF8 Encoding");
         }
 
@@ -276,7 +276,7 @@ public sealed class MD5Core
     {
         if (null == input)
         {
-            throw new System.ArgumentNullException("input", "Unable convert null array to array of uInts");
+            throw new ArgumentNullException(nameof(input), "Unable convert null array to array of uInts");
         }
 
         uint[] result = new uint[16];

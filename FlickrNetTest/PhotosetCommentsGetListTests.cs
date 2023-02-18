@@ -17,12 +17,12 @@ namespace FlickrNetTest
 
             PhotosetCommentCollection comments = f.PhotosetsCommentsGetList("1335934");
 
-            Assert.IsNotNull(comments);
+            Assert.That(comments, Is.Not.Null);
 
-            Assert.AreEqual(2, comments.Count);
+            Assert.That(comments, Has.Count.EqualTo(2));
 
-            Assert.AreEqual("Superchou", comments[0].AuthorUserName);
-            Assert.AreEqual("LOL... I had no idea this set existed... what a great afternoon we had :)", comments[0].CommentHtml);
+            Assert.That(comments[0].AuthorUserName, Is.EqualTo("Superchou"));
+            Assert.That(comments[0].CommentHtml, Is.EqualTo("LOL... I had no idea this set existed... what a great afternoon we had :)"));
         }
     }
 }

@@ -48,7 +48,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of contacts to return per page. If this argument is omitted, it defaults to 1000. The maximum allowed value is 1000.</param>
         /// <returns>An instance of the <see cref="ContactCollection"/> class containing the list of contacts.</returns>
-        public ContactCollection ContactsGetList(string filter, int page, int perPage)
+        public ContactCollection ContactsGetList(string? filter, int page, int perPage)
         {
             CheckRequiresAuthentication();
 
@@ -123,7 +123,7 @@ namespace FlickrNet
         /// "ff" friends and family, and "all" all your contacts.
         /// Default value is "all".</param>
         /// <returns>List of contacts for the authenticated user.</returns>
-        public ContactCollection ContactsGetListRecentlyUploaded(DateTime dateLastUpdated, string filter)
+        public ContactCollection ContactsGetListRecentlyUploaded(DateTime dateLastUpdated, string? filter)
         {
             CheckRequiresAuthentication();
 

@@ -15,7 +15,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.commons.getInstitutions");
 
-            GetResponseAsync<InstitutionCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

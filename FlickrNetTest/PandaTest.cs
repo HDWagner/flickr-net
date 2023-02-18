@@ -15,12 +15,12 @@ namespace FlickrNetTest
         {
             string[] pandas = Instance.PandaGetList();
 
-            Assert.IsNotNull(pandas, "Should return string array");
-            Assert.IsTrue(pandas.Length > 0, "Should not return empty array");
+            Assert.That(pandas, Is.Not.Null, "Should return string array");
+            Assert.That(pandas, Is.Not.Empty, "Should not return empty array");
 
-            Assert.AreEqual("ling ling", pandas[0]);
-            Assert.AreEqual("hsing hsing", pandas[1]);
-            Assert.AreEqual("wang wang", pandas[2]);
+            Assert.That(pandas[0], Is.EqualTo("ling ling"));
+            Assert.That(pandas[1], Is.EqualTo("hsing hsing"));
+            Assert.That(pandas[2], Is.EqualTo("wang wang"));
         }
 
         [Test]
@@ -28,9 +28,9 @@ namespace FlickrNetTest
         {
             var photos = Instance.PandaGetPhotos("ling ling");
 
-            Assert.IsNotNull(photos, "PandaPhotos should not be null.");
-            Assert.AreEqual(photos.Count, photos.Total, "PandaPhotos.Count should equal PandaPhotos.Total.");
-            Assert.AreEqual("ling ling", photos.PandaName, "PandaPhotos.Panda should be 'ling ling'");
+            Assert.That(photos, Is.Not.Null, "PandaPhotos should not be null.");
+            Assert.That(photos.Total, Is.EqualTo(photos.Count), "PandaPhotos.Count should equal PandaPhotos.Total.");
+            Assert.That(photos.PandaName, Is.EqualTo("ling ling"), "PandaPhotos.Panda should be 'ling ling'");
         }
     }
 }

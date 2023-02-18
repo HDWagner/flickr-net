@@ -28,7 +28,7 @@ namespace FlickrNet
         /// <param name="collectionId">The id of the collection to get stats for. 
         /// If not provided, stats for all collections will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetCollectionDomainsAsync(DateTime date, string collectionId, Action<FlickrResult<StatDomainCollection>> callback)
+        public void StatsGetCollectionDomainsAsync(DateTime date, string? collectionId, Action<FlickrResult<StatDomainCollection>> callback)
         {
             StatsGetCollectionDomainsAsync(date, collectionId, 0, 0, callback);
         }
@@ -62,7 +62,7 @@ namespace FlickrNet
         /// <param name="perPage">Number of domains to return per page. 
         /// If this argument is omitted, it defaults to 25. The maximum allowed value is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetCollectionDomainsAsync(DateTime date, string collectionId, int page, int perPage,
+        public void StatsGetCollectionDomainsAsync(DateTime date, string? collectionId, int page, int perPage,
                                                    Action<FlickrResult<StatDomainCollection>> callback)
         {
             CheckRequiresAuthentication();
@@ -86,7 +86,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatDomainCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.stats.getCSVFiles");
 
-            GetResponseAsync<CsvFileCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace FlickrNet
         /// <param name="photoId">The id of the photo to get stats for. 
         /// If not provided, stats for all photos will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotoDomainsAsync(DateTime date, string photoId, Action<FlickrResult<StatDomainCollection>> callback)
+        public void StatsGetPhotoDomainsAsync(DateTime date, string? photoId, Action<FlickrResult<StatDomainCollection>> callback)
         {
             StatsGetPhotoDomainsAsync(date, photoId, 0, 0, callback);
         }
@@ -161,7 +161,7 @@ namespace FlickrNet
         /// <param name="perPage">Number of domains to return per page. 
         /// If this argument is omitted, it defaults to 25. The maximum allowed value is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotoDomainsAsync(DateTime date, string photoId, int page, int perPage, Action<FlickrResult<StatDomainCollection>> callback)
+        public void StatsGetPhotoDomainsAsync(DateTime date, string? photoId, int page, int perPage, Action<FlickrResult<StatDomainCollection>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -184,7 +184,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatDomainCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatDomainCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace FlickrNet
         /// <param name="photosetId">The id of the photoset to get stats for. 
         /// If not provided, stats for all sets will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotosetDomainsAsync(DateTime date, string photosetId, Action<FlickrResult<StatDomainCollection>> callback)
+        public void StatsGetPhotosetDomainsAsync(DateTime date, string? photosetId, Action<FlickrResult<StatDomainCollection>> callback)
         {
             StatsGetPhotosetDomainsAsync(date, photosetId, 0, 0, callback);
         }
@@ -283,7 +283,7 @@ namespace FlickrNet
         /// <param name="perPage">Number of domains to return per page. 
         /// If this argument is omitted, it defaults to 25. The maximum allowed value is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotosetDomainsAsync(DateTime date, string photosetId, int page, int perPage, Action<FlickrResult<StatDomainCollection>> callback)
+        public void StatsGetPhotosetDomainsAsync(DateTime date, string? photosetId, int page, int perPage, Action<FlickrResult<StatDomainCollection>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -306,7 +306,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatDomainCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace FlickrNet
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("collection_id", UtilityMethods.CleanCollectionId(collectionId));
 
-            GetResponseAsync<Stats>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace FlickrNet
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<Stats>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.stats.getPhotostreamStats");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
 
-            GetResponseAsync<Stats>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace FlickrNet
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("photoset_id", photosetId);
 
-            GetResponseAsync<Stats>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace FlickrNet
         /// <param name="photoId">The photo to return referrers for. 
         /// If missing then referrers for all photos will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotoReferrersAsync(DateTime date, string domain, string photoId,
+        public void StatsGetPhotoReferrersAsync(DateTime date, string domain, string? photoId,
                                                 Action<FlickrResult<StatReferrerCollection>> callback)
         {
             StatsGetPhotoReferrersAsync(date, domain, photoId, 0, 0, callback);
@@ -438,7 +438,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of referrers to return per page. 
         /// The default is 25 and the maximum is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotoReferrersAsync(DateTime date, string domain, string photoId, int page, int perPage,
+        public void StatsGetPhotoReferrersAsync(DateTime date, string domain, string? photoId, int page, int perPage,
                                                 Action<FlickrResult<StatReferrerCollection>> callback)
         {
             CheckRequiresAuthentication();
@@ -463,7 +463,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatReferrerCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -487,7 +487,7 @@ namespace FlickrNet
         /// <param name="photosetId">The photoset to return referrers for. 
         /// If missing then referrers for all photosets will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, Action<FlickrResult<StatReferrerCollection>> callback)
+        public void StatsGetPhotosetReferrersAsync(DateTime date, string domain, string? photosetId, Action<FlickrResult<StatReferrerCollection>> callback)
         {
             StatsGetPhotosetReferrersAsync(date, domain, photosetId, 0, 0, callback);
         }
@@ -519,7 +519,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of referrers to return per page. 
         /// The default is 25 and the maximum is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetPhotosetReferrersAsync(DateTime date, string domain, string photosetId, int page,
+        public void StatsGetPhotosetReferrersAsync(DateTime date, string domain, string? photosetId, int page,
                                                    int perPage, Action<FlickrResult<StatReferrerCollection>> callback)
         {
             CheckRequiresAuthentication();
@@ -544,7 +544,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatReferrerCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -568,7 +568,7 @@ namespace FlickrNet
         /// <param name="collectionId">The collection to return referrers for. 
         /// If missing then referrers for all photosets will be returned.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetCollectionReferrersAsync(DateTime date, string domain, string collectionId,
+        public void StatsGetCollectionReferrersAsync(DateTime date, string domain, string? collectionId,
                                                      Action<FlickrResult<StatReferrerCollection>> callback)
         {
             StatsGetCollectionReferrersAsync(date, domain, collectionId, 0, 0, callback);
@@ -603,7 +603,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of referrers to return per page. 
         /// The default is 25 and the maximum is 100.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void StatsGetCollectionReferrersAsync(DateTime date, string domain, string collectionId, int page,
+        public void StatsGetCollectionReferrersAsync(DateTime date, string domain, string? collectionId, int page,
                                                      int perPage, Action<FlickrResult<StatReferrerCollection>> callback)
         {
             CheckRequiresAuthentication();
@@ -628,7 +628,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatReferrerCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -672,7 +672,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<StatReferrerCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -700,7 +700,7 @@ namespace FlickrNet
                 parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             }
 
-            GetResponseAsync<StatViews>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -808,7 +808,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PopularPhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

@@ -300,22 +300,22 @@ namespace FlickrNet
         {
             if (options == null)
             {
-                throw new ArgumentNullException("options");
+                throw new ArgumentNullException(nameof(options));
             }
 
             if (parameters == null)
             {
-                throw new ArgumentNullException("parameters");
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             if (options.MinUploadDate != DateTime.MinValue)
             {
-                parameters.Add("min_uploaded_date", UtilityMethods.DateToUnixTimestamp(options.MinUploadDate).ToString());
+                parameters.Add("min_uploaded_date", DateToUnixTimestamp(options.MinUploadDate).ToString());
             }
 
             if (options.MaxUploadDate != DateTime.MinValue)
             {
-                parameters.Add("max_uploaded_date", UtilityMethods.DateToUnixTimestamp(options.MaxUploadDate).ToString());
+                parameters.Add("max_uploaded_date", DateToUnixTimestamp(options.MaxUploadDate).ToString());
             }
 
             if (options.MinTakenDate != DateTime.MinValue)
@@ -548,7 +548,7 @@ namespace FlickrNet
 #else
             using (var csp = new System.Security.Cryptography.MD5CryptoServiceProvider())
             {
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(data);
+                byte[] bytes = Encoding.UTF8.GetBytes(data);
                 hashedBytes = csp.ComputeHash(bytes, 0, bytes.Length);
             }
 #endif
@@ -728,7 +728,7 @@ namespace FlickrNet
         {
             string value = text;
 
-            value = UtilityMethods.EscapeDataString(value).Replace("+", "%20");
+            value = EscapeDataString(value).Replace("+", "%20");
 
             // UrlEncode escapes with lowercase characters (e.g. %2f) but oAuth needs %2F
             value = Regex.Replace(value, "(%[0-9a-f][0-9a-f])", c => c.Value.ToUpper());

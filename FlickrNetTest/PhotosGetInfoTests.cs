@@ -22,61 +22,61 @@ namespace FlickrNetTest
         {
             PhotoInfo info = AuthInstance.PhotosGetInfo("4268023123");
 
-            Assert.IsNotNull(info);
+            Assert.That(info, Is.Not.Null);
 
-            Assert.AreEqual("4268023123", info.PhotoId);
-            Assert.AreEqual("a4283bac01", info.Secret);
-            Assert.AreEqual("2795", info.Server);
-            Assert.AreEqual("3", info.Farm);
-            Assert.AreEqual(UtilityMethods.UnixTimestampToDate("1263291891"), info.DateUploaded);
-            Assert.AreEqual(false, info.IsFavorite);
-            Assert.AreEqual(LicenseType.AttributionNoncommercialShareAlikeCC, info.License);
-            Assert.AreEqual(0, info.Rotation);
-            Assert.AreEqual("9d3d4bf24a", info.OriginalSecret);
-            Assert.AreEqual("jpg", info.OriginalFormat);
-            Assert.IsTrue(info.ViewCount > 87, "ViewCount should be greater than 87.");
-            Assert.AreEqual(MediaType.Photos, info.Media);
+            Assert.That(info.PhotoId, Is.EqualTo("4268023123"));
+            Assert.That(info.Secret, Is.EqualTo("a4283bac01"));
+            Assert.That(info.Server, Is.EqualTo("2795"));
+            Assert.That(info.Farm, Is.EqualTo("3"));
+            Assert.That(info.DateUploaded, Is.EqualTo(UtilityMethods.UnixTimestampToDate("1263291891")));
+            Assert.That(info.IsFavorite, Is.EqualTo(false));
+            Assert.That(info.License, Is.EqualTo(LicenseType.AttributionNoncommercialShareAlikeCC));
+            Assert.That(info.Rotation, Is.EqualTo(0));
+            Assert.That(info.OriginalSecret, Is.EqualTo("9d3d4bf24a"));
+            Assert.That(info.OriginalFormat, Is.EqualTo("jpg"));
+            Assert.That(info.ViewCount, Is.GreaterThan(87), "ViewCount should be greater than 87.");
+            Assert.That(info.Media, Is.EqualTo(MediaType.Photos));
 
-            Assert.AreEqual("12. Sudoku", info.Title);
-            Assert.AreEqual("It scares me sometimes how much some of my handwriting reminds me of Dad's " +
-                            "- in this photo there is one 5 that especially reminds me of his handwriting.", info.Description);
+            Assert.That(info.Title, Is.EqualTo("12. Sudoku"));
+            Assert.That(info.Description, Is.EqualTo("It scares me sometimes how much some of my handwriting reminds me of Dad's " +
+                            "- in this photo there is one 5 that especially reminds me of his handwriting."));
 
             //Owner
-            Assert.AreEqual("41888973@N00", info.OwnerUserId);
+            Assert.That(info.OwnerUserId, Is.EqualTo("41888973@N00"));
 
             //Dates
-            Assert.AreEqual(new DateTime(2010, 01, 12, 11, 01, 20), info.DateTaken, "DateTaken is not set correctly.");
+            Assert.That(info.DateTaken, Is.EqualTo(new DateTime(2010, 01, 12, 11, 01, 20)), "DateTaken is not set correctly.");
 
             //Editability
-            Assert.IsTrue(info.CanComment, "CanComment should be true when authenticated.");
-            Assert.IsTrue(info.CanAddMeta, "CanAddMeta should be true when authenticated.");
+            Assert.That(info.CanComment, Is.True, "CanComment should be true when authenticated.");
+            Assert.That(info.CanAddMeta, Is.True, "CanAddMeta should be true when authenticated.");
 
             //Permissions
-            Assert.AreEqual(PermissionComment.Everybody, info.PermissionComment);
-            Assert.AreEqual(PermissionAddMeta.Everybody, info.PermissionAddMeta);
+            Assert.That(info.PermissionComment, Is.EqualTo(PermissionComment.Everybody));
+            Assert.That(info.PermissionAddMeta, Is.EqualTo(PermissionAddMeta.Everybody));
 
             //Visibility
 
             // Notes
 
-            Assert.AreEqual(1, info.Notes.Count, "Notes.Count should be one.");
-            Assert.AreEqual("72157623069944527", info.Notes[0].NoteId);
-            Assert.AreEqual("41888973@N00", info.Notes[0].AuthorId);
-            Assert.AreEqual("Sam Judson", info.Notes[0].AuthorName);
-            Assert.AreEqual(267, info.Notes[0].XPosition);
-            Assert.AreEqual(238, info.Notes[0].YPosition);
+            Assert.That(info.Notes, Has.Count.EqualTo(1), "Notes.Count should be one.");
+            Assert.That(info.Notes[0].NoteId, Is.EqualTo("72157623069944527"));
+            Assert.That(info.Notes[0].AuthorId, Is.EqualTo("41888973@N00"));
+            Assert.That(info.Notes[0].AuthorName, Is.EqualTo("Sam Judson"));
+            Assert.That(info.Notes[0].XPosition, Is.EqualTo(267));
+            Assert.That(info.Notes[0].YPosition, Is.EqualTo(238));
 
             // Tags
 
-            Assert.AreEqual(5, info.Tags.Count);
-            Assert.AreEqual("78188-4268023123-586", info.Tags[0].TagId);
-            Assert.AreEqual("green", info.Tags[0].Raw);
+            Assert.That(info.Tags, Has.Count.EqualTo(5));
+            Assert.That(info.Tags[0].TagId, Is.EqualTo("78188-4268023123-586"));
+            Assert.That(info.Tags[0].Raw, Is.EqualTo("green"));
 
             // URLs
 
-            Assert.AreEqual(1, info.Urls.Count);
-            Assert.AreEqual("photopage", info.Urls[0].UrlType);
-            Assert.AreEqual("https://www.flickr.com/photos/samjudson/4268023123/", info.Urls[0].Url);
+            Assert.That(info.Urls, Has.Count.EqualTo(1));
+            Assert.That(info.Urls[0].UrlType, Is.EqualTo("photopage"));
+            Assert.That(info.Urls[0].Url, Is.EqualTo("https://www.flickr.com/photos/samjudson/4268023123/"));
 
         }
 
@@ -85,60 +85,60 @@ namespace FlickrNetTest
         {
             PhotoInfo info = Instance.PhotosGetInfo("4268023123");
 
-            Assert.IsNotNull(info);
+            Assert.That(info, Is.Not.Null);
 
-            Assert.AreEqual("4268023123", info.PhotoId);
-            Assert.AreEqual("a4283bac01", info.Secret);
-            Assert.AreEqual("2795", info.Server);
-            Assert.AreEqual("3", info.Farm);
-            Assert.AreEqual(UtilityMethods.UnixTimestampToDate("1263291891"), info.DateUploaded);
-            Assert.AreEqual(false, info.IsFavorite);
-            Assert.AreEqual(LicenseType.AttributionNoncommercialShareAlikeCC, info.License);
-            Assert.AreEqual(0, info.Rotation);
-            Assert.AreEqual("9d3d4bf24a", info.OriginalSecret);
-            Assert.AreEqual("jpg", info.OriginalFormat);
-            Assert.IsTrue(info.ViewCount > 87, "ViewCount should be greater than 87.");
-            Assert.AreEqual(MediaType.Photos, info.Media);
+            Assert.That(info.PhotoId, Is.EqualTo("4268023123"));
+            Assert.That(info.Secret, Is.EqualTo("a4283bac01"));
+            Assert.That(info.Server, Is.EqualTo("2795"));
+            Assert.That(info.Farm, Is.EqualTo("3"));
+            Assert.That(info.DateUploaded, Is.EqualTo(UtilityMethods.UnixTimestampToDate("1263291891")));
+            Assert.That(info.IsFavorite, Is.EqualTo(false));
+            Assert.That(info.License, Is.EqualTo(LicenseType.AttributionNoncommercialShareAlikeCC));
+            Assert.That(info.Rotation, Is.EqualTo(0));
+            Assert.That(info.OriginalSecret, Is.EqualTo("9d3d4bf24a"));
+            Assert.That(info.OriginalFormat, Is.EqualTo("jpg"));
+            Assert.That(info.ViewCount, Is.GreaterThan(87), "ViewCount should be greater than 87.");
+            Assert.That(info.Media, Is.EqualTo(MediaType.Photos));
 
-            Assert.AreEqual("12. Sudoku", info.Title);
-            Assert.AreEqual("It scares me sometimes how much some of my handwriting reminds me of Dad's " +
-                            "- in this photo there is one 5 that especially reminds me of his handwriting.", info.Description);
+            Assert.That(info.Title, Is.EqualTo("12. Sudoku"));
+            Assert.That(info.Description, Is.EqualTo("It scares me sometimes how much some of my handwriting reminds me of Dad's " +
+                            "- in this photo there is one 5 that especially reminds me of his handwriting."));
 
             //Owner
-            Assert.AreEqual("41888973@N00", info.OwnerUserId);
+            Assert.That(info.OwnerUserId, Is.EqualTo("41888973@N00"));
 
             //Dates
 
             //Editability
-            Assert.IsFalse(info.CanComment, "CanComment should be false when not authenticated.");
-            Assert.IsFalse(info.CanAddMeta, "CanAddMeta should be false when not authenticated.");
+            Assert.That(info.CanComment, Is.False, "CanComment should be false when not authenticated.");
+            Assert.That(info.CanAddMeta, Is.False, "CanAddMeta should be false when not authenticated.");
 
             //Permissions
-            Assert.IsNull(info.PermissionComment, "PermissionComment should be null when not authenticated.");
-            Assert.IsNull(info.PermissionAddMeta, "PermissionAddMeta should be null when not authenticated.");
+            Assert.That(info.PermissionComment, Is.Null, "PermissionComment should be null when not authenticated.");
+            Assert.That(info.PermissionAddMeta, Is.Null, "PermissionAddMeta should be null when not authenticated.");
 
             //Visibility
 
             // Notes
 
-            Assert.AreEqual(1, info.Notes.Count, "Notes.Count should be one.");
-            Assert.AreEqual("72157623069944527", info.Notes[0].NoteId);
-            Assert.AreEqual("41888973@N00", info.Notes[0].AuthorId);
-            Assert.AreEqual("Sam Judson", info.Notes[0].AuthorName);
-            Assert.AreEqual(267, info.Notes[0].XPosition);
-            Assert.AreEqual(238, info.Notes[0].YPosition);
+            Assert.That(info.Notes, Has.Count.EqualTo(1), "Notes.Count should be one.");
+            Assert.That(info.Notes[0].NoteId, Is.EqualTo("72157623069944527"));
+            Assert.That(info.Notes[0].AuthorId, Is.EqualTo("41888973@N00"));
+            Assert.That(info.Notes[0].AuthorName, Is.EqualTo("Sam Judson"));
+            Assert.That(info.Notes[0].XPosition, Is.EqualTo(267));
+            Assert.That(info.Notes[0].YPosition, Is.EqualTo(238));
 
             // Tags
 
-            Assert.AreEqual(5, info.Tags.Count);
-            Assert.AreEqual("78188-4268023123-586", info.Tags[0].TagId);
-            Assert.AreEqual("green", info.Tags[0].Raw);
+            Assert.That(info.Tags, Has.Count.EqualTo(5));
+            Assert.That(info.Tags[0].TagId, Is.EqualTo("78188-4268023123-586"));
+            Assert.That(info.Tags[0].Raw, Is.EqualTo("green"));
 
             // URLs
 
-            Assert.AreEqual(1, info.Urls.Count);
-            Assert.AreEqual("photopage", info.Urls[0].UrlType);
-            Assert.AreEqual("https://www.flickr.com/photos/samjudson/4268023123/", info.Urls[0].Url);
+            Assert.That(info.Urls, Has.Count.EqualTo(1));
+            Assert.That(info.Urls[0].UrlType, Is.EqualTo("photopage"));
+            Assert.That(info.Urls[0].Url, Is.EqualTo("https://www.flickr.com/photos/samjudson/4268023123/"));
         }
 
         [Test]
@@ -147,9 +147,9 @@ namespace FlickrNetTest
             var photoId = "14042679057";
             var info = Instance.PhotosGetInfo(photoId);
 
-            Assert.AreEqual(photoId, info.PhotoId);
-            Assert.AreEqual("63226137@N02", info.OwnerUserId);
-            Assert.AreEqual("https://www.flickr.com/photos/63226137@N02/14042679057/", info.WebUrl);
+            Assert.That(info.PhotoId, Is.EqualTo(photoId));
+            Assert.That(info.OwnerUserId, Is.EqualTo("63226137@N02"));
+            Assert.That(info.WebUrl, Is.EqualTo("https://www.flickr.com/photos/63226137@N02/14042679057/"));
 
         }
         [Test]
@@ -160,7 +160,7 @@ namespace FlickrNetTest
 
             PhotoInfo info = AuthInstance.PhotosGetInfo(photoId);
 
-            Assert.IsNotNull(info.Location);
+            Assert.That(info.Location, Is.Not.Null);
         }
 
         [Test]
@@ -170,8 +170,8 @@ namespace FlickrNetTest
 
             PhotoInfo info = Instance.PhotosGetInfo(photoId);
 
-            Assert.IsNotNull(info);
-            Assert.IsTrue(info.HasPeople, "HasPeople should be true.");
+            Assert.That(info, Is.Not.Null);
+            Assert.That(info.HasPeople, Is.True, "HasPeople should be true.");
 
         }
 
@@ -185,8 +185,8 @@ namespace FlickrNetTest
             PhotoCollection photos = Instance.PhotosSearch(o);
             PhotoInfo info = Instance.PhotosGetInfo(photos[0].PhotoId);
 
-            Assert.AreEqual(false, info.CanBlog);
-            Assert.AreEqual(true, info.CanDownload);
+            Assert.That(info.CanBlog, Is.EqualTo(false));
+            Assert.That(info.CanDownload, Is.EqualTo(true));
         }
 
         [Test]
@@ -196,8 +196,8 @@ namespace FlickrNetTest
 
             PhotoInfo info = Instance.PhotosGetInfo(photoid);
 
-            Assert.AreEqual(new DateTime(2009, 1, 1), info.DateTaken);
-            Assert.AreEqual(DateGranularity.Circa, info.DateTakenGranularity);
+            Assert.That(info.DateTaken, Is.EqualTo(new DateTime(2009, 1, 1)));
+            Assert.That(info.DateTakenGranularity, Is.EqualTo(DateGranularity.Circa));
 
         }
 
@@ -208,8 +208,8 @@ namespace FlickrNetTest
 
             var info = Instance.PhotosGetInfo(videoId);
 
-            Assert.IsNotNull(info);
-            Assert.AreEqual(videoId, info.PhotoId);
+            Assert.That(info, Is.Not.Null);
+            Assert.That(info.PhotoId, Is.EqualTo(videoId));
         }
 
         [Test]
@@ -235,11 +235,11 @@ namespace FlickrNetTest
         {
             var info = Instance.PhotosGetInfo("54071193");
 
-            Assert.IsNotNull(info, "PhotoInfo should not be null.");
-            Assert.IsNotNull(info.Location, "Location should not be null.");
-            Assert.AreEqual(-180, info.Location.Longitude, "Longitude should be -180");
-            Assert.AreEqual("https://www.flickr.com/photos/afdn/54071193/", info.Urls[0].Url);
-            Assert.IsTrue(info.GeoPermissions.IsPublic, "GeoPermissions should be public.");
+            Assert.That(info, Is.Not.Null, "PhotoInfo should not be null.");
+            Assert.That(info.Location, Is.Not.Null, "Location should not be null.");
+            Assert.That(info.Location.Longitude, Is.EqualTo(-180), "Longitude should be -180");
+            Assert.That(info.Urls[0].Url, Is.EqualTo("https://www.flickr.com/photos/afdn/54071193/"));
+            Assert.That(info.GeoPermissions.IsPublic, Is.True, "GeoPermissions should be public.");
         }
 
         [Test]
@@ -247,10 +247,10 @@ namespace FlickrNetTest
         {
             var info = Instance.PhotosGetInfo("9671143400");
 
-            Assert.IsTrue(UrlHelper.Exists(info.Small320Url), "Small320Url is not valid url : " + info.Small320Url);
-            Assert.IsTrue(UrlHelper.Exists(info.Medium640Url), "Medium640Url is not valid url : " + info.Medium640Url);
-            Assert.IsTrue(UrlHelper.Exists(info.Medium800Url), "Medium800Url is not valid url : " + info.Medium800Url);
-            Assert.AreNotEqual(info.SmallUrl, info.LargeUrl, "URLs should all be different.");
+            Assert.That(UrlHelper.Exists(info.Small320Url), Is.True, "Small320Url is not valid url : " + info.Small320Url);
+            Assert.That(UrlHelper.Exists(info.Medium640Url), Is.True, "Medium640Url is not valid url : " + info.Medium640Url);
+            Assert.That(UrlHelper.Exists(info.Medium800Url), Is.True, "Medium800Url is not valid url : " + info.Medium800Url);
+            Assert.That(info.LargeUrl, Is.Not.EqualTo(info.SmallUrl), "URLs should all be different.");
         }
 
         [Test]
@@ -269,8 +269,8 @@ namespace FlickrNetTest
 
             var info = Instance.PhotosGetInfo(photo.PhotoId);
 
-            Assert.AreEqual(photo.LargeUrl, info.LargeUrl);
-            Assert.AreEqual(photo.Small320Url, info.Small320Url);
+            Assert.That(info.LargeUrl, Is.EqualTo(photo.LargeUrl));
+            Assert.That(info.Small320Url, Is.EqualTo(photo.Small320Url));
         }
 
         [Test]

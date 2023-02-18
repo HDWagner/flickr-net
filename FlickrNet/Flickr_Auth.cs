@@ -114,8 +114,8 @@ namespace FlickrNet
         /// Takes the currently (old) authentication Flickr instance and turns it OAuth authenticated instance.
         /// </summary>
         /// <remarks>
-        /// Calling this method will also clear <see cref="Flickr.AuthToken"/> 
-        /// and set <see cref="Flickr.OAuthAccessToken"/> and <see cref="Flickr.OAuthAccessTokenSecret"/>.
+        /// Calling this method will also clear <see cref="AuthToken"/> 
+        /// and set <see cref="OAuthAccessToken"/> and <see cref="OAuthAccessTokenSecret"/>.
         /// </remarks>
         /// <returns>A new <see cref="OAuthAccessToken"/> instance.</returns>
         public OAuthAccessToken AuthOAuthGetAccessToken()

@@ -18,7 +18,7 @@ namespace FlickrNetTest
         {
             get
             {
-                return _instance ?? (_instance = TestData.GetInstance());
+                return _instance ??= TestData.GetInstance();
             }
         }
 
@@ -26,7 +26,7 @@ namespace FlickrNetTest
         {
             get
             {
-                return _authInstance ?? (_authInstance = TestData.GetAuthInstance());
+                return _authInstance ??= TestData.GetAuthInstance();
             }
         }
 
@@ -59,7 +59,7 @@ namespace FlickrNetTest
         {
             if( (_testCount % 10) > 0 )
             {
-                System.Threading.Thread.Sleep(200);
+                Thread.Sleep(200);
             }
 
             if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)

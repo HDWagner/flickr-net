@@ -63,17 +63,17 @@ namespace FlickrNet
         {
             if (timePeriod == 0)
             {
-                throw new ArgumentOutOfRangeException("timePeriod", "Time Period should be greater than 0");
+                throw new ArgumentOutOfRangeException(nameof(timePeriod), "Time Period should be greater than 0");
             }
 
             if (timeType == null)
             {
-                throw new ArgumentNullException("timeType");
+                throw new ArgumentNullException(nameof(timeType));
             }
 
             if (timeType != "d" && timeType != "h")
             {
-                throw new ArgumentOutOfRangeException("timeType", "Time type must be 'd' or 'h'");
+                throw new ArgumentOutOfRangeException(nameof(timeType), "Time type must be 'd' or 'h'");
             }
 
             ActivityUserPhotosAsync(timePeriod + timeType, page, perPage, callback);
@@ -100,7 +100,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<ActivityItemCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<ActivityItemCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
 

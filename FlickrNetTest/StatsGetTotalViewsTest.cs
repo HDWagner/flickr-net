@@ -17,10 +17,10 @@ namespace FlickrNetTest
         {
             StatViews views = AuthInstance.StatsGetTotalViews();
 
-            Assert.IsNotNull(views, "StatViews should not be null.");
-            Assert.AreNotEqual(0, views.TotalViews, "TotalViews should be greater than zero.");
-            Assert.AreNotEqual(0, views.PhotostreamViews, "PhotostreamViews should be greater than zero.");
-            Assert.AreNotEqual(0, views.PhotoViews, "PhotoViews should be greater than zero.");
+            Assert.That(views, Is.Not.Null, "StatViews should not be null.");
+            Assert.That(views.TotalViews, Is.Not.EqualTo(0), "TotalViews should be greater than zero.");
+            Assert.That(views.PhotostreamViews, Is.Not.EqualTo(0), "PhotostreamViews should be greater than zero.");
+            Assert.That(views.PhotoViews, Is.Not.EqualTo(0), "PhotoViews should be greater than zero.");
         }
 
         [Test]
@@ -29,15 +29,15 @@ namespace FlickrNetTest
         {
             CsvFileCollection col = AuthInstance.StatsGetCsvFiles();
 
-            Assert.IsNotNull(col, "CsvFileCollection should not be null.");
+            Assert.That(col, Is.Not.Null, "CsvFileCollection should not be null.");
 
-            Assert.IsTrue(col.Count > 1, "Should be more than one CsvFile returned.");
+            Assert.That(col, Has.Count.GreaterThan(1), "Should be more than one CsvFile returned.");
 
             foreach (var file in col)
             {
-                Assert.IsNotNull(file.Href, "Href should not be null.");
-                Assert.IsNotNull(file.Type, "Type should not be null.");
-                Assert.AreNotEqual(DateTime.MinValue, file.Date);
+                Assert.That(file.Href, Is.Not.Null, "Href should not be null.");
+                Assert.That(file.Type, Is.Not.Null, "Type should not be null.");
+                Assert.That(file.Date, Is.Not.EqualTo(DateTime.MinValue));
             }
         }
     }

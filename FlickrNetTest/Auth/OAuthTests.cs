@@ -22,11 +22,11 @@ namespace FlickrNetTest
 
             OAuthRequestToken requestToken = f.OAuthGetRequestToken(callback);
 
-            Assert.IsNotNull(requestToken);
-            Assert.IsNotNull(requestToken.Token, "Token should not be null.");
-            Assert.IsNotNull(requestToken.TokenSecret, "TokenSecret should not be null.");
+            Assert.That(requestToken, Is.Not.Null);
+            Assert.That(requestToken.Token, Is.Not.Null, "Token should not be null.");
+            Assert.That(requestToken.TokenSecret, Is.Not.Null, "TokenSecret should not be null.");
 
-            System.Diagnostics.Process.Start(f.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Delete));
+            System.Diagnostics.Process.Start(Flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Delete));
 
             Console.WriteLine("token = " + requestToken.Token);
             Console.WriteLine("token secret = " + requestToken.TokenSecret);
@@ -60,7 +60,8 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void OAuthPeopleGetPhotosBasicTest()
         {
-            PhotoCollection photos = AuthInstance.PeopleGetPhotos("me");
+            var photos = AuthInstance.PeopleGetPhotos("me");
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -80,7 +81,7 @@ namespace FlickrNetTest
 
             Auth a = f.AuthOAuthCheckToken();
 
-            Assert.AreEqual(a.Token, f.OAuthAccessToken);
+            Assert.That(f.OAuthAccessToken, Is.EqualTo(a.Token));
         }
 
         [Test]
@@ -106,7 +107,7 @@ namespace FlickrNetTest
 
             foreach (var pair in test)
             {
-                Assert.AreEqual(pair.Value, UtilityMethods.EscapeOAuthString(pair.Key));
+                Assert.That(UtilityMethods.EscapeOAuthString(pair.Key), Is.EqualTo(pair.Value));
             }
         }
     }

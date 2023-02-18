@@ -20,15 +20,15 @@ namespace FlickrNetTest
 
             BlogCollection blogs = f.BlogsGetList();
 
-            Assert.IsNotNull(blogs, "Blogs should not be null.");
+            Assert.That(blogs, Is.Not.Null, "Blogs should not be null.");
 
             foreach (Blog blog in blogs)
             {
-                Assert.IsNotNull(blog.BlogId, "BlogId should not be null.");
-                Assert.IsNotNull(blog.NeedsPassword, "NeedsPassword should not be null.");
-                Assert.IsNotNull(blog.BlogName, "BlogName should not be null.");
-                Assert.IsNotNull(blog.BlogUrl, "BlogUrl should not be null.");
-                Assert.IsNotNull(blog.Service, "Service should not be null.");
+                Assert.That(blog.BlogId, Is.Not.Null, "BlogId should not be null.");
+                Assert.That(blog.NeedsPassword, Is.Not.Null, "NeedsPassword should not be null.");
+                Assert.That(blog.BlogName, Is.Not.Null, "BlogName should not be null.");
+                Assert.That(blog.BlogUrl, Is.Not.Null, "BlogUrl should not be null.");
+                Assert.That(blog.Service, Is.Not.Null, "Service should not be null.");
             }
         }
 
@@ -39,17 +39,17 @@ namespace FlickrNetTest
 
             BlogServiceCollection services = f.BlogsGetServices();
 
-            Assert.IsNotNull(services, "BlogServices should not be null.");
-            Assert.AreNotEqual(0, services.Count, "BlogServices.Count should not be zero.");
+            Assert.That(services, Is.Not.Null, "BlogServices should not be null.");
+            Assert.That(services, Is.Not.Empty, "BlogServices.Count should not be zero.");
 
             foreach (BlogService service in services)
             {
-                Assert.IsNotNull(service.Id, "BlogService.Id should not be null.");
-                Assert.IsNotNull(service.Name, "BlogService.Name should not be null.");
+                Assert.That(service.Id, Is.Not.Null, "BlogService.Id should not be null.");
+                Assert.That(service.Name, Is.Not.Null, "BlogService.Name should not be null.");
             }
 
-            Assert.AreEqual("beta.blogger.com", services[0].Id, "First ID should be beta.blogger.com.");
-            Assert.AreEqual("Blogger", services[0].Name, "First Name should be beta.blogger.com.");
+            Assert.That(services[0].Id, Is.EqualTo("beta.blogger.com"), "First ID should be beta.blogger.com.");
+            Assert.That(services[0].Name, Is.EqualTo("Blogger"), "First Name should be beta.blogger.com.");
 
         }
     }

@@ -10,8 +10,8 @@ namespace FlickrNet
         /// Add a photo to a gallery.
         /// </summary>
         /// <param name="galleryId">The ID of the gallery to add a photo to. 
-        /// Note: this is the compound ID returned in methods like <see cref="Flickr.GalleriesGetList(string, int, int)"/>, 
-        /// and <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.</param>
+        /// Note: this is the compound ID returned in methods like <see cref="GalleriesGetList(string, int, int)"/>, 
+        /// and <see cref="GalleriesGetListForPhoto(string, int, int)"/>.</param>
         /// <param name="photoId">The photo ID to add to the gallery</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void GalleriesAddPhotoAsync(string galleryId, string photoId, Action<FlickrResult<NoResponse>> callback)
@@ -23,8 +23,8 @@ namespace FlickrNet
         /// Add a photo to a gallery.
         /// </summary>
         /// <param name="galleryId">The ID of the gallery to add a photo to. 
-        /// Note: this is the compound ID returned in methods like <see cref="Flickr.GalleriesGetList(string, int, int)"/>, 
-        /// and <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.</param>
+        /// Note: this is the compound ID returned in methods like <see cref="GalleriesGetList(string, int, int)"/>, 
+        /// and <see cref="GalleriesGetListForPhoto(string, int, int)"/>.</param>
         /// <param name="photoId">The photo ID to add to the gallery</param>
         /// <param name="comment">A short comment or story to accompany the photo.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
@@ -39,7 +39,7 @@ namespace FlickrNet
                 parameters.Add("comment", comment);
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace FlickrNet
                 parameters.Add("primary_photo_id", primaryPhotoId);
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -107,15 +107,15 @@ namespace FlickrNet
                 parameters.Add("description", description);
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
         /// Edit the comment for a gallery photo.
         /// </summary>
         /// <param name="galleryId">The ID of the gallery to add a photo to. 
-        /// Note: this is the compound ID returned in methods like <see cref="Flickr.GalleriesGetList(string, int, int)"/>, 
-        /// and <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.</param>
+        /// Note: this is the compound ID returned in methods like <see cref="GalleriesGetList(string, int, int)"/>, 
+        /// and <see cref="GalleriesGetListForPhoto(string, int, int)"/>.</param>
         /// <param name="photoId">The photo ID to add to the gallery.</param>
         /// <param name="comment">The updated comment the photo.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
@@ -129,7 +129,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("comment", comment);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace FlickrNet
             var ids = new List<string>(photoIds);
             parameters.Add("photo_ids", string.Join(",", ids.ToArray()));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.galleries.getInfo");
             parameters.Add("gallery_id", galleryId);
 
-            GetResponseAsync<Gallery>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<GalleryCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<GalleryCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<GalleryPhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

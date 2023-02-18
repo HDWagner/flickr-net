@@ -17,14 +17,14 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.suggestions.approveSuggestion");
             parameters.Add("suggestion_id", suggestionId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -44,11 +44,11 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("status_id", status.ToString("d"));
 
-            GetResponseAsync<SuggestionCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
-        /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
+        /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="PhotosSuggestionsRemoveSuggestion"/> instead.
         /// </summary>
         /// <param name="suggestionId">The ID of the suggestion to remove.</param>
         /// <param name="callback"></param>
@@ -58,14 +58,14 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.suggestions.rejectSuggestion");
             parameters.Add("suggestion_id", suggestionId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -80,14 +80,14 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.suggestions.removeSuggestion");
             parameters.Add("suggestion_id", suggestionId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -118,7 +118,7 @@ namespace FlickrNet
             parameters.Add("woe_id", woeId);
             parameters.Add("note", note);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

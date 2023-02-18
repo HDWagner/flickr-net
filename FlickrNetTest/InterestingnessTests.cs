@@ -15,9 +15,9 @@ namespace FlickrNetTest
 
             PhotoCollection photos = Instance.InterestingnessGetList(date, PhotoSearchExtras.All, 1, 100);
 
-            Assert.IsNotNull(photos, "Photos should not be null.");
+            Assert.That(photos, Is.Not.Null, "Photos should not be null.");
 
-            Assert.IsTrue(photos.Count > 50 && photos.Count <= 100, "Count should be at least 50, but not more than 100.");
+            Assert.That(photos.Count > 50 && photos.Count <= 100, Is.True, "Count should be at least 50, but not more than 100.");
         }
     }
 }

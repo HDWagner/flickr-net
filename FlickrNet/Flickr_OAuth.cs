@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Xml;
-using System.Diagnostics;
-#if SILVERLIGHT
 using System.Linq;
-#endif
+using System.Text;
 
 namespace FlickrNet
 {
@@ -21,19 +15,13 @@ namespace FlickrNet
         /// <param name="parameters">Parameters to be added to the signature.</param>
         /// <param name="tokenSecret">The token secret (either request or access) for generating the SHA-1 key.</param>
         /// <returns>Base64 encoded SHA-1 hash.</returns>
-        public string OAuthCalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
+        public string OAuthCalculateSignature(string method, string url, Dictionary<string, string> parameters, string? tokenSecret)
         {
             string baseString = "";
             string key = ApiSecret + "&" + tokenSecret;
-            byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(key);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
 
-#if !SILVERLIGHT
-            var sorted = new SortedList<string, string>();
-            foreach (KeyValuePair<string, string> pair in parameters) { sorted.Add(pair.Key, pair.Value); }
-#else
-                var sorted = parameters.OrderBy(p => p.Key);
-#endif
-
+            var sorted = parameters.OrderBy(p => p.Key);
             var sb = new StringBuilder();
             foreach (KeyValuePair<string, string> pair in sorted)
             {
@@ -53,7 +41,7 @@ namespace FlickrNet
             var sha1 = new System.Security.Cryptography.HMACSHA1(keyBytes);
 #endif
 
-            byte[] hashBytes = sha1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(baseString));
+            byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(baseString));
 
             string hash = Convert.ToBase64String(hashBytes);
 
@@ -66,7 +54,7 @@ namespace FlickrNet
         /// <param name="requestToken">The request token to include in the authorization url.</param>
         /// <param name="perms">The permissions being requested.</param>
         /// <returns></returns>
-        public string OAuthCalculateAuthorizationUrl(string requestToken, AuthLevel perms)
+        public static string OAuthCalculateAuthorizationUrl(string requestToken, AuthLevel perms)
         {
             return OAuthCalculateAuthorizationUrl(requestToken, perms, false);
         }
@@ -78,11 +66,11 @@ namespace FlickrNet
         /// <param name="perms">The permissions being requested.</param>
         /// <param name="mobile">Should the url be generated be the mobile one or not.</param>
         /// <returns></returns>
-        public string OAuthCalculateAuthorizationUrl(string requestToken, AuthLevel perms, bool mobile)
+        public static string OAuthCalculateAuthorizationUrl(string requestToken, AuthLevel perms, bool mobile)
         {
             string permsString = (perms == AuthLevel.None) ? "" : "&perms=" + UtilityMethods.AuthLevelToString(perms);
-            
-            return "https://" + (mobile?"m":"www") + ".flickr.com/services/oauth/authorize?oauth_token=" + requestToken + permsString;
+
+            return "https://" + (mobile ? "m" : "www") + ".flickr.com/services/oauth/authorize?oauth_token=" + requestToken + permsString;
         }
 
         /// <summary>

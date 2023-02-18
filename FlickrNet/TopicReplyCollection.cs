@@ -8,8 +8,8 @@ namespace FlickrNet
     /// The list of replies for a particular topic. 
     /// </summary>
     /// <remarks>
-    /// Includes most of the properties of the topic as well, such as <see cref="TopicReplyCollection.TopicId"/>
-    /// and <see cref="TopicReplyCollection.Subject"/>
+    /// Includes most of the properties of the topic as well, such as <see cref="TopicId"/>
+    /// and <see cref="Subject"/>
     /// </remarks>
     public class TopicReplyCollection : System.Collections.ObjectModel.Collection<TopicReply>, IFlickrParsable
     {
@@ -161,7 +161,7 @@ namespace FlickrNet
         {
             if (reader == null)
             {
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
             }
 
             if (reader.LocalName != "replies") { UtilityMethods.CheckParsingException(reader); return; }

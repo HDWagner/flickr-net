@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using FlickrNet;
 
 namespace FlickrNetTest
@@ -17,8 +16,8 @@ namespace FlickrNetTest
         {
             var s = AuthInstance.PrefsGetContentType();
 
-            Assert.IsNotNull(s);
-            Assert.AreNotEqual(ContentType.None, s);
+            //Assert.That(s, Is.Not.Null);
+            Assert.That(s, Is.Not.EqualTo(ContentType.None));
         }
 
         [Test]
@@ -27,9 +26,9 @@ namespace FlickrNetTest
         {
             var p = AuthInstance.PrefsGetGeoPerms();
 
-            Assert.IsNotNull(p);
-            Assert.IsTrue(p.ImportGeoExif);
-            Assert.AreEqual(GeoPermissionType.Public, p.GeoPermissions);
+            Assert.That(p, Is.Not.Null);
+            Assert.That(p.ImportGeoExif, Is.True);
+            Assert.That(p.GeoPermissions, Is.EqualTo(GeoPermissionType.Public));
         }
 
         [Test]
@@ -38,8 +37,8 @@ namespace FlickrNetTest
         {
             var s = AuthInstance.PrefsGetHidden();
 
-            Assert.IsNotNull(s);
-            Assert.AreNotEqual(HiddenFromSearch.None, s);
+            //Assert.That(s, Is.Not.Null);
+            Assert.That(s, Is.Not.EqualTo(HiddenFromSearch.None));
         }
 
         [Test]
@@ -48,8 +47,8 @@ namespace FlickrNetTest
         {
             var p = AuthInstance.PrefsGetPrivacy();
 
-            Assert.IsNotNull(p);
-            Assert.AreEqual(PrivacyFilter.PublicPhotos, p);
+            //Assert.That(p, Is.Not.Null);
+            Assert.That(p, Is.EqualTo(PrivacyFilter.PublicPhotos));
         }
 
         [Test]
@@ -58,8 +57,8 @@ namespace FlickrNetTest
         {
             var s = AuthInstance.PrefsGetSafetyLevel();
 
-            Assert.IsNotNull(s);
-            Assert.AreEqual(SafetyLevel.Safe, s);
+            //Assert.That(s, Is.Not.Null);
+            Assert.That(s, Is.EqualTo(SafetyLevel.Safe));
         }
 
 

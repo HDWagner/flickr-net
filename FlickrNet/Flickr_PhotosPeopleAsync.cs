@@ -55,7 +55,7 @@ namespace FlickrNet
                 parameters.Add("person_h", personHeight.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("user_id", userId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("user_id", userId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace FlickrNet
             parameters.Add("person_w", personWidth.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("person_h", personHeight.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.people.getList");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<PhotoPersonCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

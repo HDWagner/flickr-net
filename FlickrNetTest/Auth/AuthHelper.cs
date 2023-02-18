@@ -26,17 +26,17 @@ namespace FlickrNetTest
 
             string frob = f.AuthGetFrob();
 
-            Assert.IsNotNull(frob, "Frob should not be null.");
+            Assert.That(frob, Is.Not.Null, "Frob should not be null.");
 
             string url = f.AuthCalcUrl(frob, AuthLevel.Delete);
 
-            Assert.IsNotNull(url, "url should not be null.");
+            Assert.That(url, Is.Not.Null, "url should not be null.");
 
             System.Diagnostics.Process.Start(url);
 
             // Auth flickr in next 30 seconds
 
-            System.Threading.Thread.Sleep(1000 * 30);
+            Thread.Sleep(1000 * 30);
 
             Auth auth = f.AuthGetToken(frob);
 

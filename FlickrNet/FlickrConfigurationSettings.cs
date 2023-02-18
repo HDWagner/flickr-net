@@ -50,7 +50,7 @@ namespace FlickrNet
         {
             if (configNode?.Attributes == null)
             {
-                throw new ArgumentNullException("configNode");
+                throw new ArgumentNullException(nameof(configNode));
             }
 
             foreach (XmlAttribute attribute in configNode.Attributes)

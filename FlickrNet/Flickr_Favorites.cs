@@ -175,7 +175,7 @@ namespace FlickrNet
         /// <summary>
         /// Gets the public favourites for a specified user.
         /// </summary>
-        /// <remarks>This function difers from <see cref="Flickr.FavoritesGetList(string)"/> in that the user id 
+        /// <remarks>This function difers from <see cref="FavoritesGetList(string)"/> in that the user id 
         /// is not optional.</remarks>
         /// <param name="userId">The is of the user whose favourites you wish to return.</param>
         /// <returns>A <see cref="PhotoCollection"/> object containing a collection of <see cref="Photo"/> objects.</returns>
@@ -187,7 +187,7 @@ namespace FlickrNet
         /// <summary>
         /// Gets the public favourites for a specified user.
         /// </summary>
-        /// <remarks>This function difers from <see cref="Flickr.FavoritesGetList(string)"/> in that the user id 
+        /// <remarks>This function difers from <see cref="FavoritesGetList(string)"/> in that the user id 
         /// is not optional.</remarks>
         /// <param name="userId">The is of the user whose favourites you wish to return.</param>
         /// <param name="minFavoriteDate">Minimum date that a photo was favorited on.</param>

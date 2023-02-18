@@ -37,7 +37,7 @@ namespace FlickrNet
         /// <returns>The string value of the given attribute, if found.</returns>
         public string GetAttributeValue(string element, string attribute)
         {
-            System.Xml.XmlDocument doc = GetXmlDocument();
+            XmlDocument doc = GetXmlDocument();
             XmlNode node = doc.SelectSingleNode("//" + element + "/@" + attribute);
             if (node != null)
             {
@@ -56,7 +56,7 @@ namespace FlickrNet
         /// <returns>The string value of the given element, if found.</returns>
         public string GetElementValue(string element)
         {
-            System.Xml.XmlDocument doc = GetXmlDocument();
+            XmlDocument doc = GetXmlDocument();
             XmlNode node = doc.SelectSingleNode("//" + element + "[1]");
             if (node != null)
             {
@@ -70,7 +70,7 @@ namespace FlickrNet
 
 
 
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             ResponseXml = reader.ReadOuterXml();
         }
@@ -83,7 +83,7 @@ namespace FlickrNet
         public string[] GetElementArray(string elementName)
         {
             var array = new List<string>();
-            foreach (System.Xml.XmlNode n in GetXmlDocument().SelectNodes("//" + elementName))
+            foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName))
             {
                 array.Add(n.InnerText);
             }
@@ -99,7 +99,7 @@ namespace FlickrNet
         public string[] GetElementArray(string elementName, string attributeName)
         {
             var array = new List<string>();
-            foreach (System.Xml.XmlNode n in GetXmlDocument().SelectNodes("//" + elementName + "/@" + attributeName))
+            foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName + "/@" + attributeName))
             {
                 array.Add(n.InnerText);
             }

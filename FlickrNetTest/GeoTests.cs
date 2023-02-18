@@ -18,9 +18,9 @@ namespace FlickrNetTest
         {
             GeoPermissions perms = AuthInstance.PhotosGeoGetPerms(TestData.PhotoId);
 
-            Assert.IsNotNull(perms);
-            Assert.AreEqual(TestData.PhotoId, perms.PhotoId);
-            Assert.IsTrue(perms.IsPublic, "IsPublic should be true.");
+            Assert.That(perms, Is.Not.Null);
+            Assert.That(perms.PhotoId, Is.EqualTo(TestData.PhotoId));
+            Assert.That(perms.IsPublic, Is.True, "IsPublic should be true.");
         }
 
         [Test]
@@ -30,16 +30,16 @@ namespace FlickrNetTest
         {
             PhotoCollection photos = AuthInstance.PhotosGetWithGeoData();
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count);
-            Assert.AreNotEqual(0, photos.Total);
-            Assert.AreEqual(1, photos.Page);
-            Assert.AreNotEqual(0, photos.PerPage);
-            Assert.AreNotEqual(0, photos.Pages);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
+            Assert.That(photos.Total, Is.Not.EqualTo(0));
+            Assert.That(photos.Page, Is.EqualTo(1));
+            Assert.That(photos.PerPage, Is.Not.EqualTo(0));
+            Assert.That(photos.Pages, Is.Not.EqualTo(0));
 
             foreach (var p in photos)
             {
-                Assert.IsNotNull(p.PhotoId);
+                Assert.That(p.PhotoId, Is.Not.Null);
             }
 
         }

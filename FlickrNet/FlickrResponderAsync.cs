@@ -30,7 +30,7 @@ namespace FlickrNet
             }
         }
 
-        private static void GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback) 
+        private static void GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback)
         {
             var method = flickr.CurrentService == SupportedService.Zooomr ? "GET" : "POST";
 
@@ -114,7 +114,7 @@ namespace FlickrNet
             }
         }
 
-        private static void DownloadDataAsync(string method, string baseUrl, string data, string contentType, string authHeader, Action<FlickrResult<string>> callback)
+        private static void DownloadDataAsync(string method, string baseUrl, string? data, string? contentType, string? authHeader, Action<FlickrResult<string>> callback)
         {
             var client = new WebClient();
             client.Encoding = System.Text.Encoding.UTF8;
@@ -131,7 +131,7 @@ namespace FlickrNet
 
             if (method == "POST")
             {
-                client.UploadStringCompleted += delegate(object sender, UploadStringCompletedEventArgs e)
+                client.UploadStringCompleted += delegate (object sender, UploadStringCompletedEventArgs e)
                 {
                     client.Dispose();
 
@@ -139,7 +139,7 @@ namespace FlickrNet
                     if (e.Error != null)
                     {
                         result.Error = e.Error;
-                        callback(result);                        
+                        callback(result);
                         return;
                     }
 
@@ -147,12 +147,19 @@ namespace FlickrNet
                     callback(result);
                     return;
                 };
+                if (data == null) {
+                    var result = new FlickrResult<string>();
+                    result.Error = new FlickrException("Invalid data in POST request");
+                    callback(result);
+                    client.Dispose();
+                    return;
+                }
 
                 client.UploadStringAsync(new Uri(baseUrl), data);
             }
             else
             {
-                client.DownloadStringCompleted += delegate(object sender, DownloadStringCompletedEventArgs e)
+                client.DownloadStringCompleted += delegate (object sender, DownloadStringCompletedEventArgs e)
                 {
                     client.Dispose();
 

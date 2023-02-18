@@ -27,7 +27,7 @@ namespace FlickrNet
         /// </summary>
         public int Total { get; set; }
 
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "domains")
             {

@@ -16,7 +16,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.comments.getList");
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<PhotoCommentCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.comments.deleteComment");
             parameters.Add("comment_id", commentId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace FlickrNet
             parameters.Add("comment_id", commentId);
             parameters.Add("comment_text", commentText);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -162,7 +162,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

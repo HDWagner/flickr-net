@@ -16,14 +16,14 @@ namespace FlickrNetTest
         {
             InstitutionCollection insts = Instance.CommonsGetInstitutions();
 
-            Assert.IsNotNull(insts);
-            Assert.IsTrue(insts.Count > 5);
+            Assert.That(insts, Is.Not.Null);
+            Assert.That(insts, Has.Count.GreaterThan(5));
 
             foreach (var i in insts)
             {
-                Assert.IsNotNull(i);
-                Assert.IsNotNull(i.InstitutionId);
-                Assert.IsNotNull(i.InstitutionName);
+                Assert.That(i, Is.Not.Null);
+                Assert.That(i.InstitutionId, Is.Not.Null);
+                Assert.That(i.InstitutionName, Is.Not.Null);
             }
         }
     }

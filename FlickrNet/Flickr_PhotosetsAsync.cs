@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -17,13 +14,13 @@ namespace FlickrNet
         public void PhotosetsAddPhotoAsync(string photosetId, string photoId, Action<FlickrResult<NoResponse>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.addPhoto");
             parameters.Add("photoset_id", photosetId);
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -44,10 +41,10 @@ namespace FlickrNet
         /// <param name="description">THe description of the photoset.</param>
         /// <param name="primaryPhotoId">The ID of the photo which will be the primary photo for the photoset. This photo will also be added to the set.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosetsCreateAsync(string title, string description, string primaryPhotoId, Action<FlickrResult<Photoset>> callback)
+        public void PhotosetsCreateAsync(string title, string? description, string primaryPhotoId, Action<FlickrResult<Photoset>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.create");
             parameters.Add("primary_photo_id", primaryPhotoId);
@@ -61,7 +58,7 @@ namespace FlickrNet
                 parameters.Add("description", description);
             }
 
-            GetResponseAsync<Photoset>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -77,7 +74,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photosets.delete");
             parameters.Add("photoset_id", photosetId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -90,14 +87,14 @@ namespace FlickrNet
         public void PhotosetsEditMetaAsync(string photosetId, string title, string description, Action<FlickrResult<NoResponse>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.editMeta");
             parameters.Add("photoset_id", photosetId);
             parameters.Add("title", title);
             parameters.Add("description", description);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -133,14 +130,14 @@ namespace FlickrNet
         public void PhotosetsEditPhotosAsync(string photosetId, string primaryPhotoId, string photoIds, Action<FlickrResult<NoResponse>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.editPhotos");
             parameters.Add("photoset_id", photosetId);
             parameters.Add("primary_photo_id", primaryPhotoId);
             parameters.Add("photo_ids", photoIds);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -156,7 +153,7 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("photoset_id", photosetId);
 
-            GetResponseAsync<Context>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -170,7 +167,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photosets.getInfo");
             parameters.Add("photoset_id", photosetId);
 
-            GetResponseAsync<Photoset>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace FlickrNet
         public void PhotosetsGetListAsync(Action<FlickrResult<PhotosetCollection>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             PhotosetsGetListAsync(null, 0, 0, callback);
         }
 
@@ -195,7 +192,7 @@ namespace FlickrNet
         public void PhotosetsGetListAsync(int page, int perPage, Action<FlickrResult<PhotosetCollection>> callback)
         {
             CheckRequiresAuthentication();
-            
+
             PhotosetsGetListAsync(null, page, perPage, callback);
         }
 
@@ -204,7 +201,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The ID of the user to return the photosets of.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosetsGetListAsync(string userId, Action<FlickrResult<PhotosetCollection>> callback)
+        public void PhotosetsGetListAsync(string? userId, Action<FlickrResult<PhotosetCollection>> callback)
         {
             PhotosetsGetListAsync(userId, 0, 0, callback);
         }
@@ -216,7 +213,7 @@ namespace FlickrNet
         /// <param name="page">The page of the results to return. Defaults to page 1.</param>
         /// <param name="perPage">The number of photosets to return per page. Defaults to 500.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosetsGetListAsync(string userId, int page, int perPage, Action<FlickrResult<PhotosetCollection>> callback)
+        public void PhotosetsGetListAsync(string? userId, int page, int perPage, Action<FlickrResult<PhotosetCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.getList");
@@ -236,10 +233,10 @@ namespace FlickrNet
             }
 
             GetResponseAsync<PhotosetCollection>(
-                parameters, 
+                parameters,
                 r =>
                 {
-                    if (!r.HasError)
+                    if (!r.HasError && userId != null)
                     {
                         foreach (Photoset photoset in r.Result)
                         {
@@ -385,10 +382,14 @@ namespace FlickrNet
 
             if (media != MediaType.None)
             {
-                parameters.Add("media",(media == MediaType.All? "all": (media == MediaType.Photos? "photos": (media == MediaType.Videos ? "videos" : string.Empty))));
+                var value = media == MediaType.All ? "all"
+                    : (media == MediaType.Photos ? "photos"
+                    : (media == MediaType.Videos ? "videos"
+                    : string.Empty));
+                parameters.Add("media", value);
             }
 
-            GetResponseAsync<PhotosetPhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -429,7 +430,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photosets.orderSets");
             parameters.Add("photoset_ids", photosetIds);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -448,7 +449,7 @@ namespace FlickrNet
             parameters.Add("photoset_id", photosetId);
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -467,7 +468,7 @@ namespace FlickrNet
             parameters.Add("photoset_id", photosetId);
             parameters.Add("photo_ids", string.Join(",", photoIds));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -486,7 +487,7 @@ namespace FlickrNet
             parameters.Add("photoset_id", photosetId);
             parameters.Add("photo_ids", string.Join(",", photoIds));
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -505,7 +506,7 @@ namespace FlickrNet
             parameters.Add("photoset_id", photosetId);
             parameters.Add("photo_id", photoId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
 
@@ -520,7 +521,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photosets.comments.getList");
             parameters.Add("photoset_id", photosetId);
 
-            GetResponseAsync<PhotosetCommentCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -537,7 +538,7 @@ namespace FlickrNet
             parameters.Add("comment_text", commentText);
 
             GetResponseAsync<UnknownResponse>(
-                parameters, 
+                parameters,
                 r =>
                 {
                     var result = new FlickrResult<string>();
@@ -565,7 +566,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photosets.comments.deleteComment");
             parameters.Add("comment_id", commentId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -581,7 +582,7 @@ namespace FlickrNet
             parameters.Add("comment_id", commentId);
             parameters.Add("comment_text", commentText);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

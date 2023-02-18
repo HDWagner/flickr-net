@@ -6,7 +6,6 @@ using System;
 namespace FlickrNetTest
 {
     [TestFixture]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0026:Possible unassigned object created by 'new'")]
     public class BoundaryTests : BaseTest
     {
         [Test]
@@ -16,7 +15,7 @@ namespace FlickrNetTest
 
             var e = b.DiagonalDistanceInMiles();
 
-            Assert.AreNotEqual(0, e);
+            Assert.That(e, Is.Not.EqualTo(0));
         }
 
         [Test]
@@ -35,7 +34,7 @@ namespace FlickrNetTest
             var b = new BoundaryBox(8.68194, 50.11222, 13.29750, 52.52222);
 
             var e = b.DiagonalDistanceInMiles();
-            Assert.IsTrue(259.9 < e && e < 260.0);
+            Assert.That(259.9 < e && e < 260.0, Is.True);
         }
 
         [Test]

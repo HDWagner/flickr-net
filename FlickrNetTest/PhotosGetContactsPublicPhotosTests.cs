@@ -4,11 +4,11 @@ using NUnit.Framework;
 namespace FlickrNetTest
 {
 
-    [TestFixtureAttribute]
+    [TestFixture]
     public class PhotosGetContactsPublicPhotosTests : BaseTest
     {
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosUserIdExtrasTest()
         {
             Flickr f = Instance;
@@ -17,11 +17,11 @@ namespace FlickrNetTest
             PhotoSearchExtras extras = PhotoSearchExtras.All;
             var photos = f.PhotosGetContactsPublicPhotos(userId, extras);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosAllParamsTest()
         {
             Flickr f = Instance;
@@ -36,11 +36,11 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetContactsPublicPhotos(userId, count, justFriends, singlePhoto, includeSelf, extras);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosExceptExtrasTest()
         {
             Flickr f = Instance;
@@ -54,11 +54,11 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetContactsPublicPhotos(userId, count, justFriends, singlePhoto, includeSelf);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosUserIdTest()
         {
             Flickr f = Instance;
@@ -67,11 +67,11 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetContactsPublicPhotos(userId);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosUserIdCountExtrasTest()
         {
             Flickr f = Instance;
@@ -83,11 +83,11 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetContactsPublicPhotos(userId, count, extras);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
 
-        [TestAttribute]
+        [Test]
         public void PhotosGetContactsPublicPhotosUserIdCountTest()
         {
             Flickr f = Instance;
@@ -98,8 +98,8 @@ namespace FlickrNetTest
 
             var photos = f.PhotosGetContactsPublicPhotos(userId, count);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned more than 0 photos");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned more than 0 photos");
         }
     }
 }

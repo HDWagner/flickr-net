@@ -23,19 +23,19 @@ namespace FlickrNetTest
                              + "</location>"
                              + "</photo>";
 
-            var sr = new System.IO.StringReader(xml);
+            var sr = new StringReader(xml);
             var xr = new System.Xml.XmlTextReader(sr);
             xr.Read();
 
             var info = new PhotoInfo();
             ((IFlickrParsable)info).Load(xr);
 
-            Assert.AreEqual("7519320006", info.PhotoId);
-            Assert.IsNotNull(info.Location);
-            Assert.AreEqual((GeoAccuracy)16, info.Location.Accuracy);
+            Assert.That(info.PhotoId, Is.EqualTo("7519320006"));
+            Assert.That(info.Location, Is.Not.Null);
+            Assert.That(info.Location.Accuracy, Is.EqualTo((GeoAccuracy)16));
 
-            Assert.IsNotNull(info.Location.Country);
-            Assert.AreEqual("cnffEpdTUb5v258BBA", info.Location.Country.PlaceId);
+            Assert.That(info.Location.Country, Is.Not.Null);
+            Assert.That(info.Location.Country.PlaceId, Is.EqualTo("cnffEpdTUb5v258BBA"));
         }
 
         [Test]
@@ -45,16 +45,16 @@ namespace FlickrNetTest
                              + "<location latitude=\"-23.32\" longitude=\"-34.2\" accuracy=\"10\" context=\"1\" />"
                              + "</photo>";
 
-            var sr = new System.IO.StringReader(xml);
+            var sr = new StringReader(xml);
             var xr = new System.Xml.XmlTextReader(sr);
             xr.Read();
 
             var info = new PhotoInfo();
             ((IFlickrParsable)info).Load(xr);
 
-            Assert.AreEqual("7519320006", info.PhotoId);
-            Assert.IsNotNull(info.Location);
-            Assert.AreEqual((GeoAccuracy)10, info.Location.Accuracy);
+            Assert.That(info.PhotoId, Is.EqualTo("7519320006"));
+            Assert.That(info.Location, Is.Not.Null);
+            Assert.That(info.Location.Accuracy, Is.EqualTo((GeoAccuracy)10));
 
         }
 
@@ -70,7 +70,7 @@ namespace FlickrNetTest
             var geoPhotos = AuthInstance.PhotosGeoPhotosForLocation(geoPhoto.Latitude, geoPhoto.Longitude,
                                                                     GeoAccuracy.Street, PhotoSearchExtras.None, 100, 1);
 
-            Assert.IsTrue(geoPhotos.Select(p => p.PhotoId).Contains(geoPhoto.PhotoId));
+            Assert.That(geoPhotos.Select(p => p.PhotoId), Does.Contain(geoPhoto.PhotoId));
         }
 
         [Test]
@@ -85,8 +85,8 @@ namespace FlickrNetTest
 
             var location = AuthInstance.PhotosGeoGetLocation(photo.PhotoId);
 
-            Assert.AreEqual(photo.Longitude, location.Longitude, "Longitudes should match exactly.");
-            Assert.AreEqual(photo.Latitude, location.Latitude, "Latitudes should match exactly.");
+            Assert.That(location.Longitude, Is.EqualTo(photo.Longitude), "Longitudes should match exactly.");
+            Assert.That(location.Latitude, Is.EqualTo(photo.Latitude), "Latitudes should match exactly.");
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace FlickrNetTest
 
             var location = AuthInstance.PhotosGeoGetLocation(photo.PhotoId);
 
-            Assert.IsNull(location, "Location should be null.");
+            Assert.That(location, Is.Null, "Location should be null.");
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace FlickrNetTest
         {
             var photo = AuthInstance.PhotosSearch(new PhotoSearchOptions { HasGeo = true, UserId = TestData.TestUserId, Extras = PhotoSearchExtras.Geo }).First();
 
-            Assert.IsTrue(photo.GeoContext.HasValue, "GeoContext should be set.");
+            Assert.That(photo.GeoContext.HasValue, Is.True, "GeoContext should be set.");
 
             var origContext = photo.GeoContext.Value;
 
@@ -145,9 +145,10 @@ namespace FlickrNetTest
             if (photo.GeoContext == null)
             {
                 Assert.Fail("GeoContext should not be null");
+                return;
             }
 
-            var origGeo = new { photo.Latitude, photo.Longitude, photo.Accuracy, Context = photo.GeoContext?.Value };
+            var origGeo = new { photo.Latitude, photo.Longitude, photo.Accuracy, Context = photo.GeoContext ?? new GeoContext() };
             var newGeo = new { Latitude = -23.32, Longitude = -34.2, Accuracy = GeoAccuracy.Level10, Context = GeoContext.Indoors };
 
             try
@@ -155,10 +156,10 @@ namespace FlickrNetTest
                 AuthInstance.PhotosGeoSetLocation(photo.PhotoId, newGeo.Latitude, newGeo.Longitude, newGeo.Accuracy, newGeo.Context);
 
                 var location = AuthInstance.PhotosGeoGetLocation(photo.PhotoId);
-                Assert.AreEqual(newGeo.Latitude, location?.Latitude, "New Latitude should be set.");
-                Assert.AreEqual(newGeo.Longitude, location?.Longitude, "New Longitude should be set.");
-                Assert.AreEqual(newGeo.Context, location?.Context, "New Context should be set.");
-                Assert.AreEqual(newGeo.Accuracy, location?.Accuracy, "New Accuracy should be set.");
+                Assert.That(location?.Latitude, Is.EqualTo(newGeo.Latitude), "New Latitude should be set.");
+                Assert.That(location?.Longitude, Is.EqualTo(newGeo.Longitude), "New Longitude should be set.");
+                Assert.That(location?.Context, Is.EqualTo(newGeo.Context), "New Context should be set.");
+                Assert.That(location?.Accuracy, Is.EqualTo(newGeo.Accuracy), "New Accuracy should be set.");
             }
             finally
             {
@@ -184,14 +185,14 @@ namespace FlickrNetTest
 
             var photos2 = AuthInstance.PhotosGeoPhotosForLocation(photo.Latitude, photo.Longitude, photo.Accuracy, PhotoSearchExtras.All, 0, 0);
 
-            Assert.IsNotNull(photos2, "PhotosGeoPhotosForLocation should not return null.");
-            Assert.IsTrue(photos2.Count > 0, "Should return one or more photos.");
+            Assert.That(photos2, Is.Not.Null, "PhotosGeoPhotosForLocation should not return null.");
+            Assert.That(photos2, Is.Not.Empty, "Should return one or more photos.");
 
             foreach (var p in photos2)
             {
-                Assert.IsNotNull(p.PhotoId);
-                Assert.AreNotEqual(0, p.Longitude);
-                Assert.AreNotEqual(0, p.Latitude);
+                Assert.That(p.PhotoId, Is.Not.Null);
+                Assert.That(p.Longitude, Is.Not.EqualTo(0));
+                Assert.That(p.Latitude, Is.Not.EqualTo(0));
             }
 
         }

@@ -107,7 +107,7 @@ namespace FlickrNet
 
             if (count != 0 && (count < 10 || count > 50) && !singlePhoto)
             {
-                throw new ArgumentOutOfRangeException("count", string.Format(System.Globalization.CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
+                throw new ArgumentOutOfRangeException(nameof(count), string.Format(System.Globalization.CultureInfo.InvariantCulture, "Count must be between 10 and 50. ({0})", count));
             }
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getContactsPhotos");
@@ -301,10 +301,10 @@ namespace FlickrNet
         /// <param name="dates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
         /// <param name="takenDates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
         /// <returns><see cref="PhotoCountCollection"/> class instance.</returns>
-        public PhotoCountCollection PhotosGetCounts(DateTime[] dates, DateTime[] takenDates)
+        public PhotoCountCollection PhotosGetCounts(DateTime[]? dates, DateTime[]? takenDates)
         {
-            string dateString = null;
-            string takenDateString = null;
+            string? dateString = null;
+            string? takenDateString = null;
 
             if (dates != null && dates.Length > 0)
             {
@@ -350,7 +350,7 @@ namespace FlickrNet
         /// <param name="secret">The secret of the photo. If the secret is specified then
         /// authentication checks are bypassed.</param>
         /// <returns>An instance of the <see cref="ExifTagCollection"/> class containing the EXIF data.</returns>
-        public ExifTagCollection PhotosGetExif(string photoId, string secret)
+        public ExifTagCollection PhotosGetExif(string photoId, string? secret)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getExif");
@@ -429,9 +429,9 @@ namespace FlickrNet
         /// <param name="perPage"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-            public PhotoCollection PhotosGetPopular(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, string sort = "interesting", int perPage = 100, int page = 1)
+        public PhotoCollection PhotosGetPopular(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, string sort = "interesting", int perPage = 100, int page = 1)
         {
-            if( userId == null)
+            if (userId == null)
             {
                 CheckRequiresAuthentication();
             }
@@ -688,7 +688,7 @@ namespace FlickrNet
         /// <summary>
         /// Remove an existing tag.
         /// </summary>
-        /// <param name="tagId">The id of the tag, as returned by <see cref="Flickr.PhotosGetInfo(string)"/> or similar method.</param>
+        /// <param name="tagId">The id of the tag, as returned by <see cref="PhotosGetInfo(string)"/> or similar method.</param>
         /// <returns>True if the tag was removed.</returns>
         public void PhotosRemoveTag(string tagId)
         {

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Collections;
 using System.Collections.ObjectModel;
 
 namespace FlickrNet
@@ -49,7 +46,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void TagsGetListUserAsync(string userId, Action<FlickrResult<TagCollection>> callback)
+        public void TagsGetListUserAsync(string? userId, Action<FlickrResult<TagCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUser");
@@ -58,7 +55,7 @@ namespace FlickrNet
                 parameters.Add("user_id", userId);
             }
 
-            GetResponseAsync<TagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -89,7 +86,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void TagsGetListUserPopularAsync(string userId, Action<FlickrResult<TagCollection>> callback)
+        public void TagsGetListUserPopularAsync(string? userId, Action<FlickrResult<TagCollection>> callback)
         {
             TagsGetListUserPopularAsync(userId, 0, callback);
         }
@@ -100,7 +97,7 @@ namespace FlickrNet
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <param name="count">Number of popular tags to return. defaults to 10 when this argument is not present.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void TagsGetListUserPopularAsync(string userId, int count, Action<FlickrResult<TagCollection>> callback)
+        public void TagsGetListUserPopularAsync(string? userId, int count, Action<FlickrResult<TagCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUserPopular");
@@ -114,7 +111,7 @@ namespace FlickrNet
                 parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<TagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -131,7 +128,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="tag">The tag to return the raw version of.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void TagsGetListUserRawAsync(string tag, Action<FlickrResult<RawTagCollection>> callback)
+        public void TagsGetListUserRawAsync(string? tag, Action<FlickrResult<RawTagCollection>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -142,7 +139,7 @@ namespace FlickrNet
                 parameters.Add("tag", tag);
             }
 
-            GetResponseAsync<RawTagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -156,7 +153,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getMostFrequentlyUsed");
 
-            GetResponseAsync<TagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -171,7 +168,7 @@ namespace FlickrNet
             parameters.Add("api_key", apiKey);
             parameters.Add("tag", tag);
 
-            GetResponseAsync<TagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -185,7 +182,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.tags.getClusters");
             parameters.Add("tag", tag);
 
-            GetResponseAsync<ClusterCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -227,7 +224,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -245,11 +242,11 @@ namespace FlickrNet
         /// <param name="period">The period for which to fetch hot tags. Valid values are day and week (defaults to day).</param>
         /// <param name="count">The number of tags to return. Defaults to 20. Maximum allowed value is 200.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void TagsGetHotListAsync(string period, int count, Action<FlickrResult<HotTagCollection>> callback)
+        public void TagsGetHotListAsync(string? period, int count, Action<FlickrResult<HotTagCollection>> callback)
         {
             if (!string.IsNullOrEmpty(period) && period != "day" && period != "week")
             {
-                throw new ArgumentException("Period must be either 'day' or 'week'.", "period");
+                throw new ArgumentException("Period must be either 'day' or 'week'.", nameof(period));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -264,7 +261,7 @@ namespace FlickrNet
                 parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<HotTagCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

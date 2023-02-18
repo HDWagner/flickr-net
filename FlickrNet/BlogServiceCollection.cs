@@ -10,7 +10,7 @@ namespace FlickrNet
     /// </summary>
     public sealed class BlogServiceCollection : System.Collections.ObjectModel.Collection<BlogService>, IFlickrParsable
     {
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "services")
             {

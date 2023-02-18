@@ -21,18 +21,18 @@ namespace FlickrNetTest
 
             var domains = f.StatsGetCollectionDomains(DateTime.Today.AddDays(-2));
 
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
-            Assert.AreEqual(domains.Total, domains.Count, "StatDomains.Count should be the same as StatDomains.Total");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
+            Assert.That(domains, Has.Count.EqualTo(domains.Total), "StatDomains.Count should be the same as StatDomains.Total");
 
             // Overloads
             domains = f.StatsGetCollectionDomains(DateTime.Today.AddDays(-2), collectionId);
-            Assert.IsNotNull(domains);
+            Assert.That(domains, Is.Not.Null);
 
             domains = f.StatsGetCollectionDomains(DateTime.Today.AddDays(-2), 1, 10);
-            Assert.IsNotNull(domains);
+            Assert.That(domains, Is.Not.Null);
 
             domains = f.StatsGetCollectionDomains(DateTime.Today.AddDays(-2), collectionId, 1, 10);
-            Assert.IsNotNull(domains);
+            Assert.That(domains, Is.Not.Null);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace FlickrNetTest
 
             Stats stats = f.StatsGetCollectionStats(DateTime.Today.AddDays(-2), collectionId);
 
-            Assert.IsNotNull(stats, "Stats should not be null.");
+            Assert.That(stats, Is.Not.Null, "Stats should not be null.");
         }
 
         [Test]
@@ -53,24 +53,24 @@ namespace FlickrNetTest
             Flickr f = AuthInstance;
 
             var domains = f.StatsGetPhotoDomains(DateTime.Today.AddDays(-2));
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
-            Assert.AreNotEqual(0, domains.Count, "StatDomains.Count should not be zero.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Empty, "StatDomains.Count should not be zero.");
 
             foreach (StatDomain domain in domains)
             {
-                Assert.IsNotNull(domain.Name, "StatDomain.Name should not be null.");
-                Assert.AreNotEqual(0, domain.Views, "StatDomain.Views should not be zero.");
+                Assert.That(domain.Name, Is.Not.Null, "StatDomain.Name should not be null.");
+                Assert.That(domain.Views, Is.Not.EqualTo(0), "StatDomain.Views should not be zero.");
             }
 
             // Overloads
             domains = f.StatsGetPhotoDomains(DateTime.Today.AddDays(-2), photoId);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             domains = f.StatsGetPhotoDomains(DateTime.Today.AddDays(-2), photoId, 1, 10);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             domains = f.StatsGetPhotoDomains(DateTime.Today.AddDays(-2), 1, 10);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
         }
 
@@ -82,7 +82,7 @@ namespace FlickrNetTest
 
             var stats = f.StatsGetPhotoStats(DateTime.Today.AddDays(-5), photoId);
 
-            Assert.IsNotNull(stats);
+            Assert.That(stats, Is.Not.Null);
         }
 
         [Test]
@@ -92,23 +92,23 @@ namespace FlickrNetTest
             Flickr f = AuthInstance;
 
             var domains = f.StatsGetPhotosetDomains(DateTime.Today.AddDays(-2));
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             foreach (StatDomain domain in domains)
             {
-                Assert.IsNotNull(domain.Name, "StatDomain.Name should not be null.");
-                Assert.AreNotEqual(0, domain.Views, "StatDomain.Views should not be zero.");
+                Assert.That(domain.Name, Is.Not.Null, "StatDomain.Name should not be null.");
+                Assert.That(domain.Views, Is.Not.EqualTo(0), "StatDomain.Views should not be zero.");
             }
 
             // Overloads
             domains = f.StatsGetPhotosetDomains(DateTime.Today.AddDays(-2), 1, 10);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             domains = f.StatsGetPhotosetDomains(DateTime.Today.AddDays(-2), photosetId);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             domains = f.StatsGetPhotosetDomains(DateTime.Today.AddDays(-2), photosetId, 1, 10);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
 
         }
@@ -121,7 +121,7 @@ namespace FlickrNetTest
 
             var stats = f.StatsGetPhotosetStats(DateTime.Today.AddDays(-5), photosetId);
 
-            Assert.IsNotNull(stats);
+            Assert.That(stats, Is.Not.Null);
         }
 
         [Test]
@@ -131,17 +131,17 @@ namespace FlickrNetTest
             Flickr f = AuthInstance;
 
             var domains = f.StatsGetPhotostreamDomains(DateTime.Today.AddDays(-2));
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
 
             foreach (StatDomain domain in domains)
             {
-                Assert.IsNotNull(domain.Name, "StatDomain.Name should not be null.");
-                Assert.AreNotEqual(0, domain.Views, "StatDomain.Views should not be zero.");
+                Assert.That(domain.Name, Is.Not.Null, "StatDomain.Name should not be null.");
+                Assert.That(domain.Views, Is.Not.EqualTo(0), "StatDomain.Views should not be zero.");
             }
 
             // Overload
             domains = f.StatsGetPhotostreamDomains(DateTime.Today.AddDays(-2), 1, 10);
-            Assert.IsNotNull(domains, "StatDomains should not be null.");
+            Assert.That(domains, Is.Not.Null, "StatDomains should not be null.");
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace FlickrNetTest
 
             var stats = f.StatsGetPhotostreamStats(DateTime.Today.AddDays(-5));
 
-            Assert.IsNotNull(stats);
+            Assert.That(stats, Is.Not.Null);
         }
 
 

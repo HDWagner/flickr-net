@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 
 namespace FlickrNet
 {
@@ -48,7 +46,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of contacts to return per page. If this argument is omitted, it defaults to 1000. The maximum allowed value is 1000.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void ContactsGetListAsync(string filter, int page, int perPage, Action<FlickrResult<ContactCollection>> callback)
+        public void ContactsGetListAsync(string? filter, int page, int perPage, Action<FlickrResult<ContactCollection>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -69,7 +67,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<ContactCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -123,7 +121,7 @@ namespace FlickrNet
         /// "ff" friends and family, and "all" all your contacts.
         /// Default value is "all".</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void ContactsGetListRecentlyUploadedAsync(DateTime dateLastUpdated, string filter, Action<FlickrResult<ContactCollection>> callback)
+        public void ContactsGetListRecentlyUploadedAsync(DateTime dateLastUpdated, string? filter, Action<FlickrResult<ContactCollection>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -140,7 +138,7 @@ namespace FlickrNet
                 parameters.Add("filter", filter);
             }
 
-            GetResponseAsync<ContactCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
 
         }
 
@@ -176,7 +174,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<ContactCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<ContactCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

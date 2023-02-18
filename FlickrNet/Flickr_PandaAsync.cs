@@ -96,7 +96,7 @@ namespace FlickrNet
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<PandaPhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

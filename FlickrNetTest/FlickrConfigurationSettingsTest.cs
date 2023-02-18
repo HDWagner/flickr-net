@@ -32,20 +32,20 @@ namespace FlickrNetTest
             var configNode = doc.SelectSingleNode("flickrNet");
             var target = new FlickrConfigurationSettings(configNode);
 
-            Assert.AreEqual("apikey", target.ApiKey);
-            Assert.AreEqual("secret", target.SharedSecret);
-            Assert.AreEqual("thetoken", target.ApiToken);
-            Assert.IsTrue(target.CacheDisabled);
-            Assert.AreEqual(1024, target.CacheSize);
-            Assert.AreEqual(new TimeSpan(1, 0, 0), target.CacheTimeout);
-            Assert.AreEqual("testlocation", target.CacheLocation);
+            Assert.That(target.ApiKey, Is.EqualTo("apikey"));
+            Assert.That(target.SharedSecret, Is.EqualTo("secret"));
+            Assert.That(target.ApiToken, Is.EqualTo("thetoken"));
+            Assert.That(target.CacheDisabled, Is.True);
+            Assert.That(target.CacheSize, Is.EqualTo(1024));
+            Assert.That(target.CacheTimeout, Is.EqualTo(new TimeSpan(1, 0, 0)));
+            Assert.That(target.CacheLocation, Is.EqualTo("testlocation"));
 
-            Assert.IsTrue(target.IsProxyDefined, "IsProxyDefined should be true");
-            Assert.AreEqual("localhost", target.ProxyIPAddress);
-            Assert.AreEqual(8800, target.ProxyPort);
-            Assert.AreEqual("testusername", target.ProxyUsername);
-            Assert.AreEqual("testpassword", target.ProxyPassword);
-            Assert.AreEqual("testdomain", target.ProxyDomain);
+            Assert.That(target.IsProxyDefined, Is.True, "IsProxyDefined should be true");
+            Assert.That(target.ProxyIPAddress, Is.EqualTo("localhost"));
+            Assert.That(target.ProxyPort, Is.EqualTo(8800));
+            Assert.That(target.ProxyUsername, Is.EqualTo("testusername"));
+            Assert.That(target.ProxyPassword, Is.EqualTo("testpassword"));
+            Assert.That(target.ProxyDomain, Is.EqualTo("testdomain"));
         }
     }
 }

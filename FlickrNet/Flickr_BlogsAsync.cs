@@ -19,7 +19,7 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.blogs.getList");
-            GetResponseAsync<BlogCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.blogs.getServices");
 
-            GetResponseAsync<BlogServiceCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FlickrNet
                 parameters.Add("blog_password", blogPassword);
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

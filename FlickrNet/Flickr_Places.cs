@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -17,7 +14,7 @@ namespace FlickrNet
         {
             if (query == null)
             {
-                throw new ArgumentNullException("query");
+                throw new ArgumentNullException(nameof(query));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -94,7 +91,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <returns>The <see cref="Place"/> record for the place/woe ID.</returns>
-        public PlaceInfo PlacesGetInfo(string placeId, string woeId)
+        public PlaceInfo PlacesGetInfo(string? placeId, string? woeId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.getInfo");
@@ -194,7 +191,7 @@ namespace FlickrNet
         /// <param name="placeId">Limit your query to only those top places belonging to a specific Flickr Places identifier.</param>
         /// <param name="woeId">Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier.</param>
         /// <returns></returns>
-        public PlaceCollection PlacesGetTopPlacesList(PlaceType placeType, string placeId, string woeId)
+        public PlaceCollection PlacesGetTopPlacesList(PlaceType placeType, string? placeId, string? woeId)
         {
             return PlacesGetTopPlacesList(placeType, DateTime.MinValue, placeId, woeId);
         }
@@ -219,7 +216,7 @@ namespace FlickrNet
         /// <param name="placeId">Limit your query to only those top places belonging to a specific Flickr Places identifier.</param>
         /// <param name="woeId">Limit your query to only those top places belonging to a specific Where on Earth (WOE) identifier.</param>
         /// <returns></returns>
-        public PlaceCollection PlacesGetTopPlacesList(PlaceType placeType, DateTime date, string placeId, string woeId)
+        public PlaceCollection PlacesGetTopPlacesList(PlaceType placeType, DateTime date, string? placeId, string? woeId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.getTopPlacesList");
@@ -261,7 +258,7 @@ namespace FlickrNet
         /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters.</param>
         /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. </param>
         /// <returns>The list of places of that type.</returns>
-        public PlaceCollection PlacesPlacesForUser(PlaceType placeType, string woeId, string placeId)
+        public PlaceCollection PlacesPlacesForUser(PlaceType placeType, string? woeId, string? placeId)
         {
             return PlacesPlacesForUser(placeType, woeId, placeId, 0, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
         }
@@ -282,7 +279,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. </param>
         /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned. </param>
         /// <returns>The list of places of that type.</returns>
-        public PlaceCollection PlacesPlacesForUser(PlaceType placeType, string woeId, string placeId, int threshold,
+        public PlaceCollection PlacesPlacesForUser(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                    DateTime minUploadDate, DateTime maxUploadDate, DateTime minTakenDate,
                                                    DateTime maxTakenDate)
         {
@@ -348,7 +345,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <returns></returns>
-        public PlaceCollection PlacesPlacesForTags(PlaceType placeType, string woeId, string placeId, int threshold,
+        public PlaceCollection PlacesPlacesForTags(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                    string[] tags, TagMode tagMode, string[] machineTags,
                                                    MachineTagMode machineTagMode, DateTime minUploadDate,
                                                    DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate)
@@ -429,7 +426,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <returns></returns>
-        public PlaceCollection PlacesPlacesForContacts(PlaceType placeType, string woeId, string placeId, int threshold,
+        public PlaceCollection PlacesPlacesForContacts(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                        ContactSearch contactType, DateTime minUploadDate,
                                                        DateTime maxUploadDate, DateTime minTakenDate,
                                                        DateTime maxTakenDate)
@@ -491,7 +488,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. </param>
         /// <param name="boundaryBox">The boundary box to search for places in.</param>
         /// <returns></returns>
-        public PlaceCollection PlacesPlacesForBoundingBox(PlaceType placeType, string woeId, string placeId, BoundaryBox boundaryBox)
+        public PlaceCollection PlacesPlacesForBoundingBox(PlaceType placeType, string? woeId, string? placeId, BoundaryBox boundaryBox)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.placesForBoundingBox");
@@ -516,12 +513,12 @@ namespace FlickrNet
         /// <summary>
         /// Find Flickr Places information by Place ID.
         ///
-        /// This method has been deprecated. It won't be removed but you should use <see cref="Flickr.PlacesGetInfo(string, string)"/> instead.
+        /// This method has been deprecated. It won't be removed but you should use <see cref="PlacesGetInfo(string, string)"/> instead.
         /// </summary>
         /// <param name="placeId">A Flickr Places ID.</param>
         /// <returns></returns>
         [Obsolete("This method is deprecated. Please use Flickr.PlacesGetInfo instead.")]
-        public PlaceInfo PlacesResolvePlaceId(string placeId)
+        public PlaceInfo PlacesResolvePlaceId(string? placeId)
         {
             return PlacesGetInfo(placeId, null);
         }
@@ -529,7 +526,7 @@ namespace FlickrNet
         /// <summary>
         /// Find Flickr Places information by Place URL.
         ///
-        /// This method has been deprecated. It won't be removed but you should use <see cref="Flickr.PlacesGetInfoByUrl(string)"/> instead.
+        /// This method has been deprecated. It won't be removed but you should use <see cref="PlacesGetInfoByUrl(string)"/> instead.
         /// </summary>
         /// <param name="url">A Flickr Places URL.</param>
         /// <returns></returns>
@@ -545,7 +542,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places identifier to use to filter photo clusters. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where on Earth identifier to use to filter photo clusters. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <returns></returns>
-        public TagCollection PlacesTagsForPlace(string placeId, string woeId)
+        public TagCollection PlacesTagsForPlace(string? placeId, string? woeId)
         {
             return PlacesTagsForPlace(placeId, woeId, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
         }
@@ -560,7 +557,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned.</param>
         /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned.</param>
         /// <returns></returns>
-        public TagCollection PlacesTagsForPlace(string placeId, string woeId, DateTime minUploadDate, DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate)
+        public TagCollection PlacesTagsForPlace(string? placeId, string? woeId, DateTime minUploadDate, DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.tagsForPlace");

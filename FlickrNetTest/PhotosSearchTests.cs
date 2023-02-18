@@ -14,13 +14,13 @@ namespace FlickrNetTest
             var o = new PhotoSearchOptions { Tags = "Test" };
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsTrue(photos.Total > 0, "Total Photos should be greater than zero.");
-            Assert.IsTrue(photos.Pages > 0, "Pages should be greaters than zero.");
-            Assert.AreEqual(100, photos.PerPage, "PhotosPerPage should be 100.");
-            Assert.AreEqual(1, photos.Page, "Page should be 1.");
+            Assert.That(photos.Total, Is.GreaterThan(0), "Total Photos should be greater than zero.");
+            Assert.That(photos.Pages, Is.GreaterThan(0), "Pages should be greaters than zero.");
+            Assert.That(photos.PerPage, Is.EqualTo(100), "PhotosPerPage should be 100.");
+            Assert.That(photos.Page, Is.EqualTo(1), "Page should be 1.");
 
-            Assert.IsTrue(photos.Count > 0, "Photos.Count should be greater than 0.");
-            Assert.AreEqual(photos.PerPage, photos.Count);
+            Assert.That(photos, Is.Not.Empty, "Photos.Count should be greater than 0.");
+            Assert.That(photos, Has.Count.EqualTo(photos.PerPage));
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace FlickrNetTest
             var o = new PhotoSearchOptions { Tags = "Test", PerPage = 5 };
             PhotoCollection photos = f.PhotosSearch(o);
 
-            Assert.AreEqual(5, photos.PerPage, "PerPage should equal 5.");
+            Assert.That(photos.PerPage, Is.EqualTo(5), "PerPage should equal 5.");
         }
 
         [Test]
@@ -42,8 +42,8 @@ namespace FlickrNetTest
 
             PhotoCollection p = AuthInstance.PhotosSearch(o);
 
-            Assert.IsTrue(p.Count > 1, "Should have returned more than 1 result returned. Count = " + p.Count);
-            Assert.IsTrue(p.Count < 100, "Should be less than 100 results returned. Count = " + p.Count);
+            Assert.That(p, Has.Count.GreaterThan(1), "Should have returned more than 1 result returned. Count = " + p.Count);
+            Assert.That(p, Has.Count.LessThan(100), "Should be less than 100 results returned. Count = " + p.Count);
         }
 
         [Test, Ignore("Currently 'Camera' searches are not working.")]
@@ -60,8 +60,8 @@ namespace FlickrNetTest
 
             var ps = AuthInstance.PhotosSearch(o);
 
-            Assert.IsNotNull(ps);
-            Assert.AreNotEqual(0, ps.Count);
+            Assert.That(ps, Is.Not.Null);
+            Assert.That(ps, Is.Not.Empty);
         }
 
         [Test]
@@ -75,8 +75,8 @@ namespace FlickrNetTest
 
             var ps = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(ps);
-            Assert.AreNotEqual(0, ps.Count);
+            Assert.That(ps, Is.Not.Null);
+            Assert.That(ps, Is.Not.Empty);
         }
 
         [Test]
@@ -85,12 +85,12 @@ namespace FlickrNetTest
             var o = new PhotoSearchOptions { PerPage = 10, Tags = "Test" };
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsTrue(photos.Total > 0, "TotalPhotos should be greater than 0.");
-            Assert.IsTrue(photos.Pages > 0, "TotalPages should be greater than 0.");
-            Assert.AreEqual(10, photos.PerPage, "PhotosPerPage should be 10.");
-            Assert.AreEqual(1, photos.Page, "PageNumber should be 1.");
-            Assert.AreEqual(10, photos.Count, "Count should be 10.");
-            Assert.AreEqual(photos.PerPage, photos.Count);
+            Assert.That(photos.Total, Is.GreaterThan(0), "TotalPhotos should be greater than 0.");
+            Assert.That(photos.Pages, Is.GreaterThan(0), "TotalPages should be greater than 0.");
+            Assert.That(photos.PerPage, Is.EqualTo(10), "PhotosPerPage should be 10.");
+            Assert.That(photos.Page, Is.EqualTo(1), "PageNumber should be 1.");
+            Assert.That(photos, Has.Count.EqualTo(10), "Count should be 10.");
+            Assert.That(photos, Has.Count.EqualTo(photos.PerPage));
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.AreEqual(TestData.TestUserId, photo.UserId);
+                Assert.That(photo.UserId, Is.EqualTo(TestData.TestUserId));
             }
         }
 
@@ -135,8 +135,8 @@ namespace FlickrNetTest
 
             for (var i = 1; i < p.Count; i++)
             {
-                Assert.AreNotEqual(default(DateTime), p[i].DateTaken);
-                Assert.IsTrue(p[i].DateTaken >= p[i - 1].DateTaken, "Date taken should increase");
+                Assert.That(p[i].DateTaken, Is.Not.EqualTo(default(DateTime)));
+                Assert.That(p[i].DateTaken, Is.GreaterThanOrEqualTo(p[i - 1].DateTaken), "Date taken should increase");
             }
         }
 
@@ -155,8 +155,8 @@ namespace FlickrNetTest
 
             for (var i = 1; i < p.Count; i++)
             {
-                Assert.AreNotEqual(default(DateTime), p[i].DateTaken);
-                Assert.IsTrue(p[i].DateTaken <= p[i - 1].DateTaken, "Date taken should decrease.");
+                Assert.That(p[i].DateTaken, Is.Not.EqualTo(default(DateTime)));
+                Assert.That(p[i].DateTaken, Is.LessThanOrEqualTo(p[i - 1].DateTaken), "Date taken should decrease.");
             }
         }
 
@@ -175,8 +175,8 @@ namespace FlickrNetTest
 
             for (var i = 1; i < p.Count; i++)
             {
-                Assert.AreNotEqual(default(DateTime), p[i].DateUploaded);
-                Assert.IsTrue(p[i].DateUploaded >= p[i - 1].DateUploaded, "Date taken should increase.");
+                Assert.That(p[i].DateUploaded, Is.Not.EqualTo(default(DateTime)));
+                Assert.That(p[i].DateUploaded, Is.GreaterThanOrEqualTo(p[i - 1].DateUploaded), "Date taken should increase.");
             }
         }
 
@@ -195,8 +195,8 @@ namespace FlickrNetTest
 
             for (int i = 1; i < p.Count; i++)
             {
-                Assert.AreNotEqual(default(DateTime), p[i].DateUploaded);
-                Assert.IsTrue(p[i].DateUploaded <= p[i - 1].DateUploaded, "Date taken should increase.");
+                Assert.That(p[i].DateUploaded, Is.Not.EqualTo(default(DateTime)));
+                Assert.That(p[i].DateUploaded, Is.LessThanOrEqualTo(p[i - 1].DateUploaded), "Date taken should increase.");
             }
         }
 
@@ -214,7 +214,7 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.IsNotNull(photo.License);
+                Assert.That(photo.License, Is.Not.Null);
             }
         }
 
@@ -233,7 +233,7 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.AreEqual(LicenseType.AttributionNoDerivativesCC, photo.License);
+                Assert.That(photo.License, Is.EqualTo(LicenseType.AttributionNoDerivativesCC));
             }
         }
 
@@ -277,7 +277,7 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.AreEqual(LicenseType.NoKnownCopyrightRestrictions, photo.License);
+                Assert.That(photo.License, Is.EqualTo(LicenseType.NoKnownCopyrightRestrictions));
             }
         }
 
@@ -288,14 +288,14 @@ namespace FlickrNetTest
 
             PhotoCollection photos = Instance.PhotosSearch(o);
 
-            Assert.AreEqual(10, photos.PerPage, "Per page is not 10");
+            Assert.That(photos.PerPage, Is.EqualTo(10), "Per page is not 10");
 
             o.PerPage = 50;
             photos = Instance.PhotosSearch(o);
-            Assert.AreEqual(50, photos.PerPage, "Per page has not changed?");
+            Assert.That(photos.PerPage, Is.EqualTo(50), "Per page has not changed?");
 
             photos = Instance.PhotosSearch(o);
-            Assert.AreEqual(50, photos.PerPage, "Per page has changed!");
+            Assert.That(photos.PerPage, Is.EqualTo(50), "Per page has changed!");
         }
 
         [Test]
@@ -305,7 +305,7 @@ namespace FlickrNetTest
 
             PhotoCollection photos = Instance.PhotosSearch(o);
 
-            Assert.AreEqual(3, photos.Page);
+            Assert.That(photos.Page, Is.EqualTo(3));
         }
 
         [Test]
@@ -319,8 +319,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Count should not be zero.");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Count should not be zero.");
 
             foreach (var photo in photos)
             {
@@ -344,8 +344,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.IsNotEmpty(photos);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
         }
 
         [Test]
@@ -363,7 +363,7 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.AreEqual(LicenseType.NoKnownCopyrightRestrictions, photo.License);
+                Assert.That(photo.License, Is.EqualTo(LicenseType.NoKnownCopyrightRestrictions));
             }
         }
 
@@ -379,7 +379,7 @@ namespace FlickrNetTest
             };
 
             var result = Instance.PhotosSearch(o);
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
 
         [Test]
@@ -393,38 +393,38 @@ namespace FlickrNetTest
             };
             PhotoCollection photos = Instance.PhotosSearch(o);
 
-            Assert.AreEqual(100, photos.PerPage);
-            Assert.AreEqual(1, photos.Page);
+            Assert.That(photos.PerPage, Is.EqualTo(100));
+            Assert.That(photos.Page, Is.EqualTo(1));
 
-            Assert.AreNotEqual(0, photos.Count, "PhotoCollection.Count should not be zero.");
+            Assert.That(photos, Is.Not.Empty, "PhotoCollection.Count should not be zero.");
 
-            Assert.AreEqual("3547139066", photos[0].PhotoId);
-            Assert.AreEqual("41888973@N00", photos[0].UserId);
-            Assert.AreEqual("bf4e11b1cb", photos[0].Secret);
-            Assert.AreEqual("3311", photos[0].Server);
-            Assert.AreEqual("Apple Store!", photos[0].Title);
-            Assert.AreEqual("4", photos[0].Farm);
-            Assert.AreEqual(false, photos[0].IsFamily);
-            Assert.AreEqual(true, photos[0].IsPublic);
-            Assert.AreEqual(false, photos[0].IsFriend);
+            Assert.That(photos[0].PhotoId, Is.EqualTo("3547139066"));
+            Assert.That(photos[0].UserId, Is.EqualTo("41888973@N00"));
+            Assert.That(photos[0].Secret, Is.EqualTo("bf4e11b1cb"));
+            Assert.That(photos[0].Server, Is.EqualTo("3311"));
+            Assert.That(photos[0].Title, Is.EqualTo("Apple Store!"));
+            Assert.That(photos[0].Farm, Is.EqualTo("4"));
+            Assert.That(photos[0].IsFamily, Is.EqualTo(false));
+            Assert.That(photos[0].IsPublic, Is.EqualTo(true));
+            Assert.That(photos[0].IsFriend, Is.EqualTo(false));
 
             var dateTaken = new DateTime(2009, 5, 18, 4, 21, 46);
             var dateUploaded = new DateTime(2009, 5, 19, 21, 21, 46);
-            Assert.IsTrue(photos[0].LastUpdated > dateTaken, "Last updated date was not correct.");
-            Assert.AreEqual(dateTaken, photos[0].DateTaken, "Date taken date was not correct.");
-            Assert.AreEqual(dateUploaded, photos[0].DateUploaded, "Date uploaded date was not correct.");
+            Assert.That(photos[0].LastUpdated, Is.GreaterThan(dateTaken), "Last updated date was not correct.");
+            Assert.That(photos[0].DateTaken, Is.EqualTo(dateTaken), "Date taken date was not correct.");
+            Assert.That(photos[0].DateUploaded, Is.EqualTo(dateUploaded), "Date uploaded date was not correct.");
 
-            Assert.AreEqual("jpg", photos[0].OriginalFormat, "OriginalFormat should be JPG");
-            Assert.AreEqual("JjXZOYpUV7IbeGVOUQ", photos[0].PlaceId, "PlaceID not set correctly.");
+            Assert.That(photos[0].OriginalFormat, Is.EqualTo("jpg"), "OriginalFormat should be JPG");
+            Assert.That(photos[0].PlaceId, Is.EqualTo("JjXZOYpUV7IbeGVOUQ"), "PlaceID not set correctly.");
 
-            Assert.IsNotNull(photos[0].Description, "Description should not be null.");
+            Assert.That(photos[0].Description, Is.Not.Null, "Description should not be null.");
 
             foreach (Photo photo in photos)
             {
-                Assert.IsNotNull(photo.PhotoId);
-                Assert.IsTrue(photo.IsPublic);
-                Assert.IsFalse(photo.IsFamily);
-                Assert.IsFalse(photo.IsFriend);
+                Assert.That(photo.PhotoId, Is.Not.Null);
+                Assert.That(photo.IsPublic, Is.True);
+                Assert.That(photo.IsFamily, Is.False);
+                Assert.That(photo.IsFriend, Is.False);
             }
         }
 
@@ -443,8 +443,8 @@ namespace FlickrNetTest
 
             foreach (Photo photo in photos)
             {
-                Assert.IsTrue(photo.Tags.Count > 0, "Should be some tags");
-                Assert.IsTrue(photo.Tags.Contains("test"), "At least one should be 'test'");
+                Assert.That(photo.Tags, Is.Not.Empty, "Should be some tags");
+                Assert.That(photo.Tags, Does.Contain("test"), "At least one should be 'test'");
             }
         }
 
@@ -483,8 +483,8 @@ namespace FlickrNetTest
 
             int totalPhotos3 = photos.Total;
 
-            Assert.AreEqual(totalPhotos1, totalPhotos2, "Total Photos 1 & 2 should be equal");
-            Assert.AreEqual(totalPhotos2, totalPhotos3, "Total Photos 2 & 3 should be equal");
+            Assert.That(totalPhotos2, Is.EqualTo(totalPhotos1), "Total Photos 1 & 2 should be equal");
+            Assert.That(totalPhotos3, Is.EqualTo(totalPhotos2), "Total Photos 2 & 3 should be equal");
         }
 
         [Test]
@@ -512,9 +512,9 @@ namespace FlickrNetTest
                     continue;
                 }
 
-                Assert.IsTrue(p.Latitude > b.MinimumLatitude && b.MaximumLatitude > p.Latitude,
+                Assert.That(p.Latitude > b.MinimumLatitude && b.MaximumLatitude > p.Latitude, Is.True,
                               "Latitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Latitude, b.MinimumLatitude, b.MaximumLatitude, p.WebUrl);
-                Assert.IsTrue(p.Longitude > b.MinimumLongitude && b.MaximumLongitude > p.Longitude,
+                Assert.That(p.Longitude > b.MinimumLongitude && b.MaximumLongitude > p.Longitude, Is.True,
                               "Longitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Longitude, b.MinimumLongitude, b.MaximumLongitude, p.WebUrl);
             }
         }
@@ -522,7 +522,7 @@ namespace FlickrNetTest
         [Test]
         public void PhotosSearchLatCultureTest()
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("nb-NO");
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("nb-NO");
 
             var o = new PhotoSearchOptions { HasGeo = true };
             o.Extras |= PhotoSearchExtras.Geo;
@@ -532,7 +532,7 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
 
@@ -550,9 +550,9 @@ namespace FlickrNetTest
 
             foreach (Photo p in photos)
             {
-                Assert.IsNotNull(p.Tags, "Tag Collection should not be null");
-                Assert.IsTrue(p.Tags.Count > 0, "Should be more than one tag for all photos");
-                Assert.IsNotNull(p.Tags[0]);
+                Assert.That(p.Tags, Is.Not.Null, "Tag Collection should not be null");
+                Assert.That(p.Tags, Is.Not.Empty, "Should be more than one tag for all photos");
+                Assert.That(p.Tags[0], Is.Not.Null);
             }
         }
 
@@ -569,10 +569,10 @@ namespace FlickrNetTest
 
             foreach (Photo p in photos)
             {
-                Assert.IsNotNull(p.Tags, "Tag Collection should not be null");
-                Assert.IsTrue(p.Tags.Count > 0, "Should be more than one tag for all photos");
-                Assert.IsTrue(p.Tags.Contains("art"), "Should contain 'art' tag.");
-                Assert.IsTrue(p.Tags.Contains("collection"), "Should contain 'collection' tag.");
+                Assert.That(p.Tags, Is.Not.Null, "Tag Collection should not be null");
+                Assert.That(p.Tags, Is.Not.Empty, "Should be more than one tag for all photos");
+                Assert.That(p.Tags, Does.Contain("art"), "Should contain 'art' tag.");
+                Assert.That(p.Tags, Does.Contain("collection"), "Should contain 'collection' tag.");
             }
         }
 
@@ -588,9 +588,9 @@ namespace FlickrNetTest
 
             var ps = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(ps, "Photos should not be null");
-            Assert.AreEqual(500, ps.PerPage, "PhotosPerPage should be 500");
-            Assert.AreNotEqual(0, ps.Count, "Count should be greater than zero.");
+            Assert.That(ps, Is.Not.Null, "Photos should not be null");
+            Assert.That(ps.PerPage, Is.EqualTo(500), "PhotosPerPage should be 500");
+            Assert.That(ps, Is.Not.Empty, "Count should be greater than zero.");
         }
 
         [Test]
@@ -602,12 +602,12 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty);
 
             foreach (var photo in photos)
             {
-                Assert.IsNotNull(photo.PhotoId);
+                Assert.That(photo.PhotoId, Is.Not.Null);
             }
         }
 
@@ -628,7 +628,7 @@ namespace FlickrNetTest
 
             foreach (var p in col)
             {
-                Assert.AreEqual(GeoContext.Outdoors, p.GeoContext);
+                Assert.That(p.GeoContext, Is.EqualTo(GeoContext.Outdoors));
             }
         }
 
@@ -647,14 +647,14 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "No photos returned by search.");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "No photos returned by search.");
 
             foreach (var photo in photos)
             {
-                Assert.IsNotNull(photo.PhotoId);
-                Assert.AreNotEqual(0, photo.Longitude, "Longitude should not be zero.");
-                Assert.AreNotEqual(0, photo.Latitude, "Latitude should not be zero.");
+                Assert.That(photo.PhotoId, Is.Not.Null);
+                Assert.That(photo.Longitude, Is.Not.EqualTo(0), "Longitude should not be zero.");
+                Assert.That(photo.Latitude, Is.Not.EqualTo(0), "Latitude should not be zero.");
             }
         }
 
@@ -678,22 +678,22 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "No photos returned by search.");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "No photos returned by search.");
 
             foreach (var photo in photos)
             {
-                Assert.IsNotNull(photo.PhotoId);
-                Assert.AreNotEqual(0, photo.Longitude, "Longitude should not be zero.");
-                Assert.AreNotEqual(0, photo.Latitude, "Latitude should not be zero.");
+                Assert.That(photo.PhotoId, Is.Not.Null);
+                Assert.That(photo.Longitude, Is.Not.EqualTo(0), "Longitude should not be zero.");
+                Assert.That(photo.Latitude, Is.Not.EqualTo(0), "Latitude should not be zero.");
 
                 LogOnError("Photo ID " + photo.PhotoId,
                            string.Format("Lat={0}, Long={1}", photo.Latitude, photo.Longitude));
 
                 // Note: +/-1 is not an exact match to 5.4km, but anything outside of these bounds is definitely wrong.
-                Assert.IsTrue(photo.Latitude > lat - 1 && photo.Latitude < lat + 1,
+                Assert.That(photo.Latitude > lat - 1 && photo.Latitude < lat + 1, Is.True,
                               "Latitude not within acceptable range.");
-                Assert.IsTrue(photo.Longitude > lon - 1 && photo.Longitude < lon + 1,
+                Assert.That(photo.Longitude > lon - 1 && photo.Longitude < lon + 1, Is.True,
                               "Latitude not within acceptable range.");
 
             }
@@ -723,8 +723,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
-            Assert.AreEqual(0, photos.Count);
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Empty);
 
         }
 
@@ -734,7 +734,7 @@ namespace FlickrNetTest
             var o = new PhotoSearchOptions { UserId = TestData.TestUserId, InGallery = true, Tags = "art" };
             var photos = Instance.PhotosSearch(o);
 
-            Assert.AreEqual(1, photos.Count, "Only one photo should have been returned.");
+            Assert.That(photos, Has.Count.EqualTo(1), "Only one photo should have been returned.");
         }
 
         [Test]
@@ -751,7 +751,7 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -762,7 +762,7 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.AreNotEqual(0, photos.Count, "Search should return some results.");
+            Assert.That(photos, Is.Not.Empty, "Search should return some results.");
         }
 
         [Test]
@@ -798,7 +798,7 @@ namespace FlickrNetTest
 
             var photos = AuthInstance.PhotosSearch(o);
 
-            Assert.AreNotEqual(0, photos.Count, "Search should return some results.");
+            Assert.That(photos, Is.Not.Empty, "Search should return some results.");
         }
 
         [Test]
@@ -813,15 +813,15 @@ namespace FlickrNetTest
             var photos = Instance.PhotosSearch(o);
             foreach (var photo in photos)
             {
-                Assert.IsTrue(photo.Rotation.HasValue, "Rotation should be set.");
+                Assert.That(photo.Rotation.HasValue, Is.True, "Rotation should be set.");
                 if (photo.PhotoId == "6861439677")
                 {
-                    Assert.AreEqual(90, photo.Rotation, "Rotation should be 90 for this photo.");
+                    Assert.That(photo.Rotation, Is.EqualTo(90), "Rotation should be 90 for this photo.");
                 }
 
                 if (photo.PhotoId == "6790104907")
                 {
-                    Assert.AreEqual(0, photo.Rotation, "Rotation should be 0 for this photo.");
+                    Assert.That(photo.Rotation, Is.EqualTo(0), "Rotation should be 0 for this photo.");
                 }
             }
         }
@@ -838,12 +838,12 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos, "PhotosSearch should not return a null instance.");
-            Assert.IsTrue(photos.Any(), "PhotoSearch should have returned some photos.");
-            Assert.IsTrue(
+            Assert.That(photos, Is.Not.Null, "PhotosSearch should not return a null instance.");
+            Assert.That(photos.Any(), Is.True, "PhotoSearch should have returned some photos.");
+            Assert.That(
                 photos.Any(
                     p =>
-                    !string.IsNullOrEmpty(p.Large1600Url) && p.Large1600Height.HasValue && p.Large1600Width.HasValue),
+                    !string.IsNullOrEmpty(p.Large1600Url) && p.Large1600Height.HasValue && p.Large1600Width.HasValue), Is.True,
                 "At least one photo should have a large1600 image url and height and width.");
         }
 
@@ -859,12 +859,12 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos, "PhotosSearch should not return a null instance.");
-            Assert.IsTrue(photos.Any(), "PhotoSearch should have returned some photos.");
-            Assert.IsTrue(
+            Assert.That(photos, Is.Not.Null, "PhotosSearch should not return a null instance.");
+            Assert.That(photos.Any(), Is.True, "PhotoSearch should have returned some photos.");
+            Assert.That(
                 photos.Any(
                     p =>
-                    !string.IsNullOrEmpty(p.Large2048Url) && p.Large2048Height.HasValue && p.Large2048Width.HasValue));
+                    !string.IsNullOrEmpty(p.Large2048Url) && p.Large2048Height.HasValue && p.Large2048Width.HasValue), Is.True);
         }
 
         [Test]
@@ -884,19 +884,19 @@ namespace FlickrNetTest
 
             var photos = AuthInstance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos, "PhotosSearch should not return a null instance.");
-            Assert.IsTrue(photos.Any(), "PhotoSearch should have returned some photos.");
-            Assert.IsTrue(photos.All(p => p.UserId != TestData.TestUserId), "None of the photos should be mine.");
-            Assert.IsTrue(photos.All(p => contacts.Contains(p.UserId)), "UserID not found in list of contacts.");
+            Assert.That(photos, Is.Not.Null, "PhotosSearch should not return a null instance.");
+            Assert.That(photos.Any(), Is.True, "PhotoSearch should have returned some photos.");
+            Assert.That(photos.All(p => p.UserId != TestData.TestUserId), Is.True, "None of the photos should be mine.");
+            Assert.That(photos.All(p => contacts.Contains(p.UserId)), Is.True, "UserID not found in list of contacts.");
 
             // Retest with user id specified explicitly
             o.UserId = TestData.TestUserId;
             photos = AuthInstance.PhotosSearch(o);
 
-            Assert.IsNotNull(photos, "PhotosSearch should not return a null instance.");
-            Assert.IsTrue(photos.Any(), "PhotoSearch should have returned some photos.");
-            Assert.IsTrue(photos.All(p => p.UserId != TestData.TestUserId), "None of the photos should be mine.");
-            Assert.IsTrue(photos.All(p => contacts.Contains(p.UserId)), "UserID not found in list of contacts.");
+            Assert.That(photos, Is.Not.Null, "PhotosSearch should not return a null instance.");
+            Assert.That(photos.Any(), Is.True, "PhotoSearch should have returned some photos.");
+            Assert.That(photos.All(p => p.UserId != TestData.TestUserId), Is.True, "None of the photos should be mine.");
+            Assert.That(photos.All(p => contacts.Contains(p.UserId)), Is.True, "UserID not found in list of contacts.");
         }
 
         [Test]
@@ -906,7 +906,7 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(new PhotoSearchOptions { Username = "Jesus Solana" });
 
-            Assert.AreEqual(user.UserId, photos.First().UserId);
+            Assert.That(photos.First().UserId, Is.EqualTo(user.UserId));
         }
 
         [Test]
@@ -927,7 +927,7 @@ namespace FlickrNetTest
                 Console.WriteLine(photo.WebUrl);
             }
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -948,7 +948,7 @@ namespace FlickrNetTest
                 Console.WriteLine(photo.WebUrl);
             }
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -969,7 +969,7 @@ namespace FlickrNetTest
                 Console.WriteLine(photo.WebUrl);
             }
 
-            Assert.IsNotNull(photos);
+            Assert.That(photos, Is.Not.Null);
         }
 
         [Test]
@@ -992,7 +992,7 @@ namespace FlickrNetTest
 
             var nextPhotos = Instance.PhotosSearch(options);
 
-            Assert.IsFalse(nextPhotos.Any(p => p.UserId == firstUserId), "Should not be any photos for user {0}", firstUserId);
+            Assert.That(nextPhotos.Any(p => p.UserId == firstUserId), Is.False, "Should not be any photos for user {0}", firstUserId);
         }
 
         [Test]
@@ -1007,8 +1007,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(options);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned some photos for 'Big Ben'");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned some photos for 'Big Ben'");
         }
 
         [Test]
@@ -1025,8 +1025,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(options);
 
-            Assert.IsNotNull(photos);
-            Assert.AreNotEqual(0, photos.Count, "Should have returned some photos for 'Big Ben'");
+            Assert.That(photos, Is.Not.Null);
+            Assert.That(photos, Is.Not.Empty, "Should have returned some photos for 'Big Ben'");
         }
 
         [Test]
@@ -1040,8 +1040,8 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(options);
 
-            Assert.IsFalse(photos.Any(p => p.CountFaves == null), "Should not have any null CountFaves");
-            Assert.IsFalse(photos.Any(p => p.CountComments == null), "Should not have any null CountComments");
+            Assert.That(photos.Any(p => p.CountFaves == null), Is.False, "Should not have any null CountFaves");
+            Assert.That(photos.Any(p => p.CountComments == null), Is.False, "Should not have any null CountComments");
         }
 
         [Test]
@@ -1057,4 +1057,4 @@ namespace FlickrNetTest
         }
     }
 }
-// ReSharper restore SuggestUseVarKeywordEvident
+

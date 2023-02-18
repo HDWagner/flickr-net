@@ -18,12 +18,12 @@ namespace FlickrNetTest
             Flickr f = AuthInstance;
             GroupCategory cat = f.GroupsBrowse();
 
-            Assert.IsNotNull(cat, "GroupCategory should not be null.");
-            Assert.AreEqual("/", cat.CategoryName, "CategoryName should be '/'.");
-            Assert.AreEqual("/", cat.Path, "Path should be '/'.");
-            Assert.AreEqual("", cat.PathIds, "PathIds should be empty string.");
-            Assert.AreEqual(0, cat.Subcategories.Count, "No sub categories should be returned.");
-            Assert.AreEqual(0, cat.Groups.Count, "No groups should be returned.");
+            Assert.That(cat, Is.Not.Null, "GroupCategory should not be null.");
+            Assert.That(cat.CategoryName, Is.EqualTo("/"), "CategoryName should be '/'.");
+            Assert.That(cat.Path, Is.EqualTo("/"), "Path should be '/'.");
+            Assert.That(cat.PathIds, Is.EqualTo(""), "PathIds should be empty string.");
+            Assert.That(cat.Subcategories, Is.Empty, "No sub categories should be returned.");
+            Assert.That(cat.Groups, Is.Empty, "No groups should be returned.");
         }
 
         [Test]
@@ -33,16 +33,16 @@ namespace FlickrNetTest
 
             GroupSearchResultCollection results = f.GroupsSearch("Buses");
 
-            Assert.IsNotNull(results, "GroupSearchResults should not be null.");
-            Assert.AreNotEqual(0, results.Count, "Count should not be zero.");
-            Assert.AreNotEqual(0, results.Total, "Total should not be zero.");
-            Assert.AreNotEqual(0, results.PerPage, "PerPage should not be zero.");
-            Assert.AreEqual(1, results.Page, "Page should be 1.");
+            Assert.That(results, Is.Not.Null, "GroupSearchResults should not be null.");
+            Assert.That(results, Is.Not.Empty, "Count should not be zero.");
+            Assert.That(results.Total, Is.Not.EqualTo(0), "Total should not be zero.");
+            Assert.That(results.PerPage, Is.Not.EqualTo(0), "PerPage should not be zero.");
+            Assert.That(results.Page, Is.EqualTo(1), "Page should be 1.");
 
             foreach (GroupSearchResult result in results)
             {
-                Assert.IsNotNull(result.GroupId, "GroupId should not be null.");
-                Assert.IsNotNull(result.GroupName, "GroupName should not be null.");
+                Assert.That(result.GroupId, Is.Not.Null, "GroupId should not be null.");
+                Assert.That(result.GroupName, Is.Not.Null, "GroupName should not be null.");
             }
         }
 
@@ -53,20 +53,20 @@ namespace FlickrNetTest
 
             GroupFullInfo info = f.GroupsGetInfo(TestData.GroupId);
 
-            Assert.IsNotNull(info, "GroupFullInfo should not be null");
-            Assert.AreEqual(TestData.GroupId, info.GroupId);
-            Assert.AreEqual("The Lake District UK", info.GroupName);
+            Assert.That(info, Is.Not.Null, "GroupFullInfo should not be null");
+            Assert.That(info.GroupId, Is.EqualTo(TestData.GroupId));
+            Assert.That(info.GroupName, Is.EqualTo("The Lake District UK"));
 
-            Assert.AreEqual("5128", info.IconServer);
-            Assert.AreEqual("6", info.IconFarm);
+            Assert.That(info.IconServer, Is.EqualTo("5128"));
+            Assert.That(info.IconFarm, Is.EqualTo("6"));
 
-            Assert.AreEqual("https://farm6.staticflickr.com/5128/buddyicons/53837206@N00.jpg", info.GroupIconUrl);
+            Assert.That(info.GroupIconUrl, Is.EqualTo("https://farm6.staticflickr.com/5128/buddyicons/53837206@N00.jpg"));
 
-            Assert.AreEqual(2, info.ThrottleInfo.Count);
-            Assert.AreEqual(GroupThrottleMode.PerDay, info.ThrottleInfo.Mode);
+            Assert.That(info.ThrottleInfo.Count, Is.EqualTo(2));
+            Assert.That(info.ThrottleInfo.Mode, Is.EqualTo(GroupThrottleMode.PerDay));
 
-            Assert.IsTrue(info.Restrictions.PhotosAccepted, "PhotosAccepted should be true.");
-            Assert.IsFalse(info.Restrictions.VideosAccepted, "VideosAccepted should be false.");
+            Assert.That(info.Restrictions.PhotosAccepted, Is.True, "PhotosAccepted should be true.");
+            Assert.That(info.Restrictions.VideosAccepted, Is.False, "VideosAccepted should be false.");
         }
 
         [Test]
@@ -77,9 +77,9 @@ namespace FlickrNetTest
 
             GroupFullInfo info = f.GroupsGetInfo(groupId);
 
-            Assert.IsNotNull(info, "GroupFullInfo should not be null");
-            Assert.AreEqual("0", info.IconServer, "Icon Server should be zero");
-            Assert.AreEqual("https://www.flickr.com/images/buddyicon.jpg", info.GroupIconUrl);
+            Assert.That(info, Is.Not.Null, "GroupFullInfo should not be null");
+            Assert.That(info.IconServer, Is.EqualTo("0"), "Icon Server should be zero");
+            Assert.That(info.GroupIconUrl, Is.EqualTo("https://www.flickr.com/images/buddyicon.jpg"));
 
         }
 
@@ -90,12 +90,12 @@ namespace FlickrNetTest
         {
             var ms = AuthInstance.GroupsMembersGetList(TestData.GroupId);
 
-            Assert.IsNotNull(ms);
-            Assert.AreNotEqual(0, ms.Count, "Count should not be zero.");
-            Assert.AreNotEqual(0, ms.Total, "Total should not be zero.");
-            Assert.AreEqual(1, ms.Page, "Page should be one.");
-            Assert.AreNotEqual(0, ms.PerPage, "PerPage should not be zero.");
-            Assert.AreNotEqual(0, ms.Pages, "Pages should not be zero.");
+            Assert.That(ms, Is.Not.Null);
+            Assert.That(ms, Is.Not.Empty, "Count should not be zero.");
+            Assert.That(ms.Total, Is.Not.EqualTo(0), "Total should not be zero.");
+            Assert.That(ms.Page, Is.EqualTo(1), "Page should be one.");
+            Assert.That(ms.PerPage, Is.Not.EqualTo(0), "PerPage should not be zero.");
+            Assert.That(ms.Pages, Is.Not.EqualTo(0), "Pages should not be zero.");
 
         }
     }

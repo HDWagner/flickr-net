@@ -34,9 +34,9 @@ namespace FlickrNetTest
 
             ((IFlickrParsable) photos).Load(reader);
 
-            Assert.IsNotNull(photos, "Photos should not be null");
-            Assert.AreEqual(500, photos.Total, "Total photos should be 500");
-            Assert.AreEqual(2, photos.Count, "Should only contain 2 photo");
+            Assert.That(photos, Is.Not.Null, "Photos should not be null");
+            Assert.That(photos.Total, Is.EqualTo(500), "Total photos should be 500");
+            Assert.That(photos, Has.Count.EqualTo(2), "Should only contain 2 photo");
 
         }
     }

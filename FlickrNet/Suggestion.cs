@@ -61,7 +61,7 @@ namespace FlickrNet
         {
             if (reader == null)
             {
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
             }
 
             if (reader.LocalName != "suggestion") { UtilityMethods.CheckParsingException(reader); return; }

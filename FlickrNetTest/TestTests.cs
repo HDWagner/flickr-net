@@ -20,8 +20,8 @@ namespace FlickrNetTest
             parameters.Add("text", "Flowers");
             UnknownResponse response = f.TestGeneric("flickr.groups.search", parameters);
 
-            Assert.IsNotNull(response, "UnknownResponse should not be null.");
-            Assert.IsNotNull(response.ResponseXml, "ResponseXml should not be null.");
+            Assert.That(response, Is.Not.Null, "UnknownResponse should not be null.");
+            Assert.That(response.ResponseXml, Is.Not.Null, "ResponseXml should not be null.");
 
         }
 
@@ -34,8 +34,8 @@ namespace FlickrNetTest
 
             UnknownResponse response = f.TestGeneric("flickr.test.null", null);
 
-            Assert.IsNotNull(response, "UnknownResponse should not be null.");
-            Assert.IsNotNull(response.ResponseXml, "ResponseXml should not be null.");
+            Assert.That(response, Is.Not.Null, "UnknownResponse should not be null.");
+            Assert.That(response.ResponseXml, Is.Not.Null, "ResponseXml should not be null.");
         }
 
         [Test]
@@ -47,13 +47,13 @@ namespace FlickrNetTest
 
             Dictionary<string, string> returns = f.TestEcho(parameters);
 
-            Assert.IsNotNull(returns);
+            Assert.That(returns, Is.Not.Null);
 
             // Was 3, now 11 because of extra oauth parameter used by default.
-            Assert.AreEqual(11, returns.Count);
+            Assert.That(returns, Has.Count.EqualTo(11));
 
-            Assert.AreEqual("flickr.test.echo", returns["method"]);
-            Assert.AreEqual("testvalue", returns["test1"]);
+            Assert.That(returns["method"], Is.EqualTo("flickr.test.echo"));
+            Assert.That(returns["test1"], Is.EqualTo("testvalue"));
 
         }
     }

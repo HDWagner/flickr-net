@@ -26,13 +26,13 @@ namespace FlickrNetTest
         {
             var tags = AuthInstance.TagsGetListUserRaw();
 
-            Assert.AreNotEqual(0, tags.Count, "There should be one or more raw tags returned");
+            Assert.That(tags, Is.Not.Empty, "There should be one or more raw tags returned");
 
             foreach (RawTag tag in tags)
             {
-                Assert.IsNotNull(tag.CleanTag, "Clean tag should not be null");
-                Assert.IsTrue(tag.CleanTag.Length > 0, "Clean tag should not be empty string");
-                Assert.IsTrue(tag.RawTags.Count > 0, "Should be one or more raw tag for each clean tag");
+                Assert.That(tag.CleanTag, Is.Not.Null, "Clean tag should not be null");
+                Assert.That(tag.CleanTag, Is.Not.Empty, "Clean tag should not be empty string");
+                Assert.That(tag.RawTags, Is.Not.Empty, "Should be one or more raw tag for each clean tag");
             }
         }
 
@@ -43,13 +43,13 @@ namespace FlickrNetTest
         {
             TagCollection tags = AuthInstance.TagsGetListUserPopular();
 
-            Assert.IsNotNull(tags, "TagCollection should not be null.");
-            Assert.AreNotEqual(0, tags.Count, "TagCollection.Count should not be zero.");
+            Assert.That(tags, Is.Not.Null, "TagCollection should not be null.");
+            Assert.That(tags, Is.Not.Empty, "TagCollection.Count should not be zero.");
 
             foreach (Tag tag in tags)
             {
-                Assert.IsNotNull(tag.TagName, "Tag.TagName should not be null.");
-                Assert.AreNotEqual(0, tag.Count, "Tag.Count should not be zero.");
+                Assert.That(tag.TagName, Is.Not.Null, "Tag.TagName should not be null.");
+                Assert.That(tag.Count, Is.Not.EqualTo(0), "Tag.Count should not be zero.");
             }
         }
 
@@ -60,13 +60,13 @@ namespace FlickrNetTest
         {
             TagCollection tags = AuthInstance.TagsGetListUser();
 
-            Assert.IsNotNull(tags, "TagCollection should not be null.");
-            Assert.AreNotEqual(0, tags.Count, "TagCollection.Count should not be zero.");
+            Assert.That(tags, Is.Not.Null, "TagCollection should not be null.");
+            Assert.That(tags, Is.Not.Empty, "TagCollection.Count should not be zero.");
 
             foreach (Tag tag in tags)
             {
-                Assert.IsNotNull(tag.TagName, "Tag.TagName should not be null.");
-                Assert.AreEqual(0, tag.Count, "Tag.Count should be zero. Not ser for this method.");
+                Assert.That(tag.TagName, Is.Not.Null, "Tag.TagName should not be null.");
+                Assert.That(tag.Count, Is.EqualTo(0), "Tag.Count should be zero. Not ser for this method.");
             }
         }
 
@@ -75,15 +75,15 @@ namespace FlickrNetTest
         {
             var tags = Instance.TagsGetListPhoto(TestData.PhotoId);
 
-            Assert.IsNotNull(tags, "tags should not be null.");
-            Assert.AreNotEqual(0, tags.Count, "Length should be greater than zero.");
+            Assert.That(tags, Is.Not.Null, "tags should not be null.");
+            Assert.That(tags, Is.Not.Empty, "Length should be greater than zero.");
 
             foreach (var tag in tags)
             {
-                Assert.IsNotNull(tag.TagId, "TagId should not be null.");
-                Assert.IsNotNull(tag.TagText, "TagText should not be null.");
-                Assert.IsNotNull(tag.Raw, "Raw should not be null.");
-                Assert.IsNotNull(tag.IsMachineTag, "IsMachineTag should not be null.");
+                Assert.That(tag.TagId, Is.Not.Null, "TagId should not be null.");
+                Assert.That(tag.TagText, Is.Not.Null, "TagText should not be null.");
+                Assert.That(tag.Raw, Is.Not.Null, "Raw should not be null.");
+                Assert.That(tag.IsMachineTag, Is.Not.Null, "IsMachineTag should not be null.");
             }
 
         }
@@ -93,20 +93,20 @@ namespace FlickrNetTest
         {
             var col = Instance.TagsGetClusters("newcastle");
 
-            Assert.IsNotNull(col);
+            Assert.That(col, Is.Not.Null);
 
-            Assert.AreEqual(4, col.Count, "Count should be four.");
-            Assert.AreEqual(col.TotalClusters, col.Count);
-            Assert.AreEqual("newcastle", col.SourceTag);
+            Assert.That(col, Has.Count.EqualTo(4), "Count should be four.");
+            Assert.That(col, Has.Count.EqualTo(col.TotalClusters));
+            Assert.That(col.SourceTag, Is.EqualTo("newcastle"));
 
-            Assert.AreEqual("water-ocean-clouds", col[0].ClusterId);
+            Assert.That(col[0].ClusterId, Is.EqualTo("water-ocean-clouds"));
 
             foreach (var c in col)
             {
-                Assert.AreNotEqual(0, c.TotalTags, "TotalTags should not be zero.");
-                Assert.IsNotNull(c.Tags, "Tags should not be null.");
-                Assert.IsTrue(c.Tags.Count >= 3);
-                Assert.IsNotNull(c.ClusterId);
+                Assert.That(c.TotalTags, Is.Not.EqualTo(0), "TotalTags should not be zero.");
+                Assert.That(c.Tags, Is.Not.Null, "Tags should not be null.");
+                Assert.That(c.Tags, Has.Count.GreaterThanOrEqualTo(3));
+                Assert.That(c.ClusterId, Is.Not.Null);
             }
         }
 
@@ -119,8 +119,8 @@ namespace FlickrNetTest
             foreach (var c in col)
             {
                 var ps = f.TagsGetClusterPhotos(c);
-                Assert.IsNotNull(ps);
-                Assert.AreNotEqual(0, ps.Count);
+                Assert.That(ps, Is.Not.Null);
+                Assert.That(ps, Is.Not.Empty);
             }
         }
 
@@ -130,13 +130,13 @@ namespace FlickrNetTest
         {
             var col = Instance.TagsGetHotList();
 
-            Assert.AreNotEqual(0, col.Count, "Count should not be zero.");
+            Assert.That(col, Is.Not.Empty, "Count should not be zero.");
 
             foreach (var c in col)
             {
-                Assert.IsNotNull(c);
-                Assert.IsNotNull(c.Tag);
-                Assert.AreNotEqual(0, c.Score);
+                Assert.That(c, Is.Not.Null);
+                Assert.That(c.Tag, Is.Not.Null);
+                Assert.That(c.Score, Is.Not.EqualTo(0));
             }
         }
 
@@ -144,7 +144,7 @@ namespace FlickrNetTest
         public void TagsGetListUserTest()
         {
             var col = Instance.TagsGetListUser(TestData.TestUserId);
-            Assert.IsNotNull(col);
+            Assert.That(col, Is.Not.Null);
         }
 
         [Test]
@@ -156,9 +156,9 @@ namespace FlickrNetTest
 
             var tags = f.TagsGetMostFrequentlyUsed();
 
-            Assert.IsNotNull(tags);
+            Assert.That(tags, Is.Not.Null);
 
-            Assert.AreNotEqual(0, tags.Count);
+            Assert.That(tags, Is.Not.Empty);
         }
     }
 }

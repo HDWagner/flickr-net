@@ -23,11 +23,11 @@ namespace FlickrNetTest
 
             Flickr.CacheLocation = newLocation;
 
-            Assert.AreEqual(Flickr.CacheLocation, newLocation);
+            Assert.That(newLocation, Is.EqualTo(Flickr.CacheLocation));
 
             Flickr.CacheLocation = origLocation;
 
-            Assert.AreEqual(Flickr.CacheLocation, origLocation);
+            Assert.That(origLocation, Is.EqualTo(Flickr.CacheLocation));
 
         }
 
@@ -47,15 +47,15 @@ namespace FlickrNetTest
 
             string lastUrl = f.LastRequest;
 
-            ICacheItem item = Cache.Responses.Get(lastUrl, TimeSpan.MaxValue, false);
+            var item = Cache.Responses.Get(lastUrl, TimeSpan.MaxValue, false);
 
-            Assert.IsNotNull(item, "Cache should now contain the item.");
+            Assert.That(item, Is.Not.Null, "Cache should now contain the item.");
             Assert.IsInstanceOf<ResponseCacheItem>(item);
 
             var response = item as ResponseCacheItem;
 
-            Assert.IsNotNull(response.Url, "Url should not be null.");
-            Assert.AreEqual(lastUrl, response.Url.AbsoluteUri, "Url should match the url requested from the cache.");
+            Assert.That(response?.Url, Is.Not.Null, "Url should not be null.");
+            Assert.That(response?.Url.AbsoluteUri, Is.EqualTo(lastUrl), "Url should match the url requested from the cache.");
         }
     }
 }

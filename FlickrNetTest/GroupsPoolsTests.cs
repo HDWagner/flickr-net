@@ -57,15 +57,15 @@ namespace FlickrNetTest
 
             PhotoCollection photos = f.GroupsPoolsGetPhotos(TestData.GroupId, null, TestData.TestUserId, PhotoSearchExtras.All, 1, 20);
 
-            Assert.IsNotNull(photos, "Photos should not be null");
-            Assert.IsTrue(photos.Count > 0, "Should be more than 0 photos returned");
-            Assert.AreEqual(20, photos.PerPage);
-            Assert.AreEqual(1, photos.Page);
+            Assert.That(photos, Is.Not.Null, "Photos should not be null");
+            Assert.That(photos, Is.Not.Empty, "Should be more than 0 photos returned");
+            Assert.That(photos.PerPage, Is.EqualTo(20));
+            Assert.That(photos.Page, Is.EqualTo(1));
 
             foreach (Photo p in photos)
             {
-                Assert.AreNotEqual(default(DateTime), p.DateAddedToGroup, "DateAddedToGroup should not be default value");
-                Assert.IsTrue(p.DateAddedToGroup < DateTime.Now, "DateAddedToGroup should be in the past");
+                Assert.That(p.DateAddedToGroup, Is.Not.EqualTo(default(DateTime)), "DateAddedToGroup should not be default value");
+                Assert.That(p.DateAddedToGroup, Is.LessThan(DateTime.Now), "DateAddedToGroup should be in the past");
             }
 
         }
@@ -77,13 +77,13 @@ namespace FlickrNetTest
 
             PhotoCollection photos = f.GroupsPoolsGetPhotos(TestData.GroupId);
 
-            Assert.IsNotNull(photos, "Photos should not be null");
-            Assert.IsTrue(photos.Count > 0, "Should be more than 0 photos returned");
+            Assert.That(photos, Is.Not.Null, "Photos should not be null");
+            Assert.That(photos, Is.Not.Empty, "Should be more than 0 photos returned");
 
             foreach (Photo p in photos)
             {
-                Assert.AreNotEqual(default(DateTime), p.DateAddedToGroup, "DateAddedToGroup should not be default value");
-                Assert.IsTrue(p.DateAddedToGroup < DateTime.Now, "DateAddedToGroup should be in the past");
+                Assert.That(p.DateAddedToGroup, Is.Not.EqualTo(default(DateTime)), "DateAddedToGroup should not be default value");
+                Assert.That(p.DateAddedToGroup, Is.LessThan(DateTime.Now), "DateAddedToGroup should be in the past");
             }
 
         }
@@ -95,13 +95,13 @@ namespace FlickrNetTest
         {
             MemberGroupInfoCollection groups = AuthInstance.GroupsPoolsGetGroups();
 
-            Assert.IsNotNull(groups, "MemberGroupInfoCollection should not be null.");
-            Assert.AreNotEqual(0, groups.Count, "MemberGroupInfoCollection.Count should not be zero.");
-            Assert.IsTrue(groups.Count > 1, "Count should be greater than one.");
+            Assert.That(groups, Is.Not.Null, "MemberGroupInfoCollection should not be null.");
+            Assert.That(groups, Is.Not.Empty, "MemberGroupInfoCollection.Count should not be zero.");
+            Assert.That(groups, Has.Count.GreaterThan(1), "Count should be greater than one.");
 
-            Assert.AreEqual(400, groups.PerPage, "PerPage should be 400.");
-            Assert.AreEqual(1, groups.Page, "Page should be 1.");
-            Assert.IsTrue(groups.Total > 1, "Total chould be greater than one");
+            Assert.That(groups.PerPage, Is.EqualTo(400), "PerPage should be 400.");
+            Assert.That(groups.Page, Is.EqualTo(1), "Page should be 1.");
+            Assert.That(groups.Total, Is.GreaterThan(1), "Total chould be greater than one");
         }
     }
 }

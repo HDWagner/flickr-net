@@ -63,7 +63,7 @@ namespace FlickrNet
                 case "disabled":
                     return GroupThrottleMode.Disabled;
                 default:
-                    throw new ArgumentException(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Unknown mode found {0}", mode), "mode");
+                    throw new ArgumentException(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Unknown mode found {0}", mode), nameof(mode));
             }
         }
 

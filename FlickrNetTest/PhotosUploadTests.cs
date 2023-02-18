@@ -43,7 +43,7 @@ namespace FlickrNetTest
                 throw result.Error;
             }
 
-            Assert.IsNotNull(result.Result);
+            Assert.That(result.Result, Is.Not.Null);
             Console.WriteLine(result.Result);
 
             // Clean up photo
@@ -56,7 +56,8 @@ namespace FlickrNetTest
         {
             Flickr f = AuthInstance;
 
-            f.OnUploadProgress += (sender, args) => {
+            f.OnUploadProgress += (sender, args) =>
+            {
                 // Do nothing
             };
 
@@ -73,15 +74,15 @@ namespace FlickrNetTest
             {
                 PhotoInfo info = f.PhotosGetInfo(photoId);
 
-                Assert.AreEqual(title, info.Title);
-                Assert.AreEqual(desc, info.Description);
-                Assert.AreEqual(2, info.Tags.Count);
-                Assert.AreEqual("testtag1", info.Tags[0].Raw);
-                Assert.AreEqual("testtag2", info.Tags[1].Raw);
+                Assert.That(info.Title, Is.EqualTo(title));
+                Assert.That(info.Description, Is.EqualTo(desc));
+                Assert.That(info.Tags, Has.Count.EqualTo(2));
+                Assert.That(info.Tags[0].Raw, Is.EqualTo("testtag1"));
+                Assert.That(info.Tags[1].Raw, Is.EqualTo("testtag2"));
 
-                Assert.IsFalse(info.IsPublic);
-                Assert.IsFalse(info.IsFamily);
-                Assert.IsFalse(info.IsFriend);
+                Assert.That(info.IsPublic, Is.False);
+                Assert.That(info.IsFamily, Is.False);
+                Assert.That(info.IsFriend, Is.False);
 
                 SizeCollection sizes = f.PhotosGetSizes(photoId);
 
@@ -91,7 +92,7 @@ namespace FlickrNetTest
                     byte[] downloadBytes = client.DownloadData(url);
                     string downloadBase64 = Convert.ToBase64String(downloadBytes);
 
-                    Assert.AreEqual(TestData.TestImageBase64, downloadBase64);
+                    Assert.That(downloadBase64, Is.EqualTo(TestData.TestImageBase64));
                 }
             }
             finally
@@ -109,13 +110,13 @@ namespace FlickrNetTest
             var photo = photos.First();
             var url = photo.Small320Url;
 
-            var client = new WebClient();
+            using var client = new WebClient();
             var data = client.DownloadData(url);
 
-            var ms = new MemoryStream(data) {Position = 0};
-            
+            using var ms = new MemoryStream(data) { Position = 0 };
+
             var photoId = AuthInstance.UploadPicture(ms, "test.jpg", "Test Photo", "Test Description", "", false, false, false, ContentType.Photo, SafetyLevel.Safe, HiddenFromSearch.Hidden);
-            Assert.IsNotNull(photoId, "PhotoId should not be null");
+            Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
 
             // Cleanup
             AuthInstance.PhotosDelete(photoId);
@@ -169,7 +170,7 @@ namespace FlickrNetTest
         {
             string url = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_50mb.mp4";
             Flickr f = AuthInstance;
-            
+
             using (WebClient client = new WebClient())
             {
                 using (Stream s = client.OpenRead(url))

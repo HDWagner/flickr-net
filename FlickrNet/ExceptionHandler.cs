@@ -18,14 +18,14 @@ namespace FlickrNet
         {
             if (reader == null)
             {
-                throw new ArgumentNullException("reader");
+                throw new ArgumentNullException(nameof(reader));
             }
 
             reader.MoveToElement();
 
             if (!reader.ReadToDescendant("err"))
             {
-                throw new System.Xml.XmlException("No error element found in XML");
+                throw new XmlException("No error element found in XML");
             }
 
             var code = 0;

@@ -63,23 +63,23 @@ namespace FlickrNet
         {
             if (timePeriod == 0)
             {
-                throw new ArgumentOutOfRangeException("timePeriod", "Time Period should be greater than 0");
+                throw new ArgumentOutOfRangeException(nameof(timePeriod), "Time Period should be greater than 0");
             }
 
             if (timeType == null)
             {
-                throw new ArgumentNullException("timeType");
+                throw new ArgumentNullException(nameof(timeType));
             }
 
             if (timeType != "d" && timeType != "h")
             {
-                throw new ArgumentOutOfRangeException("timeType", "Time type must be 'd' or 'h'");
+                throw new ArgumentOutOfRangeException(nameof(timeType), "Time type must be 'd' or 'h'");
             }
 
             return ActivityUserPhotos(timePeriod + timeType, page, perPage);
         }
 
-        private ActivityItemCollection ActivityUserPhotos(string timeframe, int page, int perPage)
+        private ActivityItemCollection ActivityUserPhotos(string? timeframe, int page, int perPage)
         {
             CheckRequiresAuthentication();
 

@@ -16,7 +16,7 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>() { { "method", "flickr.push.getSubscriptions" } };
 
-            GetResponseAsync<SubscriptionCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -80,17 +80,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topic))
             {
-                throw new ArgumentNullException("topic");
+                throw new ArgumentNullException(nameof(topic));
             }
 
             if (string.IsNullOrEmpty(callback))
             {
-                throw new ArgumentNullException("callback");
+                throw new ArgumentNullException(nameof(callback));
             }
 
             if (string.IsNullOrEmpty(verify))
             {
-                throw new ArgumentNullException("verify");
+                throw new ArgumentNullException(nameof(verify));
             }
 
             if (topic == "tags" && (tags == null || tags.Length == 0))
@@ -133,7 +133,7 @@ namespace FlickrNet
                 parameters.Add("radius_units", radiusUnits.ToString("d"));
             }
 
-            GetResponseAsync<NoResponse>(parameters, callbackAction);
+            GetResponseAsync(parameters, callbackAction);
 
         }
 
@@ -151,17 +151,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topic))
             {
-                throw new ArgumentNullException("topic");
+                throw new ArgumentNullException(nameof(topic));
             }
 
             if (string.IsNullOrEmpty(callback))
             {
-                throw new ArgumentNullException("callback");
+                throw new ArgumentNullException(nameof(callback));
             }
 
             if (string.IsNullOrEmpty(verify))
             {
-                throw new ArgumentNullException("verify");
+                throw new ArgumentNullException(nameof(verify));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -174,7 +174,7 @@ namespace FlickrNet
                 parameters.Add("verif_token", verifyToken);
             }
 
-            GetResponseAsync<NoResponse>(parameters, callbackAction);
+            GetResponseAsync(parameters, callbackAction);
         }
     }
 }

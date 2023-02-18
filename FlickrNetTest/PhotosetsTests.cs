@@ -25,24 +25,24 @@ namespace FlickrNetTest
 
             var context1 = Instance.PhotosetsGetContext(firstPhoto.PhotoId, photosetId);
 
-            Assert.IsNotNull(context1, "Context should not be null.");
-            Assert.IsNull(context1.PreviousPhoto, "PreviousPhoto should be null for first photo.");
-            Assert.IsNotNull(context1.NextPhoto, "NextPhoto should not be null.");
+            Assert.That(context1, Is.Not.Null, "Context should not be null.");
+            Assert.That(context1.PreviousPhoto, Is.Null, "PreviousPhoto should be null for first photo.");
+            Assert.That(context1.NextPhoto, Is.Not.Null, "NextPhoto should not be null.");
 
             if (firstPhoto.PhotoId != lastPhoto.PhotoId)
             {
-                Assert.AreEqual(photos[1].PhotoId, context1.NextPhoto.PhotoId, "NextPhoto should be the second photo in photoset.");
+                Assert.That(context1.NextPhoto.PhotoId, Is.EqualTo(photos[1].PhotoId), "NextPhoto should be the second photo in photoset.");
             }
 
             var context2 = Instance.PhotosetsGetContext(lastPhoto.PhotoId, photosetId);
 
-            Assert.IsNotNull(context2, "Last photo context should not be null.");
-            Assert.IsNotNull(context2.PreviousPhoto, "PreviousPhoto should not be null for first photo.");
-            Assert.IsNull(context2.NextPhoto, "NextPhoto should be null.");
+            Assert.That(context2, Is.Not.Null, "Last photo context should not be null.");
+            Assert.That(context2.PreviousPhoto, Is.Not.Null, "PreviousPhoto should not be null for first photo.");
+            Assert.That(context2.NextPhoto, Is.Null, "NextPhoto should be null.");
 
             if (firstPhoto.PhotoId != lastPhoto.PhotoId)
             {
-                Assert.AreEqual(photos[photos.Count - 2].PhotoId, context2.PreviousPhoto.PhotoId, "PreviousPhoto should be the last but one photo in photoset.");
+                Assert.That(context2.PreviousPhoto.PhotoId, Is.EqualTo(photos[photos.Count - 2].PhotoId), "PreviousPhoto should be the last but one photo in photoset.");
             }
         }
 
@@ -54,10 +54,10 @@ namespace FlickrNetTest
 
             var p = Instance.PhotosetsGetInfo(photosetId);
 
-            Assert.IsNotNull(p);
-            Assert.AreEqual(photosetId, p.PhotosetId);
-            Assert.AreEqual("Places: Derwent Walk, Gateshead", p.Title);
-            Assert.AreEqual("It's near work, so I go quite a bit...", p.Description);
+            Assert.That(p, Is.Not.Null);
+            Assert.That(p.PhotosetId, Is.EqualTo(photosetId));
+            Assert.That(p.Title, Is.EqualTo("Places: Derwent Walk, Gateshead"));
+            Assert.That(p.Description, Is.EqualTo("It's near work, so I go quite a bit..."));
         }
 
         [Test]
@@ -65,16 +65,16 @@ namespace FlickrNetTest
         {
             PhotosetCollection photosets = Instance.PhotosetsGetList(TestData.TestUserId);
 
-            Assert.IsTrue(photosets.Count > 0, "Should be at least one photoset");
-            Assert.IsTrue(photosets.Count > 100, "Should be greater than 100 photosets. (" + photosets.Count + " returned)");
+            Assert.That(photosets, Is.Not.Empty, "Should be at least one photoset");
+            Assert.That(photosets, Has.Count.GreaterThan(100), "Should be greater than 100 photosets. (" + photosets.Count + " returned)");
 
             foreach (Photoset set in photosets)
             {
-                Assert.IsNotNull(set.OwnerId, "OwnerId should not be null");
-                Assert.IsTrue(set.NumberOfPhotos > 0, "NumberOfPhotos should be greater than zero");
-                Assert.IsNotNull(set.Title, "Title should not be null");
-                Assert.IsNotNull(set.Description, "Description should not be null");
-                Assert.AreEqual(TestData.TestUserId, set.OwnerId);
+                Assert.That(set.OwnerId, Is.Not.Null, "OwnerId should not be null");
+                Assert.That(set.NumberOfPhotos, Is.GreaterThan(0), "NumberOfPhotos should be greater than zero");
+                Assert.That(set.Title, Is.Not.Null, "Title should not be null");
+                Assert.That(set.Description, Is.Not.Null, "Description should not be null");
+                Assert.That(set.OwnerId, Is.EqualTo(TestData.TestUserId));
             }
         }
 
@@ -97,13 +97,13 @@ namespace FlickrNetTest
         {
             PhotosetCollection photosets = Instance.PhotosetsGetList(TestData.TestUserId);
 
-            Assert.IsTrue(photosets.Count > 0, "Should be at least one photoset");
+            Assert.That(photosets, Is.Not.Empty, "Should be at least one photoset");
 
             foreach (Photoset set in photosets)
             {
-                Assert.IsNotNull(set.Url);
+                Assert.That(set.Url, Is.Not.Null);
                 string expectedUrl = "https://www.flickr.com/photos/" + TestData.TestUserId + "/sets/" + set.PhotosetId + "/";
-                Assert.AreEqual(expectedUrl, set.Url);
+                Assert.That(set.Url, Is.EqualTo(expectedUrl));
             }
         }
 
@@ -172,7 +172,7 @@ namespace FlickrNetTest
         {
             Photoset pset = Instance.PhotosetsGetInfo("72157627650627399");
 
-            Assert.AreEqual("Sítio em Arujá - 14/08/2011", pset.Title);
+            Assert.That(pset.Title, Is.EqualTo("Sítio em Arujá - 14/08/2011"));
         }
 
         [Test]

@@ -23,10 +23,7 @@ namespace FlickrNet
         /// <returns>An array of <see cref="XmlElement"/> instances which is the expected response.</returns>
         public UnknownResponse TestGeneric(string method, Dictionary<string, string> parameters)
         {
-            if (parameters == null)
-            {
-                parameters = new Dictionary<string, string>();
-            }
+            parameters ??= new Dictionary<string, string>();
 
             parameters.Add("method", method);
             return GetResponseNoCache<UnknownResponse>(parameters);

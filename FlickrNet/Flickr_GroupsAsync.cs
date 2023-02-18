@@ -33,7 +33,7 @@ namespace FlickrNet
                 parameters.Add("cat_id", catId);
             }
 
-            GetResponseAsync<GroupCategory>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<GroupSearchResultCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.getInfo");
             parameters.Add("api_key", apiKey);
             parameters.Add("group_id", groupId);
-            GetResponseAsync<GroupFullInfo>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace FlickrNet
 
             parameters.Add("group_id", groupId);
 
-            GetResponseAsync<MemberCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.pools.add");
             parameters.Add("photo_id", photoId);
             parameters.Add("group_id", groupId);
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.pools.getContext");
             parameters.Add("photo_id", photoId);
             parameters.Add("group_id", groupId);
-            GetResponseAsync<Context>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.pools.remove");
             parameters.Add("photo_id", photoId);
             parameters.Add("group_id", groupId);
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.pools.getGroups");
 
-            GetResponseAsync<MemberGroupInfoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace FlickrNet
                 parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
             }
 
-            GetResponseAsync<PhotoCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace FlickrNet
                 parameters.Add("accepts_rules", "1");
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -346,7 +346,7 @@ namespace FlickrNet
                 parameters.Add("accept_rules", "1");
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
 
@@ -378,7 +378,7 @@ namespace FlickrNet
                 parameters.Add("delete_photos", "1");
             }
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

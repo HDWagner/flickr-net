@@ -16,7 +16,7 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -46,7 +46,7 @@ namespace FlickrNet
         }
 
         /// <summary>
-        /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="Flickr.PhotosSuggestionsRemoveSuggestion"/> instead.
+        /// Rejects a suggestion made for a location on a photo. Currently doesn't appear to actually work. Just use <see cref="PhotosSuggestionsRemoveSuggestion"/> instead.
         /// </summary>
         /// <param name="suggestionId">The ID of the suggestion to remove.</param>
         public void PhotosSuggestionsRejectSuggestion(string suggestionId)
@@ -55,7 +55,7 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -76,7 +76,7 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(suggestionId))
             {
-                throw new ArgumentNullException("suggestionId");
+                throw new ArgumentNullException(nameof(suggestionId));
             }
 
             var parameters = new Dictionary<string, string>();

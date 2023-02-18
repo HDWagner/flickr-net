@@ -16,8 +16,8 @@ namespace FlickrNetTest
         {
             FoundUser user = AuthInstance.UrlsLookupUser("https://www.flickr.com/photos/samjudson");
 
-            Assert.AreEqual("41888973@N00", user.UserId);
-            Assert.AreEqual("Sam Judson", user.UserName);
+            Assert.That(user.UserId, Is.EqualTo("41888973@N00"));
+            Assert.That(user.UserName, Is.EqualTo("Sam Judson"));
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace FlickrNetTest
 
             string groupId = AuthInstance.UrlsLookupGroup(groupUrl);
 
-            Assert.AreEqual("71585219@N00", groupId);
+            Assert.That(groupId, Is.EqualTo("71585219@N00"));
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace FlickrNetTest
 
             Gallery gallery = f.UrlsLookupGallery(galleryUrl);
 
-            Assert.AreEqual(galleryUrl, gallery.GalleryUrl);
+            Assert.That(gallery.GalleryUrl, Is.EqualTo(galleryUrl));
 
         }
 
@@ -49,7 +49,7 @@ namespace FlickrNetTest
         {
             string url = Instance.UrlsGetUserPhotos(TestData.TestUserId);
 
-            Assert.AreEqual("https://www.flickr.com/photos/samjudson/", url);
+            Assert.That(url, Is.EqualTo("https://www.flickr.com/photos/samjudson/"));
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace FlickrNetTest
         {
             string url = Instance.UrlsGetUserProfile(TestData.TestUserId);
 
-            Assert.AreEqual("https://www.flickr.com/people/samjudson/", url);
+            Assert.That(url, Is.EqualTo("https://www.flickr.com/people/samjudson/"));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace FlickrNetTest
         {
             string url = Instance.UrlsGetGroup(TestData.GroupId);
 
-            Assert.AreEqual("https://www.flickr.com/groups/lakedistrict/", url);
+            Assert.That(url, Is.EqualTo("https://www.flickr.com/groups/lakedistrict/"));
         }
 
 

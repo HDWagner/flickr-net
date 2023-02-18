@@ -22,13 +22,10 @@ namespace FlickrNet
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void TestGenericAsync(string method, Dictionary<string, string> parameters, Action<FlickrResult<UnknownResponse>> callback)
         {
-            if (parameters == null)
-            {
-                parameters = new Dictionary<string, string>();
-            }
+            parameters ??= new Dictionary<string, string>();
 
             parameters.Add("method", method);
-            GetResponseAsync<UnknownResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -40,7 +37,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.test.login");
 
-            GetResponseAsync<FoundUser>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.test.null");
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -63,7 +60,7 @@ namespace FlickrNet
         public void TestEchoAsync(Dictionary<string, string> parameters, Action<FlickrResult<EchoResponseDictionary>> callback)
         {
             parameters.Add("method", "flickr.test.echo");
-            GetResponseAsync<EchoResponseDictionary>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
     }
 }

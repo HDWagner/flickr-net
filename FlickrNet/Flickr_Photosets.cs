@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
+﻿using System.Collections.Generic;
 
 namespace FlickrNet
 {
@@ -45,7 +41,7 @@ namespace FlickrNet
         /// <param name="description">THe description of the photoset.</param>
         /// <param name="primaryPhotoId">The ID of the photo which will be the primary photo for the photoset. This photo will also be added to the set.</param>
         /// <returns>The <see cref="Photoset"/> that is created.</returns>
-        public Photoset PhotosetsCreate(string title, string description, string primaryPhotoId)
+        public Photoset PhotosetsCreate(string title, string? description, string primaryPhotoId)
         {
             CheckRequiresAuthentication();
 
@@ -245,9 +241,9 @@ namespace FlickrNet
         /// <param name="perPage">The number of photosets to return per page. Defaults to 500.</param>
         /// <param name="primaryPhotoExtras">The extra information to return for the photosets primary photo.</param>
         /// <returns>A <see cref="PhotosetCollection"/> instance containing a collection of photosets.</returns>
-        public PhotosetCollection PhotosetsGetList(string userId, int page, int perPage, PhotoSearchExtras primaryPhotoExtras)
+        public PhotosetCollection PhotosetsGetList(string? userId, int page, int perPage, PhotoSearchExtras primaryPhotoExtras)
         {
-            var parameters = new Dictionary<string, string> {{"method", "flickr.photosets.getList"}};
+            var parameters = new Dictionary<string, string> { { "method", "flickr.photosets.getList" } };
 
             if (userId != null)
             {
@@ -264,15 +260,18 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            if ( primaryPhotoExtras != PhotoSearchExtras.None )
+            if (primaryPhotoExtras != PhotoSearchExtras.None)
             {
                 parameters.Add("primary_photo_extras", UtilityMethods.ExtrasToString(primaryPhotoExtras));
             }
 
             var photosets = GetResponseCache<PhotosetCollection>(parameters);
-            foreach (var photoset in photosets)
+            if (userId != null)
             {
-                photoset.OwnerId = userId;
+                foreach (var photoset in photosets)
+                {
+                    photoset.OwnerId = userId;
+                }
             }
             return photosets;
         }
@@ -410,7 +409,11 @@ namespace FlickrNet
 
             if (media != MediaType.None)
             {
-                parameters.Add("media", (media == MediaType.All ? "all" : (media == MediaType.Photos ? "photos" : (media == MediaType.Videos ? "videos" : string.Empty))));
+                var value = media == MediaType.All ? "all"
+                    : (media == MediaType.Photos ? "photos"
+                    : (media == MediaType.Videos ? "videos"
+                    : string.Empty));
+                parameters.Add("media", value);
             }
 
             return GetResponseCache<PhotosetPhotoCollection>(parameters);
@@ -537,7 +540,7 @@ namespace FlickrNet
         /// <param name="photosetId">The ID of the photoset to add the comment to.</param>
         /// <param name="commentText">The text of the comment. Can contain some HTML.</param>
         /// <returns>The new ID of the created comment.</returns>
-        public string PhotosetsCommentsAddComment(string photosetId, string commentText)
+        public string? PhotosetsCommentsAddComment(string photosetId, string commentText)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.comments.addComment");
@@ -546,8 +549,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseNoCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@id");
-            return nav == null ? null : nav.Value;
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@id");
+            return nav?.Value;
         }
 
         /// <summary>

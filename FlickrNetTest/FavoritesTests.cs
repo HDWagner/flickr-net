@@ -19,8 +19,8 @@ namespace FlickrNetTest
 
             var p = Instance.FavoritesGetPublicList(userId);
 
-            Assert.IsNotNull(p, "PhotoCollection should not be null instance.");
-            Assert.AreNotEqual(0, p.Count, "PhotoCollection.Count should be greater than zero.");
+            Assert.That(p, Is.Not.Null, "PhotoCollection should not be null instance.");
+            Assert.That(p, Is.Not.Empty, "PhotoCollection.Count should be greater than zero.");
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace FlickrNetTest
             var subsetOfFavourites = Instance.FavoritesGetPublicList(TestData.TestUserId, minDate, maxDate,
                                                                      PhotoSearchExtras.None, 0, 0);
 
-            Assert.AreEqual(5, subsetOfFavourites.Count, "Should be 5 favourites in subset");
+            Assert.That(subsetOfFavourites, Has.Count.EqualTo(5), "Should be 5 favourites in subset");
         }
 
         [Test]
@@ -45,8 +45,8 @@ namespace FlickrNetTest
         public void FavoritesGetListBasicTest()
         {
             var photos = AuthInstance.FavoritesGetList();
-            Assert.IsNotNull(photos, "PhotoCollection should not be null instance.");
-            Assert.AreNotEqual(0, photos.Count, "PhotoCollection.Count should be greater than zero.");
+            Assert.That(photos, Is.Not.Null, "PhotoCollection should not be null instance.");
+            Assert.That(photos, Is.Not.Empty, "PhotoCollection.Count should be greater than zero.");
         }
 
         [Test]
@@ -55,9 +55,9 @@ namespace FlickrNetTest
         public void FavoritesGetListFullParamTest()
         {
             var photos = AuthInstance.FavoritesGetList(TestData.TestUserId, DateTime.Now.AddYears(-4), DateTime.Now, PhotoSearchExtras.All, 1, 10);
-            Assert.IsNotNull(photos, "PhotoCollection should not be null.");
+            Assert.That(photos, Is.Not.Null, "PhotoCollection should not be null.");
 
-            Assert.IsTrue(photos.Count > 0, "Count should be greater than zero.");
+            Assert.That(photos, Is.Not.Empty, "Count should be greater than zero.");
 
         }
 
@@ -67,11 +67,11 @@ namespace FlickrNetTest
         public void FavoritesGetListPartialParamTest()
         {
             PhotoCollection photos = AuthInstance.FavoritesGetList(TestData.TestUserId, 2, 20);
-            Assert.IsNotNull(photos, "PhotoCollection should not be null instance.");
-            Assert.AreNotEqual(0, photos.Count, "PhotoCollection.Count should be greater than zero.");
-            Assert.AreEqual(2, photos.Page);
-            Assert.AreEqual(20, photos.PerPage);
-            Assert.AreEqual(20, photos.Count);
+            Assert.That(photos, Is.Not.Null, "PhotoCollection should not be null instance.");
+            Assert.That(photos, Is.Not.Empty, "PhotoCollection.Count should be greater than zero.");
+            Assert.That(photos.Page, Is.EqualTo(2));
+            Assert.That(photos.PerPage, Is.EqualTo(20));
+            Assert.That(photos, Has.Count.EqualTo(20));
         }
 
         [Test]
@@ -82,10 +82,10 @@ namespace FlickrNetTest
 
             var context = Instance.FavoritesGetContext(photoId, userId);
 
-            Assert.IsNotNull(context);
-            Assert.AreNotEqual(0, context.Count, "Count should be greater than zero");
-            Assert.AreEqual(1, context.PreviousPhotos.Count, "Should be 1 previous photo.");
-            Assert.AreEqual(1, context.NextPhotos.Count, "Should be 1 next photo.");
+            Assert.That(context, Is.Not.Null);
+            Assert.That(context.Count, Is.Not.EqualTo(0), "Count should be greater than zero");
+            Assert.That(context.PreviousPhotos, Has.Count.EqualTo(1), "Should be 1 previous photo.");
+            Assert.That(context.NextPhotos, Has.Count.EqualTo(1), "Should be 1 next photo.");
         }
 
         [Test]
@@ -96,10 +96,10 @@ namespace FlickrNetTest
 
             var context = Instance.FavoritesGetContext(photoId, userId, 3, 4, PhotoSearchExtras.Description);
 
-            Assert.IsNotNull(context);
-            Assert.AreNotEqual(0, context.Count, "Count should be greater than zero");
-            Assert.AreEqual(3, context.PreviousPhotos.Count, "Should be 3 previous photo.");
-            Assert.AreEqual(4, context.NextPhotos.Count, "Should be 4 next photo.");
+            Assert.That(context, Is.Not.Null);
+            Assert.That(context.Count, Is.Not.EqualTo(0), "Count should be greater than zero");
+            Assert.That(context.PreviousPhotos, Has.Count.EqualTo(3), "Should be 3 previous photo.");
+            Assert.That(context.NextPhotos, Has.Count.EqualTo(4), "Should be 4 next photo.");
         }
 
     }

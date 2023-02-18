@@ -57,8 +57,8 @@ namespace FlickrNet
             get { return baseUri[(int)service]; }
         }
 
-        private readonly Uri[] baseUri = { 
-                                                     new Uri("https://api.flickr.com/services/rest/"), 
+        private readonly Uri[] baseUri = {
+                                                     new Uri("https://api.flickr.com/services/rest/"),
                                                      new Uri("http://beta.zooomr.com/bluenote/api/rest"),
                                                      new Uri("http://www.23hq.com/services/rest/")
         };
@@ -355,7 +355,7 @@ namespace FlickrNet
                 return;
             }
 
-            Proxy = new WebProxy {Address = new Uri("http://" + settings.ProxyIPAddress + ":" + settings.ProxyPort)};
+            Proxy = new WebProxy { Address = new Uri("http://" + settings.ProxyIPAddress + ":" + settings.ProxyPort) };
 
             if (string.IsNullOrEmpty(settings.ProxyUsername))
             {
@@ -363,11 +363,11 @@ namespace FlickrNet
             }
 
             var creds = new NetworkCredential
-                        {
-                            UserName = settings.ProxyUsername,
-                            Password = settings.ProxyPassword,
-                            Domain = settings.ProxyDomain
-                        };
+            {
+                UserName = settings.ProxyUsername,
+                Password = settings.ProxyPassword,
+                Domain = settings.ProxyDomain
+            };
             Proxy.Credentials = creds;
 
 #endif
@@ -589,7 +589,7 @@ namespace FlickrNet
 
             public EventHandler<UploadProgressEventArgs> UploadProgress;
 
-            public void CopyTo(Stream stream, int bufferSize = 1024*16)
+            public void CopyTo(Stream stream, int bufferSize = 1024 * 16)
             {
                 ResetPosition();
 
@@ -600,11 +600,11 @@ namespace FlickrNet
                 foreach (var s in Streams)
                 {
                     int read;
-                    while(0 < (read = s.Read(buffer, 0, buffer.Length)))
+                    while (0 < (read = s.Read(buffer, 0, buffer.Length)))
                     {
                         soFar += read;
                         stream.Write(buffer, 0, read);
-                        if( UploadProgress != null)
+                        if (UploadProgress != null)
                         {
                             UploadProgress(this, new UploadProgressEventArgs { BytesSent = soFar, TotalBytesToSend = l.GetValueOrDefault(-1) });
                         }
@@ -616,13 +616,7 @@ namespace FlickrNet
 
             public void Dispose()
             {
-                Streams.ForEach(s =>
-                                    {
-                                        if( s != null)
-                                        {
-                                            s.Dispose();
-                                        }
-                                    });
+                Streams.ForEach(s => s?.Dispose());
             }
         }
 
@@ -687,10 +681,10 @@ namespace FlickrNet
         {
             if (xml == null)
             {
-                throw new ArgumentNullException("xml");
+                throw new ArgumentNullException(nameof(xml));
             }
 
-            var buffer = new System.Text.StringBuilder(xml.Length);
+            var buffer = new StringBuilder(xml.Length);
             foreach (var c in xml)
             {
                 if (IsLegalXmlChar(c))

@@ -12,7 +12,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="groupId">The NSID of the group to fetch the url for.</param>
         /// <returns>An instance of the <see cref="Uri"/> class containing the URL of the group page.</returns>
-        public string UrlsGetGroup(string groupId)
+        public string? UrlsGetGroup(string groupId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getGroup");
@@ -20,15 +20,15 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode node = response.GetXmlDocument().SelectSingleNode("*/@url");
-            return node == null ? null : node.Value.Replace("http://", "https://");
+            var node = response.GetXmlDocument().SelectSingleNode("*/@url");
+            return node?.Value == null ? null : node.Value.Replace("http://", "https://");
         }
 
         /// <summary>
         /// Returns the url to a user's photos.
         /// </summary>
         /// <returns>An instance of the <see cref="Uri"/> class containing the URL for the users photos.</returns>
-        public string UrlsGetUserPhotos()
+        public string? UrlsGetUserPhotos()
         {
             CheckRequiresAuthentication();
 
@@ -40,7 +40,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
         /// <returns>The URL of the users photos.</returns>
-        public string UrlsGetUserPhotos(string userId)
+        public string? UrlsGetUserPhotos(string? userId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserPhotos");
@@ -51,15 +51,15 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@url");
-            return nav == null ? null : nav.Value.Replace("http://", "https://");
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@url");
+            return nav?.Value == null ? null : nav.Value.Replace("http://", "https://");
         }
 
         /// <summary>
         /// Returns the url to a user's profile.
         /// </summary>
         /// <returns>An instance of the <see cref="Uri"/> class containing the URL for the users profile.</returns>
-        public string UrlsGetUserProfile()
+        public string? UrlsGetUserProfile()
         {
             CheckRequiresAuthentication();
 
@@ -71,7 +71,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the url for. If omitted, the calling user is assumed.</param>
         /// <returns>An instance of the <see cref="Uri"/> class containing the URL for the users profile.</returns>
-        public string UrlsGetUserProfile(string userId)
+        public string? UrlsGetUserProfile(string? userId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserProfile");
@@ -82,8 +82,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@url");
-            return nav == null ? null : nav.Value.Replace("http://", "https://");
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@url");
+            return nav?.Value == null ? null : nav.Value.Replace("http://", "https://");
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="urlToFind">The url to the group's page or photo pool.</param>
         /// <returns>The ID of the group at the specified URL on success, a null reference (Nothing in Visual Basic) if the group cannot be found.</returns>
-        public string UrlsLookupGroup(string urlToFind)
+        public string? UrlsLookupGroup(string urlToFind)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.lookupGroup");
@@ -115,8 +115,8 @@ namespace FlickrNet
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
-            System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@id");
-            return nav == null ? null : nav.Value.Replace("http://", "https://");
+            var nav = response.GetXmlDocument().SelectSingleNode("*/@id");
+            return nav?.Value == null ? null : nav.Value.Replace("http://", "https://");
         }
 
         /// <summary>

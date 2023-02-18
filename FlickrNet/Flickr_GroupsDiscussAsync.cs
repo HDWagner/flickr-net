@@ -18,12 +18,12 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -31,7 +31,7 @@ namespace FlickrNet
             parameters.Add("topic_id", topicId);
             parameters.Add("message", message);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -46,12 +46,12 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -59,7 +59,7 @@ namespace FlickrNet
             parameters.Add("topic_id", topicId);
             parameters.Add("reply_id", replyId);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -75,17 +75,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -94,7 +94,7 @@ namespace FlickrNet
             parameters.Add("reply_id", replyId);
             parameters.Add("message", message);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -107,12 +107,12 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             if (string.IsNullOrEmpty(replyId))
             {
-                throw new ArgumentNullException("replyId");
+                throw new ArgumentNullException(nameof(replyId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -120,7 +120,7 @@ namespace FlickrNet
             parameters.Add("topic_id", topicId);
             parameters.Add("reply_id", replyId);
 
-            GetResponseAsync<TopicReply>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -150,7 +150,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<TopicReplyCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -166,17 +166,17 @@ namespace FlickrNet
 
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentNullException("groupId");
+                throw new ArgumentNullException(nameof(groupId));
             }
 
             if (string.IsNullOrEmpty(subject))
             {
-                throw new ArgumentNullException("subject");
+                throw new ArgumentNullException(nameof(subject));
             }
 
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -185,7 +185,7 @@ namespace FlickrNet
             parameters.Add("subject", subject);
             parameters.Add("message", message);
 
-            GetResponseAsync<NoResponse>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(groupId))
             {
-                throw new ArgumentNullException("groupId");
+                throw new ArgumentNullException(nameof(groupId));
             }
 
             var parameters = new Dictionary<string, string>();
@@ -215,7 +215,7 @@ namespace FlickrNet
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            GetResponseAsync<TopicCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -227,14 +227,14 @@ namespace FlickrNet
         {
             if (string.IsNullOrEmpty(topicId))
             {
-                throw new ArgumentNullException("topicId");
+                throw new ArgumentNullException(nameof(topicId));
             }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.discuss.topics.getInfo");
             parameters.Add("topic_id", topicId);
 
-            GetResponseAsync<Topic>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

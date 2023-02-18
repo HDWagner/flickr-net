@@ -18,7 +18,7 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.reflection.getMethods");
 
-            GetResponseAsync<MethodCollection>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace FlickrNet
             parameters.Add("api_key", apiKey);
             parameters.Add("method_name", methodName);
 
-            GetResponseAsync<Method>(parameters, callback);
+            GetResponseAsync(parameters, callback);
         }
 
     }

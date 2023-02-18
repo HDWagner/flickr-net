@@ -45,7 +45,7 @@ namespace FlickrNet
     /// <summary>
     /// If an error occurs then Flickr returns this object.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ResponseError
     {
         /// <summary>

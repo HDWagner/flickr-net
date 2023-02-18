@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace FlickrNet
 {
@@ -55,26 +56,24 @@ namespace FlickrNet
             using (lockFile.Acquire())
             {
                 Refresh();
-                string[] keys;
-                Array values;
-                InternalGetAll(valueType, out keys, out values);
-                return (ICacheItem[])values;
+                InternalGetAll(valueType, out string[] keys, out ICacheItem[] values);
+                return values;
             }
         }
 
         /// <summary>
         /// Gets or sets cache values.
         /// </summary>
-        public ICacheItem this[string key]
+        public ICacheItem? this[string key]
         {
             set
             {
                 if (key == null)
                 {
-                    throw new ArgumentNullException("key");
+                    throw new ArgumentNullException(nameof(key));
                 }
 
-                ICacheItem oldItem;
+                ICacheItem? oldItem;
 
                 using (lockFile.Acquire())
                 {
@@ -82,10 +81,8 @@ namespace FlickrNet
                     oldItem = InternalSet(key, value);
                     Persist();
                 }
-                if (oldItem != null)
-                {
-                    oldItem.OnItemFlushed();
-                }
+
+                oldItem?.OnItemFlushed();
             }
         }
 
@@ -96,11 +93,11 @@ namespace FlickrNet
         /// <param name="maxAge">The maximum age the item can be before it is no longer returned.</param>
         /// <param name="removeIfExpired">Whether to delete the item if it has expired or not.</param>
         /// <returns></returns>
-        public ICacheItem Get(string key, TimeSpan maxAge, bool removeIfExpired)
+        public ICacheItem? Get(string key, TimeSpan maxAge, bool removeIfExpired)
         {
             Debug.Assert(maxAge > TimeSpan.Zero || maxAge == TimeSpan.MinValue, "maxAge should be positive, not negative");
 
-            ICacheItem item;
+            ICacheItem? item;
             bool expired;
             using (lockFile.Acquire())
             {
@@ -124,7 +121,7 @@ namespace FlickrNet
 
             if (expired && removeIfExpired)
             {
-                item.OnItemFlushed();
+                item?.OnItemFlushed();
             }
 
             return expired ? null : item;
@@ -146,19 +143,17 @@ namespace FlickrNet
         {
             if (size < 0)
             {
-                throw new ArgumentException("Cannot shrink to a negative size", "size");
+                throw new ArgumentException("Cannot shrink to a negative size", nameof(size));
             }
 
-            var flushed = new List<ICacheItem>();
+            var flushed = new List<ICacheItem?>();
 
             using (lockFile.Acquire())
             {
                 Refresh();
 
-                string[] keys;
-                Array values;
-                InternalGetAll(typeof(ICacheItem), out keys, out values);
-                long totalSize = 0;
+                InternalGetAll(typeof(ICacheItem), out string[] keys, out ICacheItem[] values);
+                var totalSize = 0L;
                 foreach (ICacheItem cacheItem in values)
                 {
                     totalSize += cacheItem.FileSize;
@@ -171,21 +166,18 @@ namespace FlickrNet
                         break;
                     }
 
-                    var cacheItem = (ICacheItem)values.GetValue(i);
-                    totalSize -= cacheItem.FileSize;
+                    var cacheItem = (ICacheItem?)values.GetValue(i);
+                    totalSize -= cacheItem == null ? 0 : cacheItem.FileSize;
                     flushed.Add(RemoveKey(keys[i]));
                 }
 
                 Persist();
             }
 
-            foreach (ICacheItem flushedItem in flushed)
+            foreach (var flushedItem in flushed)
             {
                 Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
-                if (flushedItem != null)
-                {
-                    flushedItem.OnItemFlushed();
-                }
+                flushedItem?.OnItemFlushed();
             }
         }
 
@@ -195,39 +187,38 @@ namespace FlickrNet
             {
                 return true;
             }
-            else if (age == TimeSpan.MaxValue)
+            if (age == TimeSpan.MaxValue)
             {
                 return false;
             }
-            else
-            {
-                return test < DateTime.UtcNow - age;
-            }
+            return test < DateTime.UtcNow - age;
         }
 
 
-        private void InternalGetAll(Type valueType, out string[] keys, out Array values)
+        private void InternalGetAll(Type valueType, out string[] keys, out ICacheItem[] values)
         {
             if (!typeof(ICacheItem).IsAssignableFrom(valueType))
             {
-                throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem", "valueType");
+                throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem", nameof(valueType));
             }
 
             keys = new List<string>(dataTable.Keys).ToArray();
-            values = Array.CreateInstance(valueType, keys.Length);
-            for (int i = 0; i < keys.Length; i++)
-            {
-                values.SetValue(dataTable[keys[i]], i);
-            }
 
-            Array.Sort(values, keys, new CreationTimeComparer());
+            var tmpValues = new List<ICacheItem>();
+            foreach (var key in keys)
+            {
+                tmpValues.Add(dataTable[key]);
+            }
+            values = tmpValues
+                .Order(new CreationTimeComparer())
+                .ToArray();
         }
 
-        private ICacheItem InternalGet(string key)
+        private ICacheItem? InternalGet(string key)
         {
             if (key == null)
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             }
 
             if (dataTable.ContainsKey(key))
@@ -241,27 +232,28 @@ namespace FlickrNet
         }
 
         /// <returns>The old value associated with <c>key</c>, if any.</returns>
-        private ICacheItem InternalSet(string key, ICacheItem value)
+        private ICacheItem? InternalSet(string key, ICacheItem? value)
         {
             if (key == null)
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             }
 
-            ICacheItem flushedItem;
+            ICacheItem? flushedItem;
 
             flushedItem = RemoveKey(key);
-            if (value != null)  // don't ever let nulls get in
+            if (value != null)
             {
+                // don't ever let nulls get in
                 dataTable[key] = value;
             }
 
-            dirty = dirty || !object.ReferenceEquals(flushedItem, value);
+            dirty = dirty || !ReferenceEquals(flushedItem, value);
 
             return flushedItem;
         }
 
-        private ICacheItem RemoveKey(string key)
+        private ICacheItem? RemoveKey(string key)
         {
             if (!dataTable.ContainsKey(key))
             {

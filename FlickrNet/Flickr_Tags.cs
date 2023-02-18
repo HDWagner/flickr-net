@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Collections;
 using System.Collections.ObjectModel;
 
 namespace FlickrNet
@@ -39,7 +36,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <returns>An array of <see cref="Tag"/> objects.</returns>
-        public TagCollection TagsGetListUser(string userId)
+        public TagCollection TagsGetListUser(string? userId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUser");
@@ -79,7 +76,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <returns>An array of <see cref="Tag"/> objects.</returns>
-        public TagCollection TagsGetListUserPopular(string userId)
+        public TagCollection TagsGetListUserPopular(string? userId)
         {
             return TagsGetListUserPopular(userId, 0);
         }
@@ -90,7 +87,7 @@ namespace FlickrNet
         /// <param name="userId">The NSID of the user to fetch the tag list for. If this argument is not specified, the currently logged in user (if any) is assumed.</param>
         /// <param name="count">Number of popular tags to return. defaults to 10 when this argument is not present.</param>
         /// <returns>An array of <see cref="Tag"/> objects.</returns>
-        public TagCollection TagsGetListUserPopular(string userId, int count)
+        public TagCollection TagsGetListUserPopular(string? userId, int count)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUserPopular");
@@ -121,7 +118,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="tag">The tag to return the raw version of.</param>
         /// <returns>An array of <see cref="RawTag"/> objects.</returns>
-        public RawTagCollection TagsGetListUserRaw(string tag)
+        public RawTagCollection TagsGetListUserRaw(string? tag)
         {
             CheckRequiresAuthentication();
 
@@ -236,11 +233,11 @@ namespace FlickrNet
         /// <param name="period">The period for which to fetch hot tags. Valid values are day and week (defaults to day).</param>
         /// <param name="count">The number of tags to return. Defaults to 20. Maximum allowed value is 200.</param>
         /// <returns></returns>
-        public HotTagCollection TagsGetHotList(string period, int count)
+        public HotTagCollection TagsGetHotList(string? period, int count)
         {
             if (!string.IsNullOrEmpty(period) && period != "day" && period != "week")
             {
-                throw new ArgumentException("Period must be either 'day' or 'week'.", "period");
+                throw new ArgumentException("Period must be either 'day' or 'week'.", nameof(period));
             }
 
             var parameters = new Dictionary<string, string>();

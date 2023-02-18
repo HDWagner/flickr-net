@@ -20,7 +20,7 @@ namespace FlickrNet
         /// </summary>
         public string Name { get; set; }
 
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
+        void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "service")
             {

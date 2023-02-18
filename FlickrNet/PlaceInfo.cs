@@ -177,7 +177,7 @@ namespace FlickrNet
             reader.Read();
         }
 
-        private void LoadAttributes(System.Xml.XmlReader reader)
+        private void LoadAttributes(XmlReader reader)
         {
             while (reader.MoveToNextAttribute())
             {
