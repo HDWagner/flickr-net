@@ -4,71 +4,22 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
+
+    <Title>FlickrNetTest</Title>
+    <Company>Wackylabs</Company>
+    <Product>FlickrNetTest</Product>
+    <Copyright>Copyright © Sam Judson 2018</Copyright>
+    <Authors>samjudson, jrotello</Authors>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\**" />
     <Compile Remove="Properties\**" />
-    <EmbeddedResource Remove="Auth\**" />
+    <Compile Remove="TestResults\**" />
     <EmbeddedResource Remove="Properties\**" />
-    <None Remove="Auth\**" />
+    <EmbeddedResource Remove="TestResults\**" />
     <None Remove="Properties\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="ActivityTests.cs" />
-    <Compile Remove="Async\PhotosetsAsyncTests.cs" />
-    <Compile Remove="Async\StatsAsyncTests.cs" />
-    <Compile Remove="AuthTests.cs" />
-    <Compile Remove="BlogTests.cs" />
-    <Compile Remove="CacheTests.cs" />
-    <Compile Remove="CameraTests.cs" />
-    <Compile Remove="CollectionTests.cs" />
-    <Compile Remove="CommonsTests.cs" />
-    <Compile Remove="ContactsTests.cs" />
-    <Compile Remove="FavoritesTests.cs" />
-    <Compile Remove="GalleriesTests.cs" />
-    <Compile Remove="GeoTests.cs" />
-    <Compile Remove="GroupsDiscussTests.cs" />
-    <Compile Remove="GroupsPoolsTests.cs" />
-    <Compile Remove="GroupsTests.cs" />
-    <Compile Remove="InterestingnessTests.cs" />
-    <Compile Remove="MachinetagsTests.cs" />
-    <Compile Remove="PandaTest.cs" />
-    <Compile Remove="PeopleTests.cs" />
-    <Compile Remove="PhotoOwnerNameTest.cs" />
-    <Compile Remove="PhotosCommentsTests.cs" />
-    <Compile Remove="PhotoSearchOptionsTests.cs" />
-    <Compile Remove="PhotosetCommentsGetListTests.cs" />
-    <Compile Remove="PhotosetsGetPhotosTests.cs" />
-    <Compile Remove="PhotosetsOrderSets.cs" />
-    <Compile Remove="PhotosetsTests.cs" />
-    <Compile Remove="PhotosGeoTests.cs" />
-    <Compile Remove="PhotosGetContactsPhotos.cs" />
-    <Compile Remove="PhotosGetContactsPublicPhotosTests.cs" />
-    <Compile Remove="PhotosGetCountTests.cs" />
-    <Compile Remove="PhotosGetFavouritesTests.cs" />
-    <Compile Remove="PhotosGetInfoTests.cs" />
-    <Compile Remove="PhotosLicensesTests.cs" />
-    <Compile Remove="PhotosSearchTests.cs" />
-    <Compile Remove="PhotosSuggestionsTests.cs" />
-    <Compile Remove="PhotosTests.cs" />
-    <Compile Remove="PhotosUploadTests.cs" />
-    <Compile Remove="PlacesTests.cs" />
-    <Compile Remove="PrefsTests.cs" />
-    <Compile Remove="ProfileTests.cs" />
-    <Compile Remove="PushTests.cs" />
-    <Compile Remove="ReflectionMethodTests.cs" />
-    <Compile Remove="StatsGetDomainsTests.cs" />
-    <Compile Remove="StatsGetPopularPhotosTests.cs" />
-    <Compile Remove="StatsGetReferrerTests.cs" />
-    <Compile Remove="StatsGetTotalViewsTest.cs" />
-    <Compile Remove="TagsTests.cs" />
-    <Compile Remove="TestTests.cs" />
-    <Compile Remove="UrlsTests.cs" />
-    <Compile Remove="UtilityMethodsTests.cs" />
+    <None Remove="TestResults\**" />
   </ItemGroup>
 
   <ItemGroup>

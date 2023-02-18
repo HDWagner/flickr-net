@@ -3,7 +3,17 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
+    <Title>Flickr .Net Api Library</Title>
+    <Description>.Net library for accessing Flickr.com Api functionality</Description>
+    <Company>http://flickrnet.codeplex.com</Company>
+    <Copyright>Copyright © Sam Judson 2010</Copyright>
+    <Version>3.26.1</Version>
+    <Authors>samjudson, jrotello</Authors>
+    <Product>Flickr .Net Api Library</Product>
+    <PackageProjectUrl>https://github.com/samjudson/flickr-net</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/HDWagner/flickr-net</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="AssemblyInfo.cs" />
+    <Compile Remove="AssemblyInfoMore.cs" />
+    <Compile Remove="SerializableAttribute.cs" />
+    <Compile Remove="ShapeDataSL.cs" />
+    <Compile Remove="UnknownResponseSL.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="CodeAnalysisDictionary.xml" />
     <None Remove="example_app.config" />
     <None Remove="FlickrNet.csproj.vspscc" />
@@ -24,6 +42,13 @@
     <None Remove="FlickrNet.snk" />
     <None Remove="FlickrNetSilverlight.csproj.vspscc" />
     <None Remove="FlickrNetWP7.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
