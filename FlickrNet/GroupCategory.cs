@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FlickrNet
+﻿namespace FlickrNet
 {
     /// <summary>
     /// Contains details of a category, including groups belonging to the category and sub categories.
@@ -93,7 +90,7 @@ namespace FlickrNet
                 else
                 {
                     var s = new Group();
-                    ((IFlickrParsable)s).Load(reader);
+                    ((IFlickrParsable)s).Load(reader); // <---- SonarQube says: here we might have a problem!!!!
                     Groups.Add(s);
                 }
             }

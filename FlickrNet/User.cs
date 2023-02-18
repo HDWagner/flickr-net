@@ -42,6 +42,8 @@ namespace FlickrNet
                     case "fullname":
                         FullName = reader.Value;
                         break;
+                    case "path_alias":
+                        break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
                         break;

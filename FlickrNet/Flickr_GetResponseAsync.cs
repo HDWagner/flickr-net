@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Xml;
 using System.IO;
 using System.Collections.Generic;
 
@@ -115,6 +114,7 @@ namespace FlickrNet
                         sw.Write(postContents);
                         sw.Close();
                     }
+                    s.Flush();
                     s.Close();
                 }
 

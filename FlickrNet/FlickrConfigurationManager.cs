@@ -19,7 +19,18 @@ namespace FlickrNet
             {
                 if (settings == null)
                 {
-                    settings = (FlickrConfigurationSettings)ConfigurationManager.GetSection(configSection);
+                    try
+                    {
+                        settings = (FlickrConfigurationSettings)ConfigurationManager.GetSection(configSection);
+                    }
+                    catch (PlatformNotSupportedException)
+                    {
+                        // not supported on android
+                    }
+                    catch (ConfigurationErrorsException)
+                    {
+                        // not supported on android
+                    }
                 }
 
                 return settings;
