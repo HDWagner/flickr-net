@@ -44,7 +44,10 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserPhotos");
-            if (userId != null && userId.Length > 0) parameters.Add("user_id", userId);
+            if (userId != null && userId.Length > 0)
+            {
+                parameters.Add("user_id", userId);
+            }
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
@@ -72,7 +75,10 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.getUserProfile");
-            if (userId != null && userId.Length > 0) parameters.Add("user_id", userId);
+            if (userId != null && userId.Length > 0)
+            {
+                parameters.Add("user_id", userId);
+            }
 
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 

@@ -11,30 +11,19 @@ namespace FlickrNet
     [XmlRoot("rsp")]
     public class UploadResponse
     {
-        private ResponseStatus status;
-        private string photoId;
         private string ticketId;
-        private ResponseError error;
 
         /// <summary>
         /// The status of the upload, either "ok" or "fail".
         /// </summary>
         [XmlAttribute("stat", Form = XmlSchemaForm.Unqualified)]
-        public ResponseStatus Status
-        {
-            get { return status; }
-            set { status = value; }
-        }
+        public ResponseStatus Status { get; set; }
 
         /// <summary>
         /// If the upload succeeded then this contains the id of the photo. Otherwise it will be zero.
         /// </summary>
         [XmlElement("photoid", Form = XmlSchemaForm.Unqualified)]
-        public string PhotoId
-        {
-            get { return photoId; }
-            set { photoId = value; }
-        }
+        public string PhotoId { get; set; }
 
         /// <summary>
         /// The ticket id, if using Asynchronous uploading.
@@ -50,11 +39,7 @@ namespace FlickrNet
         /// Contains the error returned if the upload is unsuccessful.
         /// </summary>
         [XmlElement("err", Form = XmlSchemaForm.Unqualified)]
-        public ResponseError Error
-        {
-            get { return error; }
-            set { error = value; }
-        }
+        public ResponseError Error { get; set; }
     }
 
     /// <summary>

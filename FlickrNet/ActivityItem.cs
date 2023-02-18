@@ -202,9 +202,15 @@ namespace FlickrNet
             get
             {
                 if (ItemType == ActivityItemType.Photo)
+                {
                     return UtilityMethods.UrlFormat(Farm, Server, Id, Secret, "_s", "jpg");
+                }
+
                 if (ItemType == ActivityItemType.Photoset || ItemType == ActivityItemType.Gallery)
+                {
                     return UtilityMethods.UrlFormat(Farm, Server, PrimaryPhotoId, Secret, "_s", "jpg");
+                }
+
                 return null;
             }
         }
@@ -217,9 +223,15 @@ namespace FlickrNet
             get
             {
                 if (ItemType == ActivityItemType.Photo)
+                {
                     return UtilityMethods.UrlFormat(Farm, Server, Id, Secret, "_m", "jpg");
+                }
+
                 if (ItemType == ActivityItemType.Photoset || ItemType == ActivityItemType.Gallery)
+                {
                     return UtilityMethods.UrlFormat(Farm, Server, PrimaryPhotoId, Secret, "_m", "jpg");
+                }
+
                 return null;
             }
         }

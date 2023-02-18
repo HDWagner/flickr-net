@@ -9,9 +9,9 @@ namespace FlickrNetTest
     [Category("AccessTokenRequired")]
     public class StatsGetDomainsTests : BaseTest
     {
-        string collectionId = "78188-72157600072356354";
-        string photoId = "5890800";
-        string photosetId = "1493109";
+        readonly string collectionId = "78188-72157600072356354";
+        readonly string photoId = "5890800";
+        readonly string photosetId = "1493109";
 
         [Test]
         [Ignore("Method requires authentication")]

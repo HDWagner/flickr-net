@@ -273,14 +273,14 @@ namespace FlickrNet
                         break;
                     case "upload_count":
                         {
-                            UploadCount = int.TryParse(reader.Value, out int i) ? (int?)i : null;
+                            UploadCount = int.TryParse(reader.Value, out int i) ? i : null;
                             break;
                         }
                     case "upload_limit":
                         {
                             if (reader.Value != "-1")
                             {
-                                UploadLimit = int.TryParse(reader.Value, out int i) ? (int?)i : null;
+                                UploadLimit = int.TryParse(reader.Value, out int i) ? i : null;
                             }
                             break;
                         }

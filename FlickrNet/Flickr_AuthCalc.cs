@@ -29,7 +29,10 @@ namespace FlickrNet
         [Obsolete("Use OAuth now.")]
         public string AuthCalcUrl(string frob, AuthLevel authLevel)
         {
-            if (sharedSecret == null) throw new SignatureRequiredException();
+            if (sharedSecret == null)
+            {
+                throw new SignatureRequiredException();
+            }
 
             string hash = sharedSecret + "api_key" + apiKey + "frob" + frob + "perms" + UtilityMethods.AuthLevelToString(authLevel);
             hash = UtilityMethods.MD5Hash(hash);

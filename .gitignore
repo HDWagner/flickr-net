@@ -319,3 +319,7 @@ ASALocalRun/
 # MSBuild Binary and Structured Log
 *.binlog
 /Builds
+/coverage.xml
+/.sonarqube
+/.sonarlint
+/run_SonarQube.bat

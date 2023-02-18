@@ -40,9 +40,13 @@ namespace FlickrNet
             System.Xml.XmlDocument doc = GetXmlDocument();
             XmlNode node = doc.SelectSingleNode("//" + element + "/@" + attribute);
             if (node != null)
+            {
                 return node.Value;
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <summary>
@@ -55,9 +59,13 @@ namespace FlickrNet
             System.Xml.XmlDocument doc = GetXmlDocument();
             XmlNode node = doc.SelectSingleNode("//" + element + "[1]");
             if (node != null)
+            {
                 return node.InnerText;
+            }
             else
+            {
                 return null;
+            }
         }
 
 

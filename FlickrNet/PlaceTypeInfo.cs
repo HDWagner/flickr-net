@@ -24,7 +24,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "place_type")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

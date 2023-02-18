@@ -51,12 +51,18 @@ namespace FlickrNet
         public OAuthException(Exception innerException) : base("OAuth Exception", innerException)
         {
             var exception = innerException as WebException;
-            if (exception == null) return;
+            if (exception == null)
+            {
+                return;
+            }
 
             var res = exception.Response as HttpWebResponse;
-            if (res == null) return;
+            if (res == null)
+            {
+                return;
+            }
 
-            using(var sr = new StreamReader(res.GetResponseStream()))
+            using (var sr = new StreamReader(res.GetResponseStream()))
             {
                 var response = sr.ReadToEnd();
 

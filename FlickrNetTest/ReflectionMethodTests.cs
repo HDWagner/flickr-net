@@ -130,13 +130,19 @@ namespace FlickrNetTest
 
             foreach (MethodArgument argument in flickrMethod.Arguments)
             {
-                if (argument.Name == "api_key") continue;
+                if (argument.Name == "api_key")
+                {
+                    continue;
+                }
 
                 bool found = false;
 
                 string arg = argument.Name.Replace("_", "").ToLower();
                 
-                if (exceptions.ContainsKey(arg)) arg = exceptions[arg];
+                if (exceptions.ContainsKey(arg))
+                {
+                    arg = exceptions[arg];
+                }
 
                 foreach (PropertyInfo info in properties)
                 {

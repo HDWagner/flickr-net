@@ -49,16 +49,22 @@ namespace FlickrNet
             get
             {
                 if( string.IsNullOrEmpty( Clean ) )
+                {
                     return Raw;
+                }
                 else
+                {
                     return Clean;
+                }
             }
         }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "exif")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

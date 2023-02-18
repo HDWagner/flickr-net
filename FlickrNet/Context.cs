@@ -41,12 +41,20 @@ namespace FlickrNet
                     case "prevphoto":
                         PreviousPhoto = new ContextPhoto();
                         ((IFlickrParsable)PreviousPhoto).Load(reader);
-                        if (PreviousPhoto.PhotoId == "0") PreviousPhoto = null;
+                        if (PreviousPhoto.PhotoId == "0")
+                        {
+                            PreviousPhoto = null;
+                        }
+
                         break;
                     case "nextphoto":
                         NextPhoto = new ContextPhoto();
                         ((IFlickrParsable)NextPhoto).Load(reader);
-                        if (NextPhoto.PhotoId == "0") NextPhoto = null;
+                        if (NextPhoto.PhotoId == "0")
+                        {
+                            NextPhoto = null;
+                        }
+
                         break;
 
                 }

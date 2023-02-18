@@ -42,15 +42,29 @@ namespace FlickrNet
 
             var token = new OAuthAccessToken();
             if( parts.ContainsKey("oauth_token") )
+            {
                 token.Token = parts["oauth_token"];
+            }
+
             if (parts.ContainsKey("oauth_token_secret"))
+            {
                 token.TokenSecret = parts["oauth_token_secret"];
+            }
+
             if (parts.ContainsKey("user_nsid"))
+            {
                 token.UserId = parts["user_nsid"];
+            }
+
             if (parts.ContainsKey("fullname"))
+            {
                 token.FullName = parts["fullname"];
+            }
+
             if (parts.ContainsKey("username"))
+            {
                 token.Username = parts["username"];
+            }
 
             return token;
         }

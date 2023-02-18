@@ -45,7 +45,11 @@ namespace FlickrNet
 
             Count = reader.ReadElementContentAsInt();
 
-            if( reader.LocalName != "prevphotos" ) reader.ReadToFollowing("prevphotos");
+            if( reader.LocalName != "prevphotos" )
+            {
+                reader.ReadToFollowing("prevphotos");
+            }
+
             reader.ReadToDescendant("photo");
             while (reader.LocalName == "photo")
             {
@@ -54,7 +58,11 @@ namespace FlickrNet
                 PreviousPhotos.Add(photo);
             }
 
-            if (reader.LocalName != "nextphotos") reader.ReadToFollowing("nextphotos");
+            if (reader.LocalName != "nextphotos")
+            {
+                reader.ReadToFollowing("nextphotos");
+            }
+
             reader.ReadToDescendant("photo");
             while (reader.LocalName == "photo")
             {

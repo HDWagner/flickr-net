@@ -23,7 +23,9 @@ namespace FlickrNet
 
             System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@content_type");
             if (nav == null)
+            {
                 throw new ParsingException("Unable to find content type preference in returned XML.");
+            }
 
             return (ContentType)int.Parse(nav.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
         }
@@ -57,7 +59,9 @@ namespace FlickrNet
 
             System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@hidden");
             if (nav == null)
+            {
                 throw new ParsingException("Unable to find hidden preference in returned XML.");
+            }
 
             return (HiddenFromSearch)int.Parse(nav.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
         }
@@ -77,7 +81,9 @@ namespace FlickrNet
 
             System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@privacy");
             if (nav == null)
+            {
                 throw new ParsingException("Unable to find safety level in returned XML.");
+            }
 
             return (PrivacyFilter)int.Parse(nav.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
         }
@@ -97,7 +103,9 @@ namespace FlickrNet
 
             System.Xml.XmlNode nav = response.GetXmlDocument().SelectSingleNode("*/@safety_level");
             if (nav == null)
+            {
                 throw new ParsingException("Unable to find safety level in returned XML.");
+            }
 
             return (SafetyLevel)int.Parse(nav.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
         }

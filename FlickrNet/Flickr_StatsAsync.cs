@@ -71,10 +71,20 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.stats.getCollectionDomains");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-            if (!string.IsNullOrEmpty(collectionId)) parameters.Add("collection_id", collectionId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(collectionId))
+            {
+                parameters.Add("collection_id", collectionId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatDomainCollection>(parameters, callback);
         }
@@ -159,9 +169,20 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.stats.getPhotoDomains");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-            if (!string.IsNullOrEmpty(photoId)) parameters.Add("photo_id", photoId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(photoId))
+            {
+                parameters.Add("photo_id", photoId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatDomainCollection>(parameters, callback);
         }
@@ -196,8 +217,15 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.stats.getPhotostreamDomains");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatDomainCollection>(parameters, callback);
         }
@@ -263,9 +291,20 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.stats.getPhotosetDomains");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-            if (!string.IsNullOrEmpty(photosetId)) parameters.Add("photoset_id", photosetId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(photosetId))
+            {
+                parameters.Add("photoset_id", photosetId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatDomainCollection>(parameters, callback);
         }
@@ -409,10 +448,20 @@ namespace FlickrNet
             parameters.Add("method", "flickr.stats.getPhotoReferrers");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("domain", domain);
-            if (!string.IsNullOrEmpty(photoId)) parameters.Add("photo_id", photoId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(photoId))
+            {
+                parameters.Add("photo_id", photoId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatReferrerCollection>(parameters, callback);
         }
@@ -480,10 +529,20 @@ namespace FlickrNet
             parameters.Add("method", "flickr.stats.getPhotosetReferrers");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("domain", domain);
-            if (!string.IsNullOrEmpty(photosetId)) parameters.Add("photoset_id", photosetId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(photosetId))
+            {
+                parameters.Add("photoset_id", photosetId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatReferrerCollection>(parameters, callback);
         }
@@ -554,10 +613,20 @@ namespace FlickrNet
             parameters.Add("method", "flickr.stats.getCollectionReferrers");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("domain", domain);
-            if (!string.IsNullOrEmpty(collectionId)) parameters.Add("collection_id", collectionId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(collectionId))
+            {
+                parameters.Add("collection_id", collectionId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatReferrerCollection>(parameters, callback);
         }
@@ -593,9 +662,15 @@ namespace FlickrNet
             parameters.Add("method", "flickr.stats.getPhotostreamReferrers");
             parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
             parameters.Add("domain", domain);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<StatReferrerCollection>(parameters, callback);
         }
@@ -620,7 +695,10 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.stats.getTotalViews");
-            if (date != DateTime.MinValue) parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
+            if (date != DateTime.MinValue)
+            {
+                parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
+            }
 
             GetResponseAsync<StatViews>(parameters, callback);
         }
@@ -710,11 +788,25 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.stats.getPopularPhotos");
-            if (date != DateTime.MinValue) parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
-            if (sort != PopularitySort.None) parameters.Add("sort", UtilityMethods.SortOrderToString(sort));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (date != DateTime.MinValue)
+            {
+                parameters.Add("date", UtilityMethods.DateToUnixTimestamp(date));
+            }
+
+            if (sort != PopularitySort.None)
+            {
+                parameters.Add("sort", UtilityMethods.SortOrderToString(sort));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PopularPhotoCollection>(parameters, callback);
         }

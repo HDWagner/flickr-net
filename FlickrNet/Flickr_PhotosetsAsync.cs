@@ -51,8 +51,15 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.create");
             parameters.Add("primary_photo_id", primaryPhotoId);
-            if (!string.IsNullOrEmpty(title)) parameters.Add("title", title);
-            if (!string.IsNullOrEmpty(description)) parameters.Add("description", description);
+            if (!string.IsNullOrEmpty(title))
+            {
+                parameters.Add("title", title);
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                parameters.Add("description", description);
+            }
 
             GetResponseAsync<Photoset>(parameters, callback);
         }
@@ -213,9 +220,20 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.getList");
-            if (userId != null) parameters.Add("user_id", userId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (userId != null)
+            {
+                parameters.Add("user_id", userId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PhotosetCollection>(
                 parameters, 
@@ -345,12 +363,30 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photosets.getPhotos");
             parameters.Add("photoset_id", photosetId);
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (privacyFilter != PrivacyFilter.None) parameters.Add("privacy_filter", privacyFilter.ToString("d"));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (privacyFilter != PrivacyFilter.None)
+            {
+                parameters.Add("privacy_filter", privacyFilter.ToString("d"));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (media != MediaType.None) parameters.Add("media",(media == MediaType.All? "all": (media == MediaType.Photos? "photos": (media == MediaType.Videos ? "videos" : string.Empty))));
+            }
+
+            if (media != MediaType.None)
+            {
+                parameters.Add("media",(media == MediaType.All? "all": (media == MediaType.Photos? "photos": (media == MediaType.Videos ? "videos" : string.Empty))));
+            }
 
             GetResponseAsync<PhotosetPhotoCollection>(parameters, callback);
         }
@@ -507,7 +543,9 @@ namespace FlickrNet
                     var result = new FlickrResult<string>();
                     result.HasError = r.HasError;
                     if (r.HasError)
+                    {
                         result.Error = r.Error;
+                    }
                     else
                     {
                         result.Result = r.Result.GetAttributeValue("*", "id");

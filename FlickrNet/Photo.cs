@@ -152,9 +152,13 @@ namespace FlickrNet
             get
             {
                 if (urlSquare != null)
+                {
                     return urlSquare;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_s", "jpg");
+                }
             }
         }
 
@@ -175,9 +179,13 @@ namespace FlickrNet
             get
             {
                 if (urlLargeSquare != null)
+                {
                     return urlLargeSquare;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_q", "jpg");
+                }
             }
         }
 
@@ -197,9 +205,13 @@ namespace FlickrNet
             get
             {
                 if (urlThumbnail != null)
+                {
                     return urlThumbnail;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_t", "jpg");
+                }
             }
         }
 
@@ -220,9 +232,13 @@ namespace FlickrNet
             get
             {
                 if (urlSmall != null)
+                {
                     return urlSmall;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_m", "jpg");
+                }
             }
         }
 
@@ -243,9 +259,13 @@ namespace FlickrNet
             get
             {
                 if (urlSmall320 != null)
+                {
                     return urlSmall320;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_n", "jpg");
+                }
             }
         }
 
@@ -268,9 +288,13 @@ namespace FlickrNet
             get
             {
                 if (urlMedium640 != null)
+                {
                     return urlMedium640;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_z", "jpg");
+                }
             }
         }
 
@@ -293,9 +317,13 @@ namespace FlickrNet
             get
             {
                 if (urlMedium800 != null)
+                {
                     return urlMedium800;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_z", "jpg");
+                }
             }
         }
 
@@ -344,9 +372,13 @@ namespace FlickrNet
             get
             {
                 if (urlMedium != null)
+                {
                     return urlMedium;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, string.Empty, "jpg");
+                }
             }
         }
 
@@ -369,9 +401,13 @@ namespace FlickrNet
             get
             {
                 if (urlLarge != null)
+                {
                     return urlLarge;
+                }
                 else
+                {
                     return UtilityMethods.UrlFormat(this, "_b", "jpg");
+                }
             }
         }
 
@@ -392,10 +428,14 @@ namespace FlickrNet
             get 
             {
                 if (urlOriginal != null)
+                {
                     return urlOriginal;
+                }
 
                 if (OriginalFormat == null || OriginalFormat.Length == 0)
+                {
                     return null;
+                }
 
                 return UtilityMethods.UrlFormat(this, "_o", OriginalFormat);
             }
@@ -528,12 +568,19 @@ namespace FlickrNet
         {
             get
             {
-                if (urlLarge != null) return true;
+                if (urlLarge != null)
+                {
+                    return true;
+                }
 
                 if (OriginalHeight > 1280 || OriginalWidth > 1280)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
         }
 
@@ -545,12 +592,19 @@ namespace FlickrNet
         {
             get
             {
-                if (urlMedium != null) return true;
+                if (urlMedium != null)
+                {
+                    return true;
+                }
 
                 if (OriginalHeight > 500 || OriginalWidth > 500)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
         }
 
@@ -559,7 +613,10 @@ namespace FlickrNet
         {
             Load(reader, false);
 
-            if (reader.LocalName == "photo" && reader.NodeType == XmlNodeType.EndElement) reader.Read();
+            if (reader.LocalName == "photo" && reader.NodeType == XmlNodeType.EndElement)
+            {
+                reader.Read();
+            }
         }
 
         /// <summary>
@@ -571,7 +628,9 @@ namespace FlickrNet
         protected void Load(XmlReader reader, bool allowExtraAtrributes)
         {
             if (reader.LocalName != "photo" && reader.LocalName != "primary_photo_extras")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -870,7 +929,11 @@ namespace FlickrNet
                         CountComments = reader.ReadContentAsInt();
                         break;
                     default:
-                        if (!allowExtraAtrributes) UtilityMethods.CheckParsingException(reader);
+                        if (!allowExtraAtrributes)
+                        {
+                            UtilityMethods.CheckParsingException(reader);
+                        }
+
                         break;
                 }
             }
@@ -878,8 +941,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.LocalName == "description")
+            {
                 Description = reader.ReadElementContentAsString();
-
+            }
         }
     }
 }

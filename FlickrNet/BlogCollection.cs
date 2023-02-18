@@ -12,7 +12,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "blogs")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             reader.Read();
 

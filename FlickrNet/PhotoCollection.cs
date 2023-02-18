@@ -13,7 +13,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "photos")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -45,7 +47,10 @@ namespace FlickrNet
             {
                 var p = new Photo();
                 ((IFlickrParsable)p).Load(reader);
-                if (!string.IsNullOrEmpty(p.PhotoId)) Add(p);
+                if (!string.IsNullOrEmpty(p.PhotoId))
+                {
+                    Add(p);
+                }
             }
 
             // Skip to next element (if any)

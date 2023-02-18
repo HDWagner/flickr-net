@@ -34,7 +34,10 @@ namespace FlickrNet
             parameters.Add("method", "flickr.galleries.addPhoto");
             parameters.Add("gallery_id", galleryId);
             parameters.Add("photo_id", photoId);
-            if (!string.IsNullOrEmpty(comment)) parameters.Add("comment", comment);
+            if (!string.IsNullOrEmpty(comment))
+            {
+                parameters.Add("comment", comment);
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -65,7 +68,10 @@ namespace FlickrNet
             parameters.Add("method", "flickr.galleries.create");
             parameters.Add("title", title);
             parameters.Add("description", description);
-            if (!string.IsNullOrEmpty(primaryPhotoId)) parameters.Add("primary_photo_id", primaryPhotoId);
+            if (!string.IsNullOrEmpty(primaryPhotoId))
+            {
+                parameters.Add("primary_photo_id", primaryPhotoId);
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -96,7 +102,10 @@ namespace FlickrNet
             parameters.Add("method", "flickr.galleries.editMeta");
             parameters.Add("gallery_id", galleryId);
             parameters.Add("title", title);
-            if (!string.IsNullOrEmpty(description)) parameters.Add("description", description);
+            if (!string.IsNullOrEmpty(description))
+            {
+                parameters.Add("description", description);
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -205,9 +214,20 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.getList");
-            if (!string.IsNullOrEmpty(userId)) parameters.Add("user_id", userId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(userId))
+            {
+                parameters.Add("user_id", userId);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<GalleryCollection>(parameters, callback);
         }
@@ -234,8 +254,15 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.getListForPhoto");
             parameters.Add("photo_id", photoId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<GalleryCollection>(parameters, callback);
         }
@@ -261,7 +288,10 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.getPhotos");
             parameters.Add("gallery_id", galleryId);
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             GetResponseAsync<GalleryPhotoCollection>(parameters, callback);
         }

@@ -23,7 +23,11 @@ namespace FlickrNet
         {
             get
             {
-                if (url == null) url = string.Format(System.Globalization.CultureInfo.InvariantCulture, "https://www.flickr.com/photos/{0}/sets/{1}/", OwnerId, PhotosetId);
+                if (url == null)
+                {
+                    url = string.Format(System.Globalization.CultureInfo.InvariantCulture, "https://www.flickr.com/photos/{0}/sets/{1}/", OwnerId, PhotosetId);
+                }
+
                 return url;
             }
             set { url = value; }
@@ -147,7 +151,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "photoset")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

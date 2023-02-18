@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-
-#pragma warning disable CS0618 // Type or member is obsolete
 
 namespace FlickrNet
 {
@@ -39,7 +35,7 @@ namespace FlickrNet
             parameters.Add("method", "flickr.auth.getFrob");
 
             GetResponseAsync<UnknownResponse>(
-                parameters, 
+                parameters,
                 r =>
                 {
                     var result = new FlickrResult<string>();

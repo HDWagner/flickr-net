@@ -147,16 +147,33 @@ namespace FlickrNet
         public void PeopleGetPublicPhotosAsync(string userId, int page, int perPage, SafetyLevel safetyLevel, PhotoSearchExtras extras, Action<FlickrResult<PhotoCollection>> callback)
         {
             if (!IsAuthenticated && safetyLevel > SafetyLevel.Safe)
+            {
                 throw new ArgumentException("Safety level may only be 'Safe' for unauthenticated calls", "safetyLevel");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.getPublicPhotos");
             parameters.Add("api_key", apiKey);
             parameters.Add("user_id", userId);
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (safetyLevel != SafetyLevel.None) parameters.Add("safety_level", safetyLevel.ToString("D"));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (safetyLevel != SafetyLevel.None)
+            {
+                parameters.Add("safety_level", safetyLevel.ToString("D"));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -294,23 +311,55 @@ namespace FlickrNet
 
             parameters.Add("method", "flickr.people.getPhotos");
             parameters.Add("user_id", userId ?? "me");
-            if (safeSearch != SafetyLevel.None) parameters.Add("safe_search", safeSearch.ToString("d"));
+            if (safeSearch != SafetyLevel.None)
+            {
+                parameters.Add("safe_search", safeSearch.ToString("d"));
+            }
+
             if (minUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate));
+            }
+
             if (maxUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate));
+            }
+
             if (minTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate));
+            }
+
             if (maxTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate));
+            }
 
-            if (contentType != ContentTypeSearch.None) parameters.Add("content_type", contentType.ToString("d"));
-            if (privacyFilter != PrivacyFilter.None) parameters.Add("privacy_filter", privacyFilter.ToString("d"));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (contentType != ContentTypeSearch.None)
+            {
+                parameters.Add("content_type", contentType.ToString("d"));
+            }
 
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (privacyFilter != PrivacyFilter.None)
+            {
+                parameters.Add("privacy_filter", privacyFilter.ToString("d"));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -372,9 +421,20 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.getPhotosOf");
             parameters.Add("user_id", userId);
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PeoplePhotoCollection>(parameters, callback);
         }

@@ -177,10 +177,15 @@ namespace FlickrNet
                         // Duplicate of above but not compound
                         break;
                     case "url":
-                        if (reader.Value.IndexOf("www.flickr.com", StringComparison.Ordinal) > 0)
+                        if (reader.Value.IndexOf("www.flickr.com", StringComparison.Ordinal) >= 0)
+                        {
                             GalleryUrl = reader.Value.Replace("http://", "https://");
+                        }
                         else
+                        {
                             GalleryUrl = "https://www.flickr.com" + reader.Value;
+                        }
+
                         break;
                     case "owner":
                         OwnerId = reader.Value;

@@ -38,7 +38,10 @@ namespace FlickrNet
         {
             Load(reader, false);
 
-            if (reader.LocalName == "photo") return;
+            if (reader.LocalName == "photo")
+            {
+                return;
+            }
 
             if (reader.LocalName != "stats")
             {
@@ -76,7 +79,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.LocalName == "description")
+            {
                 Description = reader.ReadElementContentAsString();
+            }
 
             reader.Skip();
         }

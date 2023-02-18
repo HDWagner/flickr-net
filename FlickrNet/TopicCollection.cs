@@ -72,8 +72,15 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (reader.LocalName != "topics") throw new ResponseXmlException("Unknown initial element \"" + reader.LocalName + "\". Expecting \"topics\".");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
+            if (reader.LocalName != "topics")
+            {
+                throw new ResponseXmlException("Unknown initial element \"" + reader.LocalName + "\". Expecting \"topics\".");
+            }
 
             while (reader.MoveToNextAttribute())
             {

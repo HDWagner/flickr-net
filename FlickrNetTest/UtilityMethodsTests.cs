@@ -1,7 +1,5 @@
-﻿using System;
-using FlickrNet;
+﻿using FlickrNet;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace FlickrNetTest
 {
@@ -434,6 +432,8 @@ namespace FlickrNetTest
             var u2 = new Uri(new Uri("http://www.test.com"), u);
 
             Console.WriteLine(u2.AbsoluteUri);
+
+            Assert.AreEqual("http://www.test.com/Test", u2.ToString());
         }
 
         [Test]

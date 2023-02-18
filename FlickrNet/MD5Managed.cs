@@ -2,6 +2,8 @@
 using System;
 using System.Security.Cryptography;
 
+namespace MD5Namespace;
+
 // **************************************************************
 // * Raw implementation of the MD5 hash algorithm
 // * from RFC 1321.

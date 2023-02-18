@@ -54,7 +54,9 @@
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "category")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -123,7 +125,9 @@
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "category")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

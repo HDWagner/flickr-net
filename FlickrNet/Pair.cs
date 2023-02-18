@@ -50,7 +50,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.NodeType == System.Xml.XmlNodeType.Text)
+            {
                 PairName = reader.ReadContentAsString();
+            }
 
             reader.Read();
         }

@@ -20,7 +20,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "brand")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

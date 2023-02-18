@@ -23,14 +23,17 @@ namespace FlickrNet
                 lock (lockObject)
                 {
                     if (responses == null)
+                    {
                         responses = new PersistentCache(Path.Combine(CacheLocation, "responseCache.dat"), new ResponseCacheItemPersister());
+                    }
+
                     return responses;
                 }
             }
         }
 
 
-        private static object lockObject = new object();
+        private static readonly object lockObject = new object();
 
         private enum Tristate
         {
@@ -47,9 +50,14 @@ namespace FlickrNet
             {
 #if !(WindowsCE || MONOTOUCH || SILVERLIGHT)
                 if (cacheDisabled == Tristate.Null && FlickrConfigurationManager.Settings != null)
+                {
                     cacheDisabled = FlickrConfigurationManager.Settings.CacheDisabled ? Tristate.True : Tristate.False;
+                }
 #endif
-                if (cacheDisabled == Tristate.Null) cacheDisabled = Tristate.False;
+                if (cacheDisabled == Tristate.Null)
+                {
+                    cacheDisabled = Tristate.False;
+                }
 
                 return cacheDisabled == Tristate.True;
             }
@@ -70,7 +78,9 @@ namespace FlickrNet
             {
 #if !(WindowsCE || MONOTOUCH || SILVERLIGHT)
                 if (cacheLocation == null && FlickrConfigurationManager.Settings != null)
+                {
                     cacheLocation = FlickrConfigurationManager.Settings.CacheLocation;
+                }
 #endif
                 if (cacheLocation == null)
                 {
@@ -98,7 +108,9 @@ namespace FlickrNet
                 }
 
                 if (cacheLocation == null)
+                {
                     throw new CacheException("Unable to determine cache location. Please set cacheLocation in configuration file or set manually in code");
+                }
 
                 return cacheLocation;
             }
@@ -108,32 +120,12 @@ namespace FlickrNet
             }
         }
 
-        // Default cache size is set to 50MB
-        private static long cacheSizeLimit = 52428800;
-
-        internal static long CacheSizeLimit
-        {
-            get
-            {
-                return cacheSizeLimit;
-            }
-            set
-            {
-                cacheSizeLimit = value;
-            }
-        }
-
-        // Default cache timeout is 1 hour
-        private static TimeSpan cachetimeout = new TimeSpan(0, 1, 0, 0, 0);
+        internal static long CacheSizeLimit { get; set; } = 52428800;
 
         /// <summary>
         /// The default timeout for cachable objects within the cache.
         /// </summary>
-        public static TimeSpan CacheTimeout
-        {
-            get { return cachetimeout; }
-            set { cachetimeout = value; }
-        }
+        public static TimeSpan CacheTimeout { get; set; } = new TimeSpan(0, 1, 0, 0, 0);
 
         /// <summary>
         /// Remove a specific URL from the cache.
@@ -197,6 +189,7 @@ namespace FlickrNet
 
         void ICacheItem.OnItemFlushed()
         {
+            // the author doesn't care
         }
 
     }
@@ -212,7 +205,9 @@ namespace FlickrNet
 
             // Corrupted cache record, so throw IOException which is then handled and returns partial cache.
             if (chunks.Length != 2)
+            {
                 throw new IOException("Unexpected number of chunks found");
+            }
 
             string url = chunks[0];
             var creationTime = new DateTime(long.Parse(chunks[1], System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));

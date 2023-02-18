@@ -47,9 +47,20 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.machinetags.getNamespaces");
-            if (!string.IsNullOrEmpty(predicate)) parameters.Add("predicate", predicate);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(predicate))
+            {
+                parameters.Add("predicate", predicate);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<NamespaceCollection>(parameters);
 
@@ -97,9 +108,20 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.machinetags.getPredicates");
-            if (!string.IsNullOrEmpty(namespaceName)) parameters.Add("namespace", namespaceName);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(namespaceName))
+            {
+                parameters.Add("namespace", namespaceName);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PredicateCollection>(parameters);
         }
@@ -148,10 +170,25 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.machinetags.getPairs");
-            if (!string.IsNullOrEmpty(namespaceName)) parameters.Add("namespace", namespaceName);
-            if (!string.IsNullOrEmpty(predicate)) parameters.Add("predicate", predicate);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(namespaceName))
+            {
+                parameters.Add("namespace", namespaceName);
+            }
+
+            if (!string.IsNullOrEmpty(predicate))
+            {
+                parameters.Add("predicate", predicate);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PairCollection>(parameters);
         }
@@ -182,8 +219,15 @@ namespace FlickrNet
             parameters.Add("method", "flickr.machinetags.getValues");
             parameters.Add("namespace", namespaceName);
             parameters.Add("predicate", predicate);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<ValueCollection>(parameters);
         }
@@ -253,11 +297,30 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.machinetags.getRecentValues");
-            if (!string.IsNullOrEmpty(namespaceName)) parameters.Add("namespace", namespaceName);
-            if (!string.IsNullOrEmpty(predicate)) parameters.Add("predicate", predicate);
-            if (addedSince != DateTime.MinValue) parameters.Add("added_since", UtilityMethods.DateToUnixTimestamp(addedSince));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(namespaceName))
+            {
+                parameters.Add("namespace", namespaceName);
+            }
+
+            if (!string.IsNullOrEmpty(predicate))
+            {
+                parameters.Add("predicate", predicate);
+            }
+
+            if (addedSince != DateTime.MinValue)
+            {
+                parameters.Add("added_since", UtilityMethods.DateToUnixTimestamp(addedSince));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<ValueCollection>(parameters);
         }

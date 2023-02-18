@@ -129,8 +129,15 @@ namespace FlickrNet
 
         private void LoadElements(XmlReader reader)
         {
-            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "photo") return;
-            if (reader.NodeType == XmlNodeType.Element && reader.Name == "geoperms") return;
+            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "photo")
+            {
+                return;
+            }
+
+            if (reader.NodeType == XmlNodeType.Element && reader.Name == "geoperms")
+            {
+                return;
+            }
 
             while (reader.NodeType != XmlNodeType.EndElement)
             {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FlickrNet.Exceptions;
+using System;
 using System.Xml;
-using FlickrNet.Exceptions;
 
 namespace FlickrNet
 {
@@ -19,14 +17,18 @@ namespace FlickrNet
         public static Exception CreateResponseException(XmlReader reader)
         {
             if (reader == null)
+            {
                 throw new ArgumentNullException("reader");
+            }
 
             reader.MoveToElement();
 
             if (!reader.ReadToDescendant("err"))
+            {
                 throw new System.Xml.XmlException("No error element found in XML");
+            }
 
-            int code = 0;
+            var code = 0;
             string msg = null;
 
             while (reader.MoveToNextAttribute())

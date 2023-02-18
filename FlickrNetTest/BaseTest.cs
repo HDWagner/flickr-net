@@ -6,8 +6,7 @@ using NUnit.Framework.Interfaces;
 
 namespace FlickrNetTest
 {
-    [TestFixture]
-    public class BaseTest
+    public abstract class BaseTest
     {
         Flickr _instance;
         Flickr _authInstance;
@@ -58,9 +57,15 @@ namespace FlickrNetTest
         [TearDown]
         public void ErrorLogging()
         {
-            if( (_testCount % 10) > 0 ) System.Threading.Thread.Sleep(200);
+            if( (_testCount % 10) > 0 )
+            {
+                System.Threading.Thread.Sleep(200);
+            }
 
-            if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed) return;
+            if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
+            {
+                return;
+            }
 
             if (InstanceUsed)
             {

@@ -136,10 +136,17 @@ namespace FlickrNet
                         try
                         {
                             var bufferSize = 32*1024;
-                            if (dataBuffer.Length/100 > bufferSize) bufferSize = bufferSize*2;
+                            if (dataBuffer.Length/100 > bufferSize)
+                            {
+                                bufferSize = bufferSize*2;
+                            }
+
                             dataBuffer.UploadProgress += (o, e) =>
                                                          {
-                                                             if (OnUploadProgress != null) OnUploadProgress(this, e);
+                                                             if (OnUploadProgress != null)
+                                                             {
+                                                                 OnUploadProgress(this, e);
+                                                             }
                                                          };
                             dataBuffer.CopyTo(reqStream, bufferSize);
                             reqStream.Close();
@@ -163,7 +170,7 @@ namespace FlickrNet
                                 sr.Close();
 
                                 var t = new UnknownResponse();
-                                ((IFlickrParsable)t).Load(responseXml);
+                                t.Load(responseXml);
                                 result.Result = t.GetElementValue("photoid");
                                 result.HasError = false;
                             }

@@ -8,9 +8,6 @@ namespace FlickrNet
     /// </summary>
     public class BoundaryBox
     {
-        private GeoAccuracy accuracy = GeoAccuracy.Street;
-        private bool isSet;
-
         private double minimumLat = -90;
         private double minimumLon = -180;
         private double maximumLat = 90;
@@ -49,12 +46,17 @@ namespace FlickrNet
         /// <param name="points">A comma seperated list of co-ordinates defining the boundary box.</param>
         public BoundaryBox(string points)
         {
-            if (points == null) throw new ArgumentNullException("points");
+            if (points == null)
+            {
+                throw new ArgumentNullException("points");
+            }
 
             string[] splits = points.Split(',');
 
             if (splits.Length != 4)
+            {
                 throw new ArgumentException("Parameter must contain 4 values, seperated by commas.", "points");
+            }
 
             try
             {
@@ -141,11 +143,7 @@ namespace FlickrNet
         /// <summary>
         /// The search accuracy - optional. Defaults to <see cref="GeoAccuracy.Street"/>.
         /// </summary>
-        public GeoAccuracy Accuracy
-        {
-            get { return accuracy; }
-            set { accuracy = value; }
-        }
+        public GeoAccuracy Accuracy { get; set; } = GeoAccuracy.Street;
 
         /// <summary>
         /// The minimum latitude of the boundary box, i.e. bottom left hand corner.
@@ -159,7 +157,7 @@ namespace FlickrNet
                 {
                     throw new ArgumentOutOfRangeException("value", "Must be between -90 and 90");
                 }
-                isSet = true; 
+                IsSet = true;
                 minimumLat = value;
             }
         }
@@ -176,7 +174,7 @@ namespace FlickrNet
                 {
                     throw new ArgumentOutOfRangeException("value", "Must be between -180 and 180");
                 }
-                isSet = true; 
+                IsSet = true;
                 minimumLon = value;
             }
         }
@@ -193,7 +191,7 @@ namespace FlickrNet
                 {
                     throw new ArgumentOutOfRangeException("value", "Must be between -90 and 90");
                 }
-                isSet = true; 
+                IsSet = true;
                 maximumLat = value;
             }
         }
@@ -210,7 +208,7 @@ namespace FlickrNet
                 {
                     throw new ArgumentOutOfRangeException("value", "Must be between -180 and 180");
                 }
-                isSet = true; 
+                IsSet = true;
                 maximumLon = value;
             }
         }
@@ -218,10 +216,7 @@ namespace FlickrNet
         /// <summary>
         /// Gets weither the boundary box has been set or not.
         /// </summary>
-        internal bool IsSet
-        {
-            get { return isSet; }
-        }
+        internal bool IsSet { get; private set; }
 
         /// <summary>
         /// Overrides the ToString method.

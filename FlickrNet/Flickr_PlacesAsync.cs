@@ -15,7 +15,10 @@ namespace FlickrNet
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void PlacesFindAsync(string query, Action<FlickrResult<PlaceCollection>> callback)
         {
-            if (query == null) throw new ArgumentNullException("query");
+            if (query == null)
+            {
+                throw new ArgumentNullException("query");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.find");
@@ -50,8 +53,10 @@ namespace FlickrNet
             parameters.Add("lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             if (accuracy != GeoAccuracy.None)
+            {
                 parameters.Add("accuracy",
                                ((int) accuracy).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PlaceCollection>(
                 parameters,
@@ -83,8 +88,15 @@ namespace FlickrNet
                 throw new FlickrException("Both placeId and woeId cannot be null or empty.");
             }
 
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
         }
@@ -105,8 +117,15 @@ namespace FlickrNet
                 throw new FlickrException("Both placeId and woeId cannot be null or empty.");
             }
 
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
 
             GetResponseAsync<PlaceInfo>(parameters, callback);
         }
@@ -156,8 +175,15 @@ namespace FlickrNet
                 throw new FlickrException("Both placeId and woeId cannot be null or empty.");
             }
 
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
 
             GetResponseAsync<ShapeDataCollection>(parameters, callback);
 
@@ -214,10 +240,20 @@ namespace FlickrNet
 
             parameters.Add("place_type_id", placeType.ToString("D"));
             if (date != DateTime.MinValue)
+            {
                 parameters.Add("date",
                                date.ToString("yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo));
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
         }
@@ -272,18 +308,40 @@ namespace FlickrNet
             parameters.Add("method", "flickr.places.placesForUser");
 
             parameters.Add("place_type_id", placeType.ToString("D"));
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
             if (threshold > 0)
+            {
                 parameters.Add("threshold", threshold.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (minTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate));
+            }
+
             if (maxTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate));
+            }
+
             if (minUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate));
+            }
+
             if (maxUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate));
+            }
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
         }
@@ -316,24 +374,60 @@ namespace FlickrNet
             parameters.Add("method", "flickr.places.placesForTags");
 
             parameters.Add("place_type_id", placeType.ToString("D"));
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
             if (threshold > 0)
+            {
                 parameters.Add("threshold", threshold.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (tags != null && tags.Length > 0) parameters.Add("tags", string.Join(",", tags));
-            if (tagMode != TagMode.None) parameters.Add("tag_mode", UtilityMethods.TagModeToString(tagMode));
+            }
+
+            if (tags != null && tags.Length > 0)
+            {
+                parameters.Add("tags", string.Join(",", tags));
+            }
+
+            if (tagMode != TagMode.None)
+            {
+                parameters.Add("tag_mode", UtilityMethods.TagModeToString(tagMode));
+            }
+
             if (machineTags != null && machineTags.Length > 0)
+            {
                 parameters.Add("machine_tags", string.Join(",", machineTags));
+            }
+
             if (machineTagMode != MachineTagMode.None)
+            {
                 parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(machineTagMode));
+            }
+
             if (minTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate));
+            }
+
             if (maxTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate));
+            }
+
             if (minUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate));
+            }
+
             if (maxUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate));
+            }
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
         }
@@ -363,20 +457,45 @@ namespace FlickrNet
             parameters.Add("method", "flickr.places.placesForContacts");
 
             parameters.Add("place_type_id", placeType.ToString("D"));
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
             if (threshold > 0)
+            {
                 parameters.Add("threshold", threshold.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (contactType != ContactSearch.None)
+            {
                 parameters.Add("contacts", (contactType == ContactSearch.AllContacts ? "all" : "ff"));
+            }
+
             if (minUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate));
+            }
+
             if (maxUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate));
+            }
+
             if (minTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate));
+            }
+
             if (maxTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate));
+            }
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
         }
@@ -397,8 +516,16 @@ namespace FlickrNet
             parameters.Add("method", "flickr.places.placesForBoundingBox");
 
             parameters.Add("place_type_id", placeType.ToString("D"));
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
             parameters.Add("bbox", boundaryBox.ToString());
 
             GetResponseAsync<PlaceCollection>(parameters, callback);
@@ -468,16 +595,35 @@ namespace FlickrNet
                 throw new FlickrException("Both placeId and woeId cannot be null or empty.");
             }
 
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
+
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
             if (minTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("min_taken_date", UtilityMethods.DateToMySql(minTakenDate));
+            }
+
             if (maxTakenDate != DateTime.MinValue)
+            {
                 parameters.Add("max_taken_date", UtilityMethods.DateToMySql(maxTakenDate));
+            }
+
             if (minUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(minUploadDate));
+            }
+
             if (maxUploadDate != DateTime.MinValue)
+            {
                 parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(maxUploadDate));
+            }
 
             GetResponseAsync<TagCollection>(parameters, callback);
         }

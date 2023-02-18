@@ -84,7 +84,11 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "reply") { UtilityMethods.CheckParsingException(reader); return; }
 
             while (reader.MoveToNextAttribute())
@@ -142,7 +146,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.LocalName == "message")
+            {
                 Message = reader.ReadElementContentAsString();
+            }
 
             reader.Skip();
         }

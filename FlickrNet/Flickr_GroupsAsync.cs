@@ -28,7 +28,10 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.browse");
-            if (!string.IsNullOrEmpty(catId)) parameters.Add("cat_id", catId);
+            if (!string.IsNullOrEmpty(catId))
+            {
+                parameters.Add("cat_id", catId);
+            }
 
             GetResponseAsync<GroupCategory>(parameters, callback);
         }
@@ -67,8 +70,15 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.search");
             parameters.Add("api_key", apiKey);
             parameters.Add("text", text);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<GroupSearchResultCollection>(parameters, callback);
         }
@@ -115,9 +125,21 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.members.getList");
             parameters.Add("api_key", apiKey);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (memberTypes != MemberTypes.None) parameters.Add("membertypes", UtilityMethods.MemberTypeToString(memberTypes));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (memberTypes != MemberTypes.None)
+            {
+                parameters.Add("membertypes", UtilityMethods.MemberTypeToString(memberTypes));
+            }
+
             parameters.Add("group_id", groupId);
 
             GetResponseAsync<MemberCollection>(parameters, callback);
@@ -245,11 +267,30 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.pools.getPhotos");
             parameters.Add("group_id", groupId);
-            if (tags != null && tags.Length > 0) parameters.Add("tags", tags);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (userId != null && userId.Length > 0) parameters.Add("user_id", userId);
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (tags != null && tags.Length > 0)
+            {
+                parameters.Add("tags", tags);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (userId != null && userId.Length > 0)
+            {
+                parameters.Add("user_id", userId);
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -277,7 +318,10 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.join");
             parameters.Add("group_id", groupId);
-            if (acceptsRules) parameters.Add("accepts_rules", "1");
+            if (acceptsRules)
+            {
+                parameters.Add("accepts_rules", "1");
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -297,7 +341,10 @@ namespace FlickrNet
             parameters.Add("method", "flickr.groups.joinRequest");
             parameters.Add("group_id", groupId);
             parameters.Add("message", message);
-            if (acceptRules) parameters.Add("accept_rules", "1");
+            if (acceptRules)
+            {
+                parameters.Add("accept_rules", "1");
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -326,7 +373,10 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.leave");
             parameters.Add("group_id", groupId);
-            if (deletePhotos) parameters.Add("delete_photos", "1");
+            if (deletePhotos)
+            {
+                parameters.Add("delete_photos", "1");
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }

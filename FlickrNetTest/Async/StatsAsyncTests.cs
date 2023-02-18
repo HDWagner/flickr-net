@@ -101,7 +101,10 @@ namespace FlickrNetTest.Async
             f.StatsGetPhotoStatsAsync(d, "7176125763", r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            if (result.HasError) throw result.Error;
+            if (result.HasError)
+            {
+                throw result.Error;
+            }
 
             Assert.IsFalse(result.HasError);
         }

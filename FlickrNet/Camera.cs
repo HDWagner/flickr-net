@@ -45,7 +45,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "camera")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

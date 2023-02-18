@@ -12,9 +12,9 @@ namespace FlickrNetTest
     [Category("AccessTokenRequired")]
     public class StatsGetReferrerTests : BaseTest
     {
-        string collectionId = "78188-72157600072356354";
-        string photoId = "5890800";
-        string photosetId = "1493109";
+        readonly string collectionId = "78188-72157600072356354";
+        readonly string photoId = "5890800";
+        readonly string photosetId = "1493109";
         readonly DateTime lastWeek = DateTime.Today.AddDays(-7);
 
 
@@ -71,7 +71,10 @@ namespace FlickrNetTest
 
             Assert.AreEqual(referrers.Count, Math.Min(referrers.Total, referrers.PerPage), "Count should either be equal to Total or PerPage.");
 
-            if (referrers.Total == 0) return;
+            if (referrers.Total == 0)
+            {
+                return;
+            }
 
             Assert.AreEqual(domain, referrers.DomainName, "StatReferrers.Domain should be the same as the searched for domain.");
 
@@ -110,7 +113,10 @@ namespace FlickrNetTest
 
             Assert.AreEqual(referrers.Count, Math.Min(referrers.Total, referrers.PerPage), "Count should either be equal to Total or PerPage.");
 
-            if (referrers.Total == 0) return;
+            if (referrers.Total == 0)
+            {
+                return;
+            }
 
             Assert.AreEqual(domain, referrers.DomainName, "StatReferrers.Domain should be the same as the searched for domain.");
 
@@ -139,7 +145,10 @@ namespace FlickrNetTest
 
             Assert.AreEqual(referrers.Count, Math.Min(referrers.Total, referrers.PerPage), "Count should either be equal to Total or PerPage.");
 
-            if (referrers.Total == 0 && referrers.Pages == 0) return;
+            if (referrers.Total == 0 && referrers.Pages == 0)
+            {
+                return;
+            }
 
             Assert.AreEqual(domain, referrers.DomainName, "StatReferrers.Domain should be the same as the searched for domain.");
 

@@ -1,15 +1,10 @@
-﻿using System.IO;
-using System.Linq;
+﻿using FlickrNet;
+using FlickrNet.Exceptions;
+using NUnit.Framework;
+using Shouldly;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Xml;
-using FlickrNet;
-using NUnit.Framework;
-using System;
-using Shouldly;
-using FlickrNet.Exceptions;
-
-#pragma warning disable CS0618 // Type or member is obsolete
 
 namespace FlickrNetTest
 {

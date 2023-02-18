@@ -1,7 +1,5 @@
-﻿using System;
-
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
 
 namespace FlickrNetTest
 {
@@ -52,7 +50,7 @@ namespace FlickrNetTest
 
             Assert.IsNotNull(items, "ActivityItemCollection should not be null.");
 
-            if( items.Count == 0)
+            if (items.Count == 0)
             {
                 Assert.Inconclusive("Unable to continue the test as no recent activity");
                 return;
@@ -74,20 +72,32 @@ namespace FlickrNetTest
                     if (e.EventType != ActivityEventType.Gallery)
                     {
                         if (e.EventType == ActivityEventType.Note || e.EventType == ActivityEventType.Comment || e.EventType == ActivityEventType.Tag)
+                        {
                             Assert.IsNotNull(e.Value, "Value should not be null for a non-favorite event.");
+                        }
                         else
+                        {
                             Assert.IsNull(e.Value, "Value should be null for an event of type " + e.EventType);
+                        }
                     }
 
                     if (e.EventType == ActivityEventType.Comment)
+                    {
                         Assert.IsNotNull(e.CommentId, "CommentId should not be null for a comment event.");
+                    }
                     else
+                    {
                         Assert.IsNull(e.CommentId, "CommentId should be null for non-comment events.");
+                    }
 
                     if (e.EventType == ActivityEventType.Gallery)
+                    {
                         Assert.IsNotNull(e.GalleryId, "GalleryId should not be null for a gallery event.");
+                    }
                     else
+                    {
                         Assert.IsNull(e.GalleryId, "GalleryId should be null for non-gallery events.");
+                    }
                 }
             }
         }

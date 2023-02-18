@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FlickrNet;
+﻿using FlickrNet;
 using NUnit.Framework;
 
 namespace FlickrNetTest
@@ -149,18 +147,18 @@ namespace FlickrNetTest
                 Assert.Fail("GeoContext should not be null");
             }
 
-            var origGeo = new {photo.Latitude, photo.Longitude, photo.Accuracy, Context = photo.GeoContext.Value};
-            var newGeo = new {Latitude = -23.32, Longitude = -34.2, Accuracy = GeoAccuracy.Level10, Context = GeoContext.Indoors};
+            var origGeo = new { photo.Latitude, photo.Longitude, photo.Accuracy, Context = photo.GeoContext?.Value };
+            var newGeo = new { Latitude = -23.32, Longitude = -34.2, Accuracy = GeoAccuracy.Level10, Context = GeoContext.Indoors };
 
             try
             {
                 AuthInstance.PhotosGeoSetLocation(photo.PhotoId, newGeo.Latitude, newGeo.Longitude, newGeo.Accuracy, newGeo.Context);
 
                 var location = AuthInstance.PhotosGeoGetLocation(photo.PhotoId);
-                Assert.AreEqual(newGeo.Latitude, location.Latitude, "New Latitude should be set.");
-                Assert.AreEqual(newGeo.Longitude, location.Longitude, "New Longitude should be set.");
-                Assert.AreEqual(newGeo.Context, location.Context, "New Context should be set.");
-                Assert.AreEqual(newGeo.Accuracy, location.Accuracy, "New Accuracy should be set.");
+                Assert.AreEqual(newGeo.Latitude, location?.Latitude, "New Latitude should be set.");
+                Assert.AreEqual(newGeo.Longitude, location?.Longitude, "New Longitude should be set.");
+                Assert.AreEqual(newGeo.Context, location?.Context, "New Context should be set.");
+                Assert.AreEqual(newGeo.Accuracy, location?.Accuracy, "New Accuracy should be set.");
             }
             finally
             {
@@ -174,12 +172,12 @@ namespace FlickrNetTest
         public void PhotosGeoPhotosForLocationBasicTest()
         {
             var o = new PhotoSearchOptions
-                        {
-                            UserId = TestData.TestUserId,
-                            HasGeo = true,
-                            PerPage = 1,
-                            Extras = PhotoSearchExtras.Geo
-                        };
+            {
+                UserId = TestData.TestUserId,
+                HasGeo = true,
+                PerPage = 1,
+                Extras = PhotoSearchExtras.Geo
+            };
 
             var photos = AuthInstance.PhotosSearch(o);
             var photo = photos[0];

@@ -39,7 +39,11 @@ namespace FlickrNet
                 else
                 {
                     var ids = new List<string>();
-                    foreach (string s in Tags) ids.Add(s);
+                    foreach (string s in Tags)
+                    {
+                        ids.Add(s);
+                    }
+
                     return string.Join("-", ids.ToArray());
                 }
             }

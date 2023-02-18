@@ -31,9 +31,15 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
 
-            if (!reader.ReadToFollowing("photos")) throw new ResponseXmlException("Unable to find \"photos\" element in response.");
+            if (!reader.ReadToFollowing("photos"))
+            {
+                throw new ResponseXmlException("Unable to find \"photos\" element in response.");
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -51,7 +57,10 @@ namespace FlickrNet
                 }
             }
 
-            if (!reader.ReadToFollowing("videos")) throw new ResponseXmlException("Unable to find \"videos\" element in response.");
+            if (!reader.ReadToFollowing("videos"))
+            {
+                throw new ResponseXmlException("Unable to find \"videos\" element in response.");
+            }
 
             while (reader.MoveToNextAttribute())
             {

@@ -54,9 +54,20 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.contacts.getList");
-            if (!string.IsNullOrEmpty(filter)) parameters.Add("filter", filter);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(filter))
+            {
+                parameters.Add("filter", filter);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<ContactCollection>(parameters, callback);
         }
@@ -119,8 +130,15 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("method", "flickr.contacts.getListRecentlyUploaded");
-            if (dateLastUpdated != DateTime.MinValue) parameters.Add("date_lastupload", UtilityMethods.DateToUnixTimestamp(dateLastUpdated));
-            if (!string.IsNullOrEmpty(filter)) parameters.Add("filter", filter);
+            if (dateLastUpdated != DateTime.MinValue)
+            {
+                parameters.Add("date_lastupload", UtilityMethods.DateToUnixTimestamp(dateLastUpdated));
+            }
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                parameters.Add("filter", filter);
+            }
 
             GetResponseAsync<ContactCollection>(parameters, callback);
 
@@ -148,8 +166,15 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.contacts.getPublicList");
             parameters.Add("user_id", userId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<ContactCollection>(parameters, callback);
         }
@@ -183,8 +208,16 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.contacts.getTaggingSuggestions");
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             GetResponseAsync<ContactCollection>(parameters, callback);
         }
     }

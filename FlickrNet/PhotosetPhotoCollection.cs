@@ -37,7 +37,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "photoset")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -83,7 +85,11 @@ namespace FlickrNet
             {
                 var photo = new Photo();
                 ((IFlickrParsable)photo).Load(reader);
-                if (string.IsNullOrEmpty(photo.UserId)) photo.UserId = OwnerId;
+                if (string.IsNullOrEmpty(photo.UserId))
+                {
+                    photo.UserId = OwnerId;
+                }
+
                 Add(photo);
             }
 

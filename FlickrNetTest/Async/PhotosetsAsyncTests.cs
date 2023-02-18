@@ -1,8 +1,7 @@
-﻿using System.Linq;
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
-using System.Reactive.Subjects;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace FlickrNetTest.Async
 {
@@ -55,6 +54,7 @@ namespace FlickrNetTest.Async
 
             f.PhotosetsGetInfoAsync(photoset.PhotosetId, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
+            Assert.IsNotNull(result.Result);
         }
 
         [Ignore("Method requires authentication")]
@@ -94,6 +94,8 @@ namespace FlickrNetTest.Async
                 // Clean up and delete photoset
                 f.PhotosetsDeleteAsync(photoset.PhotosetId, r => { w4.OnNext(r); w4.OnCompleted(); });
                 var noResponseResult = w4.Next().First();
+                Assert.IsNotNull(noResponseResult.Result);
+
             }
 
         }
@@ -109,7 +111,7 @@ namespace FlickrNetTest.Async
             var result = w.Next().First();
 
             Assert.IsFalse(result.HasError);
-            
+
         }
     }
 }

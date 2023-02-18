@@ -62,13 +62,19 @@ namespace FlickrNet
         public ActivityItemCollection ActivityUserPhotos(int timePeriod, string timeType, int page, int perPage)
         {
             if (timePeriod == 0)
+            {
                 throw new ArgumentOutOfRangeException("timePeriod", "Time Period should be greater than 0");
+            }
 
             if (timeType == null)
+            {
                 throw new ArgumentNullException("timeType");
+            }
 
             if (timeType != "d" && timeType != "h")
+            {
                 throw new ArgumentOutOfRangeException("timeType", "Time type must be 'd' or 'h'");
+            }
 
             return ActivityUserPhotos(timePeriod + timeType, page, perPage);
         }
@@ -79,9 +85,20 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.activity.userPhotos");
-            if (!string.IsNullOrEmpty(timeframe)) parameters.Add("timeframe", timeframe);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(timeframe))
+            {
+                parameters.Add("timeframe", timeframe);
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<ActivityItemCollection>(parameters);
         }
@@ -101,8 +118,15 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.activity.userComments");
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<ActivityItemCollection>(parameters);
         }

@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace FlickrNet
@@ -21,11 +20,12 @@ namespace FlickrNet
     ///        // protected operations
     /// }
     /// </summary>
-    internal class LockFile : IDisposable
+    internal sealed class LockFile : IDisposable
     {
         private readonly string filepath;
         private readonly DisposeHelper disposeHelper;
-        private Stream stream;
+        private Stream? stream;
+        private readonly object syncRoot = new object();
 
         public LockFile(string filepath)
         {
@@ -35,19 +35,22 @@ namespace FlickrNet
 
         public IDisposable Acquire()
         {
-            string dir = Path.GetDirectoryName(filepath);
+            var dir = Path.GetDirectoryName(filepath);
 
-            lock (this)
+            lock (syncRoot)
             {
-#if !WindowsCE && !SILVERLIGHT
                 while (stream != null)
+                {
                     Monitor.Wait(this);
-#endif
+                }
 
                 while (true)
                 {
                     if (!Directory.Exists(dir))
+                    {
                         Directory.CreateDirectory(dir);
+                    }
+
                     try
                     {
                         Debug.Assert(stream == null, "Stream was not null--programmer error");
@@ -75,16 +78,17 @@ namespace FlickrNet
 
         internal void Release()
         {
-            lock (this)
+            lock (syncRoot)
             {
-#if !WindowsCE
                 // Doesn't hurt to pulse. Note that waiting threads will not actually
                 // continue to execute until this critical section is exited.
                 Monitor.PulseAll(this);
-#endif
 
                 if (stream == null)
+                {
                     throw new InvalidOperationException("Tried to dispose a FileLock that was not owned");
+                }
+
                 try
                 {
                     stream.Close();
@@ -104,7 +108,7 @@ namespace FlickrNet
             }
         }
 
-        private class DisposeHelper : IDisposable
+        private sealed class DisposeHelper : IDisposable
         {
             private readonly LockFile lockFile;
 

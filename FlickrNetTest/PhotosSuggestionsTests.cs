@@ -8,7 +8,7 @@ namespace FlickrNetTest
     [TestFixture]
     public class PhotosSuggestionsTests : BaseTest
     {
-        string photoId = "6282363572";
+        readonly string photoId = "6282363572";
 
         [SetUp]
         public void TestInitialize()

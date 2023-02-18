@@ -59,7 +59,11 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "suggestion") { UtilityMethods.CheckParsingException(reader); return; }
 
             while (reader.MoveToNextAttribute())

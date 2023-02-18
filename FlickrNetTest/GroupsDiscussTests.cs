@@ -151,7 +151,10 @@ namespace FlickrNetTest
             {
                 Assert.IsTrue(topic.CanEdit, "CanEdit should be true.");
                 if (!topic.IsLocked)
+                {
                     Assert.IsTrue(topic.CanReply, "CanReply should be true.");
+                }
+
                 Assert.IsTrue(topic.CanDelete, "CanDelete should be true.");
             }
         }

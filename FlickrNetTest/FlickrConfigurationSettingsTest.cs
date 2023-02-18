@@ -1,12 +1,11 @@
 ﻿using FlickrNet;
 using NUnit.Framework;
-using System;
 using System.Xml;
 
 namespace FlickrNetTest
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for FlickrConfigurationSettingsTest and is intended
     ///to contain all FlickrConfigurationSettingsTest Unit Tests

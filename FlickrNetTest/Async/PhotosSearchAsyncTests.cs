@@ -1,9 +1,8 @@
 ﻿
-using NUnit.Framework;
 using FlickrNet;
-using System.Linq;
-using System.Reactive.Subjects;
+using NUnit.Framework;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace FlickrNetTest
 {
@@ -42,7 +41,7 @@ namespace FlickrNetTest
             AuthInstance.PhotosAddTagsAsync(photoId, tag, r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            
+            Assert.IsNotNull(result.Result);
         }
 
         [Test]

@@ -32,7 +32,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "groups")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -138,7 +140,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "group")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {

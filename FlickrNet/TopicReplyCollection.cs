@@ -159,7 +159,11 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "replies") { UtilityMethods.CheckParsingException(reader); return; }
 
             reader.Read();
@@ -249,7 +253,7 @@ namespace FlickrNet
                         break;
                     case "lastedit":
                         LastEdit = reader.Value == "" || reader.Value == "0"
-                            ? (DateTime?)null
+                            ? null
                             : UtilityMethods.UnixTimestampToDate(reader.Value);
                         break;
                     case "pro_badge":

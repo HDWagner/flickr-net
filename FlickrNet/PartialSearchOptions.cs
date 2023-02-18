@@ -7,26 +7,16 @@ namespace FlickrNet
     /// </summary>
     public class PartialSearchOptions
     {
-        private DateTime minUploadDate = DateTime.MinValue;
         private DateTime maxUploadDate = DateTime.MinValue;
-        private DateTime minTakenDate = DateTime.MinValue;
         private DateTime maxTakenDate = DateTime.MinValue;
-        private PhotoSearchExtras extras = PhotoSearchExtras.None;
-        private PhotoSearchSortOrder sort = PhotoSearchSortOrder.None;
-        private int perPage;
         private int page;
-        private PrivacyFilter privacyFilter = PrivacyFilter.None;
 
         /// <summary>
         /// Minimum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
-        public DateTime MinUploadDate
-        {
-            get { return minUploadDate; }
-            set { minUploadDate = value; }
-        }
-    
+        public DateTime MinUploadDate { get; set; } = DateTime.MinValue;
+
         /// <summary>
         /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
@@ -36,17 +26,13 @@ namespace FlickrNet
             get { return maxUploadDate; }
             set { maxUploadDate = value; }
         }
-    
+
         /// <summary>
         /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
-        public DateTime MinTakenDate
-        {
-            get { return minTakenDate; }
-            set { minTakenDate = value; }
-        }
-    
+        public DateTime MinTakenDate { get; set; } = DateTime.MinValue;
+
         /// <summary>
         /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
@@ -60,20 +46,12 @@ namespace FlickrNet
         /// <summary>
         /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.
         /// </summary>
-        public PhotoSearchExtras Extras
-        {
-            get { return extras; }
-            set { extras = value; }
-        }
+        public PhotoSearchExtras Extras { get; set; } = PhotoSearchExtras.None;
 
         /// <summary>
         /// Number of photos to return per page. Defaults to 100.
         /// </summary>
-        public int PerPage
-        {
-            get { return perPage; }
-            set { perPage = value; }
-        }
+        public int PerPage { get; set; }
 
         /// <summary>
         /// The page to return. Defaults to page 1.
@@ -83,7 +61,11 @@ namespace FlickrNet
             get { return page; }
             set 
             {
-                if (value < 0) throw new ArgumentOutOfRangeException("value", "Must be greater than 0");
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("value", "Must be greater than 0");
+                }
+
                 page = value; 
             }
         }
@@ -91,20 +73,12 @@ namespace FlickrNet
         /// <summary>
         /// The sort order of the returned list. Default is <see cref="PhotoSearchSortOrder.None"/>.
         /// </summary>
-        public PhotoSearchSortOrder SortOrder
-        {
-            get { return sort; }
-            set { sort = value; }
-        }
+        public PhotoSearchSortOrder SortOrder { get; set; } = PhotoSearchSortOrder.None;
 
         /// <summary>
         /// The privacy fitler to filter the search on.
         /// </summary>
-        public PrivacyFilter PrivacyFilter
-        {
-            get { return privacyFilter; }
-            set { privacyFilter = value; }
-        }
+        public PrivacyFilter PrivacyFilter { get; set; } = PrivacyFilter.None;
 
         /// <summary>
         /// Default constructor.

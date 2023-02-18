@@ -111,11 +111,30 @@ namespace FlickrNet
             }
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getContactsPhotos");
-            if (count > 0 && !singlePhoto) parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (justFriends) parameters.Add("just_friends", "1");
-            if (singlePhoto) parameters.Add("single_photo", "1");
-            if (includeSelf) parameters.Add("include_self", "1");
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (count > 0 && !singlePhoto)
+            {
+                parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (justFriends)
+            {
+                parameters.Add("just_friends", "1");
+            }
+
+            if (singlePhoto)
+            {
+                parameters.Add("single_photo", "1");
+            }
+
+            if (includeSelf)
+            {
+                parameters.Add("include_self", "1");
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -194,11 +213,30 @@ namespace FlickrNet
             parameters.Add("method", "flickr.photos.getContactsPublicPhotos");
             parameters.Add("api_key", apiKey);
             parameters.Add("user_id", userId);
-            if (count > 0) parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (justFriends) parameters.Add("just_friends", "1");
-            if (singlePhoto) parameters.Add("single_photo", "1");
-            if (includeSelf) parameters.Add("include_self", "1");
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (count > 0)
+            {
+                parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (justFriends)
+            {
+                parameters.Add("just_friends", "1");
+            }
+
+            if (singlePhoto)
+            {
+                parameters.Add("single_photo", "1");
+            }
+
+            if (includeSelf)
+            {
+                parameters.Add("include_self", "1");
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -244,9 +282,13 @@ namespace FlickrNet
         public PhotoCountCollection PhotosGetCounts(DateTime[] dates, bool taken)
         {
             if (taken)
+            {
                 return PhotosGetCounts(null, dates);
+            }
             else
+            {
                 return PhotosGetCounts(dates, null);
+            }
         }
 
         /// <summary>
@@ -278,8 +320,15 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getCounts");
-            if (!string.IsNullOrEmpty(dateString)) parameters.Add("dates", dateString);
-            if (!string.IsNullOrEmpty(takenDateString)) parameters.Add("taken_dates", takenDateString);
+            if (!string.IsNullOrEmpty(dateString))
+            {
+                parameters.Add("dates", dateString);
+            }
+
+            if (!string.IsNullOrEmpty(takenDateString))
+            {
+                parameters.Add("taken_dates", takenDateString);
+            }
 
             return GetResponseCache<PhotoCountCollection>(parameters);
         }
@@ -306,7 +355,10 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getExif");
             parameters.Add("photo_id", photoId);
-            if (secret != null) parameters.Add("secret", secret);
+            if (secret != null)
+            {
+                parameters.Add("secret", secret);
+            }
 
             return GetResponseCache<ExifTagCollection>(parameters);
         }
@@ -333,7 +385,10 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getInfo");
             parameters.Add("photo_id", photoId);
-            if (secret != null) parameters.Add("secret", secret);
+            if (secret != null)
+            {
+                parameters.Add("secret", secret);
+            }
 
             return GetResponseCache<PhotoInfo>(parameters);
         }
@@ -437,9 +492,20 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getRecent");
             parameters.Add("api_key", apiKey);
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -689,9 +755,20 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.recentlyUpdated");
             parameters.Add("min_date", UtilityMethods.DateToUnixTimestamp(minDate));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -761,7 +838,11 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.setDates");
             parameters.Add("photo_id", photoId);
-            if (datePosted != DateTime.MinValue) parameters.Add("date_posted", UtilityMethods.DateToUnixTimestamp(datePosted).ToString());
+            if (datePosted != DateTime.MinValue)
+            {
+                parameters.Add("date_posted", UtilityMethods.DateToUnixTimestamp(datePosted).ToString());
+            }
+
             if (dateTaken != DateTime.MinValue)
             {
                 parameters.Add("date_taken", dateTaken.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo));
@@ -911,7 +992,11 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.setSafetyLevel");
             parameters.Add("photo_id", photoId);
-            if (safetyLevel != SafetyLevel.None) parameters.Add("safety_level", safetyLevel.ToString("D"));
+            if (safetyLevel != SafetyLevel.None)
+            {
+                parameters.Add("safety_level", safetyLevel.ToString("D"));
+            }
+
             switch (hidden)
             {
                 case HiddenFromSearch.Visible:
@@ -947,8 +1032,15 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getFavorites");
             parameters.Add("photo_id", photoId);
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PhotoFavoriteCollection>(parameters);
 

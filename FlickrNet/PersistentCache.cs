@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Collections.Generic;
 
 namespace FlickrNet
 {
@@ -70,7 +70,9 @@ namespace FlickrNet
             set
             {
                 if (key == null)
+                {
                     throw new ArgumentNullException("key");
+                }
 
                 ICacheItem oldItem;
 
@@ -81,7 +83,9 @@ namespace FlickrNet
                     Persist();
                 }
                 if (oldItem != null)
+                {
                     oldItem.OnItemFlushed();
+                }
             }
         }
 
@@ -112,12 +116,16 @@ namespace FlickrNet
                         Persist();
                     }
                     else
+                    {
                         item = null;
+                    }
                 }
             }
 
             if (expired && removeIfExpired)
+            {
                 item.OnItemFlushed();
+            }
 
             return expired ? null : item;
         }
@@ -137,7 +145,9 @@ namespace FlickrNet
         public void Shrink(long size)
         {
             if (size < 0)
+            {
                 throw new ArgumentException("Cannot shrink to a negative size", "size");
+            }
 
             var flushed = new List<ICacheItem>();
 
@@ -150,11 +160,17 @@ namespace FlickrNet
                 InternalGetAll(typeof(ICacheItem), out keys, out values);
                 long totalSize = 0;
                 foreach (ICacheItem cacheItem in values)
+                {
                     totalSize += cacheItem.FileSize;
+                }
+
                 for (int i = 0; i < keys.Length; i++)
                 {
                     if (totalSize <= size)
+                    {
                         break;
+                    }
+
                     var cacheItem = (ICacheItem)values.GetValue(i);
                     totalSize -= cacheItem.FileSize;
                     flushed.Add(RemoveKey(keys[i]));
@@ -167,30 +183,42 @@ namespace FlickrNet
             {
                 Debug.Assert(flushedItem != null, "Flushed item was null--programmer error");
                 if (flushedItem != null)
+                {
                     flushedItem.OnItemFlushed();
+                }
             }
         }
 
         private static bool Expired(DateTime test, TimeSpan age)
         {
             if (age == TimeSpan.MinValue)
+            {
                 return true;
+            }
             else if (age == TimeSpan.MaxValue)
+            {
                 return false;
+            }
             else
+            {
                 return test < DateTime.UtcNow - age;
+            }
         }
 
 
         private void InternalGetAll(Type valueType, out string[] keys, out Array values)
         {
             if (!typeof(ICacheItem).IsAssignableFrom(valueType))
+            {
                 throw new ArgumentException("Type " + valueType.FullName + " does not implement ICacheItem", "valueType");
+            }
 
             keys = new List<string>(dataTable.Keys).ToArray();
             values = Array.CreateInstance(valueType, keys.Length);
             for (int i = 0; i < keys.Length; i++)
+            {
                 values.SetValue(dataTable[keys[i]], i);
+            }
 
             Array.Sort(values, keys, new CreationTimeComparer());
         }
@@ -198,25 +226,35 @@ namespace FlickrNet
         private ICacheItem InternalGet(string key)
         {
             if (key == null)
+            {
                 throw new ArgumentNullException("key");
+            }
 
             if (dataTable.ContainsKey(key))
-                return (ICacheItem)dataTable[key];
+            {
+                return dataTable[key];
+            }
             else
+            {
                 return null;
+            }
         }
 
         /// <returns>The old value associated with <c>key</c>, if any.</returns>
         private ICacheItem InternalSet(string key, ICacheItem value)
         {
             if (key == null)
+            {
                 throw new ArgumentNullException("key");
+            }
 
             ICacheItem flushedItem;
 
             flushedItem = RemoveKey(key);
             if (value != null)  // don't ever let nulls get in
+            {
                 dataTable[key] = value;
+            }
 
             dirty = dirty || !object.ReferenceEquals(flushedItem, value);
 
@@ -225,9 +263,12 @@ namespace FlickrNet
 
         private ICacheItem RemoveKey(string key)
         {
-            if (!dataTable.ContainsKey(key)) return null;
+            if (!dataTable.ContainsKey(key))
+            {
+                return null;
+            }
 
-            var cacheItem = (ICacheItem)dataTable[key];
+            var cacheItem = dataTable[key];
             dataTable.Remove(key);
             dirty = true;
             return cacheItem;
@@ -239,7 +280,7 @@ namespace FlickrNet
 
             DateTime newTimestamp = DateTime.MinValue;
             long newLength = -1;
-            
+
             dataFile.Refresh();
 
             if (dataFile.Exists)
@@ -252,7 +293,9 @@ namespace FlickrNet
             {
                 // file changed
                 if (!dataFile.Exists)
+                {
                     dataTable.Clear();
+                }
                 else
                 {
                     Debug.WriteLine("Loading cache from disk");
@@ -271,7 +314,9 @@ namespace FlickrNet
         private void Persist()
         {
             if (!dirty)
+            {
                 return;
+            }
 
             Debug.WriteLine("Saving cache to disk");
             using (FileStream outStream = dataFile.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
@@ -297,7 +342,9 @@ namespace FlickrNet
                     string key = UtilityMethods.ReadString(s);
                     ICacheItem val = persister.Read(s);
                     if (val == null) // corrupt cache file 
+                    {
                         return table;
+                    }
 
                     table[key] = val;
                 }
@@ -314,22 +361,35 @@ namespace FlickrNet
             UtilityMethods.WriteInt32(s, table.Count);
             foreach (KeyValuePair<string, ICacheItem> entry in table)
             {
-                UtilityMethods.WriteString(s, (string)entry.Key);
-                persister.Write(s, (ICacheItem)entry.Value);
+                UtilityMethods.WriteString(s, entry.Key);
+                persister.Write(s, entry.Value);
             }
         }
 
-        private class CreationTimeComparer : IComparer
+        private sealed class CreationTimeComparer : IComparer<ICacheItem>, IComparer
         {
-            public int Compare(object x, object y)
+            public int Compare(ICacheItem? x, ICacheItem? y)
             {
-                return ((ICacheItem)x).CreationTime.CompareTo(((ICacheItem)y).CreationTime);
+                if (x == null && y == null)
+                {
+                    return 0;
+                }
+                if (x == null)
+                {
+                    return -1;
+                }
+                return x.CreationTime.CompareTo(y?.CreationTime);
+            }
+
+            public int Compare(object? x, object? y)
+            {
+                return Compare((ICacheItem?)x, (ICacheItem?)y);
             }
         }
 
         void IDisposable.Dispose()
         {
-            if (lockFile != null) lockFile.Dispose();
+            lockFile?.Dispose();
         }
     }
 }

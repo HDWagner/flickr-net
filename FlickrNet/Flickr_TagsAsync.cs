@@ -53,7 +53,10 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUser");
-            if (userId != null && userId.Length > 0) parameters.Add("user_id", userId);
+            if (userId != null && userId.Length > 0)
+            {
+                parameters.Add("user_id", userId);
+            }
 
             GetResponseAsync<TagCollection>(parameters, callback);
         }
@@ -101,8 +104,15 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUserPopular");
-            if (userId != null) parameters.Add("user_id", userId);
-            if (count > 0) parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (userId != null)
+            {
+                parameters.Add("user_id", userId);
+            }
+
+            if (count > 0)
+            {
+                parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<TagCollection>(parameters, callback);
         }
@@ -127,7 +137,10 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListUserRaw");
-            if (tag != null && tag.Length > 0) parameters.Add("tag", tag);
+            if (tag != null && tag.Length > 0)
+            {
+                parameters.Add("tag", tag);
+            }
 
             GetResponseAsync<RawTagCollection>(parameters, callback);
         }
@@ -209,7 +222,10 @@ namespace FlickrNet
             parameters.Add("method", "flickr.tags.getClusterPhotos");
             parameters.Add("tag", tag);
             parameters.Add("cluster_id", clusterId);
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -238,8 +254,15 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getHotList");
-            if (!string.IsNullOrEmpty(period)) parameters.Add("period", period);
-            if (count > 0) parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (!string.IsNullOrEmpty(period))
+            {
+                parameters.Add("period", period);
+            }
+
+            if (count > 0)
+            {
+                parameters.Add("count", count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<HotTagCollection>(parameters, callback);
         }

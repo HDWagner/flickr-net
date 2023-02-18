@@ -21,9 +21,13 @@ namespace FlickrNet
             bool oAuth = parameters.ContainsKey("oauth_consumer_key");
 
             if (oAuth)
+            {
                 return GetDataResponseOAuth(flickr, baseUrl, parameters);
+            }
             else
+            {
                 return GetDataResponseNormal(flickr, baseUrl, parameters);
+            }
         }
 
         private static string GetDataResponseNormal(Flickr flickr, string baseUrl, Dictionary<string, string> parameters)
@@ -37,12 +41,19 @@ namespace FlickrNet
                 data += k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&";
             }
 
-            if (method == "GET" && data.Length > 2000) method = "POST";
+            if (method == "GET" && data.Length > 2000)
+            {
+                method = "POST";
+            }
 
             if (method == "GET")
+            {
                 return DownloadData(method, baseUrl + "?" + data, null, null, null);
+            }
             else
+            {
                 return DownloadData(method, baseUrl, data, PostContentType, null);
+            }
         }
 
         private static string GetDataResponseOAuth(Flickr flickr, string baseUrl, Dictionary<string, string> parameters)
@@ -50,8 +61,15 @@ namespace FlickrNet
             string method = "POST";
 
             // Remove api key if it exists.
-            if (parameters.ContainsKey("api_key")) parameters.Remove("api_key");
-            if (parameters.ContainsKey("api_sig")) parameters.Remove("api_sig");
+            if (parameters.ContainsKey("api_key"))
+            {
+                parameters.Remove("api_key");
+            }
+
+            if (parameters.ContainsKey("api_sig"))
+            {
+                parameters.Remove("api_sig");
+            }
 
             // If OAuth Access Token is set then add token and generate signature.
             if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
@@ -75,21 +93,29 @@ namespace FlickrNet
             }
             catch (WebException ex)
             {
-                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
+                if (ex.Status != WebExceptionStatus.ProtocolError)
+                {
+                    throw;
+                }
 
                 var response = ex.Response as HttpWebResponse;
-                if (response == null) throw;
+                if (response == null)
+                {
+                    throw;
+                }
 
                 string responseData = null;
 
                 using (var stream = response.GetResponseStream())
                 {
                     if( stream != null)
+                    {
                         using (var responseReader = new StreamReader(stream))
                         {
                             responseData = responseReader.ReadToEnd();
                             responseReader.Close();
                         }
+                    }
                 }
                 if (response.StatusCode == HttpStatusCode.BadRequest ||
                     response.StatusCode == HttpStatusCode.Unauthorized)
@@ -98,7 +124,11 @@ namespace FlickrNet
                     throw new OAuthException(responseData, ex);
                 }
 
-                if (string.IsNullOrEmpty(responseData)) throw;
+                if (string.IsNullOrEmpty(responseData))
+                {
+                    throw;
+                }
+
                 throw new WebException("WebException occurred with the following body content: " + responseData, ex, ex.Status, ex.Response);
             }
         }
@@ -112,8 +142,15 @@ namespace FlickrNet
                 using (WebClient client = new WebClient())
                 {
                     client.Encoding = Encoding.UTF8;
-                    if (!string.IsNullOrEmpty(contentType)) client.Headers.Add("Content-Type", contentType);
-                    if (!string.IsNullOrEmpty(authHeader)) client.Headers.Add("Authorization", authHeader);
+                    if (!string.IsNullOrEmpty(contentType))
+                    {
+                        client.Headers.Add("Content-Type", contentType);
+                    }
+
+                    if (!string.IsNullOrEmpty(authHeader))
+                    {
+                        client.Headers.Add("Authorization", authHeader);
+                    }
 
                     if (method == "POST")
                     {

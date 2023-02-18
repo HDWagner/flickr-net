@@ -10,7 +10,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "items")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             reader.Read();
 

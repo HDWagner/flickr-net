@@ -118,11 +118,30 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.comments.getRecentForContacts");
-            if (dateLastComment != DateTime.MinValue) parameters.Add("date_lastcomment", UtilityMethods.DateToUnixTimestamp(dateLastComment));
-            if (contactsFilter != null && contactsFilter.Length > 0) parameters.Add("contacts_filter", string.Join(",", contactsFilter));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (dateLastComment != DateTime.MinValue)
+            {
+                parameters.Add("date_lastcomment", UtilityMethods.DateToUnixTimestamp(dateLastComment));
+            }
+
+            if (contactsFilter != null && contactsFilter.Length > 0)
+            {
+                parameters.Add("contacts_filter", string.Join(",", contactsFilter));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }

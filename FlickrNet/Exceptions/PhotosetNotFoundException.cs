@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FlickrNet.Exceptions
+﻿namespace FlickrNet.Exceptions
 {
     /// <summary>
     /// No photoset with the photoset ID supplied to the method could be found.

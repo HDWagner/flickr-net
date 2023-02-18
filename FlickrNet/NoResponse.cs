@@ -11,6 +11,7 @@ namespace FlickrNet
     {
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
+            // no body, no parsing.
         }
     }
 }

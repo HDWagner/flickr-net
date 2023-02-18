@@ -11,7 +11,6 @@ namespace FlickrNet
     /// </summary>
     public sealed class CollectionInfo : IFlickrParsable
     {
-        private readonly Collection<Photo> _iconPhotos = new Collection<Photo>();
 
         /// <summary>
         /// The ID for the collection.
@@ -61,12 +60,14 @@ namespace FlickrNet
         /// <summary>
         /// An array of the 12 photos used to create a collection's mosaic.
         /// </summary>
-        public Collection<Photo> IconPhotos { get { return _iconPhotos; } }
+        public Collection<Photo> IconPhotos { get; } = new Collection<Photo>();
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "collection")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -119,7 +120,7 @@ namespace FlickrNet
                             var p = new Photo();
                             ((IFlickrParsable)p).Load(reader);
 
-                            _iconPhotos.Add(p);
+                            IconPhotos.Add(p);
                         }
                         reader.Read();
                         return;

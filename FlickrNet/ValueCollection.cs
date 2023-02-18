@@ -45,7 +45,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "values")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -88,8 +90,16 @@ namespace FlickrNet
             {
                 var item = new Value();
                 ((IFlickrParsable)item).Load(reader);
-                if (!string.IsNullOrEmpty(NamespaceName) && string.IsNullOrEmpty(item.NamespaceName)) item.NamespaceName = NamespaceName;
-                if (!string.IsNullOrEmpty(PredicateName) && string.IsNullOrEmpty(item.PredicateName)) item.PredicateName = PredicateName;
+                if (!string.IsNullOrEmpty(NamespaceName) && string.IsNullOrEmpty(item.NamespaceName))
+                {
+                    item.NamespaceName = NamespaceName;
+                }
+
+                if (!string.IsNullOrEmpty(PredicateName) && string.IsNullOrEmpty(item.PredicateName))
+                {
+                    item.PredicateName = PredicateName;
+                }
+
                 Add(item);
             }
 

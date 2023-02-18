@@ -117,7 +117,11 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "topic") { UtilityMethods.CheckParsingException(reader); return; }
 
             while (reader.MoveToNextAttribute())
@@ -188,7 +192,7 @@ namespace FlickrNet
                         AuthorIsDeleted = reader.Value == "1";
                         break;
                     case "lastedit":
-                        DateLastEdited = reader.Value == "" || reader.Value == "0" ? (DateTime?)null : UtilityMethods.UnixTimestampToDate(reader.Value);
+                        DateLastEdited = reader.Value == "" || reader.Value == "0" ? null : UtilityMethods.UnixTimestampToDate(reader.Value);
                         break;
                     case "pro_badge":
                         ProBadgeStyle = reader.Value;
@@ -202,7 +206,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.LocalName == "message")
+            {
                 Message = reader.ReadElementContentAsString();
+            }
 
             reader.Skip();
         }

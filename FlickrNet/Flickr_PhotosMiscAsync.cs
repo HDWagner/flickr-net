@@ -19,9 +19,14 @@ namespace FlickrNet
         public void PhotosTransformRotateAsync(string photoId, int degrees, Action<FlickrResult<NoResponse>> callback)
         {
             if (photoId == null)
+            {
                 throw new ArgumentNullException("photoId");
+            }
+
             if (degrees != 90 && degrees != 180 && degrees != 270)
+            {
                 throw new ArgumentException("Must be 90, 180 or 270", "degrees");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.transform.rotate");

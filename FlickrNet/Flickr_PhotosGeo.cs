@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 
 namespace FlickrNet
 {
@@ -26,7 +24,9 @@ namespace FlickrNet
             CheckRequiresAuthentication();
 
             if (string.IsNullOrEmpty(placeId) && string.IsNullOrEmpty(woeId))
+            {
                 throw new ArgumentException("You must pass either a placeId or a woeId");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.geo.batchCorrectLocation");
@@ -45,18 +45,27 @@ namespace FlickrNet
         /// <param name="photoId">The ID of the photo whose WOE location is being corrected.</param>
         /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
-        public void PhotosGeoCorrectLocation(string photoId, string placeId, string woeId)
+        public void PhotosGeoCorrectLocation(string photoId, string placeId, string? woeId)
         {
             CheckRequiresAuthentication();
 
             if (string.IsNullOrEmpty(placeId) && string.IsNullOrEmpty(woeId))
+            {
                 throw new ArgumentException("You must supply at least one of placeId and woeId parameters.");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.geo.correctLocation");
             parameters.Add("photo_id", photoId);
-            if (!string.IsNullOrEmpty(placeId)) parameters.Add("place_id", placeId);
-            if (!string.IsNullOrEmpty(woeId)) parameters.Add("woe_id", woeId);
+            if (!string.IsNullOrEmpty(placeId))
+            {
+                parameters.Add("place_id", placeId);
+            }
+
+            if (!string.IsNullOrEmpty(woeId))
+            {
+                parameters.Add("woe_id", woeId);
+            }
 
             GetResponseNoCache<NoResponse>(parameters);
         }
@@ -66,7 +75,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="photoId">The ID of the photo to return the location information for.</param>
         /// <returns>Returns null if the photo has no location information, otherwise returns the location information.</returns>
-        public PlaceInfo PhotosGeoGetLocation(string photoId)
+        public PlaceInfo? PhotosGeoGetLocation(string photoId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.geo.getLocation");
@@ -79,7 +88,11 @@ namespace FlickrNet
             }
             catch (FlickrApiException ex)
             {
-                if (ex.Code == 2) return null;
+                if (ex.Code == 2)
+                {
+                    return null;
+                }
+
                 throw;
             }
         }
@@ -149,9 +162,14 @@ namespace FlickrNet
             parameters.Add("lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             if (accuracy != GeoAccuracy.None)
+            {
                 parameters.Add("accuracy", accuracy.ToString("D"));
+            }
+
             if (context != GeoContext.NotDefined)
+            {
                 parameters.Add("context", context.ToString("D"));
+            }
 
             GetResponseNoCache<NoResponse>(parameters);
         }
@@ -180,10 +198,20 @@ namespace FlickrNet
             parameters.Add("lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("accuracy", accuracy.ToString("D"));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseNoCache<PhotoCollection>(parameters);
 

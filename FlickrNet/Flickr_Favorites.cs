@@ -139,12 +139,35 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string> {{"method", "flickr.favorites.getList"}};
 
-            if (userId != null) parameters.Add("user_id", userId);
-            if (minFavoriteDate != DateTime.MinValue) parameters.Add("min_fave_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
-            if (maxFavoriteDate != DateTime.MinValue) parameters.Add("max_fave_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (userId != null)
+            {
+                parameters.Add("user_id", userId);
+            }
+
+            if (minFavoriteDate != DateTime.MinValue)
+            {
+                parameters.Add("min_fave_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
+            }
+
+            if (maxFavoriteDate != DateTime.MinValue)
+            {
+                parameters.Add("max_fave_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -181,11 +204,30 @@ namespace FlickrNet
                                      {"user_id", userId}
                                  };
 
-            if (minFavoriteDate != DateTime.MinValue) parameters.Add("min_fave_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
-            if (maxFavoriteDate != DateTime.MinValue) parameters.Add("max_fave_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
-            if (perPage > 0) parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            if (minFavoriteDate != DateTime.MinValue)
+            {
+                parameters.Add("min_fave_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
+            }
+
+            if (maxFavoriteDate != DateTime.MinValue)
+            {
+                parameters.Add("max_fave_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (perPage > 0)
+            {
+                parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             return GetResponseCache<PhotoCollection>(parameters);
         }
@@ -244,7 +286,10 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("num_prev", Math.Max(1, numPrevious).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("num_next", Math.Max(1, numNext).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             return GetResponseCache<FavoriteContext>(parameters);
         }

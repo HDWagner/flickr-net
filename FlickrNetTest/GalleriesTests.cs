@@ -96,7 +96,10 @@ namespace FlickrNetTest
 
             var photoIds = new List<string>();
 
-            foreach (var photo in photos) photoIds.Add(photo.PhotoId);
+            foreach (var photo in photos)
+            {
+                photoIds.Add(photo.PhotoId);
+            }
 
             f.GalleriesEditPhotos(galleryId, gallery.PrimaryPhotoId, photoIds);
 
@@ -206,7 +209,10 @@ namespace FlickrNetTest
             var photos = f.GalleriesGetPhotos(galleryId);
 
             var photoIds = new List<string>();
-            foreach (var p in photos) photoIds.Add(p.PhotoId);
+            foreach (var p in photos)
+            {
+                photoIds.Add(p.PhotoId);
+            }
 
             // Remove the last one.
             GalleryPhoto photo = photos.Last(p => p.PhotoId != primaryPhotoId);

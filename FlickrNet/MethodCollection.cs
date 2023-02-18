@@ -89,7 +89,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "method")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -195,7 +197,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "argument")
+            {
                 return;
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -247,7 +251,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "error")
+            {
                 return;
+            }
 
             while (reader.MoveToNextAttribute())
             {

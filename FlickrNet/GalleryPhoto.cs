@@ -19,13 +19,19 @@ namespace FlickrNet
             Load(reader, false);
 
             if (reader.LocalName == "comment")
+            {
                 Comment = reader.ReadElementContentAsString();
+            }
 
             if (reader.LocalName == "description")
+            {
                 Description = reader.ReadElementContentAsString();
+            }
 
             if (reader.NodeType == System.Xml.XmlNodeType.EndElement && reader.LocalName == "photo")
+            {
                 reader.Skip();
+            }
         }
     }
 }

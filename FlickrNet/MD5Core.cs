@@ -2,6 +2,8 @@
 using System;
 using System.Text;
 
+namespace MD5Namespace;
+
 // **************************************************************
 // * Raw implementation of the MD5 hash algorithm
 // * from RFC 1321.
@@ -27,9 +29,14 @@ public sealed class MD5Core
     public static byte[] GetHash(string input, Encoding encoding)
     {
         if (null == input)
+        {
             throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+        }
+
         if (null == encoding)
+        {
             throw new System.ArgumentNullException("encoding", "Unable to calculate hash over a string without a default encoding. Consider using the GetHash(string) overload to use UTF8 Encoding");
+        }
 
         byte[] target = encoding.GetBytes(input);
 
@@ -41,39 +48,12 @@ public sealed class MD5Core
         return GetHash(input, new UTF8Encoding());
     }
 
-    public static string GetHashString(byte[] input)
-    {
-        if (null == input)
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
-
-        string retval = BitConverter.ToString(GetHash(input));
-        retval = retval.Replace("-", "");
-
-        return retval;
-    }
-
-    public static string GetHashString(string input, Encoding encoding)
-    {
-        if (null == input)
-            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
-        if (null == encoding)
-            throw new System.ArgumentNullException("encoding", "Unable to calculate hash over a string without a default encoding. " +
-                                                               "Consider using the GetHashString(string) overload to use UTF8 Encoding");
-
-        byte[] target = encoding.GetBytes(input);
-
-        return GetHashString(target);
-    }
-
-    public static string GetHashString(string input)
-    {
-        return GetHashString(input, new UTF8Encoding());
-    }
-
     public static byte[] GetHash(byte[] input)
     {
         if (null == input)
+        {
             throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+        }
 
         //Intitial values defined in RFC 1321
         var abcd = new ABCDStruct();
@@ -92,6 +72,44 @@ public sealed class MD5Core
         // The final data block. 
         return MD5Core.GetHashFinalBlock(input, startIndex, input.Length - startIndex, abcd, (Int64)input.Length * 8);
     }
+
+
+    public static string GetHashString(byte[] input)
+    {
+        if (null == input)
+        {
+            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+        }
+
+        string retval = BitConverter.ToString(GetHash(input));
+        retval = retval.Replace("-", "");
+
+        return retval;
+    }
+
+    public static string GetHashString(string input, Encoding encoding)
+    {
+        if (null == input)
+        {
+            throw new System.ArgumentNullException("input", "Unable to calculate hash over null input data");
+        }
+
+        if (null == encoding)
+        {
+            throw new System.ArgumentNullException("encoding", "Unable to calculate hash over a string without a default encoding. " +
+                                                               "Consider using the GetHashString(string) overload to use UTF8 Encoding");
+        }
+
+        byte[] target = encoding.GetBytes(input);
+
+        return GetHashString(target);
+    }
+
+    public static string GetHashString(string input)
+    {
+        return GetHashString(input, new UTF8Encoding());
+    }
+
 
     internal static byte[] GetHashFinalBlock(byte[] input, int ibStart, int cbSize, ABCDStruct ABCD, Int64 len)
     {
@@ -257,13 +275,15 @@ public sealed class MD5Core
     private static uint[] Converter(byte[] input, int ibStart)
     {
         if (null == input)
+        {
             throw new System.ArgumentNullException("input", "Unable convert null array to array of uInts");
+        }
 
         uint[] result = new uint[16];
 
         for (int i = 0; i < 16; i++)
         {
-            result[i] = (uint)input[ibStart + i * 4];
+            result[i] = input[ibStart + i * 4];
             result[i] += (uint)input[ibStart + i * 4 + 1] << 8;
             result[i] += (uint)input[ibStart + i * 4 + 2] << 16;
             result[i] += (uint)input[ibStart + i * 4 + 3] << 24;

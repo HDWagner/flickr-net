@@ -73,7 +73,10 @@ namespace FlickrNetTest
 
             Assert.IsNotNull(theset.PrimaryPhotoId, "PrimaryPhotoId should not be null.");
 
-            if (theset.Total >= theset.PerPage) return;
+            if (theset.Total >= theset.PerPage)
+            {
+                return;
+            }
 
             var primary = theset.FirstOrDefault(p => p.PhotoId == theset.PrimaryPhotoId);
 

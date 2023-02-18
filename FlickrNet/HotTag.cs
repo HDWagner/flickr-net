@@ -34,7 +34,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.NodeType == System.Xml.XmlNodeType.Text)
+            {
                 Tag = reader.ReadContentAsString();
+            }
 
             reader.Read();
         }

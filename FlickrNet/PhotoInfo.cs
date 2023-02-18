@@ -402,7 +402,9 @@ namespace FlickrNet
             get 
             {
                 if (string.IsNullOrEmpty(OriginalFormat))
+                {
                     return null;
+                }
 
                 return UtilityMethods.UrlFormat(this, "_o", OriginalFormat);
             }
@@ -411,7 +413,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "photo")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             LoadAttributes(reader);
 
@@ -870,7 +874,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "note")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -963,7 +969,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "tag")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -1016,7 +1024,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             if (reader.LocalName != "url")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -1035,7 +1045,10 @@ namespace FlickrNet
 
             Url = reader.ReadContentAsString();
 
-            if (Url.Contains("www.flickr.com")) Url = Url.Replace("http://", "https://");
+            if (Url.Contains("www.flickr.com"))
+            {
+                Url = Url.Replace("http://", "https://");
+            }
 
             reader.Skip();
         }

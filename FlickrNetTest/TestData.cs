@@ -65,7 +65,10 @@ namespace FlickrNetTest
         {
             Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\FlickrNetTest", true);
             if (key == null)
+            {
                 key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"SOFTWARE\FlickrNetTest");
+            }
+
             key.SetValue(name, value);
         }
 

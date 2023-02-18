@@ -2,8 +2,6 @@
 using NUnit.Framework;
 using Shouldly;
 
-#pragma warning disable CS0618 // Type or member is obsolete
-
 namespace FlickrNetTest
 {
     [TestFixture]

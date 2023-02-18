@@ -22,7 +22,10 @@ namespace FlickrNet
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void TestGenericAsync(string method, Dictionary<string, string> parameters, Action<FlickrResult<UnknownResponse>> callback)
         {
-            if (parameters == null) parameters = new Dictionary<string, string>();
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
 
             parameters.Add("method", method);
             GetResponseAsync<UnknownResponse>(parameters, callback);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -81,7 +80,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName, string title, string description, string tags, bool isPublic, bool isFamily, bool isFriend)
+        public string UploadPicture(string fileName, string? title, string? description, string? tags, bool isPublic, bool isFamily, bool isFriend)
         {
             var file = Path.GetFileName(fileName);
             using (Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -107,7 +106,7 @@ namespace FlickrNet
         /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
         /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
         /// <returns>The id of the photograph after successful uploading.</returns>
-        public string UploadPicture(Stream stream, string fileName, string title, string description, string tags,
+        public string UploadPicture(Stream stream, string fileName, string? title, string? description, string? tags,
                                     bool isPublic, bool isFamily, bool isFriend, ContentType contentType,
                                     SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch)
         {
@@ -163,8 +162,8 @@ namespace FlickrNet
 
             string responseXml = UploadData(stream, fileName, uploadUri, parameters);
 
-           var t = new UnknownResponse();
-            ((IFlickrParsable) t).Load(responseXml);
+            var t = new UnknownResponse();
+            t.Load(responseXml);
             return t.GetElementValue("photoid");
         }
 
@@ -174,10 +173,14 @@ namespace FlickrNet
 
             var authHeader = FlickrResponder.OAuthCalculateAuthHeader(parameters);
             var dataBuffer = CreateUploadData(imageStream, fileName, parameters, boundary);
-            
+
             var req = (HttpWebRequest)WebRequest.Create(uploadUri);
             req.Method = "POST";
-            if (Proxy != null) req.Proxy = Proxy;
+            if (Proxy != null)
+            {
+                req.Proxy = Proxy;
+            }
+
             req.Timeout = HttpTimeout;
             req.ContentType = "multipart/form-data; boundary=" + boundary;
 
@@ -193,15 +196,22 @@ namespace FlickrNet
             using (var reqStream = req.GetRequestStream())
             {
                 var bufferSize = 32 * 1024;
-                if (dataBuffer.Length / 100 > bufferSize) bufferSize = bufferSize * 2;
-                dataBuffer.UploadProgress += (o, e) => { if( OnUploadProgress != null ) OnUploadProgress(this, e); };
+                if (dataBuffer.Length / 100 > bufferSize)
+                {
+                    bufferSize = bufferSize * 2;
+                }
+
+                dataBuffer.UploadProgress += (o, e) => { if (OnUploadProgress != null) { OnUploadProgress(this, e); } };
                 dataBuffer.CopyTo(reqStream, bufferSize);
                 reqStream.Flush();
             }
 
             var res = (HttpWebResponse)req.GetResponse();
             var stream = res.GetResponseStream();
-            if( stream == null) throw new FlickrWebException("Unable to retrieve stream from web response.");
+            if (stream == null)
+            {
+                throw new FlickrWebException("Unable to retrieve stream from web response.");
+            }
 
             var sr = new StreamReader(stream);
             var s = sr.ReadToEnd();
@@ -217,17 +227,8 @@ namespace FlickrNet
         /// <returns>The id of the photograph after successful uploading.</returns>
         public string ReplacePicture(string fullFileName, string photoId)
         {
-            FileStream stream = null;
-            try
-            {
-                stream = new FileStream(fullFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                return ReplacePicture(stream, fullFileName, photoId);
-            }
-            finally
-            {
-                if (stream != null) stream.Close();
-            }
-
+            using var stream = new FileStream(fullFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return ReplacePicture(stream, fullFileName, photoId);
         }
 
         /// <summary>
@@ -262,9 +263,9 @@ namespace FlickrNet
             }
 
             var responseXml = UploadData(stream, fileName, replaceUri, parameters);
-            
+
             var t = new UnknownResponse();
-            ((IFlickrParsable)t).Load(responseXml);
+            t.Load(responseXml);
             return t.GetElementValue("photoid");
         }
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
+using System.Net;
 
 namespace FlickrNet
 {
@@ -22,9 +21,13 @@ namespace FlickrNet
             bool oAuth = parameters.ContainsKey("oauth_consumer_key");
 
             if (oAuth)
+            {
                 GetDataResponseOAuthAsync(flickr, baseUrl, parameters, callback);
+            }
             else
+            {
                 GetDataResponseNormalAsync(flickr, baseUrl, parameters, callback);
+            }
         }
 
         private static void GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback) 
@@ -38,12 +41,19 @@ namespace FlickrNet
                 data += k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&";
             }
 
-            if (method == "GET" && data.Length > 2000) method = "POST";
+            if (method == "GET" && data.Length > 2000)
+            {
+                method = "POST";
+            }
 
             if (method == "GET")
+            {
                 DownloadDataAsync(method, baseUrl + "?" + data, null, null, null, callback);
+            }
             else
+            {
                 DownloadDataAsync(method, baseUrl, data, PostContentType, null, callback);
+            }
         }
 
         private static void GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback)
@@ -51,8 +61,15 @@ namespace FlickrNet
             const string method = "POST";
 
             // Remove api key if it exists.
-            if (parameters.ContainsKey("api_key")) parameters.Remove("api_key");
-            if (parameters.ContainsKey("api_sig")) parameters.Remove("api_sig");
+            if (parameters.ContainsKey("api_key"))
+            {
+                parameters.Remove("api_key");
+            }
+
+            if (parameters.ContainsKey("api_sig"))
+            {
+                parameters.Remove("api_sig");
+            }
 
             // If OAuth Access Token is set then add token and generate signature.
             if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
@@ -77,9 +94,15 @@ namespace FlickrNet
             catch (WebException ex)
             {
                 var response = ex.Response as HttpWebResponse;
-                if (response == null) throw;
+                if (response == null)
+                {
+                    throw;
+                }
 
-                if (response.StatusCode != HttpStatusCode.BadRequest && response.StatusCode != HttpStatusCode.Unauthorized) throw;
+                if (response.StatusCode != HttpStatusCode.BadRequest && response.StatusCode != HttpStatusCode.Unauthorized)
+                {
+                    throw;
+                }
 
                 using (var responseReader = new StreamReader(response.GetResponseStream()))
                 {
@@ -96,18 +119,27 @@ namespace FlickrNet
             var client = new WebClient();
             client.Encoding = System.Text.Encoding.UTF8;
 
-            if (!string.IsNullOrEmpty(contentType)) client.Headers["Content-Type"] = contentType;
-            if (!string.IsNullOrEmpty(authHeader)) client.Headers["Authorization"] = authHeader;
+            if (!string.IsNullOrEmpty(contentType))
+            {
+                client.Headers["Content-Type"] = contentType;
+            }
+
+            if (!string.IsNullOrEmpty(authHeader))
+            {
+                client.Headers["Authorization"] = authHeader;
+            }
 
             if (method == "POST")
             {
                 client.UploadStringCompleted += delegate(object sender, UploadStringCompletedEventArgs e)
                 {
+                    client.Dispose();
+
                     var result = new FlickrResult<string>();
                     if (e.Error != null)
                     {
                         result.Error = e.Error;
-                        callback(result);
+                        callback(result);                        
                         return;
                     }
 
@@ -122,6 +154,8 @@ namespace FlickrNet
             {
                 client.DownloadStringCompleted += delegate(object sender, DownloadStringCompletedEventArgs e)
                 {
+                    client.Dispose();
+
                     var result = new FlickrResult<string>();
                     if (e.Error != null)
                     {
@@ -136,7 +170,6 @@ namespace FlickrNet
                 };
 
                 client.DownloadStringAsync(new Uri(baseUrl));
-
             }
         }
     }

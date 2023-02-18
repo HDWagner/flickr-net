@@ -26,7 +26,9 @@ namespace FlickrNet
         void IFlickrParsable.Load(XmlReader reader)
         {
             if (reader.LocalName != "user")
+            {
                 UtilityMethods.CheckParsingException(reader);
+            }
 
             while (reader.MoveToNextAttribute())
             {
@@ -250,14 +252,14 @@ namespace FlickrNet
                         break;
                     case "upload_count":
                         {
-                            UploadCount = int.TryParse(reader.Value, out int i) ? (int?)i : null;
+                            UploadCount = int.TryParse(reader.Value, out int i) ? i : null;
                             break;
                         }
                     case "upload_limit":
                         {
                             if (reader.Value != "-1")
                             {
-                                UploadLimit = int.TryParse(reader.Value, out int i) ? (int?)i : null;
+                                UploadLimit = int.TryParse(reader.Value, out int i) ? i : null;
                             }
                             break;
                         }
@@ -281,11 +283,17 @@ namespace FlickrNet
                 {
                     case "uploaded":
                         if (!string.IsNullOrEmpty(reader.Value))
+                        {
                             VideosUploaded = reader.ReadContentAsInt();
+                        }
+
                         break;
                     case "remaining":
                         if (!string.IsNullOrEmpty(reader.Value) && reader.Value != "lots")
+                        {
                             VideosRemaining = reader.ReadContentAsInt();
+                        }
+
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
@@ -326,11 +334,17 @@ namespace FlickrNet
                 {
                     case "created":
                         if (!string.IsNullOrEmpty(reader.Value))
+                        {
                             SetsCreated = reader.ReadContentAsInt();
+                        }
+
                         break;
                     case "remaining":
                         if (!string.IsNullOrEmpty(reader.Value) && reader.Value != "lots")
+                        {
                             SetsRemaining = reader.ReadContentAsInt();
+                        }
+
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);

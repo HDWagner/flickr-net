@@ -38,38 +38,30 @@ namespace FlickrNet
     /// </remarks>
     internal class FlickrConfigurationSettings
     {
-        private string apiKey;
-        private string apiSecret;
-        private string apiToken;
-        private int cacheSize;
-        private TimeSpan cacheTimeout = TimeSpan.MinValue;
-        private string proxyAddress;
-        private int proxyPort;
-        private bool proxyDefined;
-        private string proxyUsername;
-        private string proxyPassword;
-        private string proxyDomain;
-        private string cacheLocation;
-        private bool cacheDisabled;
-        private SupportedService service;
+        private readonly string apiToken;
+        private readonly string cacheLocation;
+        private readonly SupportedService service;
 
         /// <summary>
         /// Loads FlickrConfigurationSettings with the settings in the config file.
         /// </summary>
         /// <param name="configNode">XmlNode containing the configuration settings.</param>
-        public FlickrConfigurationSettings(XmlNode configNode)
+        public FlickrConfigurationSettings(XmlNode? configNode)
         {
-            if (configNode == null) throw new ArgumentNullException("configNode");
+            if (configNode?.Attributes == null)
+            {
+                throw new ArgumentNullException("configNode");
+            }
 
             foreach (XmlAttribute attribute in configNode.Attributes)
             {
                 switch (attribute.Name)
                 {
                     case "apiKey":
-                        apiKey = attribute.Value;
+                        ApiKey = attribute.Value;
                         break;
                     case "secret":
-                        apiSecret = attribute.Value;
+                        SharedSecret = attribute.Value;
                         break;
                     case "token":
                         apiToken = attribute.Value;
@@ -77,7 +69,7 @@ namespace FlickrNet
                     case "cacheDisabled":
                         try
                         {
-                            cacheDisabled = bool.Parse(attribute.Value);
+                            CacheDisabled = bool.Parse(attribute.Value);
                             break;
                         }
                         catch (FormatException ex)
@@ -87,7 +79,7 @@ namespace FlickrNet
                     case "cacheSize":
                         try
                         {
-                            cacheSize = int.Parse(attribute.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
+                            CacheSize = int.Parse(attribute.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
                             break;
                         }
                         catch (FormatException ex)
@@ -97,7 +89,7 @@ namespace FlickrNet
                     case "cacheTimeout":
                         try
                         {
-                            cacheTimeout = TimeSpan.Parse(attribute.Value);
+                            CacheTimeout = TimeSpan.Parse(attribute.Value);
                             break;
                         }
                         catch (FormatException ex)
@@ -147,21 +139,23 @@ namespace FlickrNet
         private void ProcessProxyNode(XmlNode proxy, XmlNode configNode)
         {
             if (proxy.ChildNodes.Count > 0)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy element does not support child elements");
+            }
 
-            proxyDefined = true;
+            IsProxyDefined = true;
             foreach (XmlAttribute attribute in proxy.Attributes)
             {
 
                 switch (attribute.Name)
                 {
                     case "ipaddress":
-                        proxyAddress = attribute.Value;
+                        ProxyIPAddress = attribute.Value;
                         break;
                     case "port":
                         try
                         {
-                            proxyPort = int.Parse(attribute.Value, System.Globalization.CultureInfo.InvariantCulture);
+                            ProxyPort = int.Parse(attribute.Value, System.Globalization.CultureInfo.InvariantCulture);
                         }
                         catch (FormatException ex)
                         {
@@ -169,13 +163,13 @@ namespace FlickrNet
                         }
                         break;
                     case "username":
-                        proxyUsername = attribute.Value;
+                        ProxyUsername = attribute.Value;
                         break;
                     case "password":
-                        proxyPassword = attribute.Value;
+                        ProxyPassword = attribute.Value;
                         break;
                     case "domain":
-                        proxyDomain = attribute.Value;
+                        ProxyDomain = attribute.Value;
                         break;
                     default:
                         throw new System.Configuration.ConfigurationErrorsException(
@@ -184,33 +178,41 @@ namespace FlickrNet
                 }
             }
 
-            if (proxyAddress == null)
+            if (ProxyIPAddress == null)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy ipaddress is mandatory if you specify the proxy element");
-            if (proxyPort == 0)
+            }
+
+            if (ProxyPort == 0)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy port is mandatory if you specify the proxy element");
-            if (proxyUsername != null && proxyPassword == null)
+            }
+
+            if (ProxyUsername != null && ProxyPassword == null)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy password must be specified if proxy username is specified");
-            if (proxyUsername == null && proxyPassword != null)
+            }
+
+            if (ProxyUsername == null && ProxyPassword != null)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy username must be specified if proxy password is specified");
-            if (proxyDomain != null && proxyUsername == null)
+            }
+
+            if (ProxyDomain != null && ProxyUsername == null)
+            {
                 throw new System.Configuration.ConfigurationErrorsException("proxy username/password must be specified if proxy domain is specified");
+            }
         }
 
         /// <summary>
         /// API key. Null if not present. Optional.
         /// </summary>
-        public string ApiKey
-        {
-            get { return apiKey; }
-        }
+        public string ApiKey { get; }
 
         /// <summary>
         /// Shared Secret. Null if not present. Optional.
         /// </summary>
-        public string SharedSecret
-        {
-            get { return apiSecret; }
-        }
+        public string SharedSecret { get; }
 
         /// <summary>
         /// API token. Null if not present. Optional.
@@ -223,26 +225,17 @@ namespace FlickrNet
         /// <summary>
         /// Cache size in bytes. 0 if not present. Optional.
         /// </summary>
-        public bool CacheDisabled
-        {
-            get { return cacheDisabled; }
-        }
+        public bool CacheDisabled { get; }
 
         /// <summary>
         /// Cache size in bytes. 0 if not present. Optional.
         /// </summary>
-        public int CacheSize
-        {
-            get { return cacheSize; }
-        }
+        public int CacheSize { get; }
 
         /// <summary>
         /// Cache timeout. Equals TimeSpan.MinValue is not present. Optional.
         /// </summary>
-        public TimeSpan CacheTimeout
-        {
-            get { return cacheTimeout; }
-        }
+        public TimeSpan CacheTimeout { get; } = TimeSpan.MinValue;
 
         public string CacheLocation
         {
@@ -257,50 +250,32 @@ namespace FlickrNet
         /// <summary>
         /// If the proxy is defined in the configuration section.
         /// </summary>
-        public bool IsProxyDefined
-        {
-            get { return proxyDefined; }
-        }
+        public bool IsProxyDefined { get; private set; }
 
         /// <summary>
         /// If <see cref="IsProxyDefined"/> is true then this is mandatory.
         /// </summary>
-        public string ProxyIPAddress
-        {
-            get { return proxyAddress; }
-        }
+        public string ProxyIPAddress { get; private set; }
 
         /// <summary>
         /// If <see cref="IsProxyDefined"/> is true then this is mandatory.
         /// </summary>
-        public int ProxyPort
-        {
-            get { return proxyPort; }
-        }
+        public int ProxyPort { get; private set; }
 
         /// <summary>
         /// The username for the proxy. Optional.
         /// </summary>
-        public string ProxyUsername
-        {
-            get { return proxyUsername; }
-        }
+        public string ProxyUsername { get; private set; }
 
         /// <summary>
         /// The password for the proxy. Optional.
         /// </summary>
-        public string ProxyPassword
-        {
-            get { return proxyPassword; }
-        }
+        public string ProxyPassword { get; private set; }
 
         /// <summary>
         /// The domain for the proxy. Optional.
         /// </summary>
-        public string ProxyDomain
-        {
-            get { return proxyDomain; }
-        }
+        public string ProxyDomain { get; private set; }
     }
 }
 #endif

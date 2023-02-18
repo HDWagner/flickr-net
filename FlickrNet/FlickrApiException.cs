@@ -1,5 +1,5 @@
 using System;
-using System.Security.Permissions;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
@@ -50,6 +50,10 @@ namespace FlickrNet
         {
         }
 
+        protected FlickrApiException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        {
+        }
+
 
         /// <summary>
         /// Get the code of the Flickr error.
@@ -59,8 +63,8 @@ namespace FlickrNet
         /// <summary>
         /// Gets the orignal message returned by Flickr.
         /// </summary>
-        public string OriginalMessage { get; set; }
-        
+        public string? OriginalMessage { get; set; }
+
         /// <summary>
         /// Overrides the message to return custom error message.
         /// </summary>
@@ -71,6 +75,7 @@ namespace FlickrNet
                 return OriginalMessage + " (" + Code + ")";
             }
         }
+
 
     }
 }

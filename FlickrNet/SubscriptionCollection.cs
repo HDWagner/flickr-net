@@ -12,7 +12,11 @@ namespace FlickrNet
     {
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "subscriptions") { UtilityMethods.CheckParsingException(reader); return; }
 
             reader.Read();

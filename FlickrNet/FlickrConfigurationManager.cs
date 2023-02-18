@@ -1,19 +1,17 @@
 using System;
 using System.Configuration;
-using System.Xml;
 
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
 namespace FlickrNet
 {
     /// <summary>
     /// Summary description for FlickrConfigurationManager.
     /// </summary>
-    internal class FlickrConfigurationManager : IConfigurationSectionHandler
+    internal static class FlickrConfigurationManager 
     {
-        private static string configSection = "flickrNet";
-        private static FlickrConfigurationSettings settings;
+        private static readonly string configSection = "flickrNet";
+        private static FlickrConfigurationSettings? settings;
 
-        public static FlickrConfigurationSettings Settings
+        public static FlickrConfigurationSettings? Settings
         {
             get
             {
@@ -37,11 +35,5 @@ namespace FlickrNet
             }
         }
 
-        public object Create(object parent, object configContext, XmlNode section)
-        {
-            configSection = section.Name;
-            return new FlickrConfigurationSettings(section);
-        }
     }
 }
-#endif

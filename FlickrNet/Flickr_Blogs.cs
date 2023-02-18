@@ -64,7 +64,10 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("title", title);
             parameters.Add("description", description);
-            if (blogPassword != null) parameters.Add("blog_password", blogPassword);
+            if (blogPassword != null)
+            {
+                parameters.Add("blog_password", blogPassword);
+            }
 
             GetResponseCache<NoResponse>(parameters);
         }

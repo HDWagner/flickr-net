@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
 
 namespace FlickrNet
@@ -29,7 +27,11 @@ namespace FlickrNet
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader");
+            }
+
             if (reader.LocalName != "suggestions") { UtilityMethods.CheckParsingException(reader); return; }
 
             while (reader.MoveToNextAttribute())
@@ -56,8 +58,6 @@ namespace FlickrNet
                 ((IFlickrParsable)suggestion).Load(reader);
                 Add(suggestion);
             }
-
-            return;
         }
     }
 }

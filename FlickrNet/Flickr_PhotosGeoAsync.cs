@@ -143,7 +143,9 @@ namespace FlickrNet
             parameters.Add("lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             if (accuracy != GeoAccuracy.None)
+            {
                 parameters.Add("accuracy", accuracy.ToString("D"));
+            }
 
             GetResponseAsync<NoResponse>(parameters, callback);
         }
@@ -173,10 +175,20 @@ namespace FlickrNet
             parameters.Add("lat", latitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("lon", longitude.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("accuracy", accuracy.ToString("D"));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
 

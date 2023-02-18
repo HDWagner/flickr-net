@@ -42,7 +42,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.NodeType == System.Xml.XmlNodeType.Text)
+            {
                 PredicateName = reader.ReadContentAsString();
+            }
 
             reader.Read();
         }

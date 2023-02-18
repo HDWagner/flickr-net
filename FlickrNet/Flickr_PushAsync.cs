@@ -30,7 +30,11 @@ namespace FlickrNet
 
             GetResponseAsync<UnknownResponse>(parameters, r =>
             {
-                if (callback == null) return;
+                if (callback == null)
+                {
+                    return;
+                }
+
                 if (r.HasError)
                 {
                     callback(new FlickrResult<string[]>() { Error = r.Error });
@@ -74,22 +78,42 @@ namespace FlickrNet
         {
             CheckRequiresAuthentication();
 
-            if (string.IsNullOrEmpty(topic)) throw new ArgumentNullException("topic");
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException("callback");
-            if (string.IsNullOrEmpty(verify)) throw new ArgumentNullException("verify");
+            if (string.IsNullOrEmpty(topic))
+            {
+                throw new ArgumentNullException("topic");
+            }
+
+            if (string.IsNullOrEmpty(callback))
+            {
+                throw new ArgumentNullException("callback");
+            }
+
+            if (string.IsNullOrEmpty(verify))
+            {
+                throw new ArgumentNullException("verify");
+            }
 
             if (topic == "tags" && (tags == null || tags.Length == 0))
+            {
                 throw new InvalidOperationException("Must specify at least one tag is using topic of 'tags'");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.push.subscribe");
             parameters.Add("topic", topic);
             parameters.Add("callback", callback);
             parameters.Add("verify", verify);
-            if (!string.IsNullOrEmpty(verifyToken)) parameters.Add("verify_token", verifyToken);
+            if (!string.IsNullOrEmpty(verifyToken))
+            {
+                parameters.Add("verify_token", verifyToken);
+            }
+
             if (leaseSeconds > 0)
+            {
                 parameters.Add("lease_seconds",
                                leaseSeconds.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
             if (woeIds != null && woeIds.Length > 0)
             {
                 var woeIdList = new List<string>();
@@ -99,8 +123,15 @@ namespace FlickrNet
                 }
                 parameters.Add("woe_ids", string.Join(",", woeIdList.ToArray()));
             }
-            if (placeIds != null && placeIds.Length > 0) parameters.Add("place_ids", string.Join(",", placeIds));
-            if (radiusUnits != RadiusUnit.None) parameters.Add("radius_units", radiusUnits.ToString("d"));
+            if (placeIds != null && placeIds.Length > 0)
+            {
+                parameters.Add("place_ids", string.Join(",", placeIds));
+            }
+
+            if (radiusUnits != RadiusUnit.None)
+            {
+                parameters.Add("radius_units", radiusUnits.ToString("d"));
+            }
 
             GetResponseAsync<NoResponse>(parameters, callbackAction);
 
@@ -118,16 +149,30 @@ namespace FlickrNet
         {
             CheckRequiresAuthentication();
 
-            if (string.IsNullOrEmpty(topic)) throw new ArgumentNullException("topic");
-            if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException("callback");
-            if (string.IsNullOrEmpty(verify)) throw new ArgumentNullException("verify");
+            if (string.IsNullOrEmpty(topic))
+            {
+                throw new ArgumentNullException("topic");
+            }
+
+            if (string.IsNullOrEmpty(callback))
+            {
+                throw new ArgumentNullException("callback");
+            }
+
+            if (string.IsNullOrEmpty(verify))
+            {
+                throw new ArgumentNullException("verify");
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.push.unsubscribe");
             parameters.Add("topic", topic);
             parameters.Add("callback", callback);
             parameters.Add("verify", verify);
-            if (!string.IsNullOrEmpty(verifyToken)) parameters.Add("verif_token", verifyToken);
+            if (!string.IsNullOrEmpty(verifyToken))
+            {
+                parameters.Add("verif_token", verifyToken);
+            }
 
             GetResponseAsync<NoResponse>(parameters, callbackAction);
         }

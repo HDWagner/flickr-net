@@ -35,10 +35,12 @@ namespace FlickrNet
             var method = parameters["method"];
 
             // User of obsolete AuthToken property while we transition over to the new OAuth authentication process.
-#pragma warning disable 612,618
             if (method.StartsWith("flickr.auth", StringComparison.Ordinal) && !method.EndsWith("oauth.checkToken", StringComparison.Ordinal))
             {
-                if (!string.IsNullOrEmpty(AuthToken)) parameters["auth_token"] = AuthToken;
+                if (!string.IsNullOrEmpty(AuthToken))
+                {
+                    parameters["auth_token"] = AuthToken;
+                }
             }
             else
             {
@@ -47,7 +49,10 @@ namespace FlickrNet
                 {
                     parameters.Remove("api_key");
                     OAuthGetBasicParameters(parameters);
-                    if (!string.IsNullOrEmpty(OAuthAccessToken)) parameters["oauth_token"] = OAuthAccessToken;
+                    if (!string.IsNullOrEmpty(OAuthAccessToken))
+                    {
+                        parameters["oauth_token"] = OAuthAccessToken;
+                    }
                 }
                 else
                 {
@@ -88,7 +93,7 @@ namespace FlickrNet
                 }
             }
 
-            lastResponse = responseXml;
+            LastResponse = responseXml;
 
             var item = new T();
             item.Load(responseXml);

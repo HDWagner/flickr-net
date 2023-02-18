@@ -74,7 +74,9 @@ namespace FlickrNet
             reader.Read();
 
             if (reader.NodeType == System.Xml.XmlNodeType.Text)
+            {
                 ValueText = reader.ReadContentAsString();
+            }
 
             reader.Read();
 

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
 using System.Collections.ObjectModel;
 
 namespace FlickrNet
@@ -110,8 +107,11 @@ namespace FlickrNet
                             {
                                 string[] xy = point.Split(',');
                                 if (xy.Length != 2)
+                                {
                                     throw new ParsingException("Invalid polypoint found in polyline : '" + polystring +
                                                                "'");
+                                }
+
                                 polyline.Add(
                                     new PointD(
                                         double.Parse(xy[0], System.Globalization.NumberFormatInfo.InvariantInfo),
@@ -137,18 +137,15 @@ namespace FlickrNet
     /// </summary>
     public struct PointD
     {
-        private double x;
-        private double y;
-
         /// <summary>
         /// The X position of the point.
         /// </summary>
-        public double X { get { return x; } }
+        public double X { get; }
 
         /// <summary>
         /// The Y position of the point.
         /// </summary>
-        public double Y { get { return y; } }
+        public double Y { get; }
 
         /// <summary>
         /// Default constructor.
@@ -157,8 +154,8 @@ namespace FlickrNet
         /// <param name="y"></param>
         public PointD(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
 
         /// <summary>
@@ -188,14 +185,16 @@ namespace FlickrNet
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null) return false;
-            if (obj is PointD)
+            if (obj == null)
             {
-                var p = (PointD)obj;
-                return this == p;
+                return false;
+            }
 
+            if (obj is PointD p)
+            {
+                return this == p;
             }
             return false;
         }
@@ -207,15 +206,6 @@ namespace FlickrNet
         public override int GetHashCode()
         {
             return X.GetHashCode() + Y.GetHashCode();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }

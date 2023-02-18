@@ -119,15 +119,35 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.favorites.getList");
-            if (userId != null) parameters.Add("user_id", userId);
+            if (userId != null)
+            {
+                parameters.Add("user_id", userId);
+            }
+
             if (minFavoriteDate != DateTime.MinValue)
+            {
                 parameters.Add("min_fav_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
+            }
+
             if (maxFavoriteDate != DateTime.MinValue)
+            {
                 parameters.Add("max_fav_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -164,13 +184,29 @@ namespace FlickrNet
             parameters.Add("method", "flickr.favorites.getPublicList");
             parameters.Add("user_id", userId);
             if (minFavoriteDate != DateTime.MinValue)
+            {
                 parameters.Add("min_fav_date", UtilityMethods.DateToUnixTimestamp(minFavoriteDate));
+            }
+
             if (maxFavoriteDate != DateTime.MinValue)
+            {
                 parameters.Add("max_fav_date", UtilityMethods.DateToUnixTimestamp(maxFavoriteDate));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
+
             if (perPage > 0)
+            {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (page > 0) parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (page > 0)
+            {
+                parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
 
             GetResponseAsync<PhotoCollection>(parameters, callback);
         }
@@ -233,7 +269,10 @@ namespace FlickrNet
             parameters.Add("photo_id", photoId);
             parameters.Add("num_prev", Math.Max(1, numPrevious).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             parameters.Add("num_next", Math.Max(1, numNext).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (extras != PhotoSearchExtras.None) parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            if (extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", UtilityMethods.ExtrasToString(extras));
+            }
 
             GetResponseAsync<FavoriteContext>(parameters, callback);
         }

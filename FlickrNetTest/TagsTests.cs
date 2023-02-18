@@ -1,6 +1,5 @@
-﻿
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
 using Shouldly;
 
 namespace FlickrNetTest
@@ -145,6 +144,7 @@ namespace FlickrNetTest
         public void TagsGetListUserTest()
         {
             var col = Instance.TagsGetListUser(TestData.TestUserId);
+            Assert.IsNotNull(col);
         }
 
         [Test]

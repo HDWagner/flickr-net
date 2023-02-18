@@ -8,11 +8,10 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
 #if SILVERLIGHT
 using System.Linq;
 #endif
-
-#pragma warning disable CS0618 // Type or member is obsolete
 
 namespace FlickrNet
 {
@@ -68,7 +67,7 @@ namespace FlickrNet
         {
             get { return uploadUrl[(int)service]; }
         }
-        private static string[] uploadUrl = {
+        private static readonly string[] uploadUrl = {
                                                               "https://up.flickr.com/services/upload/",
                                                               "http://beta.zooomr.com/bluenote/api/upload",
                                                               "http://www.23hq.com/services/upload/"
@@ -78,7 +77,7 @@ namespace FlickrNet
         {
             get { return replaceUrl[(int)service]; }
         }
-        private static string[] replaceUrl = {
+        private static readonly string[] replaceUrl = {
                                                                "https://up.flickr.com/services/replace/",
                                                                "http://beta.zooomr.com/bluenote/api/replace",
                                                                "http://www.23hq.com/services/replace/"
@@ -88,7 +87,7 @@ namespace FlickrNet
         {
             get { return authUrl[(int)service]; }
         }
-        private static string[] authUrl = {
+        private static readonly string[] authUrl = {
                                                             "https://www.flickr.com/services/auth/",
                                                             "http://beta.zooomr.com/auth/",
                                                             "http://www.23hq.com/services/auth/"
@@ -97,14 +96,9 @@ namespace FlickrNet
         private string apiKey;
         private string apiToken;
         private string sharedSecret;
-        // private int timeout = 100000;  // original value
-        private int timeout = 3600000;  // (Andrew Keil) Changed to 1 hour in milliseconds to avoid timeout issues when uploading picture & videos
-
         private string lastRequest;
-        private string lastResponse;
 
 #if !SILVERLIGHT
-        private WebProxy proxy; 
 #endif
 
         /// <summary>
@@ -255,11 +249,7 @@ namespace FlickrNet
         /// <summary>
         /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
         /// </summary>
-        public int HttpTimeout
-        {
-            get { return timeout; }
-            set { timeout = value; }
-        }
+        public int HttpTimeout { get; set; } = 3600000;
 
         /// <summary>
         /// Checks to see if a shared secret and an api token are stored in the object.
@@ -277,10 +267,7 @@ namespace FlickrNet
         /// Returns the raw XML returned from the last response.
         /// Only set it the response was not returned from cache.
         /// </summary>
-        public string LastResponse
-        {
-            get { return lastResponse; }
-        }
+        public string LastResponse { get; private set; }
 
         /// <summary>
         /// Returns the last URL requested. Includes API signing.
@@ -296,7 +283,7 @@ namespace FlickrNet
         /// It defaults to your internet explorer proxy settings.
         /// </summary>
 
-        public WebProxy Proxy { get { return proxy; } set { proxy = value; } }
+        public WebProxy Proxy { get; set; }
 #endif
 
         /// <summary>
@@ -344,19 +331,36 @@ namespace FlickrNet
 #if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
 
             var settings = FlickrConfigurationManager.Settings;
-            if (settings == null) return;
+            if (settings == null)
+            {
+                return;
+            }
 
-            if (settings.CacheSize != 0) CacheSizeLimit = settings.CacheSize;
-            if (settings.CacheTimeout != TimeSpan.MinValue) CacheTimeout = settings.CacheTimeout;
+            if (settings.CacheSize != 0)
+            {
+                CacheSizeLimit = settings.CacheSize;
+            }
+
+            if (settings.CacheTimeout != TimeSpan.MinValue)
+            {
+                CacheTimeout = settings.CacheTimeout;
+            }
+
             ApiKey = settings.ApiKey;
             AuthToken = settings.ApiToken;
             ApiSecret = settings.SharedSecret;
 
-            if (!settings.IsProxyDefined) return;
+            if (!settings.IsProxyDefined)
+            {
+                return;
+            }
 
             Proxy = new WebProxy {Address = new Uri("http://" + settings.ProxyIPAddress + ":" + settings.ProxyPort)};
 
-            if (string.IsNullOrEmpty(settings.ProxyUsername)) return;
+            if (string.IsNullOrEmpty(settings.ProxyUsername))
+            {
+                return;
+            }
 
             var creds = new NetworkCredential
                         {
@@ -407,7 +411,9 @@ namespace FlickrNet
         internal void CheckApiKey()
         {
             if (string.IsNullOrEmpty(ApiKey))
+            {
                 throw new ApiKeyRequiredException();
+            }
         }
 
         internal void CheckSigned()
@@ -415,7 +421,9 @@ namespace FlickrNet
             CheckApiKey();
 
             if (string.IsNullOrEmpty(ApiSecret))
+            {
                 throw new SignatureRequiredException();
+            }
         }
 
         internal void CheckRequiresAuthentication()
@@ -487,16 +495,6 @@ namespace FlickrNet
             }
 
             return nonSeekableStream;
-
-            //var ms = new MemoryStream();
-            //var buffer = new byte[1024];
-            //int bytes;
-            //while ((bytes = nonSeekableStream.Read(buffer, 0, buffer.Length)) > 0)
-            //{
-            //    ms.Write(buffer, 0, bytes);
-            //}
-            //ms.Position = 0;
-            //return ms;
         }
 
         private StreamCollection CreateUploadData(Stream imageStream, string fileName, Dictionary<string, string> parameters, string boundary)
@@ -516,7 +514,10 @@ namespace FlickrNet
 
 #if !SILVERLIGHT
                 // Silverlight < 5 doesn't support modification of the Authorization header, so all data must be sent in post body.
-                if (key.StartsWith("oauth", StringComparison.Ordinal)) continue;
+                if (key.StartsWith("oauth", StringComparison.Ordinal))
+                {
+                    continue;
+                }
 #endif
                 hashStringBuilder.Append(key);
                 hashStringBuilder.Append(parameters[key]);
@@ -575,7 +576,10 @@ namespace FlickrNet
                     long l = 0;
                     foreach (var s in Streams)
                     {
-                        if (!s.CanSeek) return null;
+                        if (!s.CanSeek)
+                        {
+                            return null;
+                        }
 
                         l += s.Length;
                     }
@@ -601,7 +605,9 @@ namespace FlickrNet
                         soFar += read;
                         stream.Write(buffer, 0, read);
                         if( UploadProgress != null)
+                        {
                             UploadProgress(this, new UploadProgressEventArgs { BytesSent = soFar, TotalBytesToSend = l.GetValueOrDefault(-1) });
+                        }
                     }
                     stream.Flush();
                 }
@@ -613,7 +619,9 @@ namespace FlickrNet
                 Streams.ForEach(s =>
                                     {
                                         if( s != null)
+                                        {
                                             s.Dispose();
+                                        }
                                     });
             }
         }
@@ -638,7 +646,9 @@ namespace FlickrNet
                 while (reader.MoveToNextAttribute())
                 {
                     if (reader.LocalName == "stat" && reader.Value == "fail")
+                    {
                         throw ExceptionHandler.CreateResponseException(reader);
+                    }
                 }
 
                 reader.MoveToElement();
@@ -661,7 +671,9 @@ namespace FlickrNet
                 while (newReader.MoveToNextAttribute())
                 {
                     if (newReader.LocalName == "stat" && newReader.Value == "fail")
+                    {
                         throw ExceptionHandler.CreateResponseException(newReader);
+                    }
                 }
 
                 newReader.MoveToElement();
@@ -679,8 +691,7 @@ namespace FlickrNet
             }
 
             var buffer = new System.Text.StringBuilder(xml.Length);
-
-            foreach (char c in xml)
+            foreach (var c in xml)
             {
                 if (IsLegalXmlChar(c))
                 {

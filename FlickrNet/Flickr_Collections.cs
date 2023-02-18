@@ -42,12 +42,22 @@ namespace FlickrNet
         /// <returns>An array of <see cref="Collection"/> instances.</returns>
         public CollectionCollection CollectionsGetTree(string collectionId, string userId)
         {
-            if (string.IsNullOrEmpty(userId)) CheckRequiresAuthentication();
+            if (string.IsNullOrEmpty(userId))
+            {
+                CheckRequiresAuthentication();
+            }
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.collections.getTree");
-            if (collectionId != null) parameters.Add("collection_id", collectionId);
-            if (userId != null) parameters.Add("user_id", userId);
+            if (collectionId != null)
+            {
+                parameters.Add("collection_id", collectionId);
+            }
+
+            if (userId != null)
+            {
+                parameters.Add("user_id", userId);
+            }
 
             return GetResponseCache<CollectionCollection>(parameters);
         }
@@ -89,7 +99,9 @@ namespace FlickrNet
             {
                 photosetIdsParameter += photosetIds[i];
                 if (i < photosetIds.Count - 1)
+                {
                     photosetIdsParameter += ",";
+                }
             }
 
             var parameters = new Dictionary<string, string>();

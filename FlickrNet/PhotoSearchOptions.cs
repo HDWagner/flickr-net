@@ -140,15 +140,10 @@ namespace FlickrNet
         /// </summary>
         public MediaType MediaType { get; set; }
 
-        private Collection<LicenseType> licenses = new Collection<LicenseType>();
-
         /// <summary>
         /// The licenses you wish to search for.
         /// </summary>
-        public Collection<LicenseType> Licenses
-        {
-            get { return licenses; }
-        }
+        public Collection<LicenseType> Licenses { get; } = new Collection<LicenseType>();
 
         /// <summary>
         /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.
@@ -425,17 +420,61 @@ namespace FlickrNet
         /// <param name="parameters">The <see cref="Dictionary{K,V}"/> to add the options to.</param>
         public void AddToDictionary(Dictionary<string, string> parameters)
         {
-            if (!string.IsNullOrEmpty(UserId)) parameters.Add("user_id", UserId);
-            if (!string.IsNullOrEmpty(GroupId)) parameters.Add("group_id", GroupId);
-            if (!string.IsNullOrEmpty(Text)) parameters.Add("text", Text);
-            if (!string.IsNullOrEmpty(Tags)) parameters.Add("tags", Tags);
-            if (TagMode != TagMode.None) parameters.Add("tag_mode", UtilityMethods.TagModeToString(TagMode));
-            if (!string.IsNullOrEmpty(MachineTags)) parameters.Add("machine_tags", MachineTags);
-            if (MachineTagMode != MachineTagMode.None) parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(MachineTagMode));
-            if (MinUploadDate != DateTime.MinValue) parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(MinUploadDate).ToString());
-            if (MaxUploadDate != DateTime.MinValue) parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(MaxUploadDate).ToString());
-            if (MinTakenDate != DateTime.MinValue) parameters.Add("min_taken_date", UtilityMethods.DateToMySql(MinTakenDate));
-            if (MaxTakenDate != DateTime.MinValue) parameters.Add("max_taken_date", UtilityMethods.DateToMySql(MaxTakenDate));
+            if (!string.IsNullOrEmpty(UserId))
+            {
+                parameters.Add("user_id", UserId);
+            }
+
+            if (!string.IsNullOrEmpty(GroupId))
+            {
+                parameters.Add("group_id", GroupId);
+            }
+
+            if (!string.IsNullOrEmpty(Text))
+            {
+                parameters.Add("text", Text);
+            }
+
+            if (!string.IsNullOrEmpty(Tags))
+            {
+                parameters.Add("tags", Tags);
+            }
+
+            if (TagMode != TagMode.None)
+            {
+                parameters.Add("tag_mode", UtilityMethods.TagModeToString(TagMode));
+            }
+
+            if (!string.IsNullOrEmpty(MachineTags))
+            {
+                parameters.Add("machine_tags", MachineTags);
+            }
+
+            if (MachineTagMode != MachineTagMode.None)
+            {
+                parameters.Add("machine_tag_mode", UtilityMethods.MachineTagModeToString(MachineTagMode));
+            }
+
+            if (MinUploadDate != DateTime.MinValue)
+            {
+                parameters.Add("min_upload_date", UtilityMethods.DateToUnixTimestamp(MinUploadDate).ToString());
+            }
+
+            if (MaxUploadDate != DateTime.MinValue)
+            {
+                parameters.Add("max_upload_date", UtilityMethods.DateToUnixTimestamp(MaxUploadDate).ToString());
+            }
+
+            if (MinTakenDate != DateTime.MinValue)
+            {
+                parameters.Add("min_taken_date", UtilityMethods.DateToMySql(MinTakenDate));
+            }
+
+            if (MaxTakenDate != DateTime.MinValue)
+            {
+                parameters.Add("max_taken_date", UtilityMethods.DateToMySql(MaxTakenDate));
+            }
+
             if (Licenses.Count != 0)
             {
                 var licenseArray = new List<string>();
@@ -445,47 +484,210 @@ namespace FlickrNet
                 }
                 parameters.Add("license", string.Join(",", licenseArray.ToArray()));
             }
-            if (PerPage != 0) parameters.Add("per_page", PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (Page != 0) parameters.Add("page", Page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (Extras != PhotoSearchExtras.None) parameters.Add("extras", ExtrasString);
-            if (SortOrder != PhotoSearchSortOrder.None) parameters.Add("sort", SortOrderString);
-            if (PrivacyFilter != PrivacyFilter.None) parameters.Add("privacy_filter", PrivacyFilter.ToString("d"));
-            if (BoundaryBox != null && BoundaryBox.IsSet) parameters.Add("bbox", BoundaryBox.ToString());
-            if (Accuracy != GeoAccuracy.None) parameters.Add("accuracy", Accuracy.ToString("d"));
-            if (SafeSearch != SafetyLevel.None) parameters.Add("safe_search", SafeSearch.ToString("d"));
-            if (ContentType != ContentTypeSearch.None) parameters.Add("content_type", ContentType.ToString("d"));
-            if (HasGeo != null) parameters.Add("has_geo", HasGeo.Value ? "1" : "0");
-            if (Latitude != null) parameters.Add("lat", Latitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (Longitude != null) parameters.Add("lon", Longitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (Radius != null) parameters.Add("radius", Radius.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (RadiusUnits != RadiusUnit.None) parameters.Add("radius_units", (RadiusUnits == RadiusUnit.Miles ? "mi" : "km"));
-            if (Contacts != ContactSearch.None) parameters.Add("contacts", (Contacts == ContactSearch.AllContacts ? "all" : "ff"));
-            if (WoeId != null) parameters.Add("woe_id", WoeId);
-            if (PlaceId != null) parameters.Add("place_id", PlaceId);
-            if (IsCommons) parameters.Add("is_commons", "1");
-            if (InGallery) parameters.Add("in_gallery", "1");
-            if (IsGetty) parameters.Add("is_getty", "1");
-            if (MediaType != MediaType.None) parameters.Add("media", UtilityMethods.MediaTypeToString(MediaType));
-            if (GeoContext != GeoContext.NotDefined) parameters.Add("geo_context", GeoContext.ToString("d"));
-            if (Faves) parameters.Add("faves", "1");
-            if (PersonId != null) parameters.Add("person_id", PersonId);
-            if (Camera != null) parameters.Add("camera", Camera);
-            if (JumpTo != null) parameters.Add("jump_to", JumpTo);
-            if (!string.IsNullOrEmpty(Username)) parameters.Add("username", Username);
-            if (ExifMinExposure != null) parameters.Add("exif_min_exposure", ExifMinExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExifMaxExposure != null) parameters.Add("exif_max_exposure", ExifMaxExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExifMinAperture != null) parameters.Add("exif_min_aperture", ExifMinAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExifMaxAperture != null) parameters.Add("exif_max_aperture", ExifMaxAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExifMinFocalLength != null) parameters.Add("exif_min_focallen", ExifMinFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExifMaxFocalLength != null) parameters.Add("exif_max_focallen", ExifMaxFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
-            if (ExcludeUserID != null) parameters.Add("exclude_user_id", ExcludeUserID);
-            if (FoursquareVenueID != null) parameters.Add("foursquare_venueid", FoursquareVenueID);
-            if (FoursquareWoeID != null) parameters.Add("foursquare_woeid", FoursquareWoeID);
-            if (GroupPathAlias != null) parameters.Add("group_path_alias", GroupPathAlias);
-            if (ColorCodes != null && ColorCodes.Count != 0) parameters.Add("color_codes", ColorCodeString);
-            if (Styles != null && Styles.Count != 0) parameters.Add("styles", UtilityMethods.StylesToString(Styles));
-            if (!string.IsNullOrEmpty(ContentTypes)) parameters.Add("content_types", ContentTypes);
-            if (!string.IsNullOrEmpty(VideoContentTypes)) parameters.Add("video_content_types", VideoContentTypes);
+            if (PerPage != 0)
+            {
+                parameters.Add("per_page", PerPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (Page != 0)
+            {
+                parameters.Add("page", Page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (Extras != PhotoSearchExtras.None)
+            {
+                parameters.Add("extras", ExtrasString);
+            }
+
+            if (SortOrder != PhotoSearchSortOrder.None)
+            {
+                parameters.Add("sort", SortOrderString);
+            }
+
+            if (PrivacyFilter != PrivacyFilter.None)
+            {
+                parameters.Add("privacy_filter", PrivacyFilter.ToString("d"));
+            }
+
+            if (BoundaryBox != null && BoundaryBox.IsSet)
+            {
+                parameters.Add("bbox", BoundaryBox.ToString());
+            }
+
+            if (Accuracy != GeoAccuracy.None)
+            {
+                parameters.Add("accuracy", Accuracy.ToString("d"));
+            }
+
+            if (SafeSearch != SafetyLevel.None)
+            {
+                parameters.Add("safe_search", SafeSearch.ToString("d"));
+            }
+
+            if (ContentType != ContentTypeSearch.None)
+            {
+                parameters.Add("content_type", ContentType.ToString("d"));
+            }
+
+            if (HasGeo != null)
+            {
+                parameters.Add("has_geo", HasGeo.Value ? "1" : "0");
+            }
+
+            if (Latitude != null)
+            {
+                parameters.Add("lat", Latitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (Longitude != null)
+            {
+                parameters.Add("lon", Longitude.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (Radius != null)
+            {
+                parameters.Add("radius", Radius.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (RadiusUnits != RadiusUnit.None)
+            {
+                parameters.Add("radius_units", (RadiusUnits == RadiusUnit.Miles ? "mi" : "km"));
+            }
+
+            if (Contacts != ContactSearch.None)
+            {
+                parameters.Add("contacts", (Contacts == ContactSearch.AllContacts ? "all" : "ff"));
+            }
+
+            if (WoeId != null)
+            {
+                parameters.Add("woe_id", WoeId);
+            }
+
+            if (PlaceId != null)
+            {
+                parameters.Add("place_id", PlaceId);
+            }
+
+            if (IsCommons)
+            {
+                parameters.Add("is_commons", "1");
+            }
+
+            if (InGallery)
+            {
+                parameters.Add("in_gallery", "1");
+            }
+
+            if (IsGetty)
+            {
+                parameters.Add("is_getty", "1");
+            }
+
+            if (MediaType != MediaType.None)
+            {
+                parameters.Add("media", UtilityMethods.MediaTypeToString(MediaType));
+            }
+
+            if (GeoContext != GeoContext.NotDefined)
+            {
+                parameters.Add("geo_context", GeoContext.ToString("d"));
+            }
+
+            if (Faves)
+            {
+                parameters.Add("faves", "1");
+            }
+
+            if (PersonId != null)
+            {
+                parameters.Add("person_id", PersonId);
+            }
+
+            if (Camera != null)
+            {
+                parameters.Add("camera", Camera);
+            }
+
+            if (JumpTo != null)
+            {
+                parameters.Add("jump_to", JumpTo);
+            }
+
+            if (!string.IsNullOrEmpty(Username))
+            {
+                parameters.Add("username", Username);
+            }
+
+            if (ExifMinExposure != null)
+            {
+                parameters.Add("exif_min_exposure", ExifMinExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExifMaxExposure != null)
+            {
+                parameters.Add("exif_max_exposure", ExifMaxExposure.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExifMinAperture != null)
+            {
+                parameters.Add("exif_min_aperture", ExifMinAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExifMaxAperture != null)
+            {
+                parameters.Add("exif_max_aperture", ExifMaxAperture.Value.ToString("0.00000", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExifMinFocalLength != null)
+            {
+                parameters.Add("exif_min_focallen", ExifMinFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExifMaxFocalLength != null)
+            {
+                parameters.Add("exif_max_focallen", ExifMaxFocalLength.Value.ToString("0", System.Globalization.NumberFormatInfo.InvariantInfo));
+            }
+
+            if (ExcludeUserID != null)
+            {
+                parameters.Add("exclude_user_id", ExcludeUserID);
+            }
+
+            if (FoursquareVenueID != null)
+            {
+                parameters.Add("foursquare_venueid", FoursquareVenueID);
+            }
+
+            if (FoursquareWoeID != null)
+            {
+                parameters.Add("foursquare_woeid", FoursquareWoeID);
+            }
+
+            if (GroupPathAlias != null)
+            {
+                parameters.Add("group_path_alias", GroupPathAlias);
+            }
+
+            if (ColorCodes != null && ColorCodes.Count != 0)
+            {
+                parameters.Add("color_codes", ColorCodeString);
+            }
+
+            if (Styles != null && Styles.Count != 0)
+            {
+                parameters.Add("styles", UtilityMethods.StylesToString(Styles));
+            }
+
+            if (!string.IsNullOrEmpty(ContentTypes))
+            {
+                parameters.Add("content_types", ContentTypes);
+            }
+
+            if (!string.IsNullOrEmpty(VideoContentTypes))
+            {
+                parameters.Add("video_content_types", VideoContentTypes);
+            }
         }
 
     }
