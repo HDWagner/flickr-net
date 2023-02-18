@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FlickrNetCore.Test" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="OpenCF\**" />
+    <EmbeddedResource Remove="OpenCF\**" />
+    <None Remove="OpenCF\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CodeAnalysisDictionary.xml" />
+    <None Remove="example_app.config" />
+    <None Remove="FlickrNet.csproj.vspscc" />
+    <None Remove="FlickrNet.ndoc" />
+    <None Remove="FlickrNet.snk" />
+    <None Remove="FlickrNetSilverlight.csproj.vspscc" />
+    <None Remove="FlickrNetWP7.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    <PackageReference Include="System.Security.Permissions" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
