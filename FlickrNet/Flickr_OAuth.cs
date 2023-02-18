@@ -26,9 +26,9 @@ namespace FlickrNet
             foreach (KeyValuePair<string, string> pair in sorted)
             {
                 sb.Append(pair.Key);
-                sb.Append("=");
+                sb.Append('=');
                 sb.Append(UtilityMethods.EscapeOAuthString(pair.Value));
-                sb.Append("&");
+                sb.Append('&');
             }
 
             sb.Remove(sb.Length - 1, 1);

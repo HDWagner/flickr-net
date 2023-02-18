@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.XPath;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 namespace FlickrNet
@@ -25,7 +21,6 @@ namespace FlickrNet
         {
             var document = new XmlDocument();
             document.LoadXml(ResponseXml);
-
             return document;
         }
 
@@ -35,18 +30,11 @@ namespace FlickrNet
         /// <param name="element">The element name to find.</param>
         /// <param name="attribute">The attribute of the element to return.</param>
         /// <returns>The string value of the given attribute, if found.</returns>
-        public string GetAttributeValue(string element, string attribute)
+        public string? GetAttributeValue(string element, string attribute)
         {
-            XmlDocument doc = GetXmlDocument();
-            XmlNode node = doc.SelectSingleNode("//" + element + "/@" + attribute);
-            if (node != null)
-            {
-                return node.Value;
-            }
-            else
-            {
-                return null;
-            }
+            var doc = GetXmlDocument();
+            var node = doc.SelectSingleNode("//" + element + "/@" + attribute);
+            return node?.Value;
         }
 
         /// <summary>
@@ -54,18 +42,11 @@ namespace FlickrNet
         /// </summary>
         /// <param name="element">The element name to find.</param>
         /// <returns>The string value of the given element, if found.</returns>
-        public string GetElementValue(string element)
+        public string? GetElementValue(string element)
         {
-            XmlDocument doc = GetXmlDocument();
-            XmlNode node = doc.SelectSingleNode("//" + element + "[1]");
-            if (node != null)
-            {
-                return node.InnerText;
-            }
-            else
-            {
-                return null;
-            }
+            var doc = GetXmlDocument();
+            var node = doc.SelectSingleNode("//" + element + "[1]");
+            return node?.InnerText;
         }
 
 
@@ -83,7 +64,12 @@ namespace FlickrNet
         public string[] GetElementArray(string elementName)
         {
             var array = new List<string>();
-            foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName))
+            var nodelist = GetXmlDocument().SelectNodes("//" + elementName);
+            if (nodelist == null)
+            {
+                return array.ToArray();
+            }
+            foreach (XmlNode n in nodelist)
             {
                 array.Add(n.InnerText);
             }
@@ -99,13 +85,16 @@ namespace FlickrNet
         public string[] GetElementArray(string elementName, string attributeName)
         {
             var array = new List<string>();
-            foreach (XmlNode n in GetXmlDocument().SelectNodes("//" + elementName + "/@" + attributeName))
+            var nodelist = GetXmlDocument().SelectNodes("//" + elementName + "/@" + attributeName);
+            if (nodelist == null)
+            {
+                return array.ToArray();
+            }
+            foreach (XmlNode n in nodelist)
             {
                 array.Add(n.InnerText);
             }
             return array.ToArray();
         }
-
-
     }
 }

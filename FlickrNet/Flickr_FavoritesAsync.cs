@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -111,7 +110,7 @@ namespace FlickrNet
         /// <param name="perPage">Number of photos to include per page.</param>
         /// <param name="page">The page to download this time.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void FavoritesGetListAsync(string userId, DateTime minFavoriteDate, DateTime maxFavoriteDate,
+        public void FavoritesGetListAsync(string? userId, DateTime minFavoriteDate, DateTime maxFavoriteDate,
                                           PhotoSearchExtras extras, int page, int perPage,
                                           Action<FlickrResult<PhotoCollection>> callback)
         {

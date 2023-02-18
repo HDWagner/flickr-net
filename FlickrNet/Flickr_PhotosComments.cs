@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -112,7 +109,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PhotoCollection PhotosCommentsGetRecentForContacts(DateTime dateLastComment, string[] contactsFilter, PhotoSearchExtras extras, int page, int perPage)
+        public PhotoCollection PhotosCommentsGetRecentForContacts(DateTime dateLastComment, string[]? contactsFilter, PhotoSearchExtras extras, int page, int perPage)
         {
             CheckRequiresAuthentication();
 

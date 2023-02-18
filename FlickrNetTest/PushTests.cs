@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace FlickrNetTest
 {
@@ -73,7 +72,6 @@ namespace FlickrNetTest
             try
             {
                 Assert.That(subscriptions, Has.Count.GreaterThan(1), "Should be more than one subscription.");
-
             }
             finally
             {

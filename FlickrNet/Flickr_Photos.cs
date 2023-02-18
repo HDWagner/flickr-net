@@ -380,7 +380,7 @@ namespace FlickrNet
         /// <param name="secret">The secret for the photo. If the correct secret is passed then permissions checking is skipped. 
         /// This enables the 'sharing' of individual photos by passing around the id and secret.</param>
         /// <returns>A <see cref="PhotoInfo"/> class detailing the properties of the photo.</returns>
-        public PhotoInfo PhotosGetInfo(string photoId, string secret)
+        public PhotoInfo PhotosGetInfo(string photoId, string? secret)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getInfo");
@@ -429,7 +429,7 @@ namespace FlickrNet
         /// <param name="perPage"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public PhotoCollection PhotosGetPopular(string userId, PhotoSearchExtras extras = PhotoSearchExtras.None, string sort = "interesting", int perPage = 100, int page = 1)
+        public PhotoCollection PhotosGetPopular(string? userId, PhotoSearchExtras extras = PhotoSearchExtras.None, string sort = "interesting", int perPage = 100, int page = 1)
         {
             if (userId == null)
             {
@@ -1043,7 +1043,6 @@ namespace FlickrNet
             }
 
             return GetResponseCache<PhotoFavoriteCollection>(parameters);
-
         }
 
     }

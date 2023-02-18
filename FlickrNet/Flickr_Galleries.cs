@@ -26,7 +26,7 @@ namespace FlickrNet
         /// and <see cref="GalleriesGetListForPhoto(string, int, int)"/>.</param>
         /// <param name="photoId">The photo ID to add to the gallery</param>
         /// <param name="comment">A short comment or story to accompany the photo.</param>
-        public void GalleriesAddPhoto(string galleryId, string photoId, string comment)
+        public void GalleriesAddPhoto(string galleryId, string photoId, string? comment)
         {
             CheckRequiresAuthentication();
 
@@ -58,7 +58,7 @@ namespace FlickrNet
         /// <param name="title">The name of the gallery.</param>
         /// <param name="description">A short description for the gallery.</param>
         /// <param name="primaryPhotoId">The first photo to add to your gallery.</param>
-        public void GalleriesCreate(string title, string description, string primaryPhotoId)
+        public void GalleriesCreate(string title, string description, string? primaryPhotoId)
         {
             CheckRequiresAuthentication();
 
@@ -80,7 +80,7 @@ namespace FlickrNet
         /// <param name="galleryId"></param>
         /// <param name="photoId"></param>
         /// <param name="fullResponse"></param>
-        public void GalleriesRemovePhoto(string galleryId, string photoId, string fullResponse = null)
+        public void GalleriesRemovePhoto(string galleryId, string photoId, string? fullResponse = null)
         {
             CheckRequiresAuthentication();
 
@@ -109,7 +109,7 @@ namespace FlickrNet
         /// <param name="galleryId">The gallery ID to update.</param>
         /// <param name="title">The new title for the gallery.</param>
         /// <param name="description">The new description for the gallery.</param>
-        public void GalleriesEditMeta(string galleryId, string title, string description)
+        public void GalleriesEditMeta(string galleryId, string title, string? description)
         {
             CheckRequiresAuthentication();
 
@@ -212,7 +212,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The user to return the galleries for.</param>
         /// <returns></returns>
-        public GalleryCollection GalleriesGetList(string userId)
+        public GalleryCollection GalleriesGetList(string? userId)
         {
             return GalleriesGetList(userId, 0, 0);
         }
@@ -224,7 +224,7 @@ namespace FlickrNet
         /// <param name="page"></param>
         /// <param name="perPage"></param>
         /// <returns></returns>
-        public GalleryCollection GalleriesGetList(string userId, int page, int perPage)
+        public GalleryCollection GalleriesGetList(string? userId, int page, int perPage)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.getList");

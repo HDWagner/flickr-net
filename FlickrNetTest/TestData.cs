@@ -69,19 +69,9 @@ namespace FlickrNetTest
             key.SetValue(name, value);
         }
 
-        static string GetRegistryKey(string name)
+        static string? GetRegistryKey(string name)
         {
-            var value = Environment.GetEnvironmentVariable("FLICKR_TEST_" + name.ToUpper());
-            return value;
-            //if (!string.IsNullOrEmpty(value))
-            //{
-            //    return value;
-            //}
-            //Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\FlickrNetTest", true);
-            //if (key != null && key.GetValue(name) != null)
-            //    return key.GetValue(name).ToString();
-            //else
-            //    return null;
+            return Environment.GetEnvironmentVariable("FLICKR_TEST_" + name.ToUpper());
         }
 
         public static Flickr GetInstance()

@@ -75,7 +75,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PlacesGetChildrenWithPhotosPublicAsync(string placeId, string woeId, Action<FlickrResult<PlaceCollection>> callback)
+        public void PlacesGetChildrenWithPhotosPublicAsync(string? placeId, string? woeId, Action<FlickrResult<PlaceCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.getChildrenWithPhotosPublic");

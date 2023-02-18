@@ -7,8 +7,6 @@ namespace FlickrNet
     /// </summary>
     public class PartialSearchOptions
     {
-        private DateTime maxUploadDate = DateTime.MinValue;
-        private DateTime maxTakenDate = DateTime.MinValue;
         private int page;
 
         /// <summary>
@@ -21,11 +19,7 @@ namespace FlickrNet
         /// Maximum date uploaded. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
-        public DateTime MaxUploadDate
-        {
-            get { return maxUploadDate; }
-            set { maxUploadDate = value; }
-        }
+        public DateTime MaxUploadDate { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Minimum date taken. Defaults to <see cref="DateTime.MinValue"/> which
@@ -37,11 +31,7 @@ namespace FlickrNet
         /// Maximum date taken. Defaults to <see cref="DateTime.MinValue"/> which
         /// signifies that the value is not to be used.
         /// </summary>
-        public DateTime MaxTakenDate
-        {
-            get { return maxTakenDate; }
-            set { maxTakenDate = value; }
-        }
+        public DateTime MaxTakenDate { get; set; } = DateTime.MinValue;
 
         /// <summary>
         /// Optional extras to return, defaults to all. See <see cref="PhotoSearchExtras"/> for more details.

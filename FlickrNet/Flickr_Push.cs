@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -27,11 +26,19 @@ namespace FlickrNet
             parameters.Add("method", "flickr.push.getTopics");
 
             var response = GetResponseCache<UnknownResponse>(parameters);
-            
+
             var topics = new List<string>();
-            foreach (System.Xml.XmlNode node in response.GetXmlDocument().SelectNodes("//topic/@name"))
+            var nodelist = response.GetXmlDocument().SelectNodes("//topic/@name");
+            if (nodelist == null)
             {
-                topics.Add(node.Value);
+                return topics.ToArray();
+            }
+            foreach (System.Xml.XmlNode node in nodelist)
+            {
+                if (node.Value != null)
+                {
+                    topics.Add(node.Value);
+                }
             }
 
             return topics.ToArray();
@@ -57,9 +64,9 @@ namespace FlickrNet
         /// <param name="tags">A list of strings to be used for tag subscriptions. 
         /// Photos with one or more of the tags listed will be included in the subscription. 
         /// Only valid if the topic is 'tags'</param>
-        public void PushSubscribe(string topic, string callback, string verify, string verifyToken, int leaseSeconds,
-                                  int[] woeIds, string[] placeIds, double latitude, double longitude, int radius,
-                                  RadiusUnit radiusUnits, GeoAccuracy accuracy, string[] nsids, string[] tags)
+        public void PushSubscribe(string topic, string callback, string verify, string? verifyToken, int leaseSeconds,
+                                  int[]? woeIds, string[]? placeIds, double latitude, double longitude, int radius,
+                                  RadiusUnit radiusUnits, GeoAccuracy accuracy, string[]? nsids, string[]? tags)
         {
             CheckRequiresAuthentication();
 
@@ -129,7 +136,7 @@ namespace FlickrNet
         /// <param name="callback">The callback url to unsubscribe.</param>
         /// <param name="verify">Either 'sync' or 'async'.</param>
         /// <param name="verifyToken">The verification token to include in the unsubscribe verification process.</param>
-        public void PushUnsubscribe(string topic, string callback, string verify, string verifyToken)
+        public void PushUnsubscribe(string topic, string callback, string verify, string? verifyToken)
         {
             CheckRequiresAuthentication();
 

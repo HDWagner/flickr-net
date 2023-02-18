@@ -157,8 +157,8 @@ namespace FlickrNet
             foreach (var extra in GetFlags(extras))
             {
                 var info = e.GetField(extra.ToString("G"));
-                var o = info.GetCustomAttributes(typeof(DescriptionAttribute), false);
-                if (o.Length == 0)
+                var o = info?.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (o == null || o.Length == 0)
                 {
                     continue;
                 }
@@ -238,7 +238,11 @@ namespace FlickrNet
             var enumerations = new List<Enum>();
             foreach (var fieldInfo in enumeration.GetType().GetFields(BindingFlags.Static | BindingFlags.Public))
             {
-                enumerations.Add((Enum)fieldInfo.GetValue(enumeration));
+                var item = fieldInfo.GetValue(enumeration);
+                if (item != null)
+                {
+                    enumerations.Add((Enum)item);
+                }
             }
             return enumerations;
         }
@@ -694,7 +698,7 @@ namespace FlickrNet
         /// e.g. ab=cd&amp;ef=gh will return a dictionary of { "ab" => "cd", "ef" => "gh" }.</remarks>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> StringToDictionary(string response)
+        public static Dictionary<string, string> StringToDictionary(string? response)
         {
             var dic = new Dictionary<string, string>();
 

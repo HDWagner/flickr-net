@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -28,7 +27,7 @@ namespace FlickrNet
         /// <param name="photoId">The photo ID to add to the gallery</param>
         /// <param name="comment">A short comment or story to accompany the photo.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GalleriesAddPhotoAsync(string galleryId, string photoId, string comment, Action<FlickrResult<NoResponse>> callback)
+        public void GalleriesAddPhotoAsync(string galleryId, string photoId, string? comment, Action<FlickrResult<NoResponse>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.addPhoto");
@@ -60,7 +59,7 @@ namespace FlickrNet
         /// <param name="description">A short description for the gallery.</param>
         /// <param name="primaryPhotoId">The first photo to add to your gallery.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GalleriesCreateAsync(string title, string description, string primaryPhotoId, Action<FlickrResult<NoResponse>> callback)
+        public void GalleriesCreateAsync(string title, string description, string? primaryPhotoId, Action<FlickrResult<NoResponse>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -94,7 +93,7 @@ namespace FlickrNet
         /// <param name="title">The new title for the gallery.</param>
         /// <param name="description">The new description for the gallery.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GalleriesEditMetaAsync(string galleryId, string title, string description, Action<FlickrResult<NoResponse>> callback)
+        public void GalleriesEditMetaAsync(string galleryId, string title, string? description, Action<FlickrResult<NoResponse>> callback)
         {
             CheckRequiresAuthentication();
 
@@ -198,7 +197,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The user to return the galleries for.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GalleriesGetListAsync(string userId, Action<FlickrResult<GalleryCollection>> callback)
+        public void GalleriesGetListAsync(string? userId, Action<FlickrResult<GalleryCollection>> callback)
         {
             GalleriesGetListAsync(userId, 0, 0, callback);
         }
@@ -210,7 +209,7 @@ namespace FlickrNet
         /// <param name="page"></param>
         /// <param name="perPage"></param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GalleriesGetListAsync(string userId, int page, int perPage, Action<FlickrResult<GalleryCollection>> callback)
+        public void GalleriesGetListAsync(string? userId, int page, int perPage, Action<FlickrResult<GalleryCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.galleries.getList");

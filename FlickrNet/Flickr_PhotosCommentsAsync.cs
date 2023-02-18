@@ -44,7 +44,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "id");
+                        result.Result = r.Result?.GetAttributeValue("*", "id");
                     }
                     callback(result);
                 });
@@ -129,7 +129,7 @@ namespace FlickrNet
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. 
         /// The maximum allowed value is 500.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosCommentsGetRecentForContactsAsync(DateTime dateLastComment, string[] contactsFilter,
+        public void PhotosCommentsGetRecentForContactsAsync(DateTime dateLastComment, string[]? contactsFilter,
                                                             PhotoSearchExtras extras, int page, int perPage,
                                                             Action<FlickrResult<PhotoCollection>> callback)
         {

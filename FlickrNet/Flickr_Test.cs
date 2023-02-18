@@ -21,7 +21,7 @@ namespace FlickrNet
         /// <param name="method">The method name, e.g. "flickr.test.null".</param>
         /// <param name="parameters">A list of parameters. Note, api_key is added by default and is not included. Can be null.</param>
         /// <returns>An array of <see cref="XmlElement"/> instances which is the expected response.</returns>
-        public UnknownResponse TestGeneric(string method, Dictionary<string, string> parameters)
+        public UnknownResponse TestGeneric(string method, Dictionary<string, string>? parameters)
         {
             parameters ??= new Dictionary<string, string>();
 

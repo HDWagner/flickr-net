@@ -177,7 +177,7 @@ namespace FlickrNet
                         // Duplicate of above but not compound
                         break;
                     case "url":
-                        if (reader.Value.IndexOf("www.flickr.com", StringComparison.Ordinal) >= 0)
+                        if (reader.Value.Contains("www.flickr.com", StringComparison.Ordinal))
                         {
                             GalleryUrl = reader.Value.Replace("http://", "https://");
                         }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
+using System.Net;
+using System.Text;
 
 namespace FlickrNet
 {
@@ -61,15 +61,9 @@ namespace FlickrNet
             string method = "POST";
 
             // Remove api key if it exists.
-            if (parameters.ContainsKey("api_key"))
-            {
-                parameters.Remove("api_key");
-            }
+            parameters.Remove("api_key");
 
-            if (parameters.ContainsKey("api_sig"))
-            {
-                parameters.Remove("api_sig");
-            }
+            parameters.Remove("api_sig");
 
             // If OAuth Access Token is set then add token and generate signature.
             if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
@@ -104,11 +98,11 @@ namespace FlickrNet
                     throw;
                 }
 
-                string responseData = null;
+                string? responseData = null;
 
                 using (var stream = response.GetResponseStream())
                 {
-                    if( stream != null)
+                    if (stream != null)
                     {
                         using (var responseReader = new StreamReader(stream))
                         {
@@ -135,7 +129,7 @@ namespace FlickrNet
 
 
 #if !WindowsCE
-        private static string DownloadData(string method, string baseUrl, string data, string contentType, string authHeader)
+        private static string DownloadData(string method, string baseUrl, string? data, string? contentType, string? authHeader)
         {
             Func<string> f = () =>
             {

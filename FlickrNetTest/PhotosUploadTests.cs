@@ -38,11 +38,6 @@ namespace FlickrNetTest
 
             var result = w.Next().First();
 
-            if (result.HasError)
-            {
-                throw result.Error;
-            }
-
             Assert.That(result.Result, Is.Not.Null);
             Console.WriteLine(result.Result);
 

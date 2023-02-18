@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <param name="photoId">The id of the photograph to add.</param>
         public void FavoritesAdd(string photoId)
         {
-            var parameters = new Dictionary<string, string> {{"method", "flickr.favorites.add"}, {"photo_id", photoId}};
+            var parameters = new Dictionary<string, string> { { "method", "flickr.favorites.add" }, { "photo_id", photoId } };
             GetResponseNoCache<NoResponse>(parameters);
         }
 
@@ -133,11 +133,11 @@ namespace FlickrNet
         /// <param name="perPage">Number of photos to include per page.</param>
         /// <param name="page">The page to download this time.</param>
         /// <returns><see cref="PhotoCollection"/> instance containing a collection of <see cref="Photo"/> objects.</returns>
-        public PhotoCollection FavoritesGetList(string userId, DateTime minFavoriteDate, DateTime maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage)
+        public PhotoCollection FavoritesGetList(string? userId, DateTime minFavoriteDate, DateTime maxFavoriteDate, PhotoSearchExtras extras, int page, int perPage)
         {
             CheckRequiresAuthentication();
 
-            var parameters = new Dictionary<string, string> {{"method", "flickr.favorites.getList"}};
+            var parameters = new Dictionary<string, string> { { "method", "flickr.favorites.getList" } };
 
             if (userId != null)
             {

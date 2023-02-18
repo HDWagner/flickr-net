@@ -94,12 +94,9 @@ namespace FlickrNet
         };
 
         private string apiKey;
-        private string apiToken;
-        private string sharedSecret;
+        private string? apiToken;
+        private string? sharedSecret;
         private string lastRequest;
-
-#if !SILVERLIGHT
-#endif
 
         /// <summary>
         /// Get or set the API Key to be used by all calls. API key is mandatory for all 
@@ -118,7 +115,7 @@ namespace FlickrNet
         /// API shared secret is required for all calls that require signing, which includes
         /// all methods that require authentication, as well as the actual flickr.auth.* calls.
         /// </summary>
-        public string ApiSecret
+        public string? ApiSecret
         {
             get { return sharedSecret; }
             set
@@ -139,7 +136,7 @@ namespace FlickrNet
         /// (their own, or others).
         /// </remarks>
         [Obsolete("Use OAuthToken and OAuthTokenSecret now.")]
-        public string AuthToken
+        public string? AuthToken
         {
             get { return apiToken; }
             set
@@ -400,7 +397,7 @@ namespace FlickrNet
         /// <param name="apiKey">Your Flickr API Key</param>
         /// <param name="sharedSecret">Your FLickr Shared Secret.</param>
         /// <param name="token">The token for the user who has been authenticated.</param>
-        public Flickr(string apiKey, string sharedSecret, string token)
+        public Flickr(string apiKey, string? sharedSecret, string? token)
             : this()
         {
             ApiKey = apiKey;
@@ -458,7 +455,7 @@ namespace FlickrNet
             }
 
             var url = new StringBuilder();
-            url.Append("?");
+            url.Append('?');
             foreach (KeyValuePair<string, string> pair in parameters)
             {
                 var escapedValue = UtilityMethods.EscapeDataString(pair.Value ?? "");
@@ -555,7 +552,7 @@ namespace FlickrNet
             return collection;
         }
 
-        internal class StreamCollection : IDisposable
+        internal sealed class StreamCollection : IDisposable
         {
             public List<Stream> Streams { get; private set; }
 
@@ -587,7 +584,7 @@ namespace FlickrNet
                 }
             }
 
-            public EventHandler<UploadProgressEventArgs> UploadProgress;
+            public EventHandler<UploadProgressEventArgs>? UploadProgress;
 
             public void CopyTo(Stream stream, int bufferSize = 1024 * 16)
             {

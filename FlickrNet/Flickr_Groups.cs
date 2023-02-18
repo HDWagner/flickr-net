@@ -24,7 +24,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="catId">The category id to fetch a list of groups and sub-categories for. If not specified, it defaults to zero, the root of the category tree.</param>
         /// <returns>A <see cref="GroupCategory"/> instance.</returns>
-        public GroupCategory GroupsBrowse(string catId)
+        public GroupCategory GroupsBrowse(string? catId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.browse");
@@ -240,7 +240,7 @@ namespace FlickrNet
         /// <param name="groupId">The group ID for the group.</param>
         /// <param name="tags">Space seperated list of tags that photos returned must have.</param>
         /// <returns>A <see cref="PhotoCollection"/> object containing the list of photos.</returns>
-        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string tags)
+        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string? tags)
         {
             return GroupsPoolsGetPhotos(groupId, tags, null, PhotoSearchExtras.None, 0, 0);
         }
@@ -265,7 +265,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of photos per page.</param>
         /// <param name="page">The page to return.</param>
         /// <returns>A <see cref="PhotoCollection"/> object containing the list of photos.</returns>
-        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string tags, int page, int perPage)
+        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string? tags, int page, int perPage)
         {
             return GroupsPoolsGetPhotos(groupId, tags, null, PhotoSearchExtras.None, page, perPage);
         }
@@ -281,7 +281,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of photos per page.</param>
         /// <param name="page">The page to return.</param>
         /// <returns>A <see cref="PhotoCollection"/> object containing the list of photos.</returns>
-        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage)
+        public PhotoCollection GroupsPoolsGetPhotos(string groupId, string? tags, string? userId, PhotoSearchExtras extras, int page, int perPage)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.pools.getPhotos");

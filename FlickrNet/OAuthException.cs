@@ -11,12 +11,10 @@ namespace FlickrNet
     /// </summary>
     public class OAuthException : Exception
     {
-        private readonly string _mess;
-
         /// <summary>
         /// The full response of the exception.
         /// </summary>
-        public string FullResponse { get; set; }
+        public string? FullResponse { get; set; }
 
         /// <summary>
         /// The list of error parameters returned by the OAuth exception.
@@ -28,7 +26,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="response"></param>
         /// <param name="innerException"></param>
-        public OAuthException(string response, Exception innerException) : base("OAuth Exception", innerException)
+        public OAuthException(string? response, Exception innerException) : base("OAuth Exception", innerException)
         {
             FullResponse = response;
 
@@ -41,7 +39,7 @@ namespace FlickrNet
                 throw new Exception("Failed to parse OAuth error message: " + FullResponse, innerException);
             }
 
-            _mess = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
+            Message = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
         }
 
         /// <summary>
@@ -50,39 +48,29 @@ namespace FlickrNet
         /// <param name="innerException"></param>
         public OAuthException(Exception innerException) : base("OAuth Exception", innerException)
         {
-            var exception = innerException as WebException;
-            if (exception == null)
+            if (innerException is not WebException exception)
             {
                 return;
             }
 
-            var res = exception.Response as HttpWebResponse;
-            if (res == null)
+            if (exception.Response is not HttpWebResponse res)
             {
                 return;
             }
 
-            using (var sr = new StreamReader(res.GetResponseStream()))
-            {
-                var response = sr.ReadToEnd();
+            using var sr = new StreamReader(res.GetResponseStream());
+            var response = sr.ReadToEnd();
+            sr.Close();
 
-                FullResponse = response;
+            FullResponse = response;
 
-                OAuthErrorPameters = UtilityMethods.StringToDictionary(response);
-                _mess = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
-                sr.Close();
-            }
+            OAuthErrorPameters = UtilityMethods.StringToDictionary(response);
+            Message = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
         }
 
         /// <summary>
         /// The message for the exception.
         /// </summary>
-        public override string Message
-        {
-            get
-            {
-                return _mess;
-            }
-        }
+        public override string Message { get; }
     }
 }

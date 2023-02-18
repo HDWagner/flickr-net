@@ -97,8 +97,8 @@ namespace FlickrNetTest
 
             Assert.That(context, Is.Not.Null);
 
-            Assert.That(context.PreviousPhoto.PhotoId, Is.EqualTo("3844573707"));
-            Assert.That(context.NextPhoto.PhotoId, Is.EqualTo("3992605178"));
+            Assert.That(context?.PreviousPhoto?.PhotoId, Is.EqualTo("3844573707"));
+            Assert.That(context?.NextPhoto?.PhotoId, Is.EqualTo("3992605178"));
         }
 
         [Test]

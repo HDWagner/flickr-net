@@ -1,7 +1,6 @@
 ﻿using FlickrNet;
 using NUnit.Framework;
 using Shouldly;
-using System;
 
 namespace FlickrNetTest
 {
@@ -40,7 +39,7 @@ namespace FlickrNetTest
         [Test]
         public void BoundaryBoxWithNullPointStringThrows()
         {
-            Should.Throw<ArgumentNullException>(() => new BoundaryBox(null));
+            Should.Throw<ArgumentNullException>(() => new BoundaryBox(null!));
         }
 
         [Test]

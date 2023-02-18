@@ -1,8 +1,5 @@
-﻿using System;
-
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
-using System.IO;
 
 namespace FlickrNetTest
 {
@@ -50,7 +47,7 @@ namespace FlickrNetTest
             var item = Cache.Responses.Get(lastUrl, TimeSpan.MaxValue, false);
 
             Assert.That(item, Is.Not.Null, "Cache should now contain the item.");
-            Assert.IsInstanceOf<ResponseCacheItem>(item);
+            Assert.That(item, Is.InstanceOf<ResponseCacheItem>());
 
             var response = item as ResponseCacheItem;
 

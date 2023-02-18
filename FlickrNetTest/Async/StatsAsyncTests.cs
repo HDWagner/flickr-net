@@ -101,11 +101,6 @@ namespace FlickrNetTest.Async
             f.StatsGetPhotoStatsAsync(d, "7176125763", r => { w.OnNext(r); w.OnCompleted(); });
 
             var result = w.Next().First();
-            if (result.HasError)
-            {
-                throw result.Error;
-            }
-
             Assert.That(result.HasError, Is.False);
         }
 
@@ -115,7 +110,7 @@ namespace FlickrNetTest.Async
             Flickr f = AuthInstance;
 
             var range = Enumerable.Range(7, 5);
-            var list = new List<Stats>();
+            var list = new List<Stats?>();
 
             foreach(var i in range)
             {

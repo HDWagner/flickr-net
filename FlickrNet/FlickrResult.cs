@@ -12,10 +12,10 @@ namespace FlickrNet
             Result = result.Result;
         }
 
-        private Exception error;
+        private Exception? error;
         public bool HasError { get; set; }
         public T Result { get; set; }
-        public Exception Error
+        public Exception? Error
         {
             get
             {
@@ -36,7 +36,7 @@ namespace FlickrNet
         }
 
         public int ErrorCode { get; set; }
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ namespace FlickrNet
     /// <typeparam name="T">The type of the result returned from Flickr.</typeparam>
     public class FlickrResult<T>
     {
-        private Exception error;
+        private Exception? error;
         /// <summary>
         /// True if the result returned an error.
         /// </summary>
@@ -54,12 +54,12 @@ namespace FlickrNet
         /// <summary>
         /// If the call was successful then this contains the result.
         /// </summary>
-        public T Result { get; set; }
+        public T? Result { get; set; }
 
         /// <summary>
         /// If the call was unsuccessful then this contains the exception.
         /// </summary>
-        public Exception Error
+        public Exception? Error
         {
             get
             {
@@ -90,6 +90,6 @@ namespace FlickrNet
         /// <summary>
         /// If an error was returned by the Flickr API then this will contain the error message.
         /// </summary>
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 }

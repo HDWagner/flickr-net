@@ -62,7 +62,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <returns>Returns an array of <see cref="Place"/> elements.</returns>
-        public PlaceCollection PlacesGetChildrenWithPhotosPublic(string placeId, string woeId)
+        public PlaceCollection PlacesGetChildrenWithPhotosPublic(string? placeId, string? woeId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.getChildrenWithPhotosPublic");
@@ -149,7 +149,7 @@ namespace FlickrNet
         /// <param name="placeId">A Flickr Places ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <param name="woeId">A Where On Earth (WOE) ID. (While optional, you must pass either a valid Places ID or a WOE ID.)</param>
         /// <returns></returns>
-        public ShapeDataCollection PlacesGetShapeHistory(string placeId, string woeId)
+        public ShapeDataCollection PlacesGetShapeHistory(string? placeId, string? woeId)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.getShapeHistory");
@@ -346,7 +346,7 @@ namespace FlickrNet
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <returns></returns>
         public PlaceCollection PlacesPlacesForTags(PlaceType placeType, string? woeId, string? placeId, int threshold,
-                                                   string[] tags, TagMode tagMode, string[] machineTags,
+                                                   string[]? tags, TagMode tagMode, string[]? machineTags,
                                                    MachineTagMode machineTagMode, DateTime minUploadDate,
                                                    DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate)
         {

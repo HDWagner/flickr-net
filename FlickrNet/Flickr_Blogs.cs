@@ -56,7 +56,7 @@ namespace FlickrNet
         /// <param name="title">The title of the blog post.</param>
         /// <param name="description">The body of the blog post.</param>
         /// <param name="blogPassword">The password of the blog if it is not already stored in flickr.</param>
-        public void BlogsPostPhoto(string blogId, string photoId, string title, string description, string blogPassword)
+        public void BlogsPostPhoto(string blogId, string photoId, string title, string description, string? blogPassword)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.blogs.postPhoto");

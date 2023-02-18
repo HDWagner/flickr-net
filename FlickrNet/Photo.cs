@@ -423,7 +423,7 @@ namespace FlickrNet
         /// <summary>
         /// If <see cref="OriginalFormat"/> was returned then this will contain the url of the original file.
         /// </summary>
-        public string OriginalUrl
+        public string? OriginalUrl
         {
             get 
             {

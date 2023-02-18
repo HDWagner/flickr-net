@@ -49,7 +49,7 @@ namespace FlickrNet
                 {
                     if (!Directory.Exists(dir))
                     {
-                        Directory.CreateDirectory(dir);
+                        Directory.CreateDirectory(dir!);
                     }
 
                     try

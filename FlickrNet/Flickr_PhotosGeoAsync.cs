@@ -88,7 +88,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.Location;
+                        result.Result = r.Result?.Location;
                     }
                     callback(result);
                 });

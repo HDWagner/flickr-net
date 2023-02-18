@@ -85,8 +85,8 @@ namespace FlickrNetTest
 
             var location = AuthInstance.PhotosGeoGetLocation(photo.PhotoId);
 
-            Assert.That(location.Longitude, Is.EqualTo(photo.Longitude), "Longitudes should match exactly.");
-            Assert.That(location.Latitude, Is.EqualTo(photo.Latitude), "Latitudes should match exactly.");
+            Assert.That(location?.Longitude, Is.EqualTo(photo.Longitude), "Longitudes should match exactly.");
+            Assert.That(location?.Latitude, Is.EqualTo(photo.Latitude), "Latitudes should match exactly.");
         }
 
         [Test]

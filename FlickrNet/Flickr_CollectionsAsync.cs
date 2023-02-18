@@ -40,7 +40,7 @@ namespace FlickrNet
         /// <param name="collectionId ">The ID of the collection to fetch a tree for, or zero to fetch the root collection.</param>
         /// <param name="userId">The ID of the user to fetch the tree for, or null if using the authenticated user.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void CollectionsGetTreeAsync(string collectionId, string userId, Action<FlickrResult<CollectionCollection>> callback)
+        public void CollectionsGetTreeAsync(string? collectionId, string? userId, Action<FlickrResult<CollectionCollection>> callback)
         {
             if (string.IsNullOrEmpty(userId))
             {

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 #if SILVERLIGHT
 using System.Linq;
 #endif
@@ -309,20 +307,20 @@ namespace FlickrNet
         /// <param name="dates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
         /// <param name="takenDates">Comma-delimited list of dates in unix timestamp format. Optional.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosGetCountsAsync(DateTime[] dates, DateTime[] takenDates, Action<FlickrResult<PhotoCountCollection>> callback)
+        public void PhotosGetCountsAsync(DateTime[]? dates, DateTime[]? takenDates, Action<FlickrResult<PhotoCountCollection>> callback)
         {
             CheckRequiresAuthentication();
 
-            string dateString = null;
-            string takenDateString = null;
+            string? dateString = null;
+            string? takenDateString = null;
 
             if (dates != null && dates.Length > 0)
             {
                 Array.Sort(dates);
 #if !SILVERLIGHT
-                dateString = string.Join(",", new List<DateTime>(dates).ConvertAll(new Converter<DateTime, string>(delegate(DateTime d) 
+                dateString = string.Join(",", new List<DateTime>(dates).ConvertAll(new Converter<DateTime, string>(delegate (DateTime d)
                 {
-                    return UtilityMethods.DateToUnixTimestamp(d).ToString(); 
+                    return UtilityMethods.DateToUnixTimestamp(d).ToString();
                 })).ToArray());
 #else
                 dateString = string.Join(",", (from d in dates select UtilityMethods.DateToUnixTimestamp(d)).ToArray<string>());
@@ -333,9 +331,9 @@ namespace FlickrNet
             {
                 Array.Sort(takenDates);
 #if !SILVERLIGHT
-                takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll(new Converter<DateTime, string>(delegate(DateTime d) 
+                takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll(new Converter<DateTime, string>(delegate (DateTime d)
                     {
-                        return UtilityMethods.DateToUnixTimestamp(d).ToString(); 
+                        return UtilityMethods.DateToUnixTimestamp(d).ToString();
                     })).ToArray());
 #else
                 takenDateString = string.Join(",", (from d in takenDates select UtilityMethods.DateToUnixTimestamp(d)).ToArray<string>());
@@ -374,7 +372,7 @@ namespace FlickrNet
         /// <param name="secret">The secret of the photo. If the secret is specified then
         /// authentication checks are bypassed.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosGetExifAsync(string photoId, string secret, Action<FlickrResult<ExifTagCollection>> callback)
+        public void PhotosGetExifAsync(string photoId, string? secret, Action<FlickrResult<ExifTagCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getExif");
@@ -404,7 +402,7 @@ namespace FlickrNet
         /// <param name="secret">The secret for the photo. If the correct secret is passed then permissions checking is skipped. 
         /// This enables the 'sharing' of individual photos by passing around the id and secret.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void PhotosGetInfoAsync(string photoId, string secret, Action<FlickrResult<PhotoInfo>> callback)
+        public void PhotosGetInfoAsync(string photoId, string? secret, Action<FlickrResult<PhotoInfo>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getInfo");
@@ -1036,8 +1034,6 @@ namespace FlickrNet
             }
 
             GetResponseAsync(parameters, callback);
-
         }
-
     }
 }

@@ -58,7 +58,7 @@ namespace FlickrNet
         /// <param name="description">The body of the blog post.</param>
         /// <param name="blogPassword">The password of the blog if it is not already stored in flickr.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void BlogsPostPhotoAsync(string blogId, string photoId, string title, string description, string blogPassword, Action<FlickrResult<NoResponse>> callback)
+        public void BlogsPostPhotoAsync(string blogId, string photoId, string title, string description, string? blogPassword, Action<FlickrResult<NoResponse>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.blogs.postPhoto");

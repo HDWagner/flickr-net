@@ -24,7 +24,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="catId">The category id to fetch a list of groups and sub-categories for. If not specified, it defaults to zero, the root of the category tree.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GroupsBrowseAsync(string catId, Action<FlickrResult<GroupCategory>> callback)
+        public void GroupsBrowseAsync(string? catId, Action<FlickrResult<GroupCategory>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.browse");
@@ -221,7 +221,7 @@ namespace FlickrNet
         /// <param name="groupId">The group ID for the group.</param>
         /// <param name="tags">Space seperated list of tags that photos returned must have.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GroupsPoolsGetPhotosAsync(string groupId, string tags, Action<FlickrResult<PhotoCollection>> callback)
+        public void GroupsPoolsGetPhotosAsync(string groupId, string? tags, Action<FlickrResult<PhotoCollection>> callback)
         {
             GroupsPoolsGetPhotosAsync(groupId, tags, null, PhotoSearchExtras.None, 0, 0, callback);
         }
@@ -246,7 +246,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of photos per page.</param>
         /// <param name="page">The page to return.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GroupsPoolsGetPhotosAsync(string groupId, string tags, int page, int perPage, Action<FlickrResult<PhotoCollection>> callback)
+        public void GroupsPoolsGetPhotosAsync(string groupId, string? tags, int page, int perPage, Action<FlickrResult<PhotoCollection>> callback)
         {
             GroupsPoolsGetPhotosAsync(groupId, tags, null, PhotoSearchExtras.None, page, perPage, callback);
         }
@@ -262,7 +262,7 @@ namespace FlickrNet
         /// <param name="perPage">The number of photos per page.</param>
         /// <param name="page">The page to return.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
-        public void GroupsPoolsGetPhotosAsync(string groupId, string tags, string userId, PhotoSearchExtras extras, int page, int perPage, Action<FlickrResult<PhotoCollection>> callback)
+        public void GroupsPoolsGetPhotosAsync(string groupId, string? tags, string? userId, PhotoSearchExtras extras, int page, int perPage, Action<FlickrResult<PhotoCollection>> callback)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.pools.getPhotos");

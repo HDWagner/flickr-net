@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FlickrNet;
+﻿using FlickrNet;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 
@@ -8,8 +6,8 @@ namespace FlickrNetTest
 {
     public abstract class BaseTest
     {
-        Flickr _instance;
-        Flickr _authInstance;
+        Flickr? _instance;
+        Flickr? _authInstance;
         Dictionary<string, string> _errorLog;
 
         static int _testCount;
@@ -57,7 +55,7 @@ namespace FlickrNetTest
         [TearDown]
         public void ErrorLogging()
         {
-            if( (_testCount % 10) > 0 )
+            if ((_testCount % 10) > 0)
             {
                 Thread.Sleep(200);
             }
@@ -69,13 +67,13 @@ namespace FlickrNetTest
 
             if (InstanceUsed)
             {
-                Console.WriteLine("LastRequest: " + _instance.LastRequest);
-                Console.WriteLine("LastResponse: " + _instance.LastResponse);
+                Console.WriteLine("LastRequest: " + _instance!.LastRequest);
+                Console.WriteLine("LastResponse: " + _instance!.LastResponse);
             }
             if (AuthInstanceUsed)
             {
-                Console.WriteLine("LastRequest (Auth): " +_authInstance.LastRequest);
-                Console.WriteLine("LastResponse (Auth): " + _authInstance.LastResponse);
+                Console.WriteLine("LastRequest (Auth): " + _authInstance!.LastRequest);
+                Console.WriteLine("LastResponse (Auth): " + _authInstance!.LastResponse);
             }
 
             foreach (var line in _errorLog)

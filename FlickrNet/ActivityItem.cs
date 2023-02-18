@@ -197,7 +197,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the square thumbnail of a photo or the primary photo for a photoset or gallery.
         /// </summary>
-        public string SquareThumbnailUrl
+        public string? SquareThumbnailUrl
         {
             get
             {
@@ -218,7 +218,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the small thumbnail of a photo or the primary photo for a photoset or gallery.
         /// </summary>
-        public string SmallUrl
+        public string? SmallUrl
         {
             get
             {

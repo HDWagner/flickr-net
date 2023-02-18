@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
+﻿using System.Collections.Generic;
+using System.Xml;
 
 namespace FlickrNet
 {
@@ -19,9 +17,17 @@ namespace FlickrNet
             UnknownResponse response = GetResponseCache<UnknownResponse>(parameters);
 
             var pandas = new List<string>();
-            foreach (System.Xml.XmlNode n in response.GetXmlDocument().SelectNodes("//panda/text()"))
+            var nodelist = response.GetXmlDocument().SelectNodes("//panda/text()");
+            if (nodelist == null)
             {
-                pandas.Add(n.Value);
+                return pandas.ToArray();
+            }
+            foreach (XmlNode n in nodelist)
+            {
+                if (n.Value != null)
+                {
+                    pandas.Add(n.Value);
+                }
             }
             return pandas.ToArray();
         }

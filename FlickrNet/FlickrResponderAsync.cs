@@ -61,15 +61,8 @@ namespace FlickrNet
             const string method = "POST";
 
             // Remove api key if it exists.
-            if (parameters.ContainsKey("api_key"))
-            {
-                parameters.Remove("api_key");
-            }
-
-            if (parameters.ContainsKey("api_sig"))
-            {
-                parameters.Remove("api_sig");
-            }
+            parameters.Remove("api_key");
+            parameters.Remove("api_sig");
 
             // If OAuth Access Token is set then add token and generate signature.
             if (!string.IsNullOrEmpty(flickr.OAuthAccessToken) && !parameters.ContainsKey("oauth_token"))
@@ -147,7 +140,8 @@ namespace FlickrNet
                     callback(result);
                     return;
                 };
-                if (data == null) {
+                if (data == null)
+                {
                     var result = new FlickrResult<string>();
                     result.Error = new FlickrException("Invalid data in POST request");
                     callback(result);

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 
 namespace FlickrNet
 {
@@ -255,7 +253,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="userId">The NSID of the user who's photos to return. A value of "me" will return the calling user's photos.</param>
         /// <returns></returns>
-        public PhotoCollection PeopleGetPhotos(string userId)
+        public PhotoCollection PeopleGetPhotos(string? userId)
         {
             return PeopleGetPhotos(userId, SafetyLevel.None, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
                                    DateTime.MinValue, ContentTypeSearch.None, PrivacyFilter.None, PhotoSearchExtras.None,
@@ -269,7 +267,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PhotoCollection PeopleGetPhotos(string userId, int page, int perPage)
+        public PhotoCollection PeopleGetPhotos(string? userId, int page, int perPage)
         {
             return PeopleGetPhotos(userId, SafetyLevel.None, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
                                    DateTime.MinValue, ContentTypeSearch.None, PrivacyFilter.None, PhotoSearchExtras.None,
@@ -282,7 +280,7 @@ namespace FlickrNet
         /// <param name="userId">The NSID of the user who's photos to return. A value of "me" will return the calling user's photos.</param>
         /// <param name="extras">A list of extra information to fetch for each returned record.</param>
         /// <returns></returns>
-        public PhotoCollection PeopleGetPhotos(string userId, PhotoSearchExtras extras)
+        public PhotoCollection PeopleGetPhotos(string? userId, PhotoSearchExtras extras)
         {
             return PeopleGetPhotos(userId, SafetyLevel.None, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
                                    DateTime.MinValue, ContentTypeSearch.None, PrivacyFilter.None, extras, 0, 0);
@@ -296,7 +294,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PhotoCollection PeopleGetPhotos(string userId, PhotoSearchExtras extras, int page, int perPage)
+        public PhotoCollection PeopleGetPhotos(string? userId, PhotoSearchExtras extras, int page, int perPage)
         {
             return PeopleGetPhotos(userId, SafetyLevel.None, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
                                    DateTime.MinValue, ContentTypeSearch.None, PrivacyFilter.None, extras, page, perPage);
@@ -317,7 +315,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <returns></returns>
-        public PhotoCollection PeopleGetPhotos(string userId, SafetyLevel safeSearch, DateTime minUploadDate,
+        public PhotoCollection PeopleGetPhotos(string? userId, SafetyLevel safeSearch, DateTime minUploadDate,
                                                DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate,
                                                ContentTypeSearch contentType, PrivacyFilter privacyFilter,
                                                PhotoSearchExtras extras, int page, int perPage)

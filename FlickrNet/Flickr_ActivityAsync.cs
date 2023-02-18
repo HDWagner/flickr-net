@@ -79,7 +79,7 @@ namespace FlickrNet
             ActivityUserPhotosAsync(timePeriod + timeType, page, perPage, callback);
         }
 
-        private void ActivityUserPhotosAsync(string timeframe, int page, int perPage, Action<FlickrResult<ActivityItemCollection>> callback)
+        private void ActivityUserPhotosAsync(string? timeframe, int page, int perPage, Action<FlickrResult<ActivityItemCollection>> callback)
         {
             CheckRequiresAuthentication();
 

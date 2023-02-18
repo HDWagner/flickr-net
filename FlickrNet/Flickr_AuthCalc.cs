@@ -78,7 +78,7 @@ namespace FlickrNet
         /// <param name="extra">An extra string value which Flickr will return to the callback URL along with the frob.</param>
         /// <returns>The url to redirect the user to.</returns>
         [Obsolete("Use OAuth now.")]
-        public string AuthCalcWebUrl(AuthLevel authLevel, string extra)
+        public string AuthCalcWebUrl(AuthLevel authLevel, string? extra)
         {
             CheckApiKey();
 
