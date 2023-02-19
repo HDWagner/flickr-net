@@ -74,7 +74,7 @@ namespace FlickrNet
             {
                 var urlComplete = url;
 
-                var cached = (ResponseCacheItem)Cache.Responses.Get(urlComplete, cacheTimeout, true);
+                var cached = (ResponseCacheItem?)Cache.Responses.Get(urlComplete, cacheTimeout, true);
                 if (cached != null)
                 {
                     Debug.WriteLine("Cache hit.");

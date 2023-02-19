@@ -226,10 +226,7 @@ namespace FlickrNetTest
             foreach (var p in photos)
             {
                 var sizes = Instance.PhotosGetSizes(p.PhotoId);
-                foreach (var s in sizes)
-                {
-
-                }
+                Assert.That(sizes, Is.Not.Null);
             }
 
             Assert.That(photos, Is.Not.Null);

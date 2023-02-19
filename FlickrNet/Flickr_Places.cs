@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNet
 {
@@ -279,6 +280,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. </param>
         /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned. </param>
         /// <returns>The list of places of that type.</returns>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public PlaceCollection PlacesPlacesForUser(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                    DateTime minUploadDate, DateTime maxUploadDate, DateTime minTakenDate,
                                                    DateTime maxTakenDate)
@@ -345,6 +347,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <returns></returns>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public PlaceCollection PlacesPlacesForTags(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                    string[]? tags, TagMode tagMode, string[]? machineTags,
                                                    MachineTagMode machineTagMode, DateTime minUploadDate,
@@ -426,6 +429,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <returns></returns>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public PlaceCollection PlacesPlacesForContacts(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                        ContactSearch contactType, DateTime minUploadDate,
                                                        DateTime maxUploadDate, DateTime minTakenDate,

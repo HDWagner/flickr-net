@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNet
 {
@@ -41,11 +41,9 @@ namespace FlickrNet
                     return;
                 }
 
-                var topics = r.Result.GetElementArray("topic", "name");
+                var topics = r.Result?.GetElementArray("topic", "name") ?? Array.Empty<string>();
 
                 callback(new FlickrResult<string[]>() { Result = topics });
-                return;
-
             });
 
         }
@@ -71,6 +69,7 @@ namespace FlickrNet
         /// Photos with one or more of the tags listed will be included in the subscription. 
         /// Only valid if the topic is 'tags'</param>
         /// <param name="callbackAction"></param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PushSubscribeAsync(string topic, string callback, string verify, string verifyToken,
                                        int leaseSeconds, int[] woeIds, string[] placeIds, double latitude,
                                        double longitude, int radius, RadiusUnit radiusUnits, GeoAccuracy accuracy,

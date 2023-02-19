@@ -4,4 +4,5 @@
 // a specific target and scoped to a namespace, type, member, etc.
 
 using System.Diagnostics.CodeAnalysis;
-[assembly: SuppressMessage("Assertion", "NUnit2045:Use Assert.Multiple", Justification = "<Ausstehend>", Scope = "module")]
+[assembly: SuppressMessage("Assertion", "NUnit2045:Use Assert.Multiple", Scope = "module")]
+[assembly: SuppressMessage("Interoperability", "CA1416:Plattformkompatibilität überprüfen", Justification = "Tests are supposed to run under Windows only", Scope = "type", Target = "~T:FlickrNetTest.TestData")]

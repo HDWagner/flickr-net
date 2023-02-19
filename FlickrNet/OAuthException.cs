@@ -14,19 +14,26 @@ namespace FlickrNet
         /// <summary>
         /// The full response of the exception.
         /// </summary>
-        public string? FullResponse { get; set; }
+        public string? FullResponse { get; }
 
         /// <summary>
         /// The list of error parameters returned by the OAuth exception.
         /// </summary>
-        public Dictionary<string, string> OAuthErrorPameters { get; set; }
+        public Dictionary<string, string>? OAuthErrorPameters { get; }
+
+        /// <summary>
+        /// The message for the exception.
+        /// </summary>
+        public override string Message { get; }
+
 
         /// <summary>
         /// Constructor for the OAuthException class.
         /// </summary>
         /// <param name="response"></param>
         /// <param name="innerException"></param>
-        public OAuthException(string? response, Exception innerException) : base("OAuth Exception", innerException)
+        public OAuthException(string? response, Exception innerException)
+            : base("OAuth Exception", innerException)
         {
             FullResponse = response;
 
@@ -36,7 +43,7 @@ namespace FlickrNet
             }
             catch (Exception)
             {
-                throw new Exception("Failed to parse OAuth error message: " + FullResponse, innerException);
+                throw new FlickrException("Failed to parse OAuth error message: " + FullResponse, innerException);
             }
 
             Message = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
@@ -46,8 +53,10 @@ namespace FlickrNet
         /// Constructor for the OAuthException class.
         /// </summary>
         /// <param name="innerException"></param>
-        public OAuthException(Exception innerException) : base("OAuth Exception", innerException)
+        public OAuthException(Exception innerException)
+            : base("OAuth Exception", innerException)
         {
+            Message = "OAuth Exception";
             if (innerException is not WebException exception)
             {
                 return;
@@ -68,9 +77,5 @@ namespace FlickrNet
             Message = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
         }
 
-        /// <summary>
-        /// The message for the exception.
-        /// </summary>
-        public override string Message { get; }
     }
 }

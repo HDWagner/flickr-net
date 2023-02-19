@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace FlickrNet
@@ -102,6 +103,7 @@ namespace FlickrNet
         /// <param name="placeId">The Flickr place id of the location to suggest.</param>
         /// <param name="note">A note to add to the suggestion.</param>
         /// <param name="callback"></param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PhotosSuggestionsSuggestLocationAsync(string photoId, double latitude, double longitude,
                                                           GeoAccuracy accuracy, string woeId, string placeId,
                                                           string note, Action<FlickrResult<NoResponse>> callback)

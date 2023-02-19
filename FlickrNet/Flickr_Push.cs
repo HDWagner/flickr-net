@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNet
 {
@@ -64,6 +65,7 @@ namespace FlickrNet
         /// <param name="tags">A list of strings to be used for tag subscriptions. 
         /// Photos with one or more of the tags listed will be included in the subscription. 
         /// Only valid if the topic is 'tags'</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PushSubscribe(string topic, string callback, string verify, string? verifyToken, int leaseSeconds,
                                   int[]? woeIds, string[]? placeIds, double latitude, double longitude, int radius,
                                   RadiusUnit radiusUnits, GeoAccuracy accuracy, string[]? nsids, string[]? tags)

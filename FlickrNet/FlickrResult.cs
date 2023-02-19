@@ -3,42 +3,6 @@ using System.Net;
 
 namespace FlickrNet
 {
-    internal class FlickrResultArgs<T> : EventArgs where T : IFlickrParsable
-    {
-        internal FlickrResultArgs(FlickrResult<T> result)
-        {
-            Error = result.Error;
-            HasError = result.HasError;
-            Result = result.Result;
-        }
-
-        private Exception? error;
-        public bool HasError { get; set; }
-        public T Result { get; set; }
-        public Exception? Error
-        {
-            get
-            {
-                return error;
-            }
-            set
-            {
-                error = value;
-                var flickrApiException = value as FlickrApiException;
-
-                if (flickrApiException != null)
-                {
-                    ErrorCode = flickrApiException.Code;
-                    ErrorMessage = flickrApiException.OriginalMessage;
-                    HasError = true;
-                }
-            }
-        }
-
-        public int ErrorCode { get; set; }
-        public string? ErrorMessage { get; set; }
-    }
-
     /// <summary>
     /// Contains details of the result from Flickr, or the error if an error occurred.
     /// </summary>
@@ -70,7 +34,7 @@ namespace FlickrNet
                 error = value;
                 if (value == null)
                 {
-                    HasError = false; 
+                    HasError = false;
                     return;
                 }
                 HasError = true;

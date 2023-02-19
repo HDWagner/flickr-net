@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 
@@ -14,7 +15,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName)
+        public string? UploadPicture(string fileName)
         {
             return UploadPicture(fileName, null, null, null, true, false, false);
         }
@@ -27,7 +28,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName, string title)
+        public string? UploadPicture(string fileName, string title)
         {
             return UploadPicture(fileName, title, null, null, true, false, false);
         }
@@ -41,7 +42,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName, string title, string description)
+        public string? UploadPicture(string fileName, string title, string description)
         {
             return UploadPicture(fileName, title, description, null, true, false, false);
         }
@@ -56,7 +57,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName, string title, string description, string tags)
+        public string? UploadPicture(string fileName, string title, string description, string tags)
         {
             var file = Path.GetFileName(fileName);
             using (Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -80,7 +81,7 @@ namespace FlickrNet
         /// <returns>The id of the photo on a successful upload.</returns>
         /// <exception cref="FlickrApiException">Thrown when Flickr returns an error. see http://www.flickr.com/services/api/upload.api.html for more details.</exception>
         /// <remarks>Other exceptions may be thrown, see <see cref="FileStream"/> constructors for more details.</remarks>
-        public string UploadPicture(string fileName, string? title, string? description, string? tags, bool isPublic, bool isFamily, bool isFriend)
+        public string? UploadPicture(string fileName, string? title, string? description, string? tags, bool isPublic, bool isFamily, bool isFriend)
         {
             var file = Path.GetFileName(fileName);
             using (Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -106,7 +107,8 @@ namespace FlickrNet
         /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
         /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
         /// <returns>The id of the photograph after successful uploading.</returns>
-        public string UploadPicture(Stream stream, string fileName, string? title, string? description, string? tags,
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
+        public string? UploadPicture(Stream stream, string fileName, string? title, string? description, string? tags,
                                     bool isPublic, bool isFamily, bool isFriend, ContentType contentType,
                                     SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch)
         {
@@ -225,7 +227,7 @@ namespace FlickrNet
         /// <param name="fullFileName">The full filename of the photo to upload.</param>
         /// <param name="photoId">The ID of the photo to replace.</param>
         /// <returns>The id of the photograph after successful uploading.</returns>
-        public string ReplacePicture(string fullFileName, string photoId)
+        public string? ReplacePicture(string fullFileName, string photoId)
         {
             using var stream = new FileStream(fullFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
             return ReplacePicture(stream, fullFileName, photoId);
@@ -238,7 +240,7 @@ namespace FlickrNet
         /// <param name="fileName">The filename of the file to replace the existing item with.</param>
         /// <param name="photoId">The ID of the photo to replace.</param>
         /// <returns>The id of the photograph after successful uploading.</returns>
-        public string ReplacePicture(Stream stream, string fileName, string photoId)
+        public string? ReplacePicture(Stream stream, string fileName, string photoId)
         {
 
             var replaceUri = new Uri(ReplaceUrl);

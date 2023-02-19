@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace FlickrNet
 {
@@ -34,11 +35,11 @@ namespace FlickrNet
         {
             var method = flickr.CurrentService == SupportedService.Zooomr ? "GET" : "POST";
 
-            var data = string.Empty;
+            var data = new StringBuilder();
 
             foreach (var k in parameters)
             {
-                data += k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&";
+                data.Append(k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&");
             }
 
             if (method == "GET" && data.Length > 2000)
@@ -52,7 +53,7 @@ namespace FlickrNet
             }
             else
             {
-                DownloadDataAsync(method, baseUrl, data, PostContentType, null, callback);
+                DownloadDataAsync(method, baseUrl, data.ToString(), PostContentType, null, callback);
             }
         }
 
@@ -138,8 +139,8 @@ namespace FlickrNet
 
                     result.Result = e.Result;
                     callback(result);
-                    return;
                 };
+
                 if (data == null)
                 {
                     var result = new FlickrResult<string>();
@@ -167,7 +168,6 @@ namespace FlickrNet
 
                     result.Result = e.Result;
                     callback(result);
-                    return;
                 };
 
                 client.DownloadStringAsync(new Uri(baseUrl));

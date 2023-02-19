@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNet
 {
@@ -295,6 +296,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date. Photos with an taken date greater than or equal to this value will be returned. </param>
         /// <param name="maxTakenDate">Maximum taken date. Photos with an taken date less than or equal to this value will be returned. </param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PlacesPlacesForUserAsync(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                              DateTime minUploadDate, DateTime maxUploadDate, DateTime minTakenDate,
                                              DateTime maxTakenDate, Action<FlickrResult<PlaceCollection>> callback)
@@ -361,6 +363,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PlacesPlacesForTagsAsync(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                              string[] tags, TagMode tagMode, string[] machineTags,
                                              MachineTagMode machineTagMode, DateTime minUploadDate,
@@ -443,6 +446,7 @@ namespace FlickrNet
         /// <param name="minTakenDate">Minimum taken date.</param>
         /// <param name="maxTakenDate">Maximum taken date.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PlacesPlacesForContactsAsync(PlaceType placeType, string? woeId, string? placeId, int threshold,
                                                  ContactSearch contactType, DateTime minUploadDate,
                                                  DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate,

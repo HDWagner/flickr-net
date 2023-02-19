@@ -12,15 +12,6 @@ namespace MD5Namespace;
 // * Copyright (c) Microsoft Corporation.  All rights reserved.
 // **************************************************************
 
-// Simple struct for the (a,b,c,d) which is used to compute the mesage digest.    
-struct ABCDStruct
-{
-    public uint A;
-    public uint B;
-    public uint C;
-    public uint D;
-}
-
 public sealed class MD5Core
 {
     //Prevent CSC from adding a default public constructor
@@ -56,7 +47,7 @@ public sealed class MD5Core
         }
 
         //Intitial values defined in RFC 1321
-        var abcd = new ABCDStruct();
+        var abcd = new AbcdStruct();
         abcd.A = 0x67452301;
         abcd.B = 0xefcdab89;
         abcd.C = 0x98badcfe;
@@ -111,7 +102,7 @@ public sealed class MD5Core
     }
 
 
-    internal static byte[] GetHashFinalBlock(byte[] input, int ibStart, int cbSize, ABCDStruct ABCD, Int64 len)
+    internal static byte[] GetHashFinalBlock(byte[] input, int ibStart, int cbSize, AbcdStruct abcd, Int64 len)
     {
         byte[] working = new byte[64];
         byte[] length = BitConverter.GetBytes(len);
@@ -126,21 +117,21 @@ public sealed class MD5Core
         if (cbSize <= 56)
         {
             Array.Copy(length, 0, working, 56, 8);
-            GetHashBlock(working, ref ABCD, 0);
+            GetHashBlock(working, ref abcd, 0);
         }
         else  //We need an aditional chunk to store the length
         {
-            GetHashBlock(working, ref ABCD, 0);
+            GetHashBlock(working, ref abcd, 0);
             //Create an entirely new chunk due to the 0-assigned trick mentioned above, to avoid an extra function call clearing the array
             working = new byte[64];
             Array.Copy(length, 0, working, 56, 8);
-            GetHashBlock(working, ref ABCD, 0);
+            GetHashBlock(working, ref abcd, 0);
         }
         byte[] output = new byte[16];
-        Array.Copy(BitConverter.GetBytes(ABCD.A), 0, output, 0, 4);
-        Array.Copy(BitConverter.GetBytes(ABCD.B), 0, output, 4, 4);
-        Array.Copy(BitConverter.GetBytes(ABCD.C), 0, output, 8, 4);
-        Array.Copy(BitConverter.GetBytes(ABCD.D), 0, output, 12, 4);
+        Array.Copy(BitConverter.GetBytes(abcd.A), 0, output, 0, 4);
+        Array.Copy(BitConverter.GetBytes(abcd.B), 0, output, 4, 4);
+        Array.Copy(BitConverter.GetBytes(abcd.C), 0, output, 8, 4);
+        Array.Copy(BitConverter.GetBytes(abcd.D), 0, output, 12, 4);
         return output;
     }
 
@@ -151,13 +142,14 @@ public sealed class MD5Core
     //    C = 0x98badcfe
     //    D = 0x10325476
     */
-    internal static void GetHashBlock(byte[] input, ref ABCDStruct ABCDValue, int ibStart)
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S2234:Parameters should be passed in the correct order", Justification = "Thats just the way it is")]
+    internal static void GetHashBlock(byte[] input, ref AbcdStruct abcdValue, int ibStart)
     {
         uint[] temp = Converter(input, ibStart);
-        uint a = ABCDValue.A;
-        uint b = ABCDValue.B;
-        uint c = ABCDValue.C;
-        uint d = ABCDValue.D;
+        uint a = abcdValue.A;
+        uint b = abcdValue.B;
+        uint c = abcdValue.C;
+        uint d = abcdValue.D;
 
         a = r1(a, b, c, d, temp[0], 7, 0xd76aa478);
         d = r1(d, a, b, c, temp[1], 12, 0xe8c7b756);
@@ -227,11 +219,10 @@ public sealed class MD5Core
         c = r4(c, d, a, b, temp[2], 15, 0x2ad7d2bb);
         b = r4(b, c, d, a, temp[9], 21, 0xeb86d391);
 
-        ABCDValue.A = unchecked(a + ABCDValue.A);
-        ABCDValue.B = unchecked(b + ABCDValue.B);
-        ABCDValue.C = unchecked(c + ABCDValue.C);
-        ABCDValue.D = unchecked(d + ABCDValue.D);
-        return;
+        abcdValue.A = unchecked(a + abcdValue.A);
+        abcdValue.B = unchecked(b + abcdValue.B);
+        abcdValue.C = unchecked(c + abcdValue.C);
+        abcdValue.D = unchecked(d + abcdValue.D);
     }
 
     //Manually unrolling these equations nets us a 20% performance improvement

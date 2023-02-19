@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNet
 {
@@ -297,6 +298,7 @@ namespace FlickrNet
         /// <param name="page">The page of results to return. If this argument is omitted, it defaults to 1.</param>
         /// <param name="perPage">Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void PeopleGetPhotosAsync(string? userId, SafetyLevel safeSearch, DateTime minUploadDate,
                                          DateTime maxUploadDate, DateTime minTakenDate, DateTime maxTakenDate,
                                          ContentTypeSearch contentType, PrivacyFilter privacyFilter,

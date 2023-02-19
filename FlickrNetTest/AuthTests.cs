@@ -17,7 +17,7 @@ namespace FlickrNetTest
         [Test]
         public void AuthGetFrobTest()
         {
-            string frob = TestData.GetOldSignedInstance().AuthGetFrob();
+            var frob = TestData.GetOldSignedInstance().AuthGetFrob();
 
             Assert.That(frob, Is.Not.Null, "frob should not be null.");
             Assert.That(frob, Is.Not.EqualTo(""), "Frob should not be zero length string.");
@@ -35,7 +35,7 @@ namespace FlickrNetTest
 
             Assert.That(frobResult.HasError, Is.False);
 
-            string frob = frobResult.Result;
+            var frob = frobResult.Result;
 
             Assert.That(frob, Is.Not.Null, "frob should not be null.");
             Assert.That(frob, Is.Not.EqualTo(""), "Frob should not be zero length string.");
@@ -51,9 +51,9 @@ namespace FlickrNetTest
         [Test]
         public void AuthCalcUrlTest()
         {
-            string frob = "abcdefgh";
+            var frob = "abcdefgh";
 
-            string url = TestData.GetOldSignedInstance().AuthCalcUrl(frob, AuthLevel.Read);
+            var url = TestData.GetOldSignedInstance().AuthCalcUrl(frob, AuthLevel.Read);
 
             Assert.That(url, Is.Not.Null, "url should not be null.");
         }
@@ -61,7 +61,7 @@ namespace FlickrNetTest
         [Test]
         public void AuthCalcUrlSignRequiredTest()
         {
-            string frob = "abcdefgh";
+            var frob = "abcdefgh";
 
             Action calcUrlAction = () => Instance.AuthCalcUrl(frob, AuthLevel.Read);
             calcUrlAction.ShouldThrow<SignatureRequiredException>();
@@ -73,7 +73,7 @@ namespace FlickrNetTest
         {
             Flickr f = TestData.GetOldAuthInstance();
 
-            string authToken = f.AuthToken;
+            var authToken = f.AuthToken;
 
             Assert.That(authToken, Is.Not.Null, "authToken should not be null.");
 
@@ -98,7 +98,7 @@ namespace FlickrNetTest
         [Test]
         public void AuthCheckTokenSignRequiredTest()
         {
-            string token = "abcdefgh";
+            var token = "abcdefgh";
 
             Should.Throw<SignatureRequiredException>(() => Instance.AuthCheckToken(token));
         }
@@ -106,7 +106,7 @@ namespace FlickrNetTest
         [Test]
         public void AuthCheckTokenInvalidTokenTest()
         {
-            string token = "abcdefgh";
+            var token = "abcdefgh";
 
             Should.Throw<LoginFailedInvalidTokenException>(() => TestData.GetOldSignedInstance().AuthCheckToken(token));
         }
@@ -114,7 +114,7 @@ namespace FlickrNetTest
         [Test]
         public void AuthClassBasicTest()
         {
-            string authResponse = "<auth><token>TheToken</token><perms>delete</perms><user nsid=\"41888973@N00\" username=\"Sam Judson\" fullname=\"Sam Judson\" /></auth>";
+            var authResponse = "<auth><token>TheToken</token><perms>delete</perms><user nsid=\"41888973@N00\" username=\"Sam Judson\" fullname=\"Sam Judson\" /></auth>";
 
             var reader = new XmlTextReader(new StringReader(authResponse));
             reader.Read();

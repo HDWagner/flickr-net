@@ -382,10 +382,13 @@ namespace FlickrNet
 
             if (media != MediaType.None)
             {
-                var value = media == MediaType.All ? "all"
-                    : (media == MediaType.Photos ? "photos"
-                    : (media == MediaType.Videos ? "videos"
-                    : string.Empty));
+                var value = media switch
+                {
+                    MediaType.All => "all",
+                    MediaType.Photos => "photos",
+                    MediaType.Videos => "videos",
+                    _ => string.Empty
+                };
                 parameters.Add("media", value);
             }
 

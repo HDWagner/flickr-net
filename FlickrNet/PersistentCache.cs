@@ -221,14 +221,12 @@ namespace FlickrNet
                 throw new ArgumentNullException(nameof(key));
             }
 
-            if (dataTable.ContainsKey(key))
+            if (dataTable.TryGetValue(key, out ICacheItem? value))
             {
-                return dataTable[key];
+                return value;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <returns>The old value associated with <c>key</c>, if any.</returns>

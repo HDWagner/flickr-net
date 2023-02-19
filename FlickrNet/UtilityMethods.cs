@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -212,9 +213,9 @@ namespace FlickrNet
                 {
                     colorList.Add(c);
                 }
-                if (codeMap.ContainsKey(c))
+                if (codeMap.TryGetValue(c, out string? value))
                 {
-                    colorList.Add(codeMap[c]);
+                    colorList.Add(value);
                 }
             }
 
@@ -607,7 +608,7 @@ namespace FlickrNet
 
             if (date.EndsWith("-00-01 00:00:00", StringComparison.Ordinal))
             {
-                output = new DateTime(int.Parse(date.Substring(0, 4), System.Globalization.NumberFormatInfo.InvariantInfo), 1, 1);
+                output = new DateTime(int.Parse(date.AsSpan(0, 4), System.Globalization.NumberFormatInfo.InvariantInfo), 1, 1);
                 return output;
             }
 
@@ -616,10 +617,11 @@ namespace FlickrNet
             {
                 output = DateTime.ParseExact(date, format, System.Globalization.DateTimeFormatInfo.InvariantInfo, System.Globalization.DateTimeStyles.None);
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-#if DEBUG
                 // throw only in DEBUG configuration
+#if DEBUG
+                Debug.WriteLine(e);
                 throw;
 #endif
             }

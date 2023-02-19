@@ -1,5 +1,5 @@
-using System;
 using FlickrNet;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FlickrNetTest
 {
@@ -21,41 +21,41 @@ namespace FlickrNetTest
 
         public const string TestImageBase64 = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAQYHCAME/8QAMRAAAQQBAgMFBQkAAAAAAAAAAQIDBBEFABITFCEGBzFR0UFVcZOUFSMkUmGEkaHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgEE/8QAHBEAAgMBAAMAAAAAAAAAAAAAAQIAAwQSERNB/9oADAMBAAIRAxEAPwDT/Os2QOKaJSSlpZFg0eoGjzrX5Xvkr9NSzvhyGTgsYj7KnSYhW/J4nAcKNwChV141Z/nSTBzHaByuLmckf3C/XW2nC1qdgiY7NYrfgiaI55nye+Sv00OeY3JFuAqISLaUOpND2eeoajOy2R+IzM8nyElwn+jpp7A5heSyDqOZmPIRsJ461KF8RFEWT+upbjetSx+RV6ldgoh70HorK8VzkSZKQVytqYoBUDvT1Ng9NIgyEELKHMXlwk9UANXYoePT46ucvEGUoCSzj5CUrWpHGZ3lO42av/dNec9mo/u/D/SDRr1vWoVfkNuX2MW8yJSMth4rZW7i8qlF7bKBQ8vZpz7uH2Hsm4Y8OTFoJsP1avvEeFaeD2Yje78P9KNdouDEVwKjMY9i1JKiyzsJAINdPhpW7HsXkiSrJ6268z//2Q==";
 
-        public static byte[] TestImageBytes
-        {
-            get
-            {
-                return Convert.FromBase64String(TestImageBase64);
-            }
-        }
+        public static byte[] TestImageBytes => Convert.FromBase64String(TestImageBase64);
 
         public const string FlickrNetTestGroupId = "1368041@N20";
 
-        public static string AuthToken
+
+        [DisallowNull]
+        public static string? AuthToken
         {
             get { return GetRegistryKey("AuthToken"); }
             set { SetRegistryKey("AuthToken", value); }
         }
 
-        public static string RequestToken
+        [DisallowNull]
+        public static string? RequestToken
         {
             get { return GetRegistryKey("RequestToken"); }
             set { SetRegistryKey("RequestToken", value); }
         }
 
-        public static string RequestTokenSecret
+        [DisallowNull]
+        public static string? RequestTokenSecret
         {
             get { return GetRegistryKey("RequestTokenSecret"); }
             set { SetRegistryKey("RequestTokenSecret", value); }
         }
 
-        public static string AccessToken
+        [DisallowNull]
+        public static string? AccessToken
         {
             get { return GetRegistryKey("AccessToken"); }
             set { SetRegistryKey("AccessToken", value); }
         }
 
-        public static string AccessTokenSecret
+        [DisallowNull]
+        public static string? AccessTokenSecret
         {
             get { return GetRegistryKey("AccessTokenSecret"); }
             set { SetRegistryKey("AccessTokenSecret", value); }
@@ -63,7 +63,7 @@ namespace FlickrNetTest
 
         static void SetRegistryKey(string name, string value)
         {
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\FlickrNetTest", true);
+            var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"SOFTWARE\FlickrNetTest", true);
             key ??= Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"SOFTWARE\FlickrNetTest");
 
             key.SetValue(name, value);
@@ -101,12 +101,7 @@ namespace FlickrNetTest
 
         public static Flickr GetOldAuthInstance()
         {
-            return new Flickr("3dce465686fd9144c157cb5157bd0e78", "aea31b62c6714269", AuthToken)
-            {
-                InstanceCacheDisabled
-                                   = true
-            };
+            return new Flickr("3dce465686fd9144c157cb5157bd0e78", "aea31b62c6714269", AuthToken) { InstanceCacheDisabled = true };
         }
-
     }
 }

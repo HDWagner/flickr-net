@@ -19,7 +19,7 @@ public sealed class MD5Managed : MD5
 #endif
 {
     private byte[] _data;
-    private ABCDStruct _abcd;
+    private AbcdStruct _abcd;
     private Int64 _totalLength;
     private int _dataSize;
 
@@ -34,7 +34,7 @@ public sealed class MD5Managed : MD5
         _data = new byte[64];
         _dataSize = 0;
         _totalLength = 0;
-        _abcd = new ABCDStruct();
+        _abcd = new AbcdStruct();
         //Intitial values as defined in RFC 1321
         _abcd.A = 0x67452301;
         _abcd.B = 0xefcdab89;

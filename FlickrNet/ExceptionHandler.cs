@@ -29,26 +29,27 @@ namespace FlickrNet
             }
 
             var code = 0;
-            string msg = null;
+            string msg = "Invalid Flickr response";
 
             while (reader.MoveToNextAttribute())
             {
-                if (reader.LocalName == "code")
+                switch (reader.LocalName)
                 {
-                    try
-                    {
-                        code = int.Parse(reader.Value, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo);
-                    }
-                    catch (FormatException)
-                    {
-                        throw new FlickrException("Invalid value found in code attribute. Value '" + code + "' is not an integer");
-                    }
-                    continue;
-                }
-                if (reader.LocalName == "msg")
-                {
-                    msg = reader.Value;
-                    continue;
+                    case "code":
+                        try
+                        {
+                            code = int.Parse(reader.Value, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo);
+                        }
+                        catch (FormatException)
+                        {
+                            throw new FlickrException("Invalid value found in code attribute. Value '" + code + "' is not an integer");
+                        }
+                        break;
+                    case "msg":
+                        msg = reader.Value;
+                        break;
+                    default:
+                        break;
                 }
             }
 

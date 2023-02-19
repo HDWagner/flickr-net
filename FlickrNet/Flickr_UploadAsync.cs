@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
-using System.Collections;
-using System.Xml.Serialization;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -26,6 +23,7 @@ namespace FlickrNet
         /// <param name="safetyLevel">The safety level of the photo, i.e. Safe, Moderate or Restricted.</param>
         /// <param name="hiddenFromSearch">Is the photo hidden from public searches.</param>
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
+        [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Public API needs to be unchanged.")]
         public void UploadPictureAsync(Stream stream, string fileName, string title, string description, string tags,
                                        bool isPublic, bool isFamily, bool isFriend, ContentType contentType,
                                        SafetyLevel safetyLevel, HiddenFromSearch hiddenFromSearch,

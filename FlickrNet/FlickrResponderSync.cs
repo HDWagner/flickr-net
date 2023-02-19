@@ -34,11 +34,11 @@ namespace FlickrNet
         {
             string method = flickr.CurrentService == SupportedService.Zooomr ? "GET" : "POST";
 
-            string data = string.Empty;
+            var data = new StringBuilder();
 
             foreach (var k in parameters)
             {
-                data += k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&";
+                data.Append(k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&");
             }
 
             if (method == "GET" && data.Length > 2000)
@@ -52,7 +52,7 @@ namespace FlickrNet
             }
             else
             {
-                return DownloadData(method, baseUrl, data, PostContentType, null);
+                return DownloadData(method, baseUrl, data.ToString(), PostContentType, null);
             }
         }
 

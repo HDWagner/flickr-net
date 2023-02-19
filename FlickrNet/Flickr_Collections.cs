@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FlickrNet
 {
@@ -92,20 +93,13 @@ namespace FlickrNet
             CheckRequiresAuthentication();
 
             // construct comma separated list of photoset IDs
-            var photosetIdsParameter = "";
-            for (int i = 0; i < photosetIds.Count; i++)
-            {
-                photosetIdsParameter += photosetIds[i];
-                if (i < photosetIds.Count - 1)
-                {
-                    photosetIdsParameter += ",";
-                }
-            }
+            var photosetIdsParameter = new StringBuilder();
+            photosetIdsParameter.AppendJoin(',', photosetIds);
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.collections.editSets");
             parameters.Add("collection_id", collectionId);
-            parameters.Add("photoset_ids", photosetIdsParameter);
+            parameters.Add("photoset_ids", photosetIdsParameter.ToString());
             // not sure what this parameter is for
             parameters.Add("do_remove", "0");
 
