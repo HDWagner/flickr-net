@@ -33,12 +33,12 @@ namespace FlickrNet
         /// <summary>
         /// The owner of these galleries if called from <see cref="Flickr.GalleriesGetList(string, int, int)"/>.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The ID photo that these galleries contain if called from <see cref="Flickr.GalleriesGetListForPhoto(string, int, int)"/>.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

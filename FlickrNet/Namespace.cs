@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the namespace.
         /// </summary>
-        public string NamespaceName { get; set; }
+        public string? NamespaceName { get; set; }
 
         /// <summary>
         /// The usage of the namespace.

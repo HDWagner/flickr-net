@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the referring domain.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
         /// <summary>
         /// The number of views from this domain.
         /// </summary>

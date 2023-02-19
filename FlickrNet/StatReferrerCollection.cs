@@ -28,7 +28,7 @@ namespace FlickrNet
         /// <summary>
         /// The domain name for this set of referrers.
         /// </summary>
-        public string DomainName { get; set; }
+        public string? DomainName { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The tag that is hot.
         /// </summary>
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
 
         /// <summary>
         /// The score for the tag.

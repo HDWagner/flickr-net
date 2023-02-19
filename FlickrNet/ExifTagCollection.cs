@@ -13,27 +13,27 @@ namespace FlickrNet
         /// <summary>
         /// The Photo ID for the photo whose EXIF data this is.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <summary>
         /// The Secret of the photo.
         /// </summary>
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
 
         /// <summary>
         /// The server number for the photo.
         /// </summary>
-        public string Server { get; set; }
+        public string? Server { get; set; }
 
         /// <summary>
         /// The server farm for this photo.
         /// </summary>
-        public string Farm { get; set; }
+        public string? Farm { get; set; }
 
         /// <summary>
         /// The make and model of the camera that took the photo, if available.
         /// </summary>
-        public string Camera { get; set; }
+        public string? Camera { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

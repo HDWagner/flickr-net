@@ -10,12 +10,12 @@ namespace FlickrNet
         /// <summary>
         /// The name of the camera brand. e.g. "Canon".
         /// </summary>
-        public string BrandName { get; set; }
+        public string? BrandName { get; set; }
 
         /// <summary>
         /// The ID of the camera brand. e.g. "canon".
         /// </summary>
-        public string BrandId { get; set; }
+        public string? BrandId { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

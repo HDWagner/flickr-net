@@ -13,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The source tag for this cluster collection.
         /// </summary>
-        public string SourceTag { get; set; }
+        public string? SourceTag { get; set; }
 
         /// <summary>
         /// The total number of clusters for this tag.

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace FlickrNet
 {
@@ -14,20 +11,20 @@ namespace FlickrNet
         /// <summary>
         /// Property which returns the group id for the group.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>The group name.</summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         /// <summary>
         /// Server farm for the group buddy icon.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// Server for the group buddy icon.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// Group buddy icon.

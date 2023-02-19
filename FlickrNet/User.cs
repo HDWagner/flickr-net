@@ -11,17 +11,17 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the found user.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The username of the found user.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// The full name of the user. Only returned by <see cref="Flickr.AuthGetToken"/>.
         /// </summary>
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {
@@ -70,12 +70,12 @@ namespace FlickrNet
         /// <summary>
         /// The id of the user object.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The Username of the selected user.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// Is the current user a Pro account.
@@ -85,7 +85,7 @@ namespace FlickrNet
         /// <summary>
         /// If the user is a Pro account holder will signify the style of their badge.
         /// </summary>
-        public string ProBadgeStyle { get; set; }
+        public string? ProBadgeStyle { get; set; }
 
         /// <summary>
         /// What is the upload count for this user.
@@ -100,7 +100,7 @@ namespace FlickrNet
         /// <summary>
         /// Current status of the user's upload limit.
         /// </summary>
-        public string UploadLimitStatus { get; set; }
+        public string? UploadLimitStatus { get; set; }
 
         /// <summary>
         /// The maximum bandwidth (in bytes) that the user can use each month.

@@ -19,27 +19,27 @@ namespace FlickrNet
         /// <summary>
         /// The user id of the user who made the comment or note.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The screen name of the user who made the comment or note.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// The real name of the user who made the comment or note.
         /// </summary>
-        public string RealName { get; set; }
+        public string? RealName { get; set; }
 
         /// <summary>
         /// Server for the buddy icon for the event user.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// Farm for the buddy icon for the event user.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// The date the note or comment was added.
@@ -49,27 +49,27 @@ namespace FlickrNet
         /// <summary>
         /// The text of the note or comment.
         /// </summary>
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         /// <summary>
         /// If this event is a comment then this is the ID of the comment.
         /// </summary>
-        public string CommentId { get; set; }
+        public string? CommentId { get; set; }
 
         /// <summary>
         /// If this is a note activity then this is the ID of the note.
         /// </summary>
-        public string NoteId { get; set; }
+        public string? NoteId { get; set; }
 
         /// <summary>
         /// If this is group invite, then this is the group ID of the group it has been invited to.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>
         /// If this is group invite, then this is the name of the group it has been invited to.
         /// </summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         /// <summary>
         /// Is the activity type muted.
@@ -79,7 +79,7 @@ namespace FlickrNet
         /// <summary>
         /// If this is a gallery activityits then this will contain the ID of the gallery.
         /// </summary>
-        public string GalleryId { get; set; }
+        public string? GalleryId { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

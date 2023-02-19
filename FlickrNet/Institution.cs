@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -12,7 +10,7 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the institution. Acts like a user ID for most method calls.
         /// </summary>
-        public string InstitutionId { get; set; }
+        public string? InstitutionId { get; set; }
 
         /// <summary>
         /// The date this commons collection was launched.
@@ -22,22 +20,22 @@ namespace FlickrNet
         /// <summary>
         /// The name of this commons institution.
         /// </summary>
-        public string InstitutionName { get; set; }
+        public string? InstitutionName { get; set; }
 
         /// <summary>
         /// The URL to the institution's main site.
         /// </summary>
-        public string SiteUrl { get; set; }
+        public string? SiteUrl { get; set; }
 
         /// <summary>
         /// The URL to the institution's page on Flickr.
         /// </summary>
-        public string FlickrUrl { get; set; }
+        public string? FlickrUrl { get; set; }
 
         /// <summary>
         /// The URL to the institution's copyright/license page.
         /// </summary>
-        public string LicenseUrl { get; set; }
+        public string? LicenseUrl { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

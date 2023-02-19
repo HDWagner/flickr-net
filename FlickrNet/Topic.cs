@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -12,15 +10,15 @@ namespace FlickrNet
         /// <summary>
         /// The ID for the topic
         /// </summary>
-        public string TopicId { get; set; }
+        public string? TopicId { get; set; }
         /// <summary>
         /// The subject line of the topic.
         /// </summary>
-        public string Subject { get; set; }
+        public string? Subject { get; set; }
         /// <summary>
         /// The user id of the author of the topic.
         /// </summary>
-        public string AuthorUserId { get; set; }
+        public string? AuthorUserId { get; set; }
         /// <summary>
         /// The path alias for the author of this topic.
         /// </summary>
@@ -28,7 +26,7 @@ namespace FlickrNet
         /// <summary>
         /// The user name of the author of the topic.
         /// </summary>
-        public string AuthorName { get; set; }
+        public string? AuthorName { get; set; }
         /// <summary>
         /// True if the author of the topic has a pro account.
         /// </summary>
@@ -36,7 +34,7 @@ namespace FlickrNet
         /// <summary>
         /// The badge style for the user if they are a pro.
         /// </summary>
-        public string ProBadgeStyle { get; set; }
+        public string? ProBadgeStyle { get; set; }
         /// <summary>
         /// The role within the group of the author of the topic.
         /// </summary>
@@ -44,11 +42,11 @@ namespace FlickrNet
         /// <summary>
         /// The server for the author's buddy icon.
         /// </summary>
-        public string AuthorIconServer { get; set; }
+        public string? AuthorIconServer { get; set; }
         /// <summary>
         /// The farm for the author's buddy icon.
         /// </summary>
-        public string AuthorIconFarm { get; set; }
+        public string? AuthorIconFarm { get; set; }
         /// <summary>
         /// The number of replies for this topic.
         /// </summary>
@@ -84,15 +82,15 @@ namespace FlickrNet
         /// <summary>
         /// The id of the last reply to this topic.
         /// </summary>
-        public string LastReplyId { get; set; }
+        public string? LastReplyId { get; set; }
         /// <summary>
         /// The message content of this topic.
         /// </summary>
-        public string Message { get; set; }
+        public string? Message { get; set; }
         /// <summary>
         /// The id of the group this topic belongs to.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>
         /// Has the author of this post been deleted?
@@ -213,6 +211,6 @@ namespace FlickrNet
             reader.Skip();
         }
 
-        
+
     }
 }

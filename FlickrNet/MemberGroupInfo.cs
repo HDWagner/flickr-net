@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -12,10 +10,10 @@ namespace FlickrNet
         /// <summary>
         /// Property which returns the group id for the group.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>The group name.</summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         /// <summary>
         /// True if the user is the admin for the group, false if they are not.
@@ -30,12 +28,12 @@ namespace FlickrNet
         /// <summary>
         /// The server number for the group icon.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// The web farm ID for the group icon.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// The number of photos currently in this group.

@@ -14,13 +14,13 @@ namespace FlickrNet
     public sealed class GroupFullInfo : IFlickrParsable
     {
         /// <remarks/>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <remarks/>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         /// <remarks/>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <remarks/>
         public int Members { get; set; }
@@ -38,7 +38,7 @@ namespace FlickrNet
         /// <summary>
         /// The server number used for the groups icon.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// The Path alias for the group icon
@@ -48,12 +48,12 @@ namespace FlickrNet
         /// <summary>
         /// The server farm for the group icon. If zero then the group uses the default icon.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// The language that the group information has been returned in.
         /// </summary>
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// Is this group's pool moderated.
@@ -68,7 +68,7 @@ namespace FlickrNet
         /// <summary>
         /// The HTML for the group's 'Blast' (the banner seen on the group home page).
         /// </summary>
-        public string BlastHtml { get; set; }
+        public string? BlastHtml { get; set; }
 
         /// <summary>
         /// The User ID for the user who last set the group's 'Blast' (the banner seen on the group home page).
@@ -110,17 +110,17 @@ namespace FlickrNet
         public PoolPrivacy Privacy { get; set; }
 
         /// <remarks/>
-        public GroupThrottleInfo ThrottleInfo { get; set; }
+        public GroupThrottleInfo? ThrottleInfo { get; set; }
 
         /// <summary>
         /// The restrictions that apply to new items added to this group's pool.
         /// </summary>
-        public GroupInfoRestrictions Restrictions { get; set; }
+        public GroupInfoRestrictions? Restrictions { get; set; }
 
         /// <summary>
         /// Any rules that the group has for new members.
         /// </summary>
-        public string Rules { get; set; }
+        public string? Rules { get; set; }
 
         /// <summary>
         /// Methods for automatically converting a <see cref="GroupFullInfo"/> object into

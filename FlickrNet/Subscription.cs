@@ -12,11 +12,11 @@ namespace FlickrNet
         /// <summary>
         /// The topic the subscription is listening to.
         /// </summary>
-        public string Topic { get; set; }
+        public string? Topic { get; set; }
         /// <summary>
         /// The callback URL that the subscription is sending to.
         /// </summary>
-        public string Callback { get; set; }
+        public string? Callback { get; set; }
         /// <summary>
         /// True if the subscription has not yet been verified.
         /// </summary>

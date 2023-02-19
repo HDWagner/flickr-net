@@ -9,7 +9,7 @@ namespace FlickrNet
     public sealed class PhotoPermissions : IFlickrParsable
     {
         /// <remarks/>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <remarks/>
         public bool IsPublic { get; set; }

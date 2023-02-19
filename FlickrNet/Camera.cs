@@ -10,37 +10,37 @@ namespace FlickrNet
         /// <summary>
         /// The large image for this camera model.
         /// </summary>
-        public string LargeImage { get; set; }
+        public string? LargeImage { get; set; }
 
         /// <summary>
         /// The small image for this camera model.
         /// </summary>
-        public string SmallImage { get; set; }
+        public string? SmallImage { get; set; }
 
         /// <summary>
         /// The type of memory used in this camera.
         /// </summary>
-        public string MemoryType { get; set; }
+        public string? MemoryType { get; set; }
 
         /// <summary>
         /// The size of the LCD screen (if any) used in this camera.
         /// </summary>
-        public string LcdScreenSize { get; set; }
+        public string? LcdScreenSize { get; set; }
 
         /// <summary>
         /// The number of megapixels for this camera.
         /// </summary>
-        public string MegaPixels { get; set; }
+        public string? MegaPixels { get; set; }
 
         /// <summary>
         /// The unique ID of this camera on Flickr.
         /// </summary>
-        public string CameraId { get; set; }
+        public string? CameraId { get; set; }
 
         /// <summary>
         /// The name of this camera.
         /// </summary>
-        public string CameraName { get; set; }
+        public string? CameraName { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

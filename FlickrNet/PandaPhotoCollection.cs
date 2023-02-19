@@ -27,7 +27,7 @@ namespace FlickrNet
         /// <summary>
         /// The pands that returned this set of photos.
         /// </summary>
-        public string PandaName { get; set; }
+        public string? PandaName { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

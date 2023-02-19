@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FlickrNet
+﻿namespace FlickrNet
 {
     /// <summary>
     /// Contains details of a contact for a particular user.
@@ -12,37 +8,37 @@ namespace FlickrNet
         /// <summary>
         /// The user id of the contact.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The username (or screen name) of the contact.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// The users real name. Only returned for authenticated calls to <see cref="Flickr.ContactsGetList()"/>.
         /// </summary>
-        public string RealName { get; set; }
+        public string? RealName { get; set; }
 
         /// <summary>
         /// The location of the contact. Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
         /// </summary>
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         /// <summary>
         /// The URL path alias for the contact.  Only returned for auehtnicated calls to <see cref="Flickr.ContactsGetList()"/>.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The icon server for this contacts buddy icon.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// The icon farm for this contacts buddy icon.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// Is the contact a Pro user.

@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The type of EXIF data, e.g. EXIF, TIFF, GPS etc.
         /// </summary>
-        public string TagSpace { get; set; }
+        public string? TagSpace { get; set; }
 
         /// <summary>
         /// An id number for the type of tag space.
@@ -22,29 +22,29 @@ namespace FlickrNet
         /// <summary>
         /// The tag number.
         /// </summary>
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
 
         /// <summary>
         /// The label, or description for the tag, such as Aperture
         /// or Manufacturer
         /// </summary>
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// The raw EXIF data.
         /// </summary>
-        public string Raw { get; set; }
+        public string? Raw { get; set; }
 
         /// <summary>
         /// An optional clean version of the <see cref="Raw"/> property.
         /// May be null if the <c>Raw</c> property is in a suitable format already.
         /// </summary>
-        public string Clean { get; set; }
+        public string? Clean { get; set; }
 
         /// <summary>
         /// Get the value of the <see cref="Clean"/> property, or the value of <see cref="Raw"/> if Clean is empty or null.
         /// </summary>
-        public string CleanOrRaw
+        public string? CleanOrRaw
         {
             get
             {

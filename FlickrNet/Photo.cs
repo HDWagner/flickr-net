@@ -8,16 +8,16 @@ namespace FlickrNet
     /// <remarks/>
     public class Photo : IFlickrParsable
     {
-        private string urlSquare;
-        private string urlLargeSquare;
-        private string urlThumbnail;
-        private string urlMedium;
-        private string urlMedium640;
-        private string urlMedium800;
-        private string urlSmall;
-        private string urlSmall320;
-        private string urlLarge;
-        private string urlOriginal;
+        private string? urlSquare;
+        private string? urlLargeSquare;
+        private string? urlThumbnail;
+        private string? urlMedium;
+        private string? urlMedium640;
+        private string? urlMedium800;
+        private string? urlSmall;
+        private string? urlSmall320;
+        private string? urlLarge;
+        private string? urlOriginal;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Photo"/> class.
@@ -33,22 +33,22 @@ namespace FlickrNet
         public Collection<string> Tags { get; set; }
 
         /// <remarks/>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
     
         /// <remarks/>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
     
         /// <remarks/>
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
     
         /// <remarks/>
-        public string Server { get; set; }
+        public string? Server { get; set; }
     
         /// <remarks/>
-        public string Farm { get; set; }
+        public string? Farm { get; set; }
     
         /// <remarks/>
-        public string Title { get; set; }
+        public string? Title { get; set; }
     
         /// <remarks/>
         public bool IsPublic { get; set; }
@@ -107,30 +107,30 @@ namespace FlickrNet
         public DateTime? DateFavorited { get; set; }
 
         /// <remarks/>
-        public string OwnerName { get; set; }
+        public string? OwnerName { get; set; }
 
         /// <remarks/>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <remarks/>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// Optional extra field containing the original format (jpg, png etc) of the 
         /// photo.
         /// </summary>
-        public string OriginalFormat { get; set; }
+        public string? OriginalFormat { get; set; }
 
         /// <summary>
         /// Optional extra field containing the original 'secret' of the 
         /// photo used for forming the Url.
         /// </summary>
-        public string OriginalSecret { get; set; }
+        public string? OriginalSecret { get; set; }
 
         /// <summary>
         /// Machine tags
         /// </summary>
-        public string MachineTags { get; set; }
+        public string? MachineTags { get; set; }
 
         /// <summary>
         /// The url to the web page for this photo. Uses the users userId, not their web alias, but
@@ -339,7 +339,7 @@ namespace FlickrNet
         /// <summary>
         /// Large (1600 pixel) image url, if it exists.
         /// </summary>
-        public string Large1600Url { get; set; }
+        public string? Large1600Url { get; set; }
         /// <summary>
         /// Width of Large (1600 pixel) image.
         /// </summary>
@@ -352,7 +352,7 @@ namespace FlickrNet
         /// <summary>
         /// Large (2048 pixel) image, if it exists.
         /// </summary>
-        public string Large2048Url { get; set; }
+        public string? Large2048Url { get; set; }
         /// <summary>
         /// Width of Large (2048 pixel) image.
         /// </summary>
@@ -454,12 +454,12 @@ namespace FlickrNet
         /// <summary>
         /// The Place ID. Will be null if <see cref="PhotoSearchExtras.Geo"/> is not specified in the search.
         /// </summary>
-        public string PlaceId { get; set; }
+        public string? PlaceId { get; set; }
 
         /// <summary>
         /// The WOE (Where On Earth) ID. Will be null if <see cref="PhotoSearchExtras.Geo"/> is not specified in the search.
         /// </summary>
-        public string WoeId { get; set; }
+        public string? WoeId { get; set; }
 
         /// <summary>
         /// Geo-location accuracy. A value of None means that the information was not returned.
@@ -514,27 +514,27 @@ namespace FlickrNet
         /// <summary>
         /// The media format for this photo. Only returned if PhotoSearchExtras.Media is set.
         /// </summary>
-        public string Media { get; set; }
+        public string? Media { get; set; }
 
         /// <summary>
         /// The url alias the user has picked, it applicable.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The status of the media for this photo. Only returned if PhotoSearchExtras.Media is set.
         /// </summary>
-        public string MediaStatus { get; set; }
+        public string? MediaStatus { get; set; }
 
         /// <summary>
         /// The description for the photo. Only returned if <see cref="PhotoSearchExtras.Description"/> is set.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// If Geolocation information is returned for this photo then this will contain the permissions for who can see those permissions.
         /// </summary>
-        public GeoPermissions GeoPermissions { get; set; }
+        public GeoPermissions? GeoPermissions { get; set; }
 
         /// <summary>
         /// If requested will contain the number of degrees the photo has been rotated since upload.

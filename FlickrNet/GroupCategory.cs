@@ -17,7 +17,7 @@
         /// <summary>
         /// The name for the category.
         /// </summary>
-        public string CategoryName { get; set; }
+        public string? CategoryName { get; set; }
     
         /// <summary>
         /// A forward slash delimited list of the parents of the current group.
@@ -28,7 +28,7 @@
         /// <example>
         /// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
         /// </example>
-        public string Path { get; set; }
+        public string? Path { get; set; }
     
         /// <summary>
         /// A forward slash delimited list of the ids of the parents of the current group.
@@ -39,7 +39,7 @@
         /// <example>
         /// Group Id 91, Romance will return "/Life/Romance" as the Path and "/90/91" as its PathIds
         /// </example>
-        public string PathIds { get; set; }
+        public string? PathIds { get; set; }
 
         /// <summary>
         /// An array of <see cref="Subcategory"/> items.

@@ -16,13 +16,13 @@ namespace FlickrNet
         /// The id of the group.
         /// </summary>
         [XmlAttribute("nsid", Form = XmlSchemaForm.Unqualified)]
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>
         /// The name of the group
         /// </summary>
         [XmlAttribute("name", Form = XmlSchemaForm.Unqualified)]
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         /// <summary>
         /// The number of memebers of the group.

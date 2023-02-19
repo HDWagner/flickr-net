@@ -13,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The tag for which this cluster belongs.
         /// </summary>
-        public string SourceTag { get; set; }
+        public string? SourceTag { get; set; }
 
         /// <summary>
         /// The number of tags in this cluster.
@@ -23,7 +23,7 @@ namespace FlickrNet
         /// <summary>
         /// The collection of tags in this cluster.
         /// </summary>
-        public Collection<string> Tags { get; set; }
+        public Collection<string>? Tags { get; set; }
 
         /// <summary>
         /// The cluster id for this cluster.
@@ -32,6 +32,10 @@ namespace FlickrNet
         {
             get
             {
+                if (Tags == null)
+                {
+                    return string.Empty;
+                }
                 if (Tags.Count >= 3)
                 {
                     return Tags[0] + "-" + Tags[1] + "-" + Tags[2];

@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The name the predicate
         /// </summary>
-        public string PredicateName { get; set; }
+        public string? PredicateName { get; set; }
 
         /// <summary>
         /// The usage of the predicate.

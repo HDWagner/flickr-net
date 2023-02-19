@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -17,17 +15,17 @@ namespace FlickrNet
         /// <summary>
         /// The namespace for this value.
         /// </summary>
-        public string NamespaceName { get; set; }
+        public string? NamespaceName { get; set; }
 
         /// <summary>
         /// The predicate name for this value.
         /// </summary>
-        public string PredicateName { get; set; }
+        public string? PredicateName { get; set; }
 
         /// <summary>
         /// The text of this value.
         /// </summary>
-        public string ValueText { get; set; }
+        public string? ValueText { get; set; }
 
         /// <summary>
         /// The date this machine tag was first used.

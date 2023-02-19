@@ -11,7 +11,7 @@ namespace FlickrNet
         /// <summary>
         /// The ID for the photo whose permissions these are.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <summary>
         /// Are the general unwashed (public) allowed to see the Geo Location information for this photo.

@@ -1,31 +1,5 @@
-﻿using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Collections.Generic;
-using System;
-using System.Runtime.CompilerServices;
-
-namespace FlickrNet
+﻿namespace FlickrNet
 {
-    /// <summary>
-    /// Collection of <see cref="Size"/> items for a given photograph.
-    /// </summary>
-    public sealed class SizeCollection : System.Collections.ObjectModel.Collection<Size>, IFlickrParsable
-    {
-        void IFlickrParsable.Load(System.Xml.XmlReader reader)
-        {
-            reader.Read();
-
-            while (reader.LocalName == "size")
-            {
-                var size = new Size();
-                ((IFlickrParsable)size).Load(reader);
-                Add(size);
-            }
-
-            reader.Skip();
-        }
-    }
-
     /// <summary>
     /// Contains details about all the sizes available for a given photograph.
     /// </summary>

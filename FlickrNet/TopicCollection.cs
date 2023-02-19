@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -12,7 +10,7 @@ namespace FlickrNet
         /// <summary>
         /// The id of the group the topics belong to.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
         /// <summary>
         /// The path alias for the group's url.
         /// </summary>
@@ -20,15 +18,15 @@ namespace FlickrNet
         /// <summary>
         /// The server for the group's icon.
         /// </summary>
-        public string GroupIconServer { get; set; }
+        public string? GroupIconServer { get; set; }
         /// <summary>
         /// The farm for the group's icon.
         /// </summary>
-        public string GroupIconFarm { get; set; }
+        public string? GroupIconFarm { get; set; }
         /// <summary>
         /// The name of the group the topics belong to.
         /// </summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
         /// <summary>
         /// The number of members in the group.
         /// </summary>
@@ -40,7 +38,7 @@ namespace FlickrNet
         /// <summary>
         /// The default language of this group.
         /// </summary>
-        public string Language { get; set; }
+        public string? Language { get; set; }
         /// <summary>
         /// True is the pool is moderated.
         /// </summary>

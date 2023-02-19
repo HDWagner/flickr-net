@@ -10,37 +10,37 @@ namespace FlickrNet
         /// <summary>
         /// The id of the next photo. Will be "0" if this photo is the last.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <summary>
         /// The secret for the photo.
         /// </summary>
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
 
         /// <summary>
         /// The server for this photo.
         /// </summary>
-        public string Server { get; set; }
+        public string? Server { get; set; }
 
         /// <summary>
         /// The web server farm for this photos images.
         /// </summary>
-        public string Farm { get; set; }
+        public string? Farm { get; set; }
 
         /// <summary>
         /// The title of the next photo in context.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The URL, in the given context, for the next or previous photo.
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// The URL for the thumbnail of the photo.
         /// </summary>
-        public string ThumbnailUrl { get; set; }
+        public string? ThumbnailUrl { get; set; }
 
         /// <summary>
         /// The media type of this item.

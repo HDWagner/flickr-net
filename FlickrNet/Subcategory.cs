@@ -8,12 +8,12 @@
         /// <summary>
         /// The id of the category.
         /// </summary>
-        public string SubcategoryId { get; set; }
+        public string? SubcategoryId { get; set; }
     
         /// <summary>
         /// The name of the category.
         /// </summary>
-        public string SubcategoryName { get; set; }
+        public string? SubcategoryName { get; set; }
     
         /// <summary>
         /// The number of groups found within the category.

@@ -13,20 +13,20 @@ namespace FlickrNet
     {
         /// <summary>The user id of the user.</summary>
         /// <remarks/>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
     
         /// <summary>Does the user posses a pro account.
         /// 0 = free acouunt, 1 = pro account holder.</summary>
         public bool IsPro { get; set; }
     
         /// <summary>The server that will serve up the users Buddy Icon.</summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>The server farm that will serve up the users Buddy Icon.</summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>The gender of the user on Flickr. May be null, or X for unspecified.</summary>
-        public string Gender { get; set; }
+        public string? Gender { get; set; }
 
         /// <summary>
         /// Is the person ignored by the calling user. Will be null if not an authenticated call.
@@ -71,7 +71,7 @@ namespace FlickrNet
         /// <summary>
         /// If the user is a Pro account holder will signify the style of their badge.
         /// </summary>
-        public string ProBadgeStyle { get; set; }
+        public string? ProBadgeStyle { get; set; }
 
         /// <summary>
         /// What is the upload count for this user.
@@ -84,51 +84,51 @@ namespace FlickrNet
         /// <summary>
         /// Current status of the user's upload limit.
         /// </summary>
-        public string UploadLimitStatus { get; set; }
+        public string? UploadLimitStatus { get; set; }
         /// <summary>
         /// Not sure?
         /// </summary>
         public bool? HasStats { get; set; }
 
         /// <summary>The users username, also known as their screenname.</summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
     
         /// <summary>The users real name, as entered in their profile.</summary>
-        public string RealName { get; set; }
+        public string? RealName { get; set; }
     
         /// <summary>The SHA1 hash of the users email address - used for FOAF networking.</summary>
-        public string MailboxSha1Hash { get; set; }
+        public string? MailboxSha1Hash { get; set; }
     
         /// <summary>Consists of your current location followed by country.</summary>
         /// <example>e.g. Newcastle, UK.</example>
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         /// <summary>Sub element containing a summary of the users photo information.</summary>
         /// <remarks/>
-        public PersonPhotosSummary PhotosSummary { get; set; }
+        public PersonPhotosSummary? PhotosSummary { get; set; }
 
         /// <summary>
         /// The users URL alias, if any.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The users photo location on Flickr
         /// https://www.flickr.com/photos/username/
         /// </summary>
-        public string PhotosUrl { get; set; }
+        public string? PhotosUrl { get; set; }
 
         /// <summary>
         /// The users profile location on Flickr
         /// https://www.flickr.com/people/username/
         /// </summary>
-        public string ProfileUrl { get; set; }
+        public string? ProfileUrl { get; set; }
 
         /// <summary>
         /// The users profile location on Flickr
         /// https://m.flickr.com/photostream.gne?id=ID
         /// </summary>
-        public string MobileUrl { get; set; }
+        public string? MobileUrl { get; set; }
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for the users Buddy Icon.
@@ -156,7 +156,7 @@ namespace FlickrNet
         /// <remarks>
         /// Will likely contain HTML.
         /// </remarks>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

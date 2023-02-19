@@ -9,12 +9,12 @@ namespace FlickrNet
     /// </summary>
     public sealed class Photoset : IFlickrParsable
     {
-        private string url;
+        private string? url;
 
         /// <summary>
         /// The ID of the photoset.
         /// </summary>
-        public string PhotosetId { get; set; }
+        public string? PhotosetId { get; set; }
 
         /// <summary>
         /// The URL of the photoset.
@@ -33,44 +33,44 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the owner of the photoset.
         /// </summary>
-        public string OwnerId { get; set; }
+        public string? OwnerId { get; set; }
 
         /// <summary>
         /// The username of the owner of the photoset.
         /// </summary>
-        public string OwnerName { get; set; }
+        public string? OwnerName { get; set; }
 
         /// <summary>
         /// The photo ID of the primary photo of the photoset.
         /// </summary>
-        public string PrimaryPhotoId { get; set; }
+        public string? PrimaryPhotoId { get; set; }
 
         /// <summary>
         /// The secret for the primary photo for the photoset.
         /// </summary>
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
 
         /// <summary>
         /// The server for the primary photo for the photoset.
         /// </summary>
-        public string Server { get; set; }
+        public string? Server { get; set; }
 
         /// <summary>
         /// The server farm for the primary photo for the photoset.
         /// </summary>
-        public string Farm { get; set; }
+        public string? Farm { get; set; }
 
         /// <summary>
         /// The server for the cover photos for the owner of this photoset. 
         /// </summary>
         [Obsolete("User PrimaryPhoto property instead")]
-        public string CoverPhotoServer { get; set; }
+        public string? CoverPhotoServer { get; set; }
 
         /// <summary>
         /// The farm for the cover photos for the owner of this photoset.
         /// </summary>
         [Obsolete("User PrimaryPhoto property instead")]
-        public string CoverPhotoFarm { get; set; }
+        public string? CoverPhotoFarm { get; set; }
 
         /// <summary>
         /// The total number of photos and videos.
@@ -89,12 +89,12 @@ namespace FlickrNet
         /// <summary>
         /// The title of the photoset.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The description of the photoset.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Date the photoset was created.
@@ -267,6 +267,6 @@ namespace FlickrNet
         /// <summary>
         /// The full details of the primary photo, as well as any extras requested.
         /// </summary>
-        public Photo PrimaryPhoto { get; set; }
+        public Photo? PrimaryPhoto { get; set; }
     }
 }

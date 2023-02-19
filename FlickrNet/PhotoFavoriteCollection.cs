@@ -13,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the photo.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <summary>
         /// The page of favourites that has been returned.

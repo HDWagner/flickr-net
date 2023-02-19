@@ -15,11 +15,11 @@ namespace FlickrNet
         /// <summary>
         /// The id for the suggestion.
         /// </summary>
-        public string SuggestionId { get; set; }
+        public string? SuggestionId { get; set; }
         /// <summary>
         /// The id for the photo this suggestion applies to.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
         /// <summary>
         /// The date the location was suggested.
         /// </summary>
@@ -35,15 +35,15 @@ namespace FlickrNet
         /// <summary>
         /// The note (if any) that the user added to the suggestion.
         /// </summary>
-        public string Note { get; set; }
+        public string? Note { get; set; }
         /// <summary>
         /// The WOE id for the location, if any.
         /// </summary>
-        public string WoeId { get; set; }
+        public string? WoeId { get; set; }
         /// <summary>
         /// The place id for the location, if any.
         /// </summary>
-        public string PlaceId { get; set; }
+        public string? PlaceId { get; set; }
         /// <summary>
         /// The latitude of the location suggestion.
         /// </summary>

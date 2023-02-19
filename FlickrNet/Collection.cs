@@ -11,24 +11,24 @@ namespace FlickrNet
         private readonly Collection<Collection> _subcollections = new Collection<Collection>();
 
         /// <remarks/>
-        public string CollectionId { get; set; }
+        public string? CollectionId { get; set; }
 
         /// <remarks/>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <remarks/>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <remarks/>
-        public string IconLarge { get; set; }
+        public string? IconLarge { get; set; }
 
         /// <remarks/>
-        public string IconSmall { get; set; }
+        public string? IconSmall { get; set; }
 
         /// <summary>
         /// The URL of the collection. Only returned when creating a new collection.
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// An array of <see cref="CollectionSet"/> objects.

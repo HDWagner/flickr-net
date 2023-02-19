@@ -1,33 +1,7 @@
+using System.Xml;
 
 namespace FlickrNet
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Xml;
-    
-    /// <summary>
-    /// The type of the <see cref="ActivityItem"/>.
-    /// </summary>
-    public enum ActivityItemType
-    {
-        /// <summary>
-        /// The type is unknown, either not set of a new unsupported type.
-        /// </summary>
-        Unknown,
-        /// <summary>
-        /// The activity item is on a photoset.
-        /// </summary>
-        Photoset,
-        /// <summary>
-        /// The activitiy item is on a photo.
-        /// </summary>
-        Photo,
-        /// <summary>
-        /// The activity item is on a gallery.
-        /// </summary>
-        Gallery
-    }
-
     /// <summary>
     /// Activity class used for <see cref="Flickr.ActivityUserPhotos()"/>
     /// and <see cref="Flickr.ActivityUserComments"/>.
@@ -50,27 +24,27 @@ namespace FlickrNet
         /// <summary>
         /// The ID of either the photoset or the photo.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The secret for either the photo, or the primary photo for the photoset.
         /// </summary>
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
 
         /// <summary>
         /// The server for either the photo, or the primary photo for the photoset.
         /// </summary>
-        public string Server { get; set; }
+        public string? Server { get; set; }
 
         /// <summary>
         /// The server farm for either the photo, or the primary photo for the photoset.
         /// </summary>
-        public string Farm { get; set; }
+        public string? Farm { get; set; }
 
         /// <summary>
         /// The title of the photoset or photo.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The number of new comments within the given time frame. 
@@ -112,27 +86,27 @@ namespace FlickrNet
         /// <summary>
         /// The user id of the owner of this item.
         /// </summary>
-        public string OwnerId { get; set; }
+        public string? OwnerId { get; set; }
 
         /// <summary>
         /// The real name of the activity item owner.
         /// </summary>
-        public string RealName { get; set; }
+        public string? RealName { get; set; }
 
         /// <summary>
         /// The username of the owner of this item.
         /// </summary>
-        public string OwnerName { get; set; }
+        public string? OwnerName { get; set; }
 
         /// <summary>
         /// The web server number for the activity item owners buddy icon.
         /// </summary>
-        public string OwnerServer { get; set; }
+        public string? OwnerServer { get; set; }
 
         /// <summary>
         /// The server farm number for the activity item owners buddy icon.
         /// </summary>
-        public string OwnerFarm { get; set; }
+        public string? OwnerFarm { get; set; }
 
         /// <summary>
         /// The activity item owners buddy icon.
@@ -153,7 +127,7 @@ namespace FlickrNet
         /// <summary>
         /// If this is a photoset then returns the primary photo id, otherwise will be null (<code>Nothing</code> in VB.Net).
         /// </summary>
-        public string PrimaryPhotoId { get; set; }
+        public string? PrimaryPhotoId { get; set; }
 
         /// <summary>
         /// The number of new notes within the given time frame. 

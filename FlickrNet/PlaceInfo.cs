@@ -13,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The unique id for this place.
         /// </summary>
-        public string PlaceId { get; set; }
+        public string? PlaceId { get; set; }
 
         /// <summary>
         /// The web page URL that corresponds to this place.
@@ -23,7 +23,7 @@ namespace FlickrNet
         /// </remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
             Justification = "Although called 'URL' by the Flickr API it is not an actual URI.")]
-        public string PlaceUrl { get; set; }
+        public string? PlaceUrl { get; set; }
 
         /// <summary>
         /// The URL to the place web page on Flickr.
@@ -44,17 +44,17 @@ namespace FlickrNet
         /// <summary>
         /// The WOE id for the locality.
         /// </summary>
-        public string WoeId { get; set; }
+        public string? WoeId { get; set; }
 
         /// <summary>
         /// The name of the WOE location.
         /// </summary>
-        public string WoeName { get; set; }
+        public string? WoeName { get; set; }
 
         /// <summary>
         /// The description of this place, where provided.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The latitude of this place.
@@ -79,7 +79,7 @@ namespace FlickrNet
         /// <summary>
         /// The timezone for the place.
         /// </summary>
-        public string TimeZone { get; set; }
+        public string? TimeZone { get; set; }
 
         /// <summary>
         /// Does this place have shape data for it.
@@ -89,32 +89,32 @@ namespace FlickrNet
         /// <summary>
         /// The neighbourhood for this location. May be null.
         /// </summary>
-        public Place Neighbourhood { get; set; }
+        public Place? Neighbourhood { get; set; }
 
         /// <summary>
         /// Details about the place's locality. May be null.
         /// </summary>
-        public Place Locality { get; set; }
+        public Place? Locality { get; set; }
 
         /// <summary>
         /// Details of the place's county. May be null.
         /// </summary>
-        public Place County { get; set; }
+        public Place? County { get; set; }
 
         /// <summary>
         /// Details of the place's region. May be null.
         /// </summary>
-        public Place Region { get; set; }
+        public Place? Region { get; set; }
 
         /// <summary>
         /// Details of the place's country. May be null.
         /// </summary>
-        public Place Country { get; set; }
+        public Place? Country { get; set; }
 
         /// <summary>
         /// The shape data for this place. Only available for some places (see <see cref="HasShapeData"/>).
         /// </summary>
-        public ShapeData ShapeData { get; set; }
+        public ShapeData? ShapeData { get; set; }
 
         /// <summary>
         /// Serializes the XML to an instance.

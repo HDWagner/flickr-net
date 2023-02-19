@@ -13,12 +13,12 @@ namespace FlickrNet
         /// <summary>
         /// The WOE (Where On Earth) ID for these shapes.
         /// </summary>
-        public string WoeId { get; set; }
+        public string? WoeId { get; set; }
 
         /// <summary>
         /// The Flickr place ID for these shapes.
         /// </summary>
-        public string PlaceId { get; set; }
+        public string? PlaceId { get; set; }
 
         /// <summary>
         /// The type for this place.

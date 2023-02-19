@@ -11,13 +11,13 @@ namespace FlickrNet
     public sealed class CollectionSet : IFlickrParsable
     {
         /// <remarks/>
-        public string SetId { get; set; }
+        public string? SetId { get; set; }
 
         /// <remarks/>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <remarks/>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

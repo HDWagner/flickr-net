@@ -13,27 +13,27 @@ namespace FlickrNet
         /// <summary>
         /// The comment id of this comment.
         /// </summary>
-        public string CommentId { get; set; }
+        public string? CommentId { get; set; }
 
         /// <summary>
         /// The user id of the author of the comment.
         /// </summary>
-        public string AuthorUserId { get; set; }
+        public string? AuthorUserId { get; set; }
 
         /// <summary>
         /// The username (screen name) of the author of the comment.
         /// </summary>
-        public string AuthorUserName { get; set; }
+        public string? AuthorUserName { get; set; }
 
         /// <summary>
         /// The real name of the comment author, if known.
         /// </summary>
-        public string AuthorRealName { get; set; }
+        public string? AuthorRealName { get; set; }
 
         /// <summary>
         /// The permalink to the comment on the photos web page.
         /// </summary>
-        public string Permalink { get; set; }
+        public string? Permalink { get; set; }
 
         /// <summary>
         /// The date and time that the comment was created.
@@ -43,12 +43,12 @@ namespace FlickrNet
         /// <summary>
         /// The server for the commenting users buddy icon.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// The farm for the commenting users buddy icon.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// The comment authors buddy icon.
@@ -64,12 +64,12 @@ namespace FlickrNet
         /// <summary>
         /// The path alias for the comment owner's page.
         /// </summary>
-        public string AuthorPathAlias { get; set; }
+        public string? AuthorPathAlias { get; set; }
 
         /// <summary>
         /// The comment text (can contain HTML).
         /// </summary>
-        public string CommentHtml { get; set; }
+        public string? CommentHtml { get; set; }
 
 
         /// <summary>

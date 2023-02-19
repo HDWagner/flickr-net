@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -15,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The web reference for the file.
         /// </summary>
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         /// <summary>
         /// The date the file was created for.
@@ -25,7 +23,7 @@ namespace FlickrNet
         /// <summary>
         /// The type of file archive (either "m" for Month or "d" for day).
         /// </summary>
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

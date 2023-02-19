@@ -40,8 +40,8 @@ namespace FlickrNet
     /// </remarks>
     internal class FlickrConfigurationSettings
     {
-        private readonly string apiToken;
-        private readonly string cacheLocation;
+        private readonly string? apiToken;
+        private readonly string? cacheLocation;
         private readonly SupportedService service;
 
         /// <summary>
@@ -210,17 +210,17 @@ namespace FlickrNet
         /// <summary>
         /// API key. Null if not present. Optional.
         /// </summary>
-        public string ApiKey { get; }
+        public string? ApiKey { get; }
 
         /// <summary>
         /// Shared Secret. Null if not present. Optional.
         /// </summary>
-        public string SharedSecret { get; }
+        public string? SharedSecret { get; }
 
         /// <summary>
         /// API token. Null if not present. Optional.
         /// </summary>
-        public string ApiToken
+        public string? ApiToken
         {
             get { return apiToken; }
         }
@@ -240,7 +240,7 @@ namespace FlickrNet
         /// </summary>
         public TimeSpan CacheTimeout { get; } = TimeSpan.MinValue;
 
-        public string CacheLocation
+        public string? CacheLocation
         {
             get { return cacheLocation; }
         }
@@ -258,7 +258,7 @@ namespace FlickrNet
         /// <summary>
         /// If <see cref="IsProxyDefined"/> is true then this is mandatory.
         /// </summary>
-        public string ProxyIPAddress { get; private set; }
+        public string? ProxyIPAddress { get; private set; }
 
         /// <summary>
         /// If <see cref="IsProxyDefined"/> is true then this is mandatory.
@@ -268,17 +268,17 @@ namespace FlickrNet
         /// <summary>
         /// The username for the proxy. Optional.
         /// </summary>
-        public string ProxyUsername { get; private set; }
+        public string? ProxyUsername { get; private set; }
 
         /// <summary>
         /// The password for the proxy. Optional.
         /// </summary>
-        public string ProxyPassword { get; private set; }
+        public string? ProxyPassword { get; private set; }
 
         /// <summary>
         /// The domain for the proxy. Optional.
         /// </summary>
-        public string ProxyDomain { get; private set; }
+        public string? ProxyDomain { get; private set; }
     }
 }
 #endif

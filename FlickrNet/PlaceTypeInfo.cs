@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FlickrNet
+﻿namespace FlickrNet
 {
     /// <summary>
     /// Information about the types of 'places' available from the Flickr API.
@@ -19,7 +15,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the blog service supported by Flickr.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

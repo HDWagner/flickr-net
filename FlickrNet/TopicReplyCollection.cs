@@ -16,11 +16,11 @@ namespace FlickrNet
         /// <summary>
         /// The id of the topic for which these replies are too.
         /// </summary>
-        public string TopicId { get; set; }
+        public string? TopicId { get; set; }
         /// <summary>
         /// The subject of the topic.
         /// </summary>
-        public string Subject { get; set; }
+        public string? Subject { get; set; }
         /// <summary>
         /// The last time the topic was edited, if at all.
         /// </summary>
@@ -28,27 +28,27 @@ namespace FlickrNet
         /// <summary>
         /// The group id for the topic.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
         /// <summary>
         /// The name of the group for this topic.
         /// </summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
         /// <summary>
         /// The server for the group icon.
         /// </summary>
-        public string GroupIconServer { get; set; }
+        public string? GroupIconServer { get; set; }
         /// <summary>
         /// The farm for the group icon.
         /// </summary>
-        public string GroupIconFarm { get; set; }
+        public string? GroupIconFarm { get; set; }
         /// <summary>
         /// The topic authos user id.
         /// </summary>
-        public string AuthorUserId { get; set; }
+        public string? AuthorUserId { get; set; }
         /// <summary>
         /// The topic author name.
         /// </summary>
-        public string AuthorName { get; set; }
+        public string? AuthorName { get; set; }
         /// <summary>
         /// True if the topic authos has a pro account.
         /// </summary>
@@ -60,11 +60,11 @@ namespace FlickrNet
         /// <summary>
         /// The server for the author's buddy icon.
         /// </summary>
-        public string AuthorIconServer { get; set; }
+        public string? AuthorIconServer { get; set; }
         /// <summary>
         /// The farm for the author's buddy icon.
         /// </summary>
-        public string AuthorIconFarm { get; set; }
+        public string? AuthorIconFarm { get; set; }
         /// <summary>
         /// Can the current user edit this topic.
         /// </summary>
@@ -96,7 +96,7 @@ namespace FlickrNet
         /// <summary>
         /// The message body for this topic.
         /// </summary>
-        public string Message { get; set; }
+        public string? Message { get; set; }
         /// <summary>
         /// The total number of replies to this topic.
         /// </summary>
@@ -154,7 +154,7 @@ namespace FlickrNet
         /// <summary>
         /// The badge style for the user if they are a pro.
         /// </summary>
-        public string ProBadgeStyle { get; set; }
+        public string? ProBadgeStyle { get; set; }
 
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)

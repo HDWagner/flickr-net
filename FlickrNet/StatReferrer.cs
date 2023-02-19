@@ -15,7 +15,7 @@ namespace FlickrNet
         /// <summary>
         /// The url that the referrer referred from.
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
         /// <summary>
         /// The number of times that URL was referred from.
         /// </summary>
@@ -24,7 +24,7 @@ namespace FlickrNet
         /// <summary>
         /// Then the referrer is a search engine this will contain the search term used.
         /// </summary>
-        public string SearchTerm { get; set; }
+        public string? SearchTerm { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

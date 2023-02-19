@@ -11,7 +11,7 @@ namespace FlickrNet
         /// <summary>
         /// The response from Flickr.
         /// </summary>
-        public string ResponseXml { get; set; }
+        public string? ResponseXml { get; set; }
 
         /// <summary>
         /// Gets a <see cref="XmlDocument"/> containing the response XML.
@@ -20,7 +20,11 @@ namespace FlickrNet
         public XmlDocument GetXmlDocument()
         {
             var document = new XmlDocument();
-            document.LoadXml(ResponseXml);
+            if (ResponseXml != null)
+            {
+                document.LoadXml(ResponseXml);
+            }
+
             return document;
         }
 

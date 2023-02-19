@@ -1,8 +1,3 @@
-using System;
-using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Collections.Generic;
-
 namespace FlickrNet
 {
 
@@ -18,10 +13,10 @@ namespace FlickrNet
         public LicenseType LicenseId { get; set; }
 
         /// <summary>The name of the license.</summary>
-        public string LicenseName { get; set; }
+        public string? LicenseName { get; set; }
 
         /// <summary>The URL for the license text.</summary>
-        public string LicenseUrl { get; set; }
+        public string? LicenseUrl { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

@@ -12,23 +12,23 @@ namespace FlickrNet
         /// <summary>
         /// The access token string.
         /// </summary>
-        public string Token { get; set; }
+        public string? Token { get; set; }
         /// <summary>
         /// The access token secret.
         /// </summary>
-        public string TokenSecret { get; set; }
+        public string? TokenSecret { get; set; }
         /// <summary>
         /// The user id of the authenticated user.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
         /// <summary>
         /// The username (screenname) of the authenticated user.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
         /// <summary>
         /// The full name of the authenticated user.
         /// </summary>
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         /// <summary>
         /// Parses a URL parameter encoded string and returns a new <see cref="OAuthAccessToken"/>

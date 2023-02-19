@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the pair.
         /// </summary>
-        public string PairName { get; set; }
+        public string? PairName { get; set; }
 
         /// <summary>
         /// The usage of the namespace.
@@ -22,12 +22,12 @@ namespace FlickrNet
         /// <summary>
         /// The predicate part of this pair.
         /// </summary>
-        public string PredicateName { get; set; }
+        public string? PredicateName { get; set; }
 
         /// <summary>
         /// The namespace part of this pair.
         /// </summary>
-        public string NamespaceName { get; set; }
+        public string? NamespaceName { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

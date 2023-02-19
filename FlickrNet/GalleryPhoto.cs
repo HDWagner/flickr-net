@@ -12,7 +12,7 @@ namespace FlickrNet
         /// <summary>
         /// The comment added to this photo in the gallery, if any.
         /// </summary>
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

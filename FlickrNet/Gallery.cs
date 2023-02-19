@@ -12,27 +12,27 @@ namespace FlickrNet
         /// <summary>
         /// The ID for the gallery.
         /// </summary>
-        public string GalleryId { get; set; }
+        public string? GalleryId { get; set; }
 
         /// <summary>
         /// The URL to the gallery on the web.
         /// </summary>
-        public string GalleryUrl { get; set; }
+        public string? GalleryUrl { get; set; }
 
         /// <summary>
         /// The user ID of the gallery owner.
         /// </summary>
-        public string OwnerId { get; set; }
+        public string? OwnerId { get; set; }
 
         /// <summary>
         /// Server for the gallery ownsers buddy icon. See <see cref="OwnerBuddyIcon"/> for full url.
         /// </summary>
-        public string OwnerServer { get; set; }
+        public string? OwnerServer { get; set; }
 
         /// <summary>
         /// Farm for the gallery ownsers buddy icon. See <see cref="OwnerBuddyIcon"/> for full url.
         /// </summary>
-        public string OwnerFarm { get; set; }
+        public string? OwnerFarm { get; set; }
 
         /// <summary>
         /// Gallery owner's buddy icon url.
@@ -48,7 +48,7 @@ namespace FlickrNet
         /// <summary>
         /// The username (screen name) of the gallery owner.
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// The date the gallery was first created.
@@ -63,22 +63,22 @@ namespace FlickrNet
         /// <summary>
         /// The photo id of the primary photo for the gallery.
         /// </summary>
-        public string PrimaryPhotoId { get; set; }
+        public string? PrimaryPhotoId { get; set; }
 
         /// <summary>
         /// The server for the primary photo for the gallery.
         /// </summary>
-        public string PrimaryPhotoServer { get; set; }
+        public string? PrimaryPhotoServer { get; set; }
 
         /// <summary>
         /// The web farm for the primary photo for the gallery.
         /// </summary>
-        public string PrimaryPhotoFarm { get; set; }
+        public string? PrimaryPhotoFarm { get; set; }
 
         /// <summary>
         /// The saecret for the primary photo for the gallery.
         /// </summary>
-        public string PrimaryPhotoSecret { get; set; }
+        public string? PrimaryPhotoSecret { get; set; }
 
         /// <summary>
         /// The number of photos in this gallery.
@@ -108,17 +108,17 @@ namespace FlickrNet
         /// <summary>
         /// The title of this gallery.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The description of this gallery.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The URL of the thumbnail for the primary image for this gallery.
         /// </summary>
-        public string PrimaryPhotoThumbnailUrl
+        public string? PrimaryPhotoThumbnailUrl
         {
             get
             {
@@ -129,7 +129,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL of the small image for the primary image for this gallery.
         /// </summary>
-        public string PrimaryPhotoSmallUrl
+        public string? PrimaryPhotoSmallUrl
         {
             get
             {
@@ -140,7 +140,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL of the squrea thumbnail for the primary image for this gallery.
         /// </summary>
-        public string PrimaryPhotoSquareThumbnailUrl
+        public string? PrimaryPhotoSquareThumbnailUrl
         {
             get
             {
@@ -151,7 +151,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL of the medium image for the primary image for this gallery. For large sizes call <see cref="Flickr.PhotosGetSizes(string)"/>
         /// </summary>
-        public string PrimaryPhotoMediumUrl
+        public string? PrimaryPhotoMediumUrl
         {
             get
             {

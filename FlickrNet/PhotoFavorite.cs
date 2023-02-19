@@ -14,12 +14,12 @@ namespace FlickrNet
         /// <summary>
         /// The Flickr User ID of the user who favourited the photo.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The user name of the user who favourited the photo.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// The date the hoto was favourited.

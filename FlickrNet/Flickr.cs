@@ -35,7 +35,7 @@ namespace FlickrNet
         /// a segment of uploading has been completed. This is approximately 50 bytes. The total
         /// uploaded is recorded in the <see cref="UploadProgressEventArgs"/> class.
         /// </summary>
-        public event EventHandler<UploadProgressEventArgs> OnUploadProgress;
+        public event EventHandler<UploadProgressEventArgs>? OnUploadProgress;
 
 #if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
         private static bool isServiceSet;
@@ -89,14 +89,14 @@ namespace FlickrNet
         };
         private string? apiToken;
         private string? sharedSecret;
-        private string lastRequest;
+        private string? lastRequest;
 
         /// <summary>
         /// Get or set the API Key to be used by all calls. API key is mandatory for all 
         /// calls to Flickr.
         /// </summary>
         [DisallowNull]
-        public string ApiKey { get; set; }
+        public string? ApiKey { get; set; }
 
         /// <summary>
         /// API shared secret is required for all calls that require signing, which includes
@@ -251,24 +251,23 @@ namespace FlickrNet
         /// Returns the raw XML returned from the last response.
         /// Only set it the response was not returned from cache.
         /// </summary>
-        public string LastResponse { get; private set; }
+        public string? LastResponse { get; private set; }
 
         /// <summary>
         /// Returns the last URL requested. Includes API signing.
         /// </summary>
-        public string LastRequest
+        public string? LastRequest
         {
             get { return lastRequest; }
         }
 
-#if !SILVERLIGHT
         /// <summary>
         /// You can set the <see cref="WebProxy"/> or alter its properties.
         /// It defaults to your internet explorer proxy settings.
         /// </summary>
 
-        public WebProxy Proxy { get; set; }
-#endif
+        public WebProxy? Proxy { get; set; }
+
 
         /// <summary>
         /// Clears the cache completely.
@@ -315,7 +314,7 @@ namespace FlickrNet
 #if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
 
             var settings = FlickrConfigurationManager.Settings;
-            if (settings == null)
+            if (settings?.ApiKey == null)
             {
                 return;
             }

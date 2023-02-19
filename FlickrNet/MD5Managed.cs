@@ -18,7 +18,7 @@ public sealed class MD5Managed : HashAlgorithm
 public sealed class MD5Managed : MD5
 #endif
 {
-    private byte[] _data;
+    private byte[]? _data;
     private AbcdStruct _abcd;
     private Int64 _totalLength;
     private int _dataSize;
@@ -44,6 +44,10 @@ public sealed class MD5Managed : MD5
 
     protected override void HashCore(byte[] array, int ibStart, int cbSize)
     {
+        if (_data == null) {
+            throw new InvalidOperationException(nameof(MD5Managed) +" is not initialized.");
+        }
+
         int startIndex = ibStart;
         int totalArrayLength = _dataSize + cbSize;
         if (totalArrayLength >= 64)
@@ -73,6 +77,11 @@ public sealed class MD5Managed : MD5
 
     protected override byte[] HashFinal()
     {
+        if (_data == null)
+        {
+            throw new InvalidOperationException(nameof(MD5Managed) + " is not initialized.");
+        }
+
         HashValue = MD5Core.GetHashFinalBlock(_data, 0, _dataSize, _abcd, _totalLength * 8);
         return HashValue;
     }

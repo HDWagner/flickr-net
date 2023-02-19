@@ -12,12 +12,12 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the ticket asked for.
         /// </summary>
-        public string TicketId { get; set; }
+        public string? TicketId { get; set; }
 
         /// <summary>
         /// If the ticket is complete then this contains the photo ID of the uploaded photo.
         /// </summary>
-        public string PhotoId { get; set; }
+        public string? PhotoId { get; set; }
 
         /// <summary>
         /// Is the ticket ID supplied a valid ticket. True if it is invalid.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FlickrNet
+﻿namespace FlickrNet
 {
 
     /// <summary>
@@ -15,17 +11,17 @@ namespace FlickrNet
         /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string)"/> or 
         /// <see cref="Flickr.BlogsPostPhoto(string, string, string, string, string)"/>. 
         /// </summary>
-        public string BlogId { get; set; }
+        public string? BlogId { get; set; }
 
         /// <summary>
         /// The name you have assigned to the blog in Flickr.
         /// </summary>
-        public string BlogName { get; set; }
+        public string? BlogName { get; set; }
 
         /// <summary>
         /// The URL of the blog website.
         /// </summary>
-        public string BlogUrl { get; set; }
+        public string? BlogUrl { get; set; }
 
         /// <summary>
         /// If Flickr stores the password for this then this will be 0, meaning you do not need to pass in the
@@ -36,7 +32,7 @@ namespace FlickrNet
         /// <summary>
         /// The service that his blog uses. See <see cref="Flickr.BlogsGetServices()"/>
         /// </summary>
-        public string Service { get; set; }
+        public string? Service { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

@@ -13,24 +13,24 @@ namespace FlickrNet
     {
         /// <summary>The user id of the user.</summary>
         /// <remarks/>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>The server that will serve up the users Buddy Icon.</summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>The server farm that will serve up the users Buddy Icon.</summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>The users username, also known as their screenname.</summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>The users real name, as entered in their profile.</summary>
-        public string RealName { get; set; }
+        public string? RealName { get; set; }
 
         /// <summary>
         /// The user ID of the person who added this person, to this photo.
         /// </summary>
-        public string AddedByUserId { get; set; }
+        public string? AddedByUserId { get; set; }
 
         /// <summary>
         /// The left most position of the persons bounding box, if any.
@@ -60,7 +60,7 @@ namespace FlickrNet
         /// <summary>
         /// The path alias for the users photostream, if they have set it.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The URL for the users Flickr home page.

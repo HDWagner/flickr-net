@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace FlickrNet
 {
@@ -14,11 +11,11 @@ namespace FlickrNet
         /// <summary>
         /// The unique ID for the blog service supported by Flickr.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
         /// <summary>
         /// The name of the blog service supported by Flickr.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

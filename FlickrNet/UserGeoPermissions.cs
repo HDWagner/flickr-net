@@ -13,7 +13,7 @@ namespace FlickrNet
         /// <summary>
         /// The ID of the user.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The default privacy level for geographic information attached to the user's photos.
