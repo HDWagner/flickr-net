@@ -50,7 +50,8 @@ namespace FlickrNet
         {
         }
 
-        protected FlickrApiException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected FlickrApiException(SerializationInfo serializationInfo, StreamingContext streamingContext) 
+            : base(serializationInfo, streamingContext)
         {
         }
 

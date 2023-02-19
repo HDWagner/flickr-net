@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
@@ -32,6 +33,11 @@ namespace FlickrNet
         /// <param name="innerException"></param>
         public CacheException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        protected CacheException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
         {
         }
     }

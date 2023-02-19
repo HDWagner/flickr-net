@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
@@ -10,6 +10,15 @@ namespace FlickrNet
     [Serializable]
     public sealed class EchoResponseDictionary : Dictionary<string, string>, IFlickrParsable
     {
+        public EchoResponseDictionary()
+            : base()
+        {
+        }
+        private EchoResponseDictionary(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {
             while (reader.NodeType != System.Xml.XmlNodeType.None && reader.NodeType != System.Xml.XmlNodeType.EndElement)

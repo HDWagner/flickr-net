@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet.Exceptions
 {
@@ -10,10 +9,16 @@ namespace FlickrNet.Exceptions
     /// <remarks>
     /// The owner of the photo does not want to share the data wih you.
     /// </remarks>
+    [Serializable]
     public class PermissionDeniedException : FlickrApiException
     {
         internal PermissionDeniedException(int code, string message)
             : base(code, message)
+        {
+        }
+
+        protected PermissionDeniedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

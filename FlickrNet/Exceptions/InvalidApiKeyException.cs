@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet.Exceptions
 {
@@ -10,10 +9,16 @@ namespace FlickrNet.Exceptions
     /// <remarks>
     /// The API key passed was not valid or has expired.
     /// </remarks>
+    [Serializable]
     public class InvalidApiKeyException : FlickrApiException
     {
         internal InvalidApiKeyException(string message)
             : base(100, message)
+        {
+        }
+
+        protected InvalidApiKeyException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

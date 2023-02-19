@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
@@ -35,5 +36,9 @@ namespace FlickrNet
         {
         }
 
+        protected FlickrWebException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace FlickrNet
@@ -40,5 +41,8 @@ namespace FlickrNet
         {
         }
 
+        protected ParsingException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 }

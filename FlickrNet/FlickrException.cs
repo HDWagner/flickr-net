@@ -1,10 +1,12 @@
 using System;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
     /// <summary>
     /// Generic Flickr.Net Exception.
     /// </summary>
+    [Serializable]
     public class FlickrException : Exception
     {
         /// <summary>
@@ -31,5 +33,8 @@ namespace FlickrNet
         {
         }
 
+        protected FlickrException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 }

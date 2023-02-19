@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet.Exceptions
 {
@@ -10,10 +9,16 @@ namespace FlickrNet.Exceptions
     /// <remarks>
     /// The passed signature was invalid.
     /// </remarks>
+    [Serializable]
     public class InvalidSignatureException : FlickrApiException
     {
         internal InvalidSignatureException(string message)
             : base(96, message)
+        {
+        }
+
+        protected InvalidSignatureException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

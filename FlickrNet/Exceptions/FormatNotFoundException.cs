@@ -1,7 +1,5 @@
 ﻿using System;
-
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet.Exceptions
 {
@@ -11,6 +9,7 @@ namespace FlickrNet.Exceptions
     /// <remarks>
     /// The FlickrNet library only uses one format, so you should not experience this error.
     /// </remarks>
+    [Serializable]
     public sealed class FormatNotFoundException : FlickrApiException
     {
         internal FormatNotFoundException(string message)
@@ -18,5 +17,9 @@ namespace FlickrNet.Exceptions
         {
         }
 
+        private FormatNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 }

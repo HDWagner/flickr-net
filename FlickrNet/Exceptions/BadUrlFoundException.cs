@@ -1,13 +1,12 @@
 ﻿using System;
-
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace FlickrNet.Exceptions
 {
     /// <summary>
     /// A user was included in a description or comment which Flickr rejected.
     /// </summary>
+    [Serializable]
     public sealed class BadUrlFoundException : FlickrApiException
     {
         internal BadUrlFoundException(string message)
@@ -15,5 +14,9 @@ namespace FlickrNet.Exceptions
         {
         }
 
+        private BadUrlFoundException(SerializationInfo info, StreamingContext context) 
+            : base(info, context)
+        {
+        }
     }
 }

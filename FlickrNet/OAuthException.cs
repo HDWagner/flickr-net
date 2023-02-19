@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace FlickrNet
 {
     /// <summary>
     /// An OAuth error occurred when calling one of the OAuth authentication flow methods.
     /// </summary>
+    [Serializable]
     public class OAuthException : Exception
     {
         /// <summary>
@@ -77,5 +79,15 @@ namespace FlickrNet
             Message = "OAuth Exception occurred: " + OAuthErrorPameters["oauth_problem"];
         }
 
+        protected OAuthException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            Message = base.Message;
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+        }
     }
 }
