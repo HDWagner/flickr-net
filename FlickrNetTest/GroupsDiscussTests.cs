@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
-using System.Threading;
 
 namespace FlickrNetTest
 {
     [TestFixture]
     public class GroupsDiscussTests : BaseTest
     {
-        
+
         [Test]
         [Category("AccessTokenRequired")]
         [Ignore("Method requires authentication")]
@@ -19,7 +16,7 @@ namespace FlickrNetTest
             var message = "Test message reply\n" + DateTime.Now.ToString("o");
             var newMessage = "New Message reply\n" + DateTime.Now.ToString("o");
 
-            TopicReply reply = null;
+            TopicReply? reply = null;
             TopicReplyCollection topicReplies;
             try
             {
@@ -85,7 +82,7 @@ namespace FlickrNetTest
         }
 
         [Test]
-        [Ignore("Got this working, now ignore as there is no way to delete topics!")] 
+        [Ignore("Got this working, now ignore as there is no way to delete topics!")]
         [Category("AccessTokenRequired")]
         public void GroupsDiscussTopicsAddTest()
         {

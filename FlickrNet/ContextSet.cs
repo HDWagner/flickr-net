@@ -8,10 +8,10 @@
         /// <summary>
         /// The Photoset ID of the set the selected photo is in.
         /// </summary>
-        public string PhotosetId { get; set; }
+        public string? PhotosetId { get; set; }
         /// <summary>
         /// The title of the set the selected photo is in.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
     }
 }

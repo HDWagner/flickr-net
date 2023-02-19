@@ -65,7 +65,7 @@ namespace FlickrNet
                 parameters.Add("hidden", hiddenFromSearch.ToString("D"));
             }
 
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
 
             if (!string.IsNullOrEmpty(OAuthAccessToken))
             {
@@ -77,7 +77,7 @@ namespace FlickrNet
             }
             else
             {
-                parameters.Add("auth_token", apiToken);
+                parameters.Add("auth_token", apiToken ?? string.Empty);
             }
 
             UploadDataAsync(stream, fileName, uploadUri, parameters, callback);
@@ -97,8 +97,8 @@ namespace FlickrNet
             var parameters = new Dictionary<string, string>();
 
             parameters.Add("photo_id", photoId);
-            parameters.Add("api_key", apiKey);
-            parameters.Add("auth_token", apiToken);
+            parameters.Add("api_key", ApiKey);
+            parameters.Add("auth_token", apiToken ?? string.Empty);
 
             UploadDataAsync(stream, fileName, replaceUri, parameters, callback);
         }

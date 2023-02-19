@@ -15,7 +15,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListPhoto");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("photo_id", photoId);
 
             GetResponseAsync<PhotoInfo>(
@@ -26,7 +26,7 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = r.Result.Tags;
+                        result.Result = r.Result?.Tags;
                     }
                     callback(result);
                 });
@@ -165,7 +165,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getRelated");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("tag", tag);
 
             GetResponseAsync(parameters, callback);

@@ -16,7 +16,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.findByEmail");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("find_email", emailAddress);
 
             return GetResponseCache<FoundUser>(parameters);
@@ -32,7 +32,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.findByUsername");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("username", userName);
 
             return GetResponseCache<FoundUser>(parameters);
@@ -114,7 +114,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.getPublicGroups");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("user_id", userId);
             if (includeInvitationOnly.HasValue)
             {
@@ -176,7 +176,7 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.people.getPublicPhotos");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("user_id", userId);
             if (perPage > 0)
             {

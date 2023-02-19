@@ -25,7 +25,7 @@ namespace FlickrNetTest
             Instance.PhotosSearchAsync(o, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.That(result.Result.Total, Is.GreaterThan(0));
+            Assert.That(result.Result?.Total, Is.GreaterThan(0));
 
         }
 
@@ -63,7 +63,7 @@ namespace FlickrNetTest
             AuthInstance.PhotosSearchAsync(o, r => { w.OnNext(r); w.OnCompleted(); });
             var result = w.Next().First();
 
-            Assert.That(result.Result.Total, Is.GreaterThan(0));
+            Assert.That(result.Result?.Total, Is.GreaterThan(0));
         }
 
         [Test]

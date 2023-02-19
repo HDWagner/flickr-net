@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FlickrNet
 {
@@ -36,12 +35,12 @@ namespace FlickrNet
         /// </summary>
         /// <param name="response">A URL parameter encoded string, e.g. "oauth_token=ABC&amp;oauth_token_secret=DEF&amp;user_id=1234567@N00".</param>
         /// <returns></returns>
-        internal static OAuthAccessToken ParseResponse(string response)
+        internal static OAuthAccessToken ParseResponse(string? response)
         {
             Dictionary<string, string> parts = UtilityMethods.StringToDictionary(response);
 
             var token = new OAuthAccessToken();
-            if( parts.ContainsKey("oauth_token") )
+            if (parts.ContainsKey("oauth_token"))
             {
                 token.Token = parts["oauth_token"];
             }
@@ -79,8 +78,8 @@ namespace FlickrNet
 
             reader.ReadToDescendant("access_token");
 
-            Token = reader.GetAttribute("oauth_token");
-            TokenSecret = reader.GetAttribute("oauth_token_secret");
+            Token = reader.GetAttribute("oauth_token")!;
+            TokenSecret = reader.GetAttribute("oauth_token_secret")!;
         }
     }
 }

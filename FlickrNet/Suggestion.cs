@@ -27,11 +27,11 @@ namespace FlickrNet
         /// <summary>
         /// The user id of the user who suggested the location.
         /// </summary>
-        public string SuggestedByUserId { get; set; }
+        public string? SuggestedByUserId { get; set; }
         /// <summary>
         /// The name of the user who suggested the location.
         /// </summary>
-        public string SuggestedByUserName { get; set; }
+        public string? SuggestedByUserName { get; set; }
         /// <summary>
         /// The note (if any) that the user added to the suggestion.
         /// </summary>

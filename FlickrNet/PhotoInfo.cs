@@ -41,7 +41,7 @@ namespace FlickrNet
         /// <summary>
         /// The path alias for this user, if set.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The original format of the image (e.g. jpg, png etc).

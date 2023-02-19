@@ -40,7 +40,7 @@ namespace FlickrNet
         /// <summary>
         /// THe path alias for the author, if set.
         /// </summary>
-        public string AuthorPathAlias { get; set; }
+        public string? AuthorPathAlias { get; set; }
         /// <summary>
         /// The badge style for the user if they are a pro.
         /// </summary>

@@ -16,7 +16,7 @@ namespace FlickrNet
         /// <summary>
         /// The path alias for the group's url.
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
         /// <summary>
         /// The server for the group's icon.
         /// </summary>

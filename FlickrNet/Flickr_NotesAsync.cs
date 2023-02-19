@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -41,7 +38,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "id");
+                        result.Result = r.Result?.GetAttributeValue("*", "id");
                     }
                     callback(result);
                 });

@@ -24,7 +24,7 @@ namespace FlickrNet
         /// <summary>
         /// The path alias for the author of this topic.
         /// </summary>
-        public string AuthorPathAlias { get; set; }
+        public string? AuthorPathAlias { get; set; }
         /// <summary>
         /// The user name of the author of the topic.
         /// </summary>

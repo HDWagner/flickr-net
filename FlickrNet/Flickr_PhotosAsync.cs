@@ -217,7 +217,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getContactsPublicPhotos");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("user_id", userId);
             if (count > 0)
             {
@@ -472,7 +472,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.getRecent");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             if (perPage > 0)
             {
                 parameters.Add("per_page", perPage.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
@@ -638,7 +638,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.photos.licenses.getInfo");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
 
             GetResponseAsync(parameters, callback);
         }

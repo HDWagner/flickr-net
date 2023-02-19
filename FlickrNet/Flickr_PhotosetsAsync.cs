@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace FlickrNet
@@ -238,7 +239,8 @@ namespace FlickrNet
                 {
                     if (!r.HasError && userId != null)
                     {
-                        foreach (Photoset photoset in r.Result)
+                        ICollection collection = r.Result != null ? r.Result : Array.Empty<Photoset>();
+                        foreach (Photoset photoset in collection)
                         {
                             photoset.OwnerId = userId;
                         }
@@ -552,7 +554,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "id");
+                        result.Result = r.Result?.GetAttributeValue("*", "id");
                     }
                     callback(result);
                 });

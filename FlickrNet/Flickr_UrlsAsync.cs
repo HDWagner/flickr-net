@@ -26,7 +26,7 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "url");
+                        result.Result = r.Result?.GetAttributeValue("*", "url");
                     }
                     callback(result);
                 });
@@ -66,7 +66,7 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "url");
+                        result.Result = r.Result?.GetAttributeValue("*", "url");
                     }
                     callback(result);
                 });
@@ -105,7 +105,7 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "url");
+                        result.Result = r.Result?.GetAttributeValue("*", "url");
                     }
                     callback(result);
                 });
@@ -120,7 +120,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.lookupGallery");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("url", url);
 
             GetResponseAsync(parameters, callback);
@@ -135,7 +135,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.lookupGroup");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("url", urlToFind);
 
             GetResponseAsync<UnknownResponse>(
@@ -146,7 +146,7 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = r.Result.GetAttributeValue("*", "id");
+                        result.Result = r.Result?.GetAttributeValue("*", "id");
                     }
                     callback(result);
                 });
@@ -161,7 +161,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.urls.lookupUser");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("url", urlToFind);
 
             GetResponseAsync(parameters, callback);

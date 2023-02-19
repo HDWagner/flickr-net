@@ -8,10 +8,10 @@
         /// <summary>
         /// The Group ID for the group that the selected photo is in.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
         /// <summary>
         /// The title of the group that then selected photo is in.
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
     }
 }

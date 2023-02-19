@@ -90,7 +90,7 @@ namespace FlickrNet
         {
             CheckRequiresAuthentication();
 
-            return AuthCheckToken(AuthToken);
+            return AuthCheckToken(AuthToken!);
         }
 
         /// <summary>

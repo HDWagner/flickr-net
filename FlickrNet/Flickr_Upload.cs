@@ -158,8 +158,8 @@ namespace FlickrNet
             }
             else
             {
-                parameters.Add("api_key", apiKey);
-                parameters.Add("auth_token", apiToken);
+                parameters.Add("api_key", ApiKey);
+                parameters.Add("auth_token", apiToken??string.Empty);
             }
 
             string responseXml = UploadData(stream, fileName, uploadUri, parameters);
@@ -260,8 +260,8 @@ namespace FlickrNet
             }
             else
             {
-                parameters.Add("api_key", apiKey);
-                parameters.Add("auth_token", apiToken);
+                parameters.Add("api_key", ApiKey);
+                parameters.Add("auth_token", apiToken ?? string.Empty);
             }
 
             var responseXml = UploadData(stream, fileName, replaceUri, parameters);

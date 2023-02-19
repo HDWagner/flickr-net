@@ -46,25 +46,30 @@ namespace FlickrNet
 
             while (reader.Read() && reader.LocalName != "stats")
             {
+                var value = reader.GetAttribute("views");
+                if (value == null)
+                {
+                    continue;
+                }
                 switch (reader.LocalName)
                 {
                     case "total":
-                        TotalViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        TotalViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "photos":
-                        PhotoViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        PhotoViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "photostream":
-                        PhotostreamViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        PhotostreamViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "sets":
-                        PhotosetViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        PhotosetViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "collections":
-                        CollectionViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        CollectionViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "galleries":
-                        GalleryViews = int.Parse(reader.GetAttribute("views"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        GalleryViews = int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);

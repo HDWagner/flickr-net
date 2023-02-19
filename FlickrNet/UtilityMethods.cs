@@ -111,7 +111,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="timestamp">The timestamp, as a string.</param>
         /// <returns>The <see cref="DateTime"/> object the time represents.</returns>
-        public static DateTime UnixTimestampToDate(string timestamp)
+        public static DateTime UnixTimestampToDate(string? timestamp)
         {
             if (string.IsNullOrEmpty(timestamp))
             {
@@ -480,7 +480,7 @@ namespace FlickrNet
         }
 
 
-        internal static MemberTypes ParseIdToMemberType(string memberTypeId)
+        internal static MemberTypes ParseIdToMemberType(string? memberTypeId)
         {
             switch (memberTypeId)
             {
@@ -497,7 +497,7 @@ namespace FlickrNet
             }
         }
 
-        internal static MemberTypes ParseRoleToMemberType(string memberRole)
+        internal static MemberTypes ParseRoleToMemberType(string? memberRole)
         {
             switch (memberRole)
             {
@@ -512,7 +512,7 @@ namespace FlickrNet
             }
         }
 
-        internal static string MemberTypeToString(MemberTypes memberTypes)
+        internal static string MemberTypeToString(MemberTypes? memberTypes)
         {
             var types = new List<string>();
 
@@ -592,7 +592,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="date">The date, as a string, to be parsed.</param>
         /// <returns>The parsed <see cref="DateTime"/>.</returns>
-        public static DateTime ParseDateWithGranularity(string date)
+        public static DateTime ParseDateWithGranularity(string? date)
         {
             DateTime output = DateTime.MinValue;
 
@@ -681,9 +681,9 @@ namespace FlickrNet
         /// <param name="farm"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public static string BuddyIcon(string server, string farm, string userId)
+        public static string BuddyIcon(string? server, string? farm, string? userId)
         {
-            if (string.IsNullOrEmpty(server) || server == "0")
+            if (string.IsNullOrEmpty(server) || server == "0" || string.IsNullOrEmpty(farm) || string.IsNullOrEmpty(userId))
             {
                 return "https://www.flickr.com/images/buddyicon.jpg";
             }

@@ -55,18 +55,25 @@ namespace FlickrNet
                         }
                         else
                         {
-                            try
+                            if (r.Result == null)
                             {
-                                LastResponse = r.Result;
-
-                                var t = new T();
-                                t.Load(r.Result);
-                                result.Result = t;
-                                result.HasError = false;
+                                result.Error = new FlickrException("Empty Flickr response");
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                result.Error = ex;
+                                try
+                                {
+                                    LastResponse = r.Result;
+
+                                    var t = new T();
+                                    t.Load(r.Result);
+                                    result.Result = t;
+                                    result.HasError = false;
+                                }
+                                catch (Exception ex)
+                                {
+                                    result.Error = ex;
+                                }
                             }
                         }
 

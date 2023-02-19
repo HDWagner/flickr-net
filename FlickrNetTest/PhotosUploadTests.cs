@@ -21,11 +21,11 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void UploadPictureAsyncBasicTest()
         {
-            Flickr f = AuthInstance;
+            var f = AuthInstance;
 
             var w = new AsyncSubject<FlickrResult<string>>();
 
-            byte[] imageBytes = TestData.TestImageBytes;
+            var imageBytes = TestData.TestImageBytes;
             var s = new MemoryStream(imageBytes);
             s.Position = 0;
 
@@ -49,21 +49,22 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void UploadPictureBasicTest()
         {
-            Flickr f = AuthInstance;
+            var f = AuthInstance;
 
             f.OnUploadProgress += (sender, args) =>
             {
                 // Do nothing
             };
 
-            byte[] imageBytes = TestData.TestImageBytes;
+            var imageBytes = TestData.TestImageBytes;
             var s = new MemoryStream(imageBytes);
             s.Position = 0;
 
-            string title = "Test Title";
-            string desc = "Test Description\nSecond Line";
-            string tags = "testtag1,testtag2";
-            string photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            var title = "Test Title";
+            var desc = "Test Description\nSecond Line";
+            var tags = "testtag1,testtag2";
+            var photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
 
             try
             {
@@ -121,16 +122,17 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void ReplacePictureBasicTest()
         {
-            Flickr f = AuthInstance;
+            var f = AuthInstance;
 
-            byte[] imageBytes = TestData.TestImageBytes;
+            var imageBytes = TestData.TestImageBytes;
             var s = new MemoryStream(imageBytes);
             s.Position = 0;
 
-            string title = "Test Title";
-            string desc = "Test Description\nSecond Line";
-            string tags = "testtag1,testtag2";
-            string photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            var title = "Test Title";
+            var desc = "Test Description\nSecond Line";
+            var tags = "testtag1,testtag2";
+            var photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
 
             try
             {
@@ -147,14 +149,15 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void UploadPictureFromUrl()
         {
-            string url = "http://www.google.co.uk/intl/en_com/images/srpr/logo1w.png";
-            Flickr f = AuthInstance;
+            var url = "http://www.google.co.uk/intl/en_com/images/srpr/logo1w.png";
+            var f = AuthInstance;
 
             using (WebClient client = new WebClient())
             {
                 using (Stream s = client.OpenRead(url))
                 {
-                    string photoId = f.UploadPicture(s, "google.png", "Google Image", "Google", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+                    var photoId = f.UploadPicture(s, "google.png", "Google Image", "Google", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+                    Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
                     f.PhotosDelete(photoId);
                 }
             }
@@ -163,14 +166,15 @@ namespace FlickrNetTest
         [Test, Ignore("Long running test")]
         public void UploadLargeVideoFromUrl()
         {
-            string url = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_50mb.mp4";
-            Flickr f = AuthInstance;
+            var url = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_50mb.mp4";
+            var f = AuthInstance;
 
             using (WebClient client = new WebClient())
             {
                 using (Stream s = client.OpenRead(url))
                 {
-                    string photoId = f.UploadPicture(s, "bunny.mp4", "Big Buck Bunny", "Sample Video", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+                    var photoId = f.UploadPicture(s, "bunny.mp4", "Big Buck Bunny", "Sample Video", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+                    Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
                     f.PhotosDelete(photoId);
                 }
             }
@@ -185,7 +189,7 @@ namespace FlickrNetTest
             // sample_mpeg2.m2v does not upload
             string[] filenames = { "sample_mpeg4.mp4", "sample_sorenson.mov", "sample_iTunes.mov", "sample_iPod.m4v", "sample.3gp", "sample_3GPP2.3g2" };
             // Copy files to this directory.
-            string directory = @"Z:\Code Projects\FlickrNet\Samples\";
+            var directory = @"Z:\Code Projects\FlickrNet\Samples\";
 
             foreach (string file in filenames)
             {
@@ -193,8 +197,9 @@ namespace FlickrNetTest
                 {
                     using (Stream s = new FileStream(Path.Combine(directory, file), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
-                        Flickr f = AuthInstance;
-                        string photoId = f.UploadPicture(s, file, "Video Upload Test", file, "video, test", false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.None);
+                        var f = AuthInstance;
+                        var photoId = f.UploadPicture(s, file, "Video Upload Test", file, "video, test", false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.None);
+                        Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
                         f.PhotosDelete(photoId);
                     }
                 }

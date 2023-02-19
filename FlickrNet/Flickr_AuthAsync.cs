@@ -46,7 +46,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.GetElementValue("frob");
+                        result.Result = r.Result?.GetElementValue("frob");
                     }
                     callback(result);
 
@@ -76,7 +76,7 @@ namespace FlickrNet
                 {
                     if (!r.HasError)
                     {
-                        AuthToken = r.Result.Token;
+                        AuthToken = r.Result?.Token;
                     }
                     callback(r);
                 });
@@ -103,7 +103,7 @@ namespace FlickrNet
                 {
                     if (!r.HasError)
                     {
-                        AuthToken = r.Result.Token;
+                        AuthToken = r.Result?.Token;
                     }
                     callback(r);
                 });
@@ -116,6 +116,9 @@ namespace FlickrNet
         /// <param name="callback">Callback method to call upon return of the response from Flickr.</param>
         public void AuthCheckTokenAsync(Action<FlickrResult<Auth>> callback)
         {
+            if (AuthToken == null) {
+                throw new InvalidOperationException("AuthToken must not be null.");
+            }
             AuthCheckTokenAsync(AuthToken, callback);
         }
 
@@ -139,7 +142,7 @@ namespace FlickrNet
                 {
                     if (!r.HasError)
                     {
-                        AuthToken = r.Result.Token;
+                        AuthToken = r.Result?.Token;
                     }
                     callback(r);
                 });
@@ -165,8 +168,8 @@ namespace FlickrNet
                 {
                     if (!r.HasError)
                     {
-                        OAuthAccessToken = r.Result.Token;
-                        OAuthAccessTokenSecret = r.Result.TokenSecret;
+                        OAuthAccessToken = r.Result?.Token!;
+                        OAuthAccessTokenSecret = r.Result?.TokenSecret!;
 
                         AuthToken = null;
                     }

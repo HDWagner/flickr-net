@@ -23,7 +23,7 @@ namespace FlickrNet
         /// </summary>
         /// <param name="response">A URL parameter encoded string, e.g. "oauth_token=ABC&amp;oauth_token_secret=DEF".</param>
         /// <returns></returns>
-        public static OAuthRequestToken ParseResponse(string response)
+        public static OAuthRequestToken ParseResponse(string? response)
         {
             Dictionary<string, string> parameters = UtilityMethods.StringToDictionary(response);
             var token = new OAuthRequestToken();

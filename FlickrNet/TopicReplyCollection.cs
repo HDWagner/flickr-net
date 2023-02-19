@@ -139,7 +139,7 @@ namespace FlickrNet
         /// <summary>
         /// The alias for the group url
         /// </summary>
-        public string GroupAlias { get; set; }
+        public string? GroupAlias     { get; set; }
 
         /// <summary>
         /// Has the author of this topic been deleted
@@ -149,7 +149,7 @@ namespace FlickrNet
         /// <summary>
         /// The path alias of the author, if set.
         /// </summary>
-        public string AuthorPathAlias { get; set; }
+        public string? AuthorPathAlias { get; set; }
 
         /// <summary>
         /// The badge style for the user if they are a pro.

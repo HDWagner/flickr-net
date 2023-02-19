@@ -36,22 +36,38 @@ namespace FlickrNet
 
             if (reader.GetAttribute("page") != null)
             {
-                Page = int.Parse(reader.GetAttribute("page"), System.Globalization.CultureInfo.InvariantCulture);
+                var value = reader.GetAttribute("page");
+                if (value != null)
+                {
+                    Page = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                }
             }
 
             if (reader.GetAttribute("pages") != null)
             {
-                Pages = int.Parse(reader.GetAttribute("pages"), System.Globalization.CultureInfo.InvariantCulture);
+                var value = reader.GetAttribute("pages");
+                if (value != null)
+                {
+                    Pages = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                }
             }
 
             if (reader.GetAttribute("perpage") != null)
             {
-                PerPage = int.Parse(reader.GetAttribute("perpage"), System.Globalization.CultureInfo.InvariantCulture);
+                var value = reader.GetAttribute("perpage");
+                if (value != null)
+                {
+                    PerPage = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                }
             }
 
             if (reader.GetAttribute("total") != null)
             {
-                Total = int.Parse(reader.GetAttribute("total"), System.Globalization.CultureInfo.InvariantCulture);
+                var value = reader.GetAttribute("total");
+                if (value != null)
+                {
+                    Total = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+                }
             }
 
             while (reader.Read())

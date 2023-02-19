@@ -62,7 +62,7 @@ namespace FlickrNet
                     {
                         var result = new FlickrResult<Place>();
                         result.Error = r.Error;
-                        if (!r.HasError)
+                        if (!r.HasError && r.Result != null && r.Result.Count > 0)
                         {
                             result.Result = r.Result[0];
                         }

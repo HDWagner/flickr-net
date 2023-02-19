@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-using System.Xml;
 
 namespace FlickrNet
 {
@@ -20,14 +17,18 @@ namespace FlickrNet
             parameters.Add("method", "flickr.prefs.getContentType");
 
             GetResponseAsync<UnknownResponse>(
-                parameters, 
+                parameters,
                 r =>
                 {
                     var result = new FlickrResult<ContentType>();
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = (ContentType)int.Parse(r.Result.GetAttributeValue("*", "content_type"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        var value = r.Result?.GetAttributeValue("*", "content_type");
+                        if (value != null)
+                        {
+                            result.Result = (ContentType)int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
+                        }
                     }
                     callback(result);
                 });
@@ -67,7 +68,11 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = (HiddenFromSearch)int.Parse(r.Result.GetAttributeValue("*", "hidden"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        var value = r.Result?.GetAttributeValue("*", "hidden");
+                        if (value != null)
+                        {
+                            result.Result = (HiddenFromSearch)int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
+                        }
                     }
                     callback(result);
                 });
@@ -92,7 +97,11 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = (PrivacyFilter)int.Parse(r.Result.GetAttributeValue("*", "privacy"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        var value = r.Result?.GetAttributeValue("*", "privacy");
+                        if (value != null)
+                        {
+                            result.Result = (PrivacyFilter)int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
+                        }
                     }
                     callback(result);
                 });
@@ -118,11 +127,14 @@ namespace FlickrNet
                     result.Error = r.Error;
                     if (!r.HasError)
                     {
-                        result.Result = (SafetyLevel)int.Parse(r.Result.GetAttributeValue("*", "safety_level"), System.Globalization.NumberFormatInfo.InvariantInfo);
+                        var value = r.Result?.GetAttributeValue("*", "safety_level");
+                        if (value != null)
+                        {
+                            result.Result = (SafetyLevel)int.Parse(value, System.Globalization.NumberFormatInfo.InvariantInfo);
+                        }
                     }
                     callback(result);
                 });
         }
-
     }
 }

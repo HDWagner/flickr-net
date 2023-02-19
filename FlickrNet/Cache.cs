@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace FlickrNet
@@ -66,45 +67,26 @@ namespace FlickrNet
         /// <summary>
         /// Returns the currently set location for the cache.
         /// </summary>
+        [DisallowNull]
         public static string CacheLocation
         {
             get
             {
-#if !(WindowsCE || MONOTOUCH || SILVERLIGHT)
-                if (cacheLocation == null && FlickrConfigurationManager.Settings != null)
-                {
-                    cacheLocation = FlickrConfigurationManager.Settings.CacheLocation;
-                }
-#endif
+                cacheLocation ??= FlickrConfigurationManager.Settings?.CacheLocation;
+
                 if (cacheLocation == null)
                 {
                     try
                     {
-#if !(WindowsCE || MONOTOUCH || SILVERLIGHT)
                         cacheLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FlickrNet");
-#endif
-#if MONOTOUCH
-                        cacheLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "../Library/Caches");
-#endif
-#if WindowsCE
-                        cacheLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "FlickrNetCache");
-#endif
-#if SILVERLIGHT
-                        cacheLocation = string.Empty;
-#endif
-
                     }
-                    catch (System.Security.SecurityException)
+                    catch (Exception)
                     {
-                        // Permission to read application directory not provided.
-                        throw new CacheException("Unable to read default cache location. Please cacheLocation in configuration file or set manually in code");
+                        // might throw on some platforms
                     }
                 }
 
-                if (cacheLocation == null)
-                {
-                    throw new CacheException("Unable to determine cache location. Please set cacheLocation in configuration file or set manually in code");
-                }
+                cacheLocation ??= string.Empty;
 
                 return cacheLocation;
             }

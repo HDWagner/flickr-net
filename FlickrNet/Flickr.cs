@@ -87,8 +87,6 @@ namespace FlickrNet
                                                             "http://beta.zooomr.com/auth/",
                                                             "http://www.23hq.com/services/auth/"
         };
-
-        private string apiKey;
         private string? apiToken;
         private string? sharedSecret;
         private string lastRequest;
@@ -97,14 +95,8 @@ namespace FlickrNet
         /// Get or set the API Key to be used by all calls. API key is mandatory for all 
         /// calls to Flickr.
         /// </summary>
-        public string ApiKey
-        {
-            get { return apiKey; }
-            set
-            {
-                apiKey = value == null || value.Length == 0 ? null : value;
-            }
-        }
+        [DisallowNull]
+        public string ApiKey { get; set; }
 
         /// <summary>
         /// API shared secret is required for all calls that require signing, which includes
@@ -143,12 +135,12 @@ namespace FlickrNet
         /// <summary>
         /// OAuth Access Token. Needed for authenticated access using OAuth to Flickr.
         /// </summary>
-        public string OAuthAccessToken { get; set; }
+        public string? OAuthAccessToken { get; set; }
 
         /// <summary>
         /// OAuth Access Token Secret. Needed for authenticated access using OAuth to Flickr.
         /// </summary>
-        public string OAuthAccessTokenSecret { get; set; }
+        public string? OAuthAccessTokenSecret { get; set; }
 
 
         /// <summary>

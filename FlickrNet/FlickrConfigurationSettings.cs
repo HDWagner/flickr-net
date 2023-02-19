@@ -1,5 +1,7 @@
 #if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Xml;
 
@@ -115,7 +117,7 @@ namespace FlickrNet
                     default:
                         throw new System.Configuration.ConfigurationErrorsException(
                             string.Format(
-                                System.Globalization.CultureInfo.InvariantCulture, 
+                                System.Globalization.CultureInfo.InvariantCulture,
                                 "Unknown attribute '{0}' in flickrNet node", attribute.Name), configNode);
                 }
             }
@@ -129,7 +131,7 @@ namespace FlickrNet
                         break;
                     default:
                         throw new System.Configuration.ConfigurationErrorsException(
-                            string.Format(System.Globalization.CultureInfo.InvariantCulture, 
+                            string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             "Unknown node '{0}' in flickrNet node", node.Name), configNode);
                 }
             }
@@ -144,7 +146,8 @@ namespace FlickrNet
             }
 
             IsProxyDefined = true;
-            foreach (XmlAttribute attribute in proxy.Attributes)
+            ICollection attributes = proxy.Attributes != null ? proxy.Attributes : new List<XmlAttribute>();
+            foreach (XmlAttribute attribute in attributes)
             {
 
                 switch (attribute.Name)
@@ -173,7 +176,7 @@ namespace FlickrNet
                         break;
                     default:
                         throw new System.Configuration.ConfigurationErrorsException(
-                            string.Format(System.Globalization.CultureInfo.InvariantCulture, 
+                            string.Format(System.Globalization.CultureInfo.InvariantCulture,
                             "Unknown attribute '{0}' in flickrNet/proxy node", attribute.Name), configNode);
                 }
             }

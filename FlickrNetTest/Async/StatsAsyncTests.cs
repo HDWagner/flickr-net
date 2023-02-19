@@ -112,7 +112,7 @@ namespace FlickrNetTest.Async
             var range = Enumerable.Range(7, 5);
             var list = new List<Stats?>();
 
-            foreach(var i in range)
+            foreach (var i in range)
             {
                 var d = DateTime.Today.AddDays(-i);
 
@@ -128,7 +128,7 @@ namespace FlickrNetTest.Async
             }
 
             list.Count.ShouldBe(5);
-            list.ShouldContain(s => s.Views > 0);
+            list.ShouldContain(s => s != null && s.Views > 0);
         }
     }
 }

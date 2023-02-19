@@ -10,22 +10,23 @@ namespace FlickrNetTest
     [TestFixture]
     public class GroupsPoolsTests : BaseTest
     {
-       
         [Test]
         [Category("AccessTokenRequired")]
         [Ignore("Method requires authentication")]
         public void GroupsPoolsAddBasicTest()
         {
-            Flickr f = AuthInstance;
+            var f = AuthInstance;
 
-            byte[] imageBytes = TestData.TestImageBytes;
+            var imageBytes = TestData.TestImageBytes;
             var s = new MemoryStream(imageBytes);
             s.Position = 0;
 
-            string title = "Test Title";
-            string desc = "Test Description\nSecond Line";
-            string tags = "testtag1,testtag2";
-            string photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            var title = "Test Title";
+            var desc = "Test Description\nSecond Line";
+            var tags = "testtag1,testtag2";
+            var photoId = f.UploadPicture(s, "Test.jpg", title, desc, tags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+
+            Assert.That(photoId, Is.Not.Null, "photoId should not be null");
 
             try
             {
@@ -35,14 +36,13 @@ namespace FlickrNetTest
             {
                 f.PhotosDelete(photoId);
             }
-
         }
 
         [Test]
         [Category("AccessTokenRequired")]
         public void GroupsPoolsAddNotAuthTestTest()
         {
-            string photoId = "12345";
+            var photoId = "12345";
 
             Should.Throw<SignatureRequiredException>(() => Instance.GroupsPoolsAdd(photoId, TestData.FlickrNetTestGroupId));
         }
@@ -50,9 +50,9 @@ namespace FlickrNetTest
         [Test]
         public void GroupsPoolGetPhotosFullParamTest()
         {
-            Flickr f = Instance;
+            var f = Instance;
 
-            PhotoCollection photos = f.GroupsPoolsGetPhotos(TestData.GroupId, null, TestData.TestUserId, PhotoSearchExtras.All, 1, 20);
+            var photos = f.GroupsPoolsGetPhotos(TestData.GroupId, null, TestData.TestUserId, PhotoSearchExtras.All, 1, 20);
 
             Assert.That(photos, Is.Not.Null, "Photos should not be null");
             Assert.That(photos, Is.Not.Empty, "Should be more than 0 photos returned");
@@ -70,9 +70,9 @@ namespace FlickrNetTest
         [Test]
         public void GroupsPoolGetPhotosDateAddedTest()
         {
-            Flickr f = Instance;
+            var f = Instance;
 
-            PhotoCollection photos = f.GroupsPoolsGetPhotos(TestData.GroupId);
+            var photos = f.GroupsPoolsGetPhotos(TestData.GroupId);
 
             Assert.That(photos, Is.Not.Null, "Photos should not be null");
             Assert.That(photos, Is.Not.Empty, "Should be more than 0 photos returned");
@@ -90,7 +90,7 @@ namespace FlickrNetTest
         [Ignore("Method requires authentication")]
         public void GroupsPoolsGetGroupsBasicTest()
         {
-            MemberGroupInfoCollection groups = AuthInstance.GroupsPoolsGetGroups();
+            var groups = AuthInstance.GroupsPoolsGetGroups();
 
             Assert.That(groups, Is.Not.Null, "MemberGroupInfoCollection should not be null.");
             Assert.That(groups, Is.Not.Empty, "MemberGroupInfoCollection.Count should not be zero.");

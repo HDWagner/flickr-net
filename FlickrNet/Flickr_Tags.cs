@@ -15,7 +15,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getListPhoto");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("photo_id", photoId);
 
             PhotoInfo info = GetResponseCache<PhotoInfo>(parameters);
@@ -156,7 +156,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.tags.getRelated");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("tag", tag);
 
             return GetResponseCache<TagCollection>(parameters);

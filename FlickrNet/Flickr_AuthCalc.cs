@@ -34,9 +34,9 @@ namespace FlickrNet
                 throw new SignatureRequiredException();
             }
 
-            string hash = sharedSecret + "api_key" + apiKey + "frob" + frob + "perms" + UtilityMethods.AuthLevelToString(authLevel);
+            string hash = sharedSecret + "api_key" + ApiKey + "frob" + frob + "perms" + UtilityMethods.AuthLevelToString(authLevel);
             hash = UtilityMethods.MD5Hash(hash);
-            string url = AuthUrl + "?api_key=" + apiKey + "&perms=" + UtilityMethods.AuthLevelToString(authLevel) + "&frob=" + frob;
+            string url = AuthUrl + "?api_key=" + ApiKey + "&perms=" + UtilityMethods.AuthLevelToString(authLevel) + "&frob=" + frob;
             url += "&api_sig=" + hash;
 
             return url;
@@ -84,8 +84,8 @@ namespace FlickrNet
 
             CheckSigned();
 
-            string textToHash = sharedSecret + "api_key" + apiKey;
-            string url = AuthUrl + "?api_key=" + apiKey + "&perms=" + UtilityMethods.AuthLevelToString(authLevel);
+            string textToHash = sharedSecret + "api_key" + ApiKey;
+            string url = AuthUrl + "?api_key=" + ApiKey + "&perms=" + UtilityMethods.AuthLevelToString(authLevel);
 
             if (!string.IsNullOrEmpty(extra))
             {

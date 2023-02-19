@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-
+﻿using FlickrNet;
 using NUnit.Framework;
-using FlickrNet;
 
 namespace FlickrNetTest
 {
@@ -101,6 +98,5 @@ namespace FlickrNetTest
             Assert.That(context.PreviousPhotos, Has.Count.EqualTo(3), "Should be 3 previous photo.");
             Assert.That(context.NextPhotos, Has.Count.EqualTo(4), "Should be 4 next photo.");
         }
-
     }
 }

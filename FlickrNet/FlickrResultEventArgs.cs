@@ -13,7 +13,7 @@ namespace FlickrNet
 
         private Exception? error;
         public bool HasError { get; set; }
-        public T Result { get; set; }
+        public T? Result { get; set; }
         public Exception? Error
         {
             get

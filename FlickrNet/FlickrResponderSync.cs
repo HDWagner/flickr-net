@@ -128,7 +128,6 @@ namespace FlickrNet
         }
 
 
-#if !WindowsCE
         private static string DownloadData(string method, string baseUrl, string? data, string? contentType, string? authHeader)
         {
             Func<string> f = () =>
@@ -146,8 +145,9 @@ namespace FlickrNet
                         client.Headers.Add("Authorization", authHeader);
                     }
 
-                    if (method == "POST")
+                    if (method == "POST" )
                     {
+                        // we don't care that data might be null: client.UploadString would throw correctly and we'll get rid of WebClient anyway
                         return client.UploadString(baseUrl, data);
                     }
                     return client.DownloadString(baseUrl);
@@ -171,66 +171,6 @@ namespace FlickrNet
                 }
                 throw;
             }
-
         }
-#else
-        private static string DownloadData(string method, string baseUrl, string data, string contentType, string authHeader)
-        {
-            byte[] postArray = Encoding.UTF8.GetBytes(data);
-
-            // Initialise the web request
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(baseUrl);
-            req.Method = method;
-
-            if (req.Method == "POST") req.ContentLength = postArray.Length;
-
-            req.KeepAlive = false;
-
-            if (data.Length > 0)
-            {
-                req.ContentType = "application/x-www-form-urlencoded";
-                using (Stream dataStream = req.GetRequestStream())
-                {
-                    dataStream.Write(postArray, 0, postArray.Length);
-                }
-            }
-            else
-            {
-                // This is needed in the Compact Framework
-                // See for more details: http://msdn2.microsoft.com/en-us/library/1afx2b0f.aspx
-                req.GetRequestStream().Close();
-            }
-
-            HttpWebResponse res = null;
-
-            try
-            {
-                // Get response from the internet
-                res = (HttpWebResponse)req.GetResponse();
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    HttpWebResponse res2 = (HttpWebResponse)ex.Response;
-                    if (res2 != null)
-                    {
-                        throw new FlickrWebException(String.Format(System.Globalization.CultureInfo.InvariantCulture, "HTTP Error {0}, {1}", (int)res2.StatusCode, res2.StatusDescription), ex);
-                    }
-                }
-                throw new FlickrWebException(ex.Message, ex);
-            }
-
-            string responseString = string.Empty;
-
-            using (StreamReader sr = new StreamReader(res.GetResponseStream()))
-            {
-                responseString = sr.ReadToEnd();
-            }
-
-            return responseString;
-        }
-#endif
-
     }
 }

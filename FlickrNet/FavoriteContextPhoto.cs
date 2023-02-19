@@ -12,12 +12,12 @@ namespace FlickrNet
         /// <summary>
         /// The thumbnail url for the image. Will be the same as <see cref="Photo.ThumbnailUrl"/> if that is also set.
         /// </summary>
-        public string FavoriteThumbnailUrl { get; set; }
+        public string? FavoriteThumbnailUrl { get; set; }
 
         /// <summary>
         /// The URL for the favorite, with the context of the user as well.
         /// </summary>
-        public string FavoriteUrl { get; set; }
+        public string? FavoriteUrl { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

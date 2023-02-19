@@ -43,7 +43,7 @@ namespace FlickrNet
         /// <summary>
         /// The Path alias for the group icon
         /// </summary>
-        public string PathAlias { get; set; }
+        public string? PathAlias { get; set; }
 
         /// <summary>
         /// The server farm for the group icon. If zero then the group uses the default icon.
@@ -73,7 +73,7 @@ namespace FlickrNet
         /// <summary>
         /// The User ID for the user who last set the group's 'Blast' (the banner seen on the group home page).
         /// </summary>
-        public string BlastUserId { get; set; }
+        public string? BlastUserId { get; set; }
 
         /// <summary>
         /// The date the group's 'Blast' (the banner seen on the group home page) was last updated.
@@ -83,17 +83,17 @@ namespace FlickrNet
         /// <summary>
         /// The role name assigned to members of this group.
         /// </summary>
-        public string MemberRoleName { get; set; }
+        public string? MemberRoleName { get; set; }
 
         /// <summary>
         /// The role name assigned to moderators of this group.
         /// </summary>
-        public string ModeratorRoleName { get; set; }
+        public string? ModeratorRoleName { get; set; }
 
         /// <summary>
         /// The role name assigned to admins of this group.
         /// </summary>
-        public string AdminRoleName { get; set; }
+        public string? AdminRoleName { get; set; }
 
         /// <summary>
         /// The url for the group's icon. 

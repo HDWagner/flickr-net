@@ -42,8 +42,8 @@ namespace FlickrNetTest
             Flickr f = TestData.GetSignedInstance();
 
             var requestToken = new OAuthRequestToken();
-            requestToken.Token = TestData.RequestToken;
-            requestToken.TokenSecret = TestData.RequestTokenSecret;
+            requestToken.Token = TestData.RequestToken!;
+            requestToken.TokenSecret = TestData.RequestTokenSecret!;
             string verifier = "846-116-116";
 
             OAuthAccessToken accessToken = f.OAuthGetAccessToken(requestToken, verifier);

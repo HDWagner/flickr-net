@@ -13,22 +13,22 @@ namespace FlickrNet
         /// <summary>
         /// The user id for the member.
         /// </summary>
-        public string MemberId { get; set; }
+        public string? MemberId { get; set; }
 
         /// <summary>
         /// The members name.
         /// </summary>
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// The icon server for the users buddy icon. See <see cref="IconUrl"/> for the complete URL.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// The icon farm for the users buddy icon. See <see cref="IconUrl"/> for the complete URL.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// The type of the member (basic, moderator or administrator).
@@ -40,7 +40,8 @@ namespace FlickrNet
         /// </summary>
         public string IconUrl
         {
-            get {
+            get
+            {
                 return UtilityMethods.BuddyIcon(IconServer, IconFarm, MemberId);
             }
         }

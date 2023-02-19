@@ -162,7 +162,7 @@ namespace FlickrNet
         /// <summary>
         /// I don't know what this means. Seems to be blank for most groups.
         /// </summary>
-        public string SortGroup { get; private set; }
+        public string? SortGroup { get; private set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

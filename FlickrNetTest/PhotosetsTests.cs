@@ -124,10 +124,12 @@ namespace FlickrNetTest
             s.Position = 0;
             // Upload photo once
             var photoId1 = AuthInstance.UploadPicture(s, "Test1.jpg", initialPhotoTitle, initialPhotoDescription, initialTags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            Assert.That(photoId1, Is.Not.Null);
 
             s.Position = 0;
             // Upload photo a second time
             var photoId2 = AuthInstance.UploadPicture(s, "Test2.jpg", initialPhotoTitle, initialPhotoDescription, initialTags, false, false, false, ContentType.Other, SafetyLevel.Safe, HiddenFromSearch.Visible);
+            Assert.That(photoId2, Is.Not.Null);
 
             // Creat photoset
             Photoset photoset = AuthInstance.PhotosetsCreate("Test photoset", photoId1);

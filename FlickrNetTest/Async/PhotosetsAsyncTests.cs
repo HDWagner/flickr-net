@@ -27,6 +27,7 @@ namespace FlickrNetTest.Async
 
             var context = result.Result;
 
+            Assert.That(context, Is.Not.Null);
             Assert.That(context.PreviousPhoto, Is.Null, "As this is the first photo the previous photo should be null.");
             Assert.That(context.NextPhoto, Is.Not.Null, "As this is the first photo the next photo should not be null.");
 
@@ -39,6 +40,7 @@ namespace FlickrNetTest.Async
 
             context = result.Result;
 
+            Assert.That(context, Is.Not.Null);
             Assert.That(context.NextPhoto, Is.Null, "As this is the last photo the next photo should be null.");
             Assert.That(context.PreviousPhoto, Is.Not.Null, "As this is the last photo the previous photo should not be null.");
         }
@@ -73,7 +75,7 @@ namespace FlickrNetTest.Async
             var photosetResult = w.Next().First();
             Assert.That(photosetResult.HasError, Is.False);
             var photoset = photosetResult.Result;
-
+            Assert.That(photoset, Is.Not.Null);
 
             try
             {

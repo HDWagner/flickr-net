@@ -68,7 +68,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.search");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("text", text);
             if (page > 0)
             {
@@ -92,7 +92,7 @@ namespace FlickrNet
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.getInfo");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             parameters.Add("group_id", groupId);
             return GetResponseCache<GroupFullInfo>(parameters);
         }
@@ -124,7 +124,7 @@ namespace FlickrNet
 
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.groups.members.getList");
-            parameters.Add("api_key", apiKey);
+            parameters.Add("api_key", ApiKey);
             if (page > 0)
             {
                 parameters.Add("page", page.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));

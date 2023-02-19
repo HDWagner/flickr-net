@@ -144,11 +144,11 @@ namespace FlickrNet
         /// <summary>
         /// Description of the timezone of this user.
         /// </summary>
-        public string TimeZoneLabel { get; set; }
+        public string? TimeZoneLabel { get; set; }
         /// <summary>
         /// Offset for the timezome for this user, e.g. "+01:00".
         /// </summary>
-        public string TimeZoneOffset { get; set; }
+        public string? TimeZoneOffset { get; set; }
 
         /// <summary>
         /// The description of the user, as taken from the users profil page.

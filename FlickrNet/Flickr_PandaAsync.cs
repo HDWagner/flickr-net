@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Collections;
 
 namespace FlickrNet
 {
@@ -28,7 +26,7 @@ namespace FlickrNet
                     }
                     else
                     {
-                        result.Result = r.Result.GetElementArray("panda");
+                        result.Result = r.Result?.GetElementArray("panda");
                     }
                     callback(result);
                 });
