@@ -42,7 +42,8 @@ namespace FlickrNetTest
 
             f.PeopleGetPublicPhotos(TestData.TestUserId);
 
-            string lastUrl = f.LastRequest;
+            var lastUrl = f.LastRequest;
+            Assert.That(lastUrl, Is.Not.Null);
 
             var item = Cache.Responses.Get(lastUrl, TimeSpan.MaxValue, false);
 

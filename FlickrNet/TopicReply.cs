@@ -12,15 +12,15 @@ namespace FlickrNet
         /// <summary>
         /// The id of the reply.
         /// </summary>
-        public string ReplyId { get; set; }
+        public string? ReplyId { get; set; }
         /// <summary>
         /// The id of the author of the reply.
         /// </summary>
-        public string AuthorUserId { get; set; }
+        public string? AuthorUserId { get; set; }
         /// <summary>
         /// The username of the author of the reply.
         /// </summary>
-        public string AuthorName { get; set; }
+        public string? AuthorName { get; set; }
         /// <summary>
         /// True if the author of the reply has a pro account.
         /// </summary>
@@ -32,11 +32,11 @@ namespace FlickrNet
         /// <summary>
         /// The server for the reply author's buddy icon.
         /// </summary>
-        public string AuthorIconServer { get; set; }
+        public string? AuthorIconServer { get; set; }
         /// <summary>
         /// The farm for the reply author's buddy icon.
         /// </summary>
-        public string AuthorIconFarm { get; set; }
+        public string? AuthorIconFarm { get; set; }
         /// <summary>
         /// THe path alias for the author, if set.
         /// </summary>
@@ -44,7 +44,7 @@ namespace FlickrNet
         /// <summary>
         /// The badge style for the user if they are a pro.
         /// </summary>
-        public string ProBadgeStyle { get; set; }
+        public string? ProBadgeStyle { get; set; }
         /// <summary>
         /// Can the calling user edit the reply.
         /// </summary>
@@ -64,7 +64,7 @@ namespace FlickrNet
         /// <summary>
         /// The message contents of the reply.
         /// </summary>
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         /// <summary>
         /// Has the author of this topic been deleted

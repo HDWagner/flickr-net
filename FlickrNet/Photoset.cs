@@ -124,7 +124,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the thumbnail of a photo.
         /// </summary>
-        public string PhotosetThumbnailUrl
+        public string? PhotosetThumbnailUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_t", "jpg"); }
         }
@@ -132,7 +132,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the square thumbnail of a photo.
         /// </summary>
-        public string PhotosetSquareThumbnailUrl
+        public string? PhotosetSquareThumbnailUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_s", "jpg"); }
         }
@@ -140,7 +140,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the small copy of a photo.
         /// </summary>
-        public string PhotosetSmallUrl
+        public string? PhotosetSmallUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_m", "jpg"); }
         }

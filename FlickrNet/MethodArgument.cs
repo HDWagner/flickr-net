@@ -10,7 +10,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the argument.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Is the argument optional or not.
@@ -20,7 +20,7 @@ namespace FlickrNet
         /// <summary>
         /// The description of the argument.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         void IFlickrParsable.Load(XmlReader reader)
         {

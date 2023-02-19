@@ -8,7 +8,7 @@
         /// <summary>
         /// The label for the size, such as "Thumbnail", "Small", "Medium", "Large" and "Original".
         /// </summary>
-        public string Label { get; set; }
+        public string? Label { get; set; }
     
         /// <summary>
         /// The width of the resulting image, in pixels
@@ -23,12 +23,12 @@
         /// <summary>
         /// The source url of the image.
         /// </summary>
-        public string Source { get; set; }
+        public string? Source { get; set; }
     
         /// <summary>
         /// The url to the photographs web page for this particular size.
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// The media type of this size.

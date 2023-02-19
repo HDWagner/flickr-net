@@ -40,6 +40,8 @@ namespace FlickrNetTest
 
             Auth auth = f.AuthGetToken(frob);
 
+            Assert.That(auth.Token, Is.Not.Null);
+
             TestData.AuthToken = auth.Token;
 
             Console.WriteLine(TestData.AuthToken);

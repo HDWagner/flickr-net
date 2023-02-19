@@ -22,7 +22,7 @@ namespace FlickrNet
         /// passed in.
         /// </summary>
         /// <param name="userId">The ID of the User to search for.</param>
-        public PhotoSearchOptions(string userId) 
+        public PhotoSearchOptions(string userId)
             : this(userId, null, TagMode.AllTags, null)
         {
         }
@@ -68,7 +68,7 @@ namespace FlickrNet
         /// <summary>
         /// The user Id of the user to search on. Defaults to null for no specific user.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// The geocontext for the resulting photos.
@@ -78,7 +78,7 @@ namespace FlickrNet
         /// <summary>
         /// The group id of the group to search within.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
 
         /// <summary>
         /// A comma delimited list of tags
@@ -97,7 +97,7 @@ namespace FlickrNet
         /// See https://www.flickr.com/services/api/flickr.photos.search.html for details 
         /// on how to search for machine tags.
         /// </remarks>
-        public string MachineTags { get; set; }
+        public string? MachineTags { get; set; }
 
         /// <summary>
         /// The machine tag mode. 
@@ -174,7 +174,7 @@ namespace FlickrNet
         /// <summary>
         /// The boundary box for which to search for geo location photos.
         /// </summary>
-        public BoundaryBox BoundaryBox { get; set; }
+        public BoundaryBox? BoundaryBox { get; set; }
 
         /// <summary>
         /// The accuracy of the search for geo location photos.
@@ -240,12 +240,12 @@ namespace FlickrNet
         /// <summary>
         /// The WOE id to return photos for. This is a spatial reference.
         /// </summary>
-        public string WoeId { get; set; }
+        public string? WoeId { get; set; }
 
         /// <summary>
         /// The Flickr Place to return photos for.
         /// </summary>
-        public string PlaceId { get; set; }
+        public string? PlaceId { get; set; }
 
         /// <summary>
         /// True if the photo is taken from the Flickr Commons project.
@@ -270,17 +270,17 @@ namespace FlickrNet
         /// <summary>
         /// If set then will return photos tagged as containing the given person.
         /// </summary>
-        public string PersonId { get; set; }
+        public string? PersonId { get; set; }
 
         /// <summary>
         /// Search for photos taken with a particular camera.
         /// </summary>
-        public string Camera { get; set; }
+        public string? Camera { get; set; }
 
         /// <summary>
         /// I've no idea what this does. The Flickr API comment is simply: Jump, jump!
         /// </summary>
-        public string JumpTo { get; set; }
+        public string? JumpTo { get; set; }
 
         internal string ExtrasString
         {
@@ -289,7 +289,7 @@ namespace FlickrNet
 
         internal string ColorCodeString
         {
-            get { return UtilityMethods.ColorCodesToString(ColorCodes); }
+            get { return ColorCodes == null ? string.Empty : UtilityMethods.ColorCodesToString(ColorCodes); }
         }
 
         internal string SortOrderString
@@ -300,7 +300,7 @@ namespace FlickrNet
         /// <summary>
         /// Search for photos by the users 'username'
         /// </summary>
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// The minimum exposure to return photos for.
@@ -335,22 +335,22 @@ namespace FlickrNet
         /// <summary>
         /// Exclude a specific user ID from the search results.
         /// </summary>
-        public string ExcludeUserID { get; set; }
+        public string? ExcludeUserID { get; set; }
 
         /// <summary>
         /// The ID of the Foursquare Venue to return photos for.
         /// </summary>
-        public string FoursquareVenueID { get; set; }
+        public string? FoursquareVenueID { get; set; }
 
         /// <summary>
         /// The WOE ID of the Foursquare Venue to return photos for.
         /// </summary>
-        public string FoursquareWoeID { get; set; }
+        public string? FoursquareWoeID { get; set; }
 
         /// <summary>
         /// The path alias for a group to search.
         /// </summary>
-        public string GroupPathAlias { get; set; }
+        public string? GroupPathAlias { get; set; }
 
         /// <summary>
         /// A list of the new color codes.
@@ -358,12 +358,12 @@ namespace FlickrNet
         /// <remarks>
         /// Acceptable values are "0"-"9" and "a"-"e". Or you can use a color name such as "yellow", "blue", "green" etc.
         /// </remarks>
-        public ICollection<string> ColorCodes { get; set; }
+        public ICollection<string>? ColorCodes { get; set; }
 
         /// <summary>
         /// A collection of styles the search results will be filtered against.
         /// </summary>
-        public ICollection<Style> Styles { get; set; }
+        public ICollection<Style>? Styles { get; set; }
 
         /// <summary>
         /// Comma-separated list of content types to return. 
@@ -376,7 +376,7 @@ namespace FlickrNet
         ///         <li>3 for virtual photos.</li>
         ///     </ul>
         /// </summary>
-        public string ContentTypes { get; set; }
+        public string? ContentTypes { get; set; }
 
         /// <summary>
         /// Comma-separated list of video content types to return. 
@@ -388,7 +388,7 @@ namespace FlickrNet
         ///         <li>3 for Machinima.</li>
         ///     </ul>
         /// </summary>
-        public string VideoContentTypes { get; set; }
+        public string? VideoContentTypes { get; set; }
 
         /// <summary>
         /// Calculates the Uri for a Flash slideshow for the given search options.

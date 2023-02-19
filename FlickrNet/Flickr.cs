@@ -391,6 +391,8 @@ namespace FlickrNet
             AuthToken = token;
         }
 
+
+        [MemberNotNull(nameof(ApiKey))]
         internal void CheckApiKey()
         {
             if (string.IsNullOrEmpty(ApiKey))
@@ -399,6 +401,8 @@ namespace FlickrNet
             }
         }
 
+
+        [MemberNotNull(nameof(ApiSecret))]
         internal void CheckSigned()
         {
             CheckApiKey();
@@ -409,6 +413,7 @@ namespace FlickrNet
             }
         }
 
+        [MemberNotNull(nameof(ApiSecret))]
         internal void CheckRequiresAuthentication()
         {
             CheckSigned();

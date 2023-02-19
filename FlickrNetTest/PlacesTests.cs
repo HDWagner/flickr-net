@@ -213,10 +213,10 @@ namespace FlickrNetTest
             Assert.That(p.PlaceType, Is.EqualTo(PlaceType.Locality));
             Assert.That(p.Description, Is.EqualTo("Newcastle upon Tyne, England, United Kingdom"));
 
-            Assert.That(p.Locality.PlaceId, Is.EqualTo("X9sTR3BSUrqorQ"));
-            Assert.That(p.County.PlaceId, Is.EqualTo("myqh27pQULzLWcg7Kg"));
-            Assert.That(p.Region.PlaceId, Is.EqualTo("2eIY2QFTVr_DwWZNLg"));
-            Assert.That(p.Country.PlaceId, Is.EqualTo("cnffEpdTUb5v258BBA"));
+            Assert.That(p.Locality?.PlaceId, Is.EqualTo("X9sTR3BSUrqorQ"));
+            Assert.That(p.County?.PlaceId, Is.EqualTo("myqh27pQULzLWcg7Kg"));
+            Assert.That(p.Region?.PlaceId, Is.EqualTo("2eIY2QFTVr_DwWZNLg"));
+            Assert.That(p.Country?.PlaceId, Is.EqualTo("cnffEpdTUb5v258BBA"));
 
             Assert.That(p.HasShapeData, Is.True);
             Assert.That(p.ShapeData, Is.Not.Null);
@@ -233,6 +233,7 @@ namespace FlickrNetTest
             var f = Instance;
             var placeId = "X9sTR3BSUrqorQ";
             PlaceInfo p1 = f.PlacesGetInfo(placeId, null);
+            Assert.That(p1.PlaceUrl, Is.Not.Null);
             PlaceInfo p2 = f.PlacesGetInfoByUrl(p1.PlaceUrl);
 
             Assert.That(p2, Is.Not.Null);

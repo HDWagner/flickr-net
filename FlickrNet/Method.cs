@@ -22,7 +22,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the method.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Does the method require the call to be authenticated.
@@ -42,17 +42,17 @@ namespace FlickrNet
         /// <summary>
         /// The description of the method.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// An example response for the method.
         /// </summary>
-        public string Response { get; set; }
+        public string? Response { get; set; }
 
         /// <summary>
         /// An explanation of the example response for the method.
         /// </summary>
-       public string Explanation { get; set; }
+       public string? Explanation { get; set; }
 
         /// <summary>
         /// The arguments of the method.

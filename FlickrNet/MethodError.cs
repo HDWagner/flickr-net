@@ -15,12 +15,12 @@ namespace FlickrNet
         /// <summary>
         /// The message for a method error.
         /// </summary>
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         /// <summary>
         /// The description of a method error.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
 
         void IFlickrParsable.Load(XmlReader reader)

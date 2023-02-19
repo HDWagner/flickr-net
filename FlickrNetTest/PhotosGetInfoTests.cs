@@ -183,6 +183,7 @@ namespace FlickrNetTest
             o.PerPage = 5;
 
             PhotoCollection photos = Instance.PhotosSearch(o);
+            Assert.That(photos[0].PhotoId, Is.Not.Null);
             PhotoInfo info = Instance.PhotosGetInfo(photos[0].PhotoId);
 
             Assert.That(info.CanBlog, Is.EqualTo(false));
@@ -239,7 +240,7 @@ namespace FlickrNetTest
             Assert.That(info.Location, Is.Not.Null, "Location should not be null.");
             Assert.That(info.Location.Longitude, Is.EqualTo(-180), "Longitude should be -180");
             Assert.That(info.Urls[0].Url, Is.EqualTo("https://www.flickr.com/photos/afdn/54071193/"));
-            Assert.That(info.GeoPermissions.IsPublic, Is.True, "GeoPermissions should be public.");
+            Assert.That(info.GeoPermissions?.IsPublic, Is.True, "GeoPermissions should be public.");
         }
 
         [Test]
@@ -266,6 +267,7 @@ namespace FlickrNetTest
                                           });
 
             var photo = photos.First();
+            Assert.That(photo.PhotoId, Is.Not.Null);
 
             var info = Instance.PhotosGetInfo(photo.PhotoId);
 

@@ -10,11 +10,11 @@ namespace FlickrNet
         /// <summary>
         /// The group id for the result.
         /// </summary>
-        public string GroupId { get; set; }
+        public string? GroupId { get; set; }
         /// <summary>
         /// The group name for the result.
         /// </summary>
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
         /// <summary>
         /// True if the group is an over eighteen (adult) group only.
         /// </summary>
@@ -28,12 +28,12 @@ namespace FlickrNet
         /// <summary>
         /// Group icon server.
         /// </summary>
-        public string IconServer { get; set; }
+        public string? IconServer { get; set; }
 
         /// <summary>
         /// Group icon farm.
         /// </summary>
-        public string IconFarm { get; set; }
+        public string? IconFarm { get; set; }
 
         /// <summary>
         /// Number of members in the group.

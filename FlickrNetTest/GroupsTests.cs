@@ -62,11 +62,11 @@ namespace FlickrNetTest
 
             Assert.That(info.GroupIconUrl, Is.EqualTo("https://farm6.staticflickr.com/5128/buddyicons/53837206@N00.jpg"));
 
-            Assert.That(info.ThrottleInfo.Count, Is.EqualTo(2));
-            Assert.That(info.ThrottleInfo.Mode, Is.EqualTo(GroupThrottleMode.PerDay));
+            Assert.That(info.ThrottleInfo?.Count, Is.EqualTo(2));
+            Assert.That(info.ThrottleInfo?.Mode, Is.EqualTo(GroupThrottleMode.PerDay));
 
-            Assert.That(info.Restrictions.PhotosAccepted, Is.True, "PhotosAccepted should be true.");
-            Assert.That(info.Restrictions.VideosAccepted, Is.False, "VideosAccepted should be false.");
+            Assert.That(info.Restrictions?.PhotosAccepted, Is.True, "PhotosAccepted should be true.");
+            Assert.That(info.Restrictions?.VideosAccepted, Is.False, "VideosAccepted should be false.");
         }
 
         [Test]

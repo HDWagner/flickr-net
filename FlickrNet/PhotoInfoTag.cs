@@ -8,22 +8,22 @@
         /// <summary>
         /// The id of the tag.
         /// </summary>
-        public string TagId { get; set; }
+        public string? TagId { get; set; }
 
         /// <summary>
         /// The author id of the tag.
         /// </summary>
-        public string AuthorId { get; set; }
+        public string? AuthorId { get; set; }
 
         /// <summary>
         /// The real name of the author of the tag.
         /// </summary>
-        public string AuthorName { get; set; }
+        public string? AuthorName { get; set; }
 
         /// <summary>
         /// Raw copy of the tag, as the user entered it.
         /// </summary>
-        public string Raw { get; set; }
+        public string? Raw { get; set; }
 
         /// <summary>
         /// Is the tag a machine tag.
@@ -33,7 +33,7 @@
         /// <summary>
         /// The actually tag.
         /// </summary>
-        public string TagText { get; set; }
+        public string? TagText { get; set; }
 
         void IFlickrParsable.Load(System.Xml.XmlReader reader)
         {

@@ -785,8 +785,9 @@ namespace FlickrNetTest
 
             var photos = Instance.PhotosSearch(o);
 
+
             photos.Count.ShouldNotBe(0);
-            photos.ShouldContain(p => p.Tags.Any(t => t == russian) || p.Title.Contains(russian) || p.Description.Contains(russian));
+            photos.ShouldContain(p => p.Tags.Any(t => t == russian) || (p.Title != null && p.Title.Contains(russian)) || (p.Description != null && p.Description.Contains(russian)));
         }
 
         [Test]
@@ -987,6 +988,7 @@ namespace FlickrNetTest
 
 
             var firstUserId = photos.First().UserId;
+            Assert.That(firstUserId, Is.Not.Null);
 
             options.ExcludeUserID = firstUserId;
 

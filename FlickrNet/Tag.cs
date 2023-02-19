@@ -10,7 +10,7 @@ namespace FlickrNet
         /// <summary>
         /// The name of the tag.
         /// </summary>
-        public string TagName { get; set; }
+        public string? TagName { get; set; }
 
         /// <summary>
         /// The poularity of the tag. Will be 0 if not returned via <see cref="Flickr.TagsGetListUserPopular()"/>

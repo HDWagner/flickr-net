@@ -126,9 +126,9 @@ namespace FlickrNetTest
 
             Assert.That(auth.Token, Is.EqualTo("TheToken"));
             Assert.That(auth.Permissions, Is.EqualTo(AuthLevel.Delete));
-            Assert.That(auth.User.UserId, Is.EqualTo("41888973@N00"));
-            Assert.That(auth.User.UserName, Is.EqualTo("Sam Judson"));
-            Assert.That(auth.User.FullName, Is.EqualTo("Sam Judson"));
+            Assert.That(auth.User?.UserId, Is.EqualTo("41888973@N00"));
+            Assert.That(auth.User?.UserName, Is.EqualTo("Sam Judson"));
+            Assert.That(auth.User?.FullName, Is.EqualTo("Sam Judson"));
 
         }
     }

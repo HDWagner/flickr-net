@@ -300,7 +300,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the square thumbnail for the photo.
         /// </summary>
-        public string SquareThumbnailUrl
+        public string? SquareThumbnailUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_s", "jpg"); }
         }
@@ -308,7 +308,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the thumbnail for the photo.
         /// </summary>
-        public string ThumbnailUrl
+        public string? ThumbnailUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_t", "jpg"); }
         }
@@ -316,7 +316,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the small version of this photo.
         /// </summary>
-        public string SmallUrl
+        public string? SmallUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_m", "jpg"); }
         }
@@ -328,7 +328,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string Small320Url
+        public string? Small320Url
         {
             get { return UtilityMethods.UrlFormat(this, "_n", "jpg"); }
         }
@@ -340,7 +340,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string MediumUrl
+        public string? MediumUrl
         {
             get { return UtilityMethods.UrlFormat(this, string.Empty, "jpg"); }
         }
@@ -352,7 +352,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string Medium640Url
+        public string? Medium640Url
         {
             get { return UtilityMethods.UrlFormat(this, "_z", "jpg"); }
         }
@@ -364,7 +364,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string Medium800Url
+        public string? Medium800Url
         {
             get { return UtilityMethods.UrlFormat(this, "_c", "jpg"); }
         }
@@ -376,7 +376,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string LargeUrl
+        public string? LargeUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_b", "jpg"); }
         }
@@ -388,7 +388,7 @@ namespace FlickrNet
         /// There is no guarentee that this size of the image actually exists.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get a list of existing photo URLs.
         /// </remarks>
-        public string LargeSquareUrl
+        public string? LargeSquareUrl
         {
             get { return UtilityMethods.UrlFormat(this, "_q", "jpg"); }
         }

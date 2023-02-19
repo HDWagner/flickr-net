@@ -147,7 +147,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the square thumbnail of a photo.
         /// </summary>
-        public string SquareThumbnailUrl
+        public string? SquareThumbnailUrl
         {
             get
             {
@@ -174,7 +174,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the large (150x150) square thumbnail of a photo.
         /// </summary>
-        public string LargeSquareThumbnailUrl
+        public string? LargeSquareThumbnailUrl
         {
             get
             {
@@ -200,7 +200,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the thumbnail of a photo.
         /// </summary>
-        public string ThumbnailUrl
+        public string? ThumbnailUrl
         {
             get
             {
@@ -227,7 +227,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the small copy of a photo.
         /// </summary>
-        public string SmallUrl
+        public string? SmallUrl
         {
             get
             {
@@ -254,7 +254,7 @@ namespace FlickrNet
         /// <summary>
         /// The URL for the small (320 on longest side) copy of a photo.
         /// </summary>
-        public string Small320Url
+        public string? Small320Url
         {
             get
             {
@@ -283,7 +283,7 @@ namespace FlickrNet
         /// </summary>
         /// <remarks>There is a chance that extremely small images will not have a medium 640 copy.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.</remarks>
-        public string Medium640Url
+        public string? Medium640Url
         {
             get
             {
@@ -312,7 +312,7 @@ namespace FlickrNet
         /// </summary>
         /// <remarks>There is a chance that extremely small images will not have a medium 640 copy.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.</remarks>
-        public string Medium800Url
+        public string? Medium800Url
         {
             get
             {
@@ -367,7 +367,7 @@ namespace FlickrNet
         /// </summary>
         /// <remarks>There is a chance that extremely small images will not have a medium copy.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.</remarks>
-        public string MediumUrl
+        public string? MediumUrl
         {
             get
             {
@@ -396,7 +396,7 @@ namespace FlickrNet
         /// </summary>
         /// <remarks>There is a chance that small images will not have a large copy.
         /// Use <see cref="Flickr.PhotosGetSizes"/> to get the available URLs for a photo.</remarks>
-        public string LargeUrl
+        public string? LargeUrl
         {
             get
             {

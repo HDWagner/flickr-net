@@ -51,6 +51,9 @@ namespace FlickrNetTest
             Console.WriteLine("access token = " + accessToken.Token);
             Console.WriteLine("access token secret = " + accessToken.TokenSecret);
 
+            Assert.That(accessToken.Token, Is.Not.Null);
+            Assert.That(accessToken.TokenSecret, Is.Not.Null);
+
             TestData.AccessToken = accessToken.Token;
             TestData.AccessTokenSecret = accessToken.TokenSecret;
         }
