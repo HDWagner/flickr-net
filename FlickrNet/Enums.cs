@@ -16,10 +16,10 @@ namespace FlickrNet
         /// Flickr - http://www.flickr.com/services/api
         /// </summary>
         Flickr = 0,
-        /// <summary>
-        /// Zooomr - http://blog.zooomr.com/2006/03/27/attention-developers/
-        /// </summary>
-        Zooomr = 1,
+        ///// <summary>
+        ///// Zooomr - http://blog.zooomr.com/2006/03/27/attention-developers/ - Zooomr is dead
+        ///// </summary>
+        //Zooomr = 1,
         /// <summary>
         /// 23HQ = http://www.23hq.com/doc/api/
         /// </summary>

@@ -37,9 +37,8 @@ namespace FlickrNet
         /// </summary>
         public event EventHandler<UploadProgressEventArgs>? OnUploadProgress;
 
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
         private static bool isServiceSet;
-#endif
+
         private static SupportedService defaultService = SupportedService.Flickr;
 
         private SupportedService service = SupportedService.Flickr;
@@ -95,8 +94,7 @@ namespace FlickrNet
         /// Get or set the API Key to be used by all calls. API key is mandatory for all 
         /// calls to Flickr.
         /// </summary>
-        [DisallowNull]
-        public string? ApiKey { get; set; }
+        public string ApiKey { get; set; }
 
         /// <summary>
         /// API shared secret is required for all calls that require signing, which includes
@@ -194,21 +192,17 @@ namespace FlickrNet
         {
             get
             {
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
                 if (!isServiceSet && FlickrConfigurationManager.Settings != null)
                 {
                     defaultService = FlickrConfigurationManager.Settings.Service;
                     isServiceSet = true;
                 }
-#endif
                 return defaultService;
             }
             set
             {
                 defaultService = value;
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
                 isServiceSet = true;
-#endif
             }
         }
 
@@ -224,9 +218,6 @@ namespace FlickrNet
             set
             {
                 service = value;
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
-                ServicePointManager.Expect100Continue &= service != SupportedService.Zooomr;
-#endif
             }
         }
 
@@ -311,11 +302,10 @@ namespace FlickrNet
             InstanceCacheDisabled = CacheDisabled;
             CurrentService = DefaultService;
 
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
-
             var settings = FlickrConfigurationManager.Settings;
             if (settings?.ApiKey == null)
             {
+                ApiKey = "INVALID_APIKEY";
                 return;
             }
 
@@ -352,8 +342,6 @@ namespace FlickrNet
                 Domain = settings.ProxyDomain
             };
             Proxy.Credentials = creds;
-
-#endif
         }
 
         /// <summary>

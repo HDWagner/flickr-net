@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -557,16 +558,13 @@ namespace FlickrNet
         public static string MD5Hash(string data)
         {
             byte[] hashedBytes;
-
-#if SILVERLIGHT
-            hashedBytes = MD5Core.GetHash(data, Encoding.UTF8);
-#else
-            using (var csp = new System.Security.Cryptography.MD5CryptoServiceProvider())
+            
+            using (var csp = MD5.Create())
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(data);
                 hashedBytes = csp.ComputeHash(bytes, 0, bytes.Length);
             }
-#endif
+
             return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower(System.Globalization.CultureInfo.InvariantCulture);
         }
 

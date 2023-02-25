@@ -497,5 +497,14 @@ namespace FlickrNetTest
         {
             Assert.That(expected, Is.EqualTo(UtilityMethods.StylesToString(styles)));
         }
+
+        [TestCase("", "d41d8cd98f00b204e9800998ecf8427e")]
+        [TestCase("blackandwhite,pattern,minimalism", "4c69e17175d64c750c8c0550f02c12ea")]
+        [TestCase("foo", "acbd18db4cc2f85cedef654fccc4a4d8")]
+        public void MD5Hash_Works(string value, string expected)
+        {
+            Assert.That(UtilityMethods.MD5Hash(value), Is.EqualTo(expected));
+        }
+
     }
 }

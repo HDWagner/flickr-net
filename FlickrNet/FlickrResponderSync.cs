@@ -26,13 +26,13 @@ namespace FlickrNet
             }
             else
             {
-                return GetDataResponseNormal(flickr, baseUrl, parameters);
+                return GetDataResponseNormal(baseUrl, parameters);
             }
         }
 
-        private static string GetDataResponseNormal(Flickr flickr, string baseUrl, Dictionary<string, string> parameters)
+        private static string GetDataResponseNormal(string baseUrl, Dictionary<string, string> parameters)
         {
-            string method = flickr.CurrentService == SupportedService.Zooomr ? "GET" : "POST";
+            string method = "POST";
 
             var data = new StringBuilder();
 
@@ -41,19 +41,7 @@ namespace FlickrNet
                 data.Append(k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&");
             }
 
-            if (method == "GET" && data.Length > 2000)
-            {
-                method = "POST";
-            }
-
-            if (method == "GET")
-            {
-                return DownloadData(method, baseUrl + "?" + data, null, null, null);
-            }
-            else
-            {
-                return DownloadData(method, baseUrl, data.ToString(), PostContentType, null);
-            }
+            return DownloadData(method, baseUrl, data.ToString(), PostContentType, null);
         }
 
         private static string GetDataResponseOAuth(Flickr flickr, string baseUrl, Dictionary<string, string> parameters)
@@ -128,7 +116,7 @@ namespace FlickrNet
         }
 
 
-        private static string DownloadData(string method, string baseUrl, string? data, string? contentType, string? authHeader)
+        private static string DownloadData(string method, string baseUrl, string data, string contentType, string? authHeader)
         {
             Func<string> f = () =>
             {
@@ -145,7 +133,7 @@ namespace FlickrNet
                         client.Headers.Add("Authorization", authHeader);
                     }
 
-                    if (method == "POST" )
+                    if (method == "POST")
                     {
                         // we don't care that data might be null: client.UploadString would throw correctly and we'll get rid of WebClient anyway
                         return client.UploadString(baseUrl, data);

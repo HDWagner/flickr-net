@@ -11,6 +11,9 @@ namespace FlickrNetTest
         public void CheckApiKeyThrowsExceptionWhenNotPresent()
         {
             var f = new Flickr();
+#pragma warning disable CS8625 // Ein NULL-Literal kann nicht in einen Non-Nullable-Verweistyp konvertiert werden.
+            f.ApiKey = null;
+#pragma warning restore CS8625 // Ein NULL-Literal kann nicht in einen Non-Nullable-Verweistyp konvertiert werden.
 
             Should.Throw<ApiKeyRequiredException>(() => f.CheckApiKey());
         }

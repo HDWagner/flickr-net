@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Shouldly;
 using System.Net;
+using System.Security.Policy;
 
 namespace FlickrNetTest
 {
@@ -39,12 +40,16 @@ namespace FlickrNetTest
             var tags = f.TagsGetListPhoto(photoId);
 
             // Find the tag in the collection
-            var tagsToRemove = tags.Where(t => t.TagText.StartsWith(testtag, StringComparison.Ordinal));
+
+            var tagsToRemove = tags.Where(t => t.TagText != null && t.TagText.StartsWith(testtag, StringComparison.Ordinal));
 
             foreach (var tag in tagsToRemove)
             {
-                // Remove the tag
-                f.PhotosRemoveTag(tag.TagId);
+                if (tag.TagId != null)
+                {
+                    // Remove the tag
+                    f.PhotosRemoveTag(tag.TagId);
+                }
             }
         }
 
@@ -225,6 +230,7 @@ namespace FlickrNetTest
 
             foreach (var p in photos)
             {
+                Assert.That(p.PhotoId, Is.Not.Null);
                 var sizes = Instance.PhotosGetSizes(p.PhotoId);
                 Assert.That(sizes, Is.Not.Null);
             }
@@ -357,16 +363,15 @@ namespace FlickrNetTest
         [Test]
         [Category("AccessTokenRequired")]
         [Ignore("Method requires authentication")]
-        public void PhotosSetMetaLargeDescription()
+        public async Task PhotosSetMetaLargeDescription()
         {
             string description;
 
-            using (WebClient wc = new WebClient())
-            {
-                description = wc.DownloadString("http://en.wikipedia.org/wiki/Scots_Pine");
-                // Limit to size of a url to 65519 characters, so chop the description down to a large but not too large size.
-                description = description.Substring(0, 6551);
-            }
+            using var httpClient = new HttpClient();
+            description = await httpClient.GetStringAsync("http://en.wikipedia.org/wiki/Scots_Pine");
+
+            // Limit to size of a url to 65519 characters, so chop the description down to a large but not too large size.
+            description = description.Substring(0, 6551);
 
             string title = "Blacksway Cat";
             string photoId = "5279984467";

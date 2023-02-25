@@ -17,6 +17,14 @@
     <CodeAnalysisRuleSet>..\.sonarlint\flickr-netcsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;618</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <InternalsVisibleTo Include="FlickrNetCore.Test" />
   </ItemGroup>

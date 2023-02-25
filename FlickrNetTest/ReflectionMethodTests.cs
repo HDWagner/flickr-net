@@ -135,6 +135,8 @@ namespace FlickrNetTest
                     continue;
                 }
 
+                Assert.That(argument.Name, Is.Not.Null);
+
                 bool found = false;
 
                 string arg = argument.Name.Replace("_", "").ToLower();

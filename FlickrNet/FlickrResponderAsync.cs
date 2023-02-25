@@ -27,13 +27,13 @@ namespace FlickrNet
             }
             else
             {
-                GetDataResponseNormalAsync(flickr, baseUrl, parameters, callback);
+                GetDataResponseNormalAsync(baseUrl, parameters, callback);
             }
         }
 
-        private static void GetDataResponseNormalAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback)
+        private static void GetDataResponseNormalAsync(string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback)
         {
-            var method = flickr.CurrentService == SupportedService.Zooomr ? "GET" : "POST";
+            var method = "POST";
 
             var data = new StringBuilder();
 
@@ -42,19 +42,7 @@ namespace FlickrNet
                 data.Append(k.Key + "=" + UtilityMethods.EscapeDataString(k.Value) + "&");
             }
 
-            if (method == "GET" && data.Length > 2000)
-            {
-                method = "POST";
-            }
-
-            if (method == "GET")
-            {
-                DownloadDataAsync(method, baseUrl + "?" + data, null, null, null, callback);
-            }
-            else
-            {
-                DownloadDataAsync(method, baseUrl, data.ToString(), PostContentType, null, callback);
-            }
+            DownloadDataAsync(method, baseUrl, data.ToString(), PostContentType, null, callback);
         }
 
         private static void GetDataResponseOAuthAsync(Flickr flickr, string baseUrl, Dictionary<string, string> parameters, Action<FlickrResult<string>> callback)
@@ -108,7 +96,7 @@ namespace FlickrNet
             }
         }
 
-        private static void DownloadDataAsync(string method, string baseUrl, string? data, string? contentType, string? authHeader, Action<FlickrResult<string>> callback)
+        private static void DownloadDataAsync(string method, string baseUrl, string data, string contentType, string? authHeader, Action<FlickrResult<string>> callback)
         {
             var client = new WebClient();
             client.Encoding = System.Text.Encoding.UTF8;

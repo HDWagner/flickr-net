@@ -47,7 +47,7 @@ namespace FlickrNetTest
 
         [Test]
         [Ignore("Method requires authentication")]
-        public void UploadPictureBasicTest()
+        public async Task UploadPictureBasicTest()
         {
             var f = AuthInstance;
 
@@ -82,14 +82,15 @@ namespace FlickrNetTest
 
                 SizeCollection sizes = f.PhotosGetSizes(photoId);
 
-                string url = sizes[sizes.Count - 1].Source;
-                using (WebClient client = new WebClient())
-                {
-                    byte[] downloadBytes = client.DownloadData(url);
-                    string downloadBase64 = Convert.ToBase64String(downloadBytes);
+                Assert.That(sizes[sizes.Count - 1].Source, Is.Not.Null);
 
-                    Assert.That(downloadBase64, Is.EqualTo(TestData.TestImageBase64));
-                }
+                string url = sizes[sizes.Count - 1].Source;
+
+                using var httpClient = new HttpClient();
+                var downloadBytes = await httpClient.GetByteArrayAsync(url);
+
+                string downloadBase64 = Convert.ToBase64String(downloadBytes);
+                Assert.That(downloadBase64, Is.EqualTo(TestData.TestImageBase64));
             }
             finally
             {
@@ -99,15 +100,15 @@ namespace FlickrNetTest
 
         [Test]
         [Ignore("Method requires authentication")]
-        public void DownloadAndUploadImage()
+        public async Task DownloadAndUploadImage()
         {
             var photos = AuthInstance.PeopleGetPhotos(PhotoSearchExtras.Small320Url);
 
             var photo = photos.First();
             var url = photo.Small320Url;
 
-            using var client = new WebClient();
-            var data = client.DownloadData(url);
+            using var httpClient = new HttpClient();
+            var data = await httpClient.GetByteArrayAsync(url);
 
             using var ms = new MemoryStream(data) { Position = 0 };
 
@@ -147,37 +148,31 @@ namespace FlickrNetTest
 
         [Test]
         [Ignore("Method requires authentication")]
-        public void UploadPictureFromUrl()
+        public async Task UploadPictureFromUrl()
         {
             var url = "http://www.google.co.uk/intl/en_com/images/srpr/logo1w.png";
             var f = AuthInstance;
 
-            using (WebClient client = new WebClient())
-            {
-                using (Stream s = client.OpenRead(url))
-                {
-                    var photoId = f.UploadPicture(s, "google.png", "Google Image", "Google", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
-                    Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
-                    f.PhotosDelete(photoId);
-                }
-            }
+            using var httpClient = new HttpClient();
+            var s = await httpClient.GetStreamAsync(url);
+
+            var photoId = f.UploadPicture(s, "google.png", "Google Image", "Google", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+            Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
+            f.PhotosDelete(photoId);
         }
 
         [Test, Ignore("Long running test")]
-        public void UploadLargeVideoFromUrl()
+        public async Task UploadLargeVideoFromUrl()
         {
             var url = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_50mb.mp4";
             var f = AuthInstance;
 
-            using (WebClient client = new WebClient())
-            {
-                using (Stream s = client.OpenRead(url))
-                {
-                    var photoId = f.UploadPicture(s, "bunny.mp4", "Big Buck Bunny", "Sample Video", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
-                    Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
-                    f.PhotosDelete(photoId);
-                }
-            }
+            using var httpClient = new HttpClient();
+            using var s = await httpClient.GetStreamAsync(url);
+
+            var photoId = f.UploadPicture(s, "bunny.mp4", "Big Buck Bunny", "Sample Video", "", false, false, false, ContentType.Photo, SafetyLevel.None, HiddenFromSearch.None);
+            Assert.That(photoId, Is.Not.Null, "PhotoId should not be null");
+            f.PhotosDelete(photoId);
         }
         // 
 
