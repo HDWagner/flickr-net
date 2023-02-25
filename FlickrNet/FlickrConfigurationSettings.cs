@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace FlickrNet.Internals
+namespace FlickrNet
 {
     /// <summary>
     /// Configuration settings for the Flickr.Net API Library.
@@ -37,7 +37,7 @@ namespace FlickrNet.Internals
     /// &lt;/flickrNet&gt;
     /// </code></p>
     /// </remarks>
-    internal class FlickrConfigurationSettings
+    public class FlickrConfigurationSettings
     {
         private readonly string? apiToken;
         private readonly string? cacheLocation;

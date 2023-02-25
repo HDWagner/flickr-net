@@ -8,7 +8,7 @@ namespace FlickrNet
     /// <summary>
     /// Flickr library interaction with the web goes in here.
     /// </summary>
-    public static partial class FlickrResponder
+    internal static partial class FlickrResponder
     {
 
         private const string PostContentType = "application/x-www-form-urlencoded";

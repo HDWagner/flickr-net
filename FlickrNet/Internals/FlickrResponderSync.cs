@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FlickrNet
 {
-    public static partial class FlickrResponder
+    internal static partial class FlickrResponder
     {
         /// <summary>
         /// Gets a data response for the given base url and parameters, 

@@ -1,4 +1,4 @@
-﻿namespace FlickrNet.Internals
+﻿namespace FlickrNet
 {
     using System;
 

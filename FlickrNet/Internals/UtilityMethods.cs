@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using FlickrNet.Classes;
 using FlickrNet.Exceptions;
-using FlickrNet.Internals;
 
 namespace FlickrNet
 {

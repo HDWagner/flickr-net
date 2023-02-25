@@ -1,5 +1,4 @@
 ﻿using FlickrNet.Exceptions;
-using FlickrNet.Internals;
 using System;
 
 namespace FlickrNet

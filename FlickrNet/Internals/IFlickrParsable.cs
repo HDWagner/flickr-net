@@ -11,7 +11,7 @@ namespace FlickrNet.Internals
     /// <remarks>
     /// This enables more than one class to handle the same XML element names when returned by different methods.
     /// </remarks>
-    public interface IFlickrParsable
+    internal interface IFlickrParsable
     {
         /// <summary>
         /// Allows each class that implements this interface to be loaded via an <see cref="XmlReader"/>.
