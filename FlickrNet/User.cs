@@ -188,7 +188,7 @@ namespace FlickrNet
         public int? VideosRemaining { get; set; }
 
         /// <summary>
-        /// <see cref="Double"/> representing the percentage bandwidth used so far. Will range from 0 to 1.
+        /// <see cref="double"/> representing the percentage bandwidth used so far. Will range from 0 to 1.
         /// </summary>
         public double PercentageUsed
         {

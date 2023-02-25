@@ -35,11 +35,7 @@ namespace FlickrNet
 
             baseString = method + "&" + UtilityMethods.EscapeOAuthString(url) + "&" + UtilityMethods.EscapeOAuthString(sb.ToString());
 
-#if WindowsCE
-            FlickrNet.Security.Cryptography.HMACSHA1 sha1 = new FlickrNet.Security.Cryptography.HMACSHA1(keyBytes);
-#else
             var sha1 = new System.Security.Cryptography.HMACSHA1(keyBytes);
-#endif
 
             byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(baseString));
 

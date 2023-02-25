@@ -16,7 +16,7 @@ namespace FlickrNet
     /// <summary>
     /// Internal class providing certain utility functions to other classes.
     /// </summary>
-    internal static class UtilityMethods
+    internal static partial class UtilityMethods
     {
         private static readonly DateTime UnixStartDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -121,7 +121,7 @@ namespace FlickrNet
 
             try
             {
-                return UnixTimestampToDate(Int64.Parse(timestamp, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
+                return UnixTimestampToDate(long.Parse(timestamp, System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo));
             }
             catch (FormatException)
             {
@@ -557,13 +557,8 @@ namespace FlickrNet
         /// <returns>The MD5 hash string.</returns>
         public static string MD5Hash(string data)
         {
-            byte[] hashedBytes;
-            
-            using (var csp = MD5.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(data);
-                hashedBytes = csp.ComputeHash(bytes, 0, bytes.Length);
-            }
+            var bytes = Encoding.UTF8.GetBytes(data);
+            var hashedBytes = MD5.HashData(bytes);
 
             return BitConverter.ToString(hashedBytes).Replace("-", string.Empty).ToLower(System.Globalization.CultureInfo.InvariantCulture);
         }
@@ -665,7 +660,7 @@ namespace FlickrNet
         /// If an unknown element is found and the DLL is a debug DLL then a <see cref="ParsingException"/> is thrown.
         /// </summary>
         /// <param name="reader">The <see cref="XmlReader"/> containing the unknown xml node.</param>
-        [System.Diagnostics.Conditional("DEBUG")]
+        [Conditional("DEBUG")]
         public static void CheckParsingException(XmlReader reader)
         {
             if (reader.NodeType == XmlNodeType.Attribute)
@@ -721,11 +716,7 @@ namespace FlickrNet
 
             foreach (var part in parts)
             {
-#if WindowsCE || SILVERLIGHT
-                string[] bits = part.Split('=');
-#else
                 var bits = part.Split(new[] { '=' }, 2, StringSplitOptions.RemoveEmptyEntries);
-#endif
                 dic.Add(bits[0], bits.Length == 1 ? "" : Uri.UnescapeDataString(bits[1]));
             }
 
@@ -745,7 +736,7 @@ namespace FlickrNet
             value = EscapeDataString(value).Replace("+", "%20");
 
             // UrlEncode escapes with lowercase characters (e.g. %2f) but oAuth needs %2F
-            value = Regex.Replace(value, "(%[0-9a-f][0-9a-f])", c => c.Value.ToUpper());
+            value = NonOAuthStringGroupsRegex().Replace(value, c => c.Value.ToUpper());
 
             // these characters are not escaped by UrlEncode() but needed to be escaped
             value = value.Replace("(", "%28").Replace(")", "%29").Replace("$", "%24").Replace("!", "%21").Replace(
@@ -798,6 +789,9 @@ namespace FlickrNet
         {
             return string.Join(",", styles.Distinct().Select(s => s.ToString().ToLower()));
         }
+
+        [GeneratedRegex("(%[0-9a-f][0-9a-f])")]
+        private static partial Regex NonOAuthStringGroupsRegex();
     }
 
 }

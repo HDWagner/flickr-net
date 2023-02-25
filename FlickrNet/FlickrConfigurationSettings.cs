@@ -1,8 +1,6 @@
-#if !(MONOTOUCH || WindowsCE || SILVERLIGHT)
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Xml;
 
 namespace FlickrNet
@@ -281,4 +279,3 @@ namespace FlickrNet
         public string? ProxyDomain { get; private set; }
     }
 }
-#endif

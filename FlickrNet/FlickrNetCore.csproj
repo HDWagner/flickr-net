@@ -30,27 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="OpenCF\**" />
-    <EmbeddedResource Remove="OpenCF\**" />
-    <None Remove="OpenCF\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="AssemblyInfo.cs" />
-    <Compile Remove="AssemblyInfoMore.cs" />
-    <Compile Remove="SerializableAttribute.cs" />
-    <Compile Remove="ShapeDataSL.cs" />
-    <Compile Remove="UnknownResponseSL.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="CodeAnalysisDictionary.xml" />
     <None Remove="example_app.config" />
-    <None Remove="FlickrNet.csproj.vspscc" />
     <None Remove="FlickrNet.ndoc" />
-    <None Remove="FlickrNet.snk" />
-    <None Remove="FlickrNetSilverlight.csproj.vspscc" />
-    <None Remove="FlickrNetWP7.csproj.vspscc" />
   </ItemGroup>
 
   <ItemGroup>

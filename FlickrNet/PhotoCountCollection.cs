@@ -35,7 +35,7 @@ namespace FlickrNet
     /// <summary>
     /// The specifics of a particular count.
     /// </summary>
-    public sealed class PhotoCount : IFlickrParsable
+    public sealed partial class PhotoCount : IFlickrParsable
     {
         /// <summary>Total number of photos between the FromDate and the ToDate.</summary>
         /// <remarks/>
@@ -62,10 +62,10 @@ namespace FlickrNet
                         Count = int.Parse(reader.Value, System.Globalization.NumberFormatInfo.InvariantInfo);
                         break;
                     case "fromdate":
-                        FromDate = System.Text.RegularExpressions.Regex.IsMatch(reader.Value, "^\\d+$") ? UtilityMethods.UnixTimestampToDate(reader.Value) : UtilityMethods.MySqlToDate(reader.Value);
+                        FromDate = AtLeastOneDigitRegex().IsMatch(reader.Value) ? UtilityMethods.UnixTimestampToDate(reader.Value) : UtilityMethods.MySqlToDate(reader.Value);
                         break;
                     case "todate":
-                        ToDate = System.Text.RegularExpressions.Regex.IsMatch(reader.Value, "^\\d+$") ? UtilityMethods.UnixTimestampToDate(reader.Value) : UtilityMethods.MySqlToDate(reader.Value);
+                        ToDate = AtLeastOneDigitRegex().IsMatch(reader.Value) ? UtilityMethods.UnixTimestampToDate(reader.Value) : UtilityMethods.MySqlToDate(reader.Value);
                         break;
                     default:
                         UtilityMethods.CheckParsingException(reader);
@@ -76,5 +76,8 @@ namespace FlickrNet
 
             reader.Read();
         }
+
+        [System.Text.RegularExpressions.GeneratedRegex("^\\d+$")]
+        private static partial System.Text.RegularExpressions.Regex AtLeastOneDigitRegex();
     }
 }

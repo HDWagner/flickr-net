@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if SILVERLIGHT
 using System.Linq;
-#endif
 
 namespace FlickrNet
 {
@@ -317,27 +315,13 @@ namespace FlickrNet
             if (dates != null && dates.Length > 0)
             {
                 Array.Sort(dates);
-#if !SILVERLIGHT
-                dateString = string.Join(",", new List<DateTime>(dates).ConvertAll(new Converter<DateTime, string>(delegate (DateTime d)
-                {
-                    return UtilityMethods.DateToUnixTimestamp(d).ToString();
-                })).ToArray());
-#else
-                dateString = string.Join(",", (from d in dates select UtilityMethods.DateToUnixTimestamp(d)).ToArray<string>());
-#endif
+                dateString = string.Join(",", dates.Select(UtilityMethods.DateToUnixTimestamp));
             }
 
             if (takenDates != null && takenDates.Length > 0)
             {
                 Array.Sort(takenDates);
-#if !SILVERLIGHT
-                takenDateString = string.Join(",", new List<DateTime>(takenDates).ConvertAll(new Converter<DateTime, string>(delegate (DateTime d)
-                    {
-                        return UtilityMethods.DateToUnixTimestamp(d).ToString();
-                    })).ToArray());
-#else
-                takenDateString = string.Join(",", (from d in takenDates select UtilityMethods.DateToUnixTimestamp(d)).ToArray<string>());
-#endif
+                takenDateString = string.Join(",", takenDates.Select(UtilityMethods.DateToUnixTimestamp));
             }
 
             var parameters = new Dictionary<string, string>();

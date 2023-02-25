@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Xml;
+using System.Linq;
 using System.Text;
-using System.Linq;
-#if SILVERLIGHT
-using System.Linq;
-#endif
+using System.Xml;
 
 namespace FlickrNet
 {

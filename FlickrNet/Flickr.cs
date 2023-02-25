@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
-#if SILVERLIGHT
-using System.Linq;
-#endif
 
 namespace FlickrNet
 {
@@ -41,14 +39,12 @@ namespace FlickrNet
 
         private static SupportedService defaultService = SupportedService.Flickr;
 
-        private SupportedService service = SupportedService.Flickr;
-
         /// <summary>
         /// The base URL for all Flickr REST method calls.
         /// </summary>
         public Uri BaseUri
         {
-            get { return baseUri[(int)service]; }
+            get { return baseUri[(int)CurrentService]; }
         }
 
         private readonly Uri[] baseUri = {
@@ -59,7 +55,7 @@ namespace FlickrNet
 
         private string UploadUrl
         {
-            get { return uploadUrl[(int)service]; }
+            get { return uploadUrl[(int)CurrentService]; }
         }
         private static readonly string[] uploadUrl = {
                                                               "https://up.flickr.com/services/upload/",
@@ -69,7 +65,7 @@ namespace FlickrNet
 
         private string ReplaceUrl
         {
-            get { return replaceUrl[(int)service]; }
+            get { return replaceUrl[(int)CurrentService]; }
         }
         private static readonly string[] replaceUrl = {
                                                                "https://up.flickr.com/services/replace/",
@@ -79,7 +75,7 @@ namespace FlickrNet
 
         private string AuthUrl
         {
-            get { return authUrl[(int)service]; }
+            get { return authUrl[(int)CurrentService]; }
         }
         private static readonly string[] authUrl = {
                                                             "https://www.flickr.com/services/auth/",
@@ -209,17 +205,7 @@ namespace FlickrNet
         /// <summary>
         /// The current service that the Flickr API is using.
         /// </summary>
-        public SupportedService CurrentService
-        {
-            get
-            {
-                return service;
-            }
-            set
-            {
-                service = value;
-            }
-        }
+        public SupportedService CurrentService { get; set; } = SupportedService.Flickr;
 
         /// <summary>
         /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.
@@ -446,12 +432,7 @@ namespace FlickrNet
 
         private string CalculateAuthSignature(Dictionary<string, string> parameters)
         {
-#if !SILVERLIGHT
-            var sorted = new SortedList<string, string>();
-            foreach (var pair in parameters) { sorted.Add(pair.Key, pair.Value); }
-#else
             var sorted = parameters.OrderBy(p => p.Key);
-#endif
 
             var sb = new StringBuilder(ApiSecret);
             foreach (var pair in sorted)
@@ -487,14 +468,10 @@ namespace FlickrNet
 
             foreach (var key in keys)
             {
-
-#if !SILVERLIGHT
-                // Silverlight < 5 doesn't support modification of the Authorization header, so all data must be sent in post body.
                 if (key.StartsWith("oauth", StringComparison.Ordinal))
                 {
                     continue;
                 }
-#endif
                 hashStringBuilder.Append(key);
                 hashStringBuilder.Append(parameters[key]);
                 contentStringBuilder.Write("--" + boundary + "\r\n");

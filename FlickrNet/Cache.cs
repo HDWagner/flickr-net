@@ -43,12 +43,10 @@ namespace FlickrNet
         {
             get
             {
-#if !(WindowsCE || MONOTOUCH || SILVERLIGHT)
                 if (cacheDisabled == Tristate.Null && FlickrConfigurationManager.Settings != null)
                 {
                     cacheDisabled = FlickrConfigurationManager.Settings.CacheDisabled ? Tristate.True : Tristate.False;
                 }
-#endif
                 if (cacheDisabled == Tristate.Null)
                 {
                     cacheDisabled = Tristate.False;

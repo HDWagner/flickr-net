@@ -15,11 +15,7 @@ namespace FlickrNet
         {
             CheckApiKey();
 
-#if SILVERLIGHT
-            string url = "https://api.flickr.com/services/oauth/request_token";
-#else
             string url = "https://www.flickr.com/services/oauth/request_token";
-#endif
 
             Dictionary<string, string> parameters = OAuthGetBasicParameters();
 
@@ -73,11 +69,7 @@ namespace FlickrNet
         {
             CheckApiKey();
 
-#if SILVERLIGHT
-            string url = "https://api.flickr.com/services/oauth/access_token";
-#else
             string url = "https://www.flickr.com/services/oauth/access_token";
-#endif
 
             Dictionary<string, string> parameters = OAuthGetBasicParameters();
 
