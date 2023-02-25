@@ -1,4 +1,6 @@
 ﻿using FlickrNet;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 using NUnit.Framework;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;

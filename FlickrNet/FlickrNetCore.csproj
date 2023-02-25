@@ -15,6 +15,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/HDWagner/flickr-net</RepositoryUrl>
     <CodeAnalysisRuleSet>..\.sonarlint\flickr-netcsharp.ruleset</CodeAnalysisRuleSet>
+    <RootNamespace>FlickrNet</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

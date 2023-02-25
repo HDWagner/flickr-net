@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -31,19 +33,19 @@ namespace FlickrNet
         /// <param name="latitude">The latitude, between -180 and 180.</param>
         /// <param name="longitude">The longitude, between -90 and 90.</param>
         /// <returns>An instance of the <see cref="Place"/> that matches the locality.</returns>
-        public Place PlacesFindByLatLon(double latitude, double longitude)
+        public PlaceCollection PlacesFindByLatLon(double latitude, double longitude)
         {
             return PlacesFindByLatLon(latitude, longitude, GeoAccuracy.None);
         }
 
         /// <summary>
-        /// Returns a place based on the input latitude and longitude.
+        /// Returns places based on the input latitude and longitude.
         /// </summary>
         /// <param name="latitude">The latitude, between -180 and 180.</param>
         /// <param name="longitude">The longitude, between -90 and 90.</param>
         /// <param name="accuracy">The level the locality will be for.</param>
         /// <returns>An instance of the <see cref="Place"/> that matches the locality.</returns>
-        public Place PlacesFindByLatLon(double latitude, double longitude, GeoAccuracy accuracy)
+        public PlaceCollection PlacesFindByLatLon(double latitude, double longitude, GeoAccuracy accuracy)
         {
             var parameters = new Dictionary<string, string>();
             parameters.Add("method", "flickr.places.findByLatLon");
@@ -54,7 +56,7 @@ namespace FlickrNet
                 parameters.Add("accuracy", ((int)accuracy).ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
             }
 
-            return GetResponseCache<PlaceCollection>(parameters)[0];
+            return GetResponseCache<PlaceCollection>(parameters);
         }
 
         /// <summary>

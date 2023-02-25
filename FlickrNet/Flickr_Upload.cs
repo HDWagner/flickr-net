@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
+using FlickrNet.Internals;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
 
 namespace FlickrNet
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using FlickrNet.Classes;
 
 namespace FlickrNet
 {

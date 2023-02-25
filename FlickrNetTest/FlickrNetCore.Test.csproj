@@ -11,6 +11,7 @@
     <Product>FlickrNetTest</Product>
     <Copyright>Copyright © Sam Judson 2018</Copyright>
     <Authors>samjudson, jrotello</Authors>
+    <RootNamespace>FlickrNetTest</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -54,6 +55,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlickrNet\FlickrNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
 </Project>

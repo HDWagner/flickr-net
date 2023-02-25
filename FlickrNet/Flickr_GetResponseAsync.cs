@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using FlickrNet.Internals;
+using System;
 using System.Collections.Generic;
 
 namespace FlickrNet

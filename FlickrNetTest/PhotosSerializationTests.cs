@@ -1,7 +1,8 @@
 ﻿
+using FlickrNet.Classes;
+using FlickrNet.Internals;
+using FlickrNetTest.TestUtilities;
 using NUnit.Framework;
-using FlickrNet;
-using System.IO;
 using System.Xml;
 
 namespace FlickrNetTest

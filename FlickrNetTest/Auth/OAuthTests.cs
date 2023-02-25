@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FlickrNet;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using FlickrNet.Internals;
+using FlickrNetTest.TestUtilities;
 using NUnit.Framework;
-using FlickrNet;
 using Shouldly;
 
 namespace FlickrNetTest

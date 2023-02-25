@@ -3,6 +3,9 @@
 using NUnit.Framework;
 using FlickrNet;
 using Shouldly;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

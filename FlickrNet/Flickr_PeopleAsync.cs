@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
 
 namespace FlickrNet
 {

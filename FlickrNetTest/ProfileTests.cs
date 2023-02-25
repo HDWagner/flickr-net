@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FlickrNetTest.TestUtilities;
+using NUnit.Framework;
 using Shouldly;
 using System;
 using System.Collections.Generic;

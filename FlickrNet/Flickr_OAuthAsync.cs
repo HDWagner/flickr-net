@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace FlickrNet
@@ -98,7 +100,7 @@ namespace FlickrNet
                         callback(result);
                         return;
                     }
-                    result.Result = FlickrNet.OAuthAccessToken.ParseResponse(r.Result);
+                    result.Result = FlickrNet.Classes.OAuthAccessToken.ParseResponse(r.Result);
                     callback(result);
                 });
         }

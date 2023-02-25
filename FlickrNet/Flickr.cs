@@ -5,6 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using FlickrNet.Internals;
+using FlickrNet.Caching;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
 
 namespace FlickrNet
 {
@@ -49,8 +53,7 @@ namespace FlickrNet
 
         private readonly Uri[] baseUri = {
                                                      new Uri("https://api.flickr.com/services/rest/"),
-                                                     new Uri("http://beta.zooomr.com/bluenote/api/rest"),
-                                                     new Uri("http://www.23hq.com/services/rest/")
+                                                     new Uri("https://www.23hq.com/services/rest/")
         };
 
         private string UploadUrl
@@ -59,8 +62,7 @@ namespace FlickrNet
         }
         private static readonly string[] uploadUrl = {
                                                               "https://up.flickr.com/services/upload/",
-                                                              "http://beta.zooomr.com/bluenote/api/upload",
-                                                              "http://www.23hq.com/services/upload/"
+                                                              "https://www.23hq.com/services/upload/"
         };
 
         private string ReplaceUrl
@@ -69,8 +71,7 @@ namespace FlickrNet
         }
         private static readonly string[] replaceUrl = {
                                                                "https://up.flickr.com/services/replace/",
-                                                               "http://beta.zooomr.com/bluenote/api/replace",
-                                                               "http://www.23hq.com/services/replace/"
+                                                               "https://www.23hq.com/services/replace/"
         };
 
         private string AuthUrl
@@ -79,8 +80,7 @@ namespace FlickrNet
         }
         private static readonly string[] authUrl = {
                                                             "https://www.flickr.com/services/auth/",
-                                                            "http://beta.zooomr.com/auth/",
-                                                            "http://www.23hq.com/services/auth/"
+                                                            "https://www.23hq.com/services/auth/"
         };
         private string? apiToken;
         private string? sharedSecret;
@@ -205,7 +205,7 @@ namespace FlickrNet
         /// <summary>
         /// The current service that the Flickr API is using.
         /// </summary>
-        public SupportedService CurrentService { get; set; } = SupportedService.Flickr;
+        public SupportedService CurrentService { get; set; }
 
         /// <summary>
         /// Internal timeout for all web requests in milliseconds. Defaults to 30 seconds.

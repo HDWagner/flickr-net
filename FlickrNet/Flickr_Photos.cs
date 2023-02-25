@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
 
 namespace FlickrNet
 {

@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Xml;
 using System.Collections.Specialized;
+using FlickrNet.Classes;
 
 namespace FlickrNet
 {

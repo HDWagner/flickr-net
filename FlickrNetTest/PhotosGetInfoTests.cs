@@ -6,6 +6,8 @@ using FlickrNet;
 using System.Reactive.Subjects;
 using System.Reactive.Linq;
 using Shouldly;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

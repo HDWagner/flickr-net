@@ -3,6 +3,9 @@
 using NUnit.Framework;
 using FlickrNet;
 using Shouldly;
+using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {
@@ -37,10 +40,11 @@ namespace FlickrNetTest
             double lat = 54.977;
             double lon = -1.612;
 
-            var place = Instance.PlacesFindByLatLon(lat, lon);
+            var places = Instance.PlacesFindByLatLon(lat, lon);
 
-            Assert.That(place, Is.Not.Null);
-            Assert.That(place.Description, Is.EqualTo("Haymarket, Newcastle upon Tyne, England, GB, United Kingdom"));
+            Assert.That(places, Is.Not.Null);
+            Assert.That(places[0], Is.Not.Null);
+            Assert.That(places[0].Description, Is.EqualTo("Haymarket, Newcastle upon Tyne, England, GB, United Kingdom"));
         }
 
         [Test]

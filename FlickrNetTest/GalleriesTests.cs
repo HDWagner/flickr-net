@@ -5,6 +5,8 @@ using NUnit.Framework;
 using FlickrNet;
 using Shouldly;
 using System.Linq;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

@@ -1,6 +1,7 @@
 ﻿
 using NUnit.Framework;
 using FlickrNet;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using FlickrNet;
 using System.Reflection;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 

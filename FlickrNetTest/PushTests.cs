@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
+using NUnit.Framework;
 
 namespace FlickrNetTest
 {
@@ -32,7 +34,7 @@ namespace FlickrNetTest
             var verify = "sync";
 
             var f = AuthInstance;
-            f.PushSubscribe(topic, callback, verify, null, lease, null, null, 0, 0, 0, FlickrNet.RadiusUnit.None, FlickrNet.GeoAccuracy.None, null, null);
+            f.PushSubscribe(topic, callback, verify, null, lease, null, null, 0, 0, 0, RadiusUnit.None, GeoAccuracy.None, null, null);
 
             var subscriptions = f.PushGetSubscriptions();
 
@@ -64,8 +66,8 @@ namespace FlickrNetTest
             var verify = "sync";
 
             var f = AuthInstance;
-            f.PushSubscribe(topic, callback1, verify, null, lease, null, null, 0, 0, 0, FlickrNet.RadiusUnit.None, FlickrNet.GeoAccuracy.None, null, null);
-            f.PushSubscribe(topic, callback2, verify, null, lease, null, null, 0, 0, 0, FlickrNet.RadiusUnit.None, FlickrNet.GeoAccuracy.None, null, null);
+            f.PushSubscribe(topic, callback1, verify, null, lease, null, null, 0, 0, 0, RadiusUnit.None, GeoAccuracy.None, null, null);
+            f.PushSubscribe(topic, callback2, verify, null, lease, null, null, 0, 0, 0, RadiusUnit.None, GeoAccuracy.None, null, null);
 
             var subscriptions = f.PushGetSubscriptions();
 

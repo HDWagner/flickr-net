@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FlickrNet.Classes;
+using System.Collections.Generic;
 
 namespace FlickrNet
 {
@@ -64,7 +65,7 @@ namespace FlickrNet
 
             string response = FlickrResponder.GetDataResponse(this, url, parameters);
 
-            var accessToken = FlickrNet.OAuthAccessToken.ParseResponse(response);
+            var accessToken = FlickrNet.Classes.OAuthAccessToken.ParseResponse(response);
 
             // Set current access token.
             OAuthAccessToken = accessToken.Token;

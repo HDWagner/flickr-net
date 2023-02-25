@@ -19,8 +19,6 @@ using System.Diagnostics.CodeAnalysis;
     MessageId = "X", Scope = "member", Target = "FlickrNet.PointD.#X")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", 
     MessageId = "Y", Scope = "member", Target = "FlickrNet.PointD.#Y")]
-[assembly: SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", 
-    Scope = "type", Target = "FlickrNet.Collection")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", 
     MessageId = "Login", Scope = "member", Target = "FlickrNet.Flickr.#TestLogin()")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", 
@@ -37,8 +35,6 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "member", Target = "FlickrNet.ResponseCacheItem.#Url")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", 
     Scope = "member", Target = "FlickrNet.ShapeData.#PolyLines")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", 
-    Scope = "member", Target = "FlickrNet.UnknownResponse.#GetXPathNavigator()")]
 [assembly: SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", 
     MessageId = "0#", Scope = "member", Target = "FlickrNet.Flickr.#PlacesGetInfoByUrl(System.String)")]
 [assembly: SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", 

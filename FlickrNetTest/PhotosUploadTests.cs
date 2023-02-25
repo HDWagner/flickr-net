@@ -1,12 +1,13 @@
 ﻿using System;
 
 using NUnit.Framework;
-using FlickrNet;
 using System.IO;
 using System.Net;
 using System.Linq;
 using System.Reactive.Subjects;
 using System.Reactive.Linq;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 
 namespace FlickrNetTest
 {

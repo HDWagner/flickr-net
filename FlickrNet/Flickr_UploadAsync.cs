@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FlickrNet.Classes;
+using FlickrNet.Exceptions;
+using FlickrNet.Internals;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -131,10 +134,10 @@ namespace FlickrNet
                     {
                         try
                         {
-                            var bufferSize = 32*1024;
-                            if (dataBuffer.Length/100 > bufferSize)
+                            var bufferSize = 32 * 1024;
+                            if (dataBuffer.Length / 100 > bufferSize)
                             {
-                                bufferSize = bufferSize*2;
+                                bufferSize = bufferSize * 2;
                             }
 
                             dataBuffer.UploadProgress += (o, e) =>
@@ -185,9 +188,9 @@ namespace FlickrNet
 
                             callback(result);
 
-                        }, 
+                        },
                         this);
-                }, 
+                },
                 this);
 
         }

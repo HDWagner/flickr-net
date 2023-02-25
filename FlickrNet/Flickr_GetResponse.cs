@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlickrNet.Caching;
+using FlickrNet.Internals;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 

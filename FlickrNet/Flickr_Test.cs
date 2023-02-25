@@ -5,6 +5,7 @@ using System.Collections;
 using System.Xml;
 using System.Collections.Specialized;
 using System.Xml.XPath;
+using FlickrNet.Classes;
 
 namespace FlickrNet
 {

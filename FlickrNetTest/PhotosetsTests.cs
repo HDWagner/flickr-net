@@ -1,7 +1,8 @@
 using System;
 using System.IO;
 using System.Linq;
-using FlickrNet;
+using FlickrNet.Classes;
+using FlickrNetTest.TestUtilities;
 using NUnit.Framework;
 using Shouldly;
 
