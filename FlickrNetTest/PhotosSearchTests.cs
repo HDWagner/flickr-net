@@ -516,9 +516,9 @@ namespace FlickrNetTest
                 }
 
                 Assert.That(p.Latitude > b.MinimumLatitude && b.MaximumLatitude > p.Latitude, Is.True,
-                              "Latitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Latitude, b.MinimumLatitude, b.MaximumLatitude, p.WebUrl);
+                            string.Format("Latitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Latitude, b.MinimumLatitude, b.MaximumLatitude, p.WebUrl));
                 Assert.That(p.Longitude > b.MinimumLongitude && b.MaximumLongitude > p.Longitude, Is.True,
-                              "Longitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Longitude, b.MinimumLongitude, b.MaximumLongitude, p.WebUrl);
+                            string.Format("Longitude is not within the boundary box. {0} outside {1} and {2} for photo {3}", p.Longitude, b.MinimumLongitude, b.MaximumLongitude, p.WebUrl));
             }
         }
 
@@ -997,7 +997,7 @@ namespace FlickrNetTest
 
             var nextPhotos = Instance.PhotosSearch(options);
 
-            Assert.That(nextPhotos.Any(p => p.UserId == firstUserId), Is.False, "Should not be any photos for user {0}", firstUserId);
+            Assert.That(nextPhotos.Any(p => p.UserId == firstUserId), Is.False, string.Format("Should not be any photos for user {0}", firstUserId));
         }
 
         [Test]

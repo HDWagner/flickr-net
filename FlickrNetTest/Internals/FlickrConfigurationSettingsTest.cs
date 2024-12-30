@@ -1,4 +1,4 @@
-﻿using FlickrNet.Internals;
+﻿using FlickrNet;
 using FlickrNetTest.TestUtilities;
 using NUnit.Framework;
 using System.Xml;
